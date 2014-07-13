@@ -1,16 +1,16 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-	<Script file="VF_RaidStats.lua"/>
-	<Frame name="VF_RaidStatsFrame" parent="UIParent" hidden="false">
+	<Script file="VF_RealmPlayersTBC.lua"/>
+	<Frame name="VF_RealmPlayersFrame" parent="UIParent" hidden="false">
 		<Scripts>
 			<OnLoad>
-				VF_RaidStats_OnLoad();
+				VF_RealmPlayers_OnLoad();
 			</OnLoad>
 			<OnEvent>
-				VF_RaidStats_OnEvent();
+				VF_RealmPlayers_OnEvent();
 			</OnEvent>
 			<OnUpdate>
-				VF_RaidStats_OnUpdate();
+				VF_RealmPlayers_OnUpdate();
 			</OnUpdate>
 		</Scripts>
 	</Frame>

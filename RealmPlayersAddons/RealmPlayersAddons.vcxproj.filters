@@ -45,16 +45,16 @@
     <None Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.toc">
       <Filter>Source Files\Classic\VF_RealmPlayers</Filter>
     </None>
-    <None Include="..\TBC\VF_RaidStats\VF_RaidStats.lua">
+    <None Include="..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.toc">
       <Filter>Source Files\TBC\VF_RaidStats</Filter>
     </None>
-    <None Include="..\TBC\VF_RaidStats\VF_RaidStats.toc">
+    <None Include="..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua">
       <Filter>Source Files\TBC\VF_RaidStats</Filter>
     </None>
-    <None Include="..\TBC\VF_RealmPlayers\VF_RealmPlayers.lua">
+    <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.lua">
       <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
     </None>
-    <None Include="..\TBC\VF_RealmPlayers\VF_RealmPlayers.toc">
+    <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.toc">
       <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
     </None>
   </ItemGroup>
@@ -65,10 +65,10 @@
     <Xml Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.xml">
       <Filter>Source Files\Classic\VF_RealmPlayers</Filter>
     </Xml>
-    <Xml Include="..\TBC\VF_RaidStats\VF_RaidStats.xml">
+    <Xml Include="..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.xml">
       <Filter>Source Files\TBC\VF_RaidStats</Filter>
     </Xml>
-    <Xml Include="..\TBC\VF_RealmPlayers\VF_RealmPlayers.xml">
+    <Xml Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.xml">
       <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
     </Xml>
   </ItemGroup>
