@@ -276,6 +276,9 @@ function VF_RP_GetPetInfo(_UnitID)
 		if(petIdentifierIndex == nil) then
 			petIdentifierIndex = string.find(data[2], "'s Minion");
 		end
+		if(petIdentifierIndex == nil) then
+			petIdentifierIndex = string.find(data[2], "'s Companion");
+		end
 		if(petIdentifierIndex) then
 			local petLevel = tonumber(string.sub(data[3], 7));
 			if(petLevel == nil) then
