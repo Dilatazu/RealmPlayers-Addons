@@ -13,33 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\VF_RealmPlayers">
+    <Filter Include="Source Files\1.12.1">
+      <UniqueIdentifier>{3c749fcb-2ab6-4964-a040-f173eed1ec1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\1.12.1\VF_RaidStats">
+      <UniqueIdentifier>{d92add04-3367-4a87-9e41-ae05219906b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\1.12.1\VF_RealmPlayers">
       <UniqueIdentifier>{c595d25b-3a93-47b3-bf22-5970f0c824d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\VF_RaidStats">
-      <UniqueIdentifier>{d92add04-3367-4a87-9e41-ae05219906b2}</UniqueIdentifier>
+    <Filter Include="Source Files\2.4.3">
+      <UniqueIdentifier>{3d4e7a57-4c8a-4178-a00b-3d785fc08fa0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\VF_RaidDamage\VF_RaidDamage.lua">
-      <Filter>Source Files\VF_RaidStats</Filter>
+      <Filter>Source Files\1.12.1\VF_RaidStats</Filter>
     </None>
     <None Include="..\VF_RaidDamage\VF_RaidDamage.toc">
-      <Filter>Source Files\VF_RaidStats</Filter>
+      <Filter>Source Files\1.12.1\VF_RaidStats</Filter>
     </None>
     <None Include="..\VF_RealmPlayers\VF_RealmPlayers.lua">
-      <Filter>Source Files\VF_RealmPlayers</Filter>
+      <Filter>Source Files\1.12.1\VF_RealmPlayers</Filter>
     </None>
     <None Include="..\VF_RealmPlayers\VF_RealmPlayers.toc">
-      <Filter>Source Files\VF_RealmPlayers</Filter>
+      <Filter>Source Files\1.12.1\VF_RealmPlayers</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\VF_RaidDamage\VF_RaidDamage.xml">
-      <Filter>Source Files\VF_RaidStats</Filter>
+      <Filter>Source Files\1.12.1\VF_RaidStats</Filter>
     </Xml>
     <Xml Include="..\VF_RealmPlayers\VF_RealmPlayers.xml">
-      <Filter>Source Files\VF_RealmPlayers</Filter>
+      <Filter>Source Files\1.12.1\VF_RealmPlayers</Filter>
     </Xml>
   </ItemGroup>
 </Project>
