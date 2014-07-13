@@ -19,6 +19,7 @@
     <None Include="..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.toc" />
     <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.lua" />
     <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.toc" />
+    <None Include="CopyToWowDir.bat" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml" />
@@ -63,6 +64,14 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <CustomBuildStep>
+      <Command>call "$(SolutionDir)\CopyToWowDir.bat"</Command>
+      <Outputs>FakeFile</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

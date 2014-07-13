@@ -1,6 +1,6 @@
 ## Interface: 11200
 ## Title: VF_RaidDamage
-## Author: Dilatazu (EmeraldDream @ www.emeralddream.com) Dilatazu@gmail.com
+## Author: Dilatazu, www.realmplayers.com, Dilatazu@gmail.com
 ## Version: 1.8.8
 ## Notes: 
 ## Dependencies: SW_Stats, KLHThreatMeter

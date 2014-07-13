@@ -31,6 +31,9 @@
     <Filter Include="Source Files\TBC\VF_RealmPlayers">
       <UniqueIdentifier>{10b1dfd4-ace0-428c-8dca-0a86766ff413}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\CopyToWowDir">
+      <UniqueIdentifier>{25922177-5c0f-450a-bc1a-1eae1abc0614}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua">
@@ -56,6 +59,9 @@
     </None>
     <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.toc">
       <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
+    </None>
+    <None Include="CopyToWowDir.bat">
+      <Filter>Source Files\CopyToWowDir</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
