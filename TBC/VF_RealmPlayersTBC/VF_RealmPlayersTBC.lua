@@ -1,4 +1,4 @@
-VF_REALMPLAYERSVERSION = GetAddOnMetadata("VF_RealmPlayers", "Version");
+VF_REALMPLAYERSVERSION = GetAddOnMetadata("VF_RealmPlayersTBC", "Version");
 
 VF_RealmPlayersVersion = VF_REALMPLAYERSVERSION;
 
@@ -45,6 +45,7 @@ end
 
 function VF_RealmPlayers_OnLoad()
 	this:RegisterEvent("PLAYER_TARGET_CHANGED");
+	this:RegisterEvent("INSPECT_HONOR_UPDATE");
 	this:RegisterEvent("VARIABLES_LOADED");
 	SlashCmdList["REALMPLAYERS"] = VF_RealmPlayers_Command;
 	SLASH_REALMPLAYERS1 = "/VFRP";
@@ -75,6 +76,8 @@ function VF_RealmPlayers_OnEvent()
 		VF_TemporarySupressTargetChange = nil;
 		local targetName = UnitName("target");
 		if(targetName == nil) then targetName = "nil"; end
+	elseif(event == "INSPECT_HONOR_UPDATE") then
+		VF_Inspect_Honor_Update = true;
 	end
 end
 
@@ -88,7 +91,7 @@ function VF_RealmPlayers_Command(arg1)
 	elseif(string.lower(arg1) == "printinspected") then
 		local playerList = "";
 		local playerCount = 0;
-		for i, v in VF_RealmPlayersData do
+		for i, v in pairs(VF_RealmPlayersData) do
 			playerList = playerList..i..", ";
 			playerCount = playerCount + 1;
 		end
@@ -97,7 +100,7 @@ function VF_RealmPlayers_Command(arg1)
 		local currTime = GetTime();
 		local playerList = "";
 		local playerCount = 0;
-		for i, v in VF_RealmPlayersData do
+		for i, v in pairs(VF_RealmPlayersData) do
 			if(currTime - v.LastInspect < 120) then
 				playerList = playerList..i..", ";
 				playerCount = playerCount + 1;
@@ -200,15 +203,13 @@ end
 function VF_RP_CreateGameToolTip()
 	VF_RP_GameToolTip = CreateFrame("GameTooltip")
 
-	VF_RP_GameToolTip:SetOwner(VF_RP_GameToolTip, "ANCHOR_NONE")
+	VF_RP_GameToolTip:SetOwner(WorldFrame, "ANCHOR_NONE")
 
 	VF_RP_GameToolTip.Llines = {}
 	VF_RP_GameToolTip.Rlines = {}
 	for i=1,30 do
-		VF_RP_GameToolTip.Llines[i] =VF_RP_GameToolTip:CreateFontString()
-		VF_RP_GameToolTip.Rlines[i] = VF_RP_GameToolTip:CreateFontString()
-		VF_RP_GameToolTip.Llines[i]:SetFontObject(GameFontNormal)
-		VF_RP_GameToolTip.Rlines[i]:SetFontObject(GameFontNormal)
+		VF_RP_GameToolTip.Llines[i] = VF_RP_GameToolTip:CreateFontString("$parentTextLeft"..i, nil, "GameTooltipText")
+		VF_RP_GameToolTip.Rlines[i] = VF_RP_GameToolTip:CreateFontString("$parentTextRight"..i, nil, "GameTooltipText")
 		VF_RP_GameToolTip:AddFontStrings(VF_RP_GameToolTip.Llines[i], VF_RP_GameToolTip.Rlines[i])
 	end
 end
@@ -255,7 +256,12 @@ function VF_RP_GetMount(_UnitID)
 		if(currBuff) then
 			leftText, rightText = VF_RP_GetBuffText(_UnitID, i);
 			if(table.getn(leftText) >= 2) then
-				if(leftText[2] == "Increases speed by 100%." or leftText[2] == "Increases speed by 60%.") then
+				if(leftText[2] == "Increases speed by 100%." 
+				or leftText[2] == "Increases speed by 60%." 
+				or leftText[2] == "Increases flight speed by 280%." 
+				or leftText[2] == "Increases flight speed by 310%." 
+				or leftText[2] == "Slow and steady..." --Turtle mount
+				) then
 					return leftText[1];
 				end
 			end
@@ -275,6 +281,9 @@ function VF_RP_GetPetInfo(_UnitID)
 		local petIdentifierIndex = string.find(data[2], "'s Pet");
 		if(petIdentifierIndex == nil) then
 			petIdentifierIndex = string.find(data[2], "'s Minion");
+		end
+		if(petIdentifierIndex == nil) then
+			petIdentifierIndex = string.find(data[2], "'s Companion");
 		end
 		if(petIdentifierIndex) then
 			local petLevel = tonumber(string.sub(data[3], 7));
@@ -320,7 +329,7 @@ function VF_RealmPlayers_OnUpdate()
 		if(affectingCombat == true) then
 			inspectionFrequency = 240;
 		end
-		if(VF_RealmPlayersData[VF_CurrentlyInspecting] == nil or currTime - VF_RealmPlayersData[VF_CurrentlyInspecting].LastInspect > inspectionFrequency or currTime < VF_RealmPlayersData[VF_CurrentlyInspecting].LastInspect) then --3600) then
+		if(VF_RealmPlayersData[VF_CurrentlyInspecting] == nil or currTime - VF_RealmPlayersData[VF_CurrentlyInspecting].LastInspect > inspectionFrequency or currTime < VF_RealmPlayersData[VF_CurrentlyInspecting].LastInspect or VF_Inspect_Honor_Update == true) then --3600) then
 			if(UnitName("target") ~= VF_CurrentlyInspecting) then
 				VF_InspectDone();
 				return;
@@ -339,6 +348,9 @@ function VF_RealmPlayers_OnUpdate()
 			end
 			if(VF_CurrentlyInspectingStage == 1) then
 				if ( not HasInspectHonorData() ) then
+					GetInspectArenaTeamData(1);
+					GetInspectArenaTeamData(2);
+					GetInspectArenaTeamData(3);
 					RequestInspectHonorData();
 				else--if(HasInspectHonorData()) then
 					VF_CurrentlyInspectingStage = 2;
@@ -358,13 +370,31 @@ function VF_RealmPlayers_OnUpdate()
 					VF_RealmPlayersData[VF_CurrentlyInspecting].LastInspect = 0;
 				end
 				--honor etc
-				local todayHK, todayDK, yesterdayHK, yesterdayHonor, thisweekHK, thisweekHonor, lastweekHK, lastweekHonor, lastweekStanding, lifetimeHK, lifetimeDK, lifetimeHighestRank = GetInspectHonorData();
-				local _, lifetimeHighestRank = GetPVPRankInfo(lifetimeHighestRank);
-				local _, currentRank = GetPVPRankInfo(UnitPVPRank("target"));
-				local currentRankProgress = GetInspectPVPRankProgress();
-				VF_RealmPlayersData[VF_CurrentlyInspecting].HonorData = ""..currentRank..":"..currentRankProgress..":"..thisweekHK..":"..thisweekHonor..":"..lastweekHK..":"..lastweekHonor..":"..lastweekStanding..":"..lifetimeHK..":"..lifetimeDK..":"..lifetimeHighestRank..":"..todayHK..":"..todayDK..":"..yesterdayHK..":"..yesterdayHonor;
+				VF_Inspect_Honor_Update = false;
+				local todayHK, todayHonor, yesterdayHK, yesterdayHonor, lifetimeHK, lifetimeDK, lifetimeHighestRank = GetInspectHonorData();
+				VF_RealmPlayersData[VF_CurrentlyInspecting].HonorData = ""..lifetimeHK..":"..lifetimeDK..":"..todayHK..":"..todayHonor..":"..yesterdayHK..":"..yesterdayHonor;
 				--honor etc
 				
+				--arena etc
+				local teamName1, teamSize1, teamRating1, teamPlayed1, teamWins1, playerPlayed1, playerRating1, bg_red1, bg_green1, bg_blue1, emblem1, emblem_red1, emblem_green1, emblem_blue1, border1, border_red1, border_green1, border_blue1 = GetInspectArenaTeamData(1)
+				local teamName2, teamSize2, teamRating2, teamPlayed2, teamWins2, playerPlayed2, playerRating2, bg_red2, bg_green2, bg_blue2, emblem2, emblem_red2, emblem_green2, emblem_blue2, border2, border_red2, border_green2, border_blue2 = GetInspectArenaTeamData(2)
+				local teamName3, teamSize3, teamRating3, teamPlayed3, teamWins3, playerPlayed3, playerRating3, bg_red3, bg_green3, bg_blue3, emblem3, emblem_red3, emblem_green3, emblem_blue3, border3, border_red3, border_green3, border_blue3 = GetInspectArenaTeamData(3)
+				
+				local arenaStr = "";
+				if(teamName1 ~= nil) then
+					arenaStr = arenaStr..teamName1..":"..teamSize1..":"..teamRating1..":"..teamPlayed1..":"..teamWins1..":"..playerPlayed1..":"..playerRating1..",";
+				end
+				if(teamName2 ~= nil) then
+					arenaStr = arenaStr..teamName2..":"..teamSize2..":"..teamRating2..":"..teamPlayed2..":"..teamWins2..":"..playerPlayed2..":"..playerRating2..",";
+				end
+				if(teamName3 ~= nil) then
+					arenaStr = arenaStr..teamName3..":"..teamSize3..":"..teamRating3..":"..teamPlayed3..":"..teamWins3..":"..playerPlayed3..":"..playerRating3..",";
+				end
+				if(arenaStr ~= "") then
+					VF_RealmPlayersData[VF_CurrentlyInspecting].ArenaData = arenaStr;
+				end
+				--arena etc
+
 				--playerData
 				local _, race = UnitRace("target");
 				local _, class = UnitClass("target");
@@ -404,7 +434,7 @@ function VF_RealmPlayers_OnUpdate()
 				--items
 				local allItems = "";
 				local allItemsList = {};
-				for slotName, slotID in VF_InventorySlots do
+				for slotName, slotID in pairs(VF_InventorySlots) do
 					local slotItem = GetInventoryItemLink("target", slotID);
 					if(slotItem ~= nil) then
 						local _, _, rubbish1, item, rubbish2 = string.find(slotItem, "(.*)|Hitem:(.*)|h%[(.*)");
@@ -431,7 +461,7 @@ function VF_RealmPlayers_OnUpdate()
 					else
 						--Data doesnt exist in here, lets add it infront of everything else
 						local oldItems = VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData;
-						for i, v in allItemsList do
+						for i, v in pairs(allItemsList) do
 							oldItems = string.gsub(oldItems, v, "");--Extra comma added earlier makes this easy
 						end
 						VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData = allItems..oldItems;
@@ -469,7 +499,7 @@ function VF_RealmPlayers_OnUpdate()
 		else
 			local playerList = "";
 			local playerCount = 0;
-			for i, v in VF_RecentlyInspected do
+			for i, v in pairs(VF_RecentlyInspected) do
 				playerList = playerList..v.." ";
 				playerCount = playerCount + 1;
 			end

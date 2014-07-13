@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Program\WoW TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RaidStatsTBC.lua" />
+    <None Include="..\..\..\Program\WoW TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RealmPlayersTBC.lua" />
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua" />
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.toc" />
     <None Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.lua" />
@@ -26,6 +28,9 @@
     <Xml Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.xml" />
     <Xml Include="..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.xml" />
     <Xml Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B3603C43-01DA-4540-A803-4072C7749A4A}</ProjectGuid>

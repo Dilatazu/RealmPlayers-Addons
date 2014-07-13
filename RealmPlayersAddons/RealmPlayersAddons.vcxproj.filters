@@ -34,6 +34,9 @@
     <Filter Include="Source Files\CopyToWowDir">
       <UniqueIdentifier>{25922177-5c0f-450a-bc1a-1eae1abc0614}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\TBC\SavedVariables">
+      <UniqueIdentifier>{fdb1e714-76fd-46a1-9bfd-8636f27200eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua">
@@ -63,6 +66,12 @@
     <None Include="CopyToWowDir.bat">
       <Filter>Source Files\CopyToWowDir</Filter>
     </None>
+    <None Include="..\..\..\Program\WoW TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RaidStatsTBC.lua">
+      <Filter>Source Files\TBC\SavedVariables</Filter>
+    </None>
+    <None Include="..\..\..\Program\WoW TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RealmPlayersTBC.lua">
+      <Filter>Source Files\TBC\SavedVariables</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml">
@@ -77,5 +86,10 @@
     <Xml Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.xml">
       <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

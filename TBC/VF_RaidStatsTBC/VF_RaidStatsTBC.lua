@@ -1,4 +1,4 @@
-VF_RAIDSTATSVERSION = GetAddOnMetadata("VF_RaidStats", "Version");
+VF_RAIDSTATSVERSION = GetAddOnMetadata("VF_RaidStatsTBC", "Version");
 
 VF_RS_MobType_Boss = 1;
 VF_RS_MobType_Trash = 2;
