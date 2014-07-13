@@ -372,7 +372,7 @@ function VF_RealmPlayers_OnUpdate()
 				--honor etc
 				VF_Inspect_Honor_Update = false;
 				local todayHK, todayHonor, yesterdayHK, yesterdayHonor, lifetimeHK, lifetimeDK, lifetimeHighestRank = GetInspectHonorData();
-				VF_RealmPlayersData[VF_CurrentlyInspecting].HonorData = ""..lifetimeHK..":"..lifetimeDK..":"..todayHK..":"..todayHonor..":"..yesterdayHK..":"..yesterdayHonor;
+				VF_RealmPlayersData[VF_CurrentlyInspecting].HonorData = ""..todayHK..":"..todayHonor..":"..yesterdayHK..":"..yesterdayHonor..":"..lifetimeHK..":"..lifetimeDK;
 				--honor etc
 				
 				--arena etc
