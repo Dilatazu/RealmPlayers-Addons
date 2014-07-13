@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: VF_RealmPlayers
+## Author: Dilatazu (EmeraldDream @ www.emeralddream.com) Dilatazu@gmail.com
+## Version: 1.54
+## Notes: 
+## Dependencies: 
+## OptionalDeps: SuperInspect, SuperInspect_UI
+## SavedVariablesPerCharacter: 
+## SavedVariables: VF_RealmPlayersData, VF_RealmPlayers_Playername, VF_RealmPlayersVersion, VF_RealmPlayers_Settings
+VF_RealmPlayers.xml

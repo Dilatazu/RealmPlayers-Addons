@@ -1,0 +1,17 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="VF_RaidDamage.lua"/>
+	<Frame name="VF_RaidDamageFrame" parent="UIParent" hidden="false">
+		<Scripts>
+			<OnLoad>
+				VF_RaidDamage_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				VF_RaidDamage_OnEvent();
+			</OnEvent>
+			<OnUpdate>
+				VF_RaidDamage_OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

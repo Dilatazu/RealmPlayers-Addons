@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: VF_RaidDamage
+## Author: Dilatazu (EmeraldDream @ www.emeralddream.com) Dilatazu@gmail.com
+## Version: 1.8.8
+## Notes: 
+## Dependencies: SW_Stats, KLHThreatMeter
+## OptionalDeps: 
+## SavedVariablesPerCharacter: 
+## SavedVariables: VF_RaidDamageData, VF_RaidDamageVersion, VF_RaidDamage_Settings, VF_RD_ErrorLog
+VF_RaidDamage.xml
