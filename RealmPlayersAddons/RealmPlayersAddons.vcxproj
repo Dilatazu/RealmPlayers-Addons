@@ -17,11 +17,14 @@
     <None Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.toc" />
     <None Include="..\TBC\VF_RaidStats\VF_RaidStats.lua" />
     <None Include="..\TBC\VF_RaidStats\VF_RaidStats.toc" />
+    <None Include="..\TBC\VF_RealmPlayers\VF_RealmPlayers.lua" />
+    <None Include="..\TBC\VF_RealmPlayers\VF_RealmPlayers.toc" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml" />
     <Xml Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.xml" />
     <Xml Include="..\TBC\VF_RaidStats\VF_RaidStats.xml" />
+    <Xml Include="..\TBC\VF_RealmPlayers\VF_RealmPlayers.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B3603C43-01DA-4540-A803-4072C7749A4A}</ProjectGuid>

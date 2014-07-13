@@ -51,6 +51,12 @@
     <None Include="..\TBC\VF_RaidStats\VF_RaidStats.toc">
       <Filter>Source Files\TBC\VF_RaidStats</Filter>
     </None>
+    <None Include="..\TBC\VF_RealmPlayers\VF_RealmPlayers.lua">
+      <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
+    </None>
+    <None Include="..\TBC\VF_RealmPlayers\VF_RealmPlayers.toc">
+      <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml">
@@ -61,6 +67,9 @@
     </Xml>
     <Xml Include="..\TBC\VF_RaidStats\VF_RaidStats.xml">
       <Filter>Source Files\TBC\VF_RaidStats</Filter>
+    </Xml>
+    <Xml Include="..\TBC\VF_RealmPlayers\VF_RealmPlayers.xml">
+      <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
     </Xml>
   </ItemGroup>
 </Project>
