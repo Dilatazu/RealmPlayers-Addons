@@ -13,39 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\1.12.1">
+    <Filter Include="Source Files\Classic">
       <UniqueIdentifier>{3c749fcb-2ab6-4964-a040-f173eed1ec1d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\1.12.1\VF_RaidStats">
+    <Filter Include="Source Files\Classic\VF_RaidStats">
       <UniqueIdentifier>{d92add04-3367-4a87-9e41-ae05219906b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\1.12.1\VF_RealmPlayers">
+    <Filter Include="Source Files\Classic\VF_RealmPlayers">
       <UniqueIdentifier>{c595d25b-3a93-47b3-bf22-5970f0c824d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\2.4.3">
+    <Filter Include="Source Files\TBC">
       <UniqueIdentifier>{3d4e7a57-4c8a-4178-a00b-3d785fc08fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TBC\VF_RaidStats">
+      <UniqueIdentifier>{a872d78b-97f1-4f08-b5aa-5d64149c527b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TBC\VF_RealmPlayers">
+      <UniqueIdentifier>{10b1dfd4-ace0-428c-8dca-0a86766ff413}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\VF_RaidDamage\VF_RaidDamage.lua">
-      <Filter>Source Files\1.12.1\VF_RaidStats</Filter>
+    <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua">
+      <Filter>Source Files\Classic\VF_RaidStats</Filter>
     </None>
-    <None Include="..\VF_RaidDamage\VF_RaidDamage.toc">
-      <Filter>Source Files\1.12.1\VF_RaidStats</Filter>
+    <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.toc">
+      <Filter>Source Files\Classic\VF_RaidStats</Filter>
     </None>
-    <None Include="..\VF_RealmPlayers\VF_RealmPlayers.lua">
-      <Filter>Source Files\1.12.1\VF_RealmPlayers</Filter>
+    <None Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.lua">
+      <Filter>Source Files\Classic\VF_RealmPlayers</Filter>
     </None>
-    <None Include="..\VF_RealmPlayers\VF_RealmPlayers.toc">
-      <Filter>Source Files\1.12.1\VF_RealmPlayers</Filter>
+    <None Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.toc">
+      <Filter>Source Files\Classic\VF_RealmPlayers</Filter>
+    </None>
+    <None Include="..\TBC\VF_RaidStats\VF_RaidStats.lua">
+      <Filter>Source Files\TBC\VF_RaidStats</Filter>
+    </None>
+    <None Include="..\TBC\VF_RaidStats\VF_RaidStats.toc">
+      <Filter>Source Files\TBC\VF_RaidStats</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\VF_RaidDamage\VF_RaidDamage.xml">
-      <Filter>Source Files\1.12.1\VF_RaidStats</Filter>
+    <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml">
+      <Filter>Source Files\Classic\VF_RaidStats</Filter>
     </Xml>
-    <Xml Include="..\VF_RealmPlayers\VF_RealmPlayers.xml">
-      <Filter>Source Files\1.12.1\VF_RealmPlayers</Filter>
+    <Xml Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.xml">
+      <Filter>Source Files\Classic\VF_RealmPlayers</Filter>
+    </Xml>
+    <Xml Include="..\TBC\VF_RaidStats\VF_RaidStats.xml">
+      <Filter>Source Files\TBC\VF_RaidStats</Filter>
     </Xml>
   </ItemGroup>
 </Project>

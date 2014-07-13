@@ -1,0 +1,10 @@
+## Interface: 20400
+## Title: VF_RaidStats
+## Author: Dilatazu, Dilatazu@gmail.com
+## Version: 1.0.0
+## Notes: 
+## Dependencies:
+## OptionalDeps: 
+## SavedVariablesPerCharacter: 
+## SavedVariables: VF_RaidStatsData, VF_RaidStatsVersion, VF_RaidStats_Settings, VF_RS_ErrorLog
+VF_RaidStats.xml
