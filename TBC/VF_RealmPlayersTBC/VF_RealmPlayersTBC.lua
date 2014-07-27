@@ -5,7 +5,7 @@ VF_RealmPlayersVersion = VF_REALMPLAYERSVERSION;
 VF_ClassColor = {
 	["DRUID"] = "|cffff7d0a",
 	["WARRIOR"] = "|cffc79c6e",
-	["SHAMAN"] = "|cfff58cba",
+	["SHAMAN"] = "|cff0070de",
 	["PRIEST"] = "|cffffffff",
 	["MAGE"] = "|cff69ccf0",
 	["ROGUE"] = "|cfffff569",
@@ -371,8 +371,8 @@ function VF_RealmPlayers_OnUpdate()
 				end
 				--honor etc
 				VF_Inspect_Honor_Update = false;
-				local todayHK, todayHonor, yesterdayHK, yesterdayHonor, lifetimeHK, lifetimeDK, lifetimeHighestRank = GetInspectHonorData();
-				VF_RealmPlayersData[VF_CurrentlyInspecting].HonorData = ""..todayHK..":"..todayHonor..":"..yesterdayHK..":"..yesterdayHonor..":"..lifetimeHK..":"..lifetimeDK;
+				local todayHK, todayHonor, yesterdayHK, yesterdayHonor, lifetimeHK = GetInspectHonorData();
+				VF_RealmPlayersData[VF_CurrentlyInspecting].HonorData = ""..todayHK..":"..todayHonor..":"..yesterdayHK..":"..yesterdayHonor..":"..lifetimeHK;
 				--honor etc
 				
 				--arena etc
