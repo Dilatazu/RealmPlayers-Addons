@@ -2,6 +2,8 @@ VF_REALMPLAYERSVERSION = GetAddOnMetadata("VF_RealmPlayers", "Version");
 
 VF_RealmPlayersVersion = VF_REALMPLAYERSVERSION;
 
+if string.find(GetBuildInfo(), "^1%.") then
+
 VF_ClassColor = {
 	["DRUID"] = "|cffff7d0a",
 	["WARRIOR"] = "|cffc79c6e",
@@ -481,3 +483,17 @@ function VF_RealmPlayers_OnUpdate()
 		VF_RecentlyInspected = {};
 	end
 end
+
+else--if not string.find(GetBuildInfo(), "^1%.") then
+	DEFAULT_CHAT_FRAME:AddMessage("ERROR! VF_RealmPlayers does not work on this WoW version! Only works on World of Warcraft Classic!");
+	
+	function VF_RealmPlayers_OnLoad()
+
+	end
+	function VF_RealmPlayers_OnEvent()
+
+	end
+	function VF_RealmPlayers_OnUpdate()
+
+	end
+end--if string.find(GetBuildInfo(), "^1%.") then
