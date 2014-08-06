@@ -302,6 +302,158 @@ function VF_RP_GetPetInfo(_UnitID)
 	return nil;
 end
 
+function VF_GrabPlayerInspectData()
+
+	--honor etc
+	VF_RP_UpdateCharacterHonorData("player");
+	--honor etc
+	
+	--arena etc
+	VF_RP_UpdateCharacterArenaData("player");
+	--arena etc
+
+	--playerData
+	VF_RP_UpdateCharacterInfoData("player");
+	--playerData
+
+	--extraData
+	VF_RP_UpdateCharacterExtraData("player");
+	--extraData
+
+	--items
+	VF_RP_UpdateCharacterItemsData("player");
+	--items
+end
+
+function VF_RP_UpdateCharacterHonorData(_Target)
+	local characterName = UnitName(_Target);
+	
+	local todayHK, todayHonor, yesterdayHK, yesterdayHonor, lifetimeHK;
+	if(_Target == "player") then
+		yesterdayHK, yesterdayHonor = GetPVPYesterdayStats();
+		lifetimeHK = GetPVPLifetimeStats();
+		todayHK, todayHonor = GetPVPSessionStats();
+	else--if(_Target == "target")
+		todayHK, todayHonor, yesterdayHK, yesterdayHonor, lifetimeHK = GetInspectHonorData();
+	end
+	VF_RealmPlayersData[characterName].HonorData = ""..todayHK..":"..todayHonor..":"..yesterdayHK..":"..yesterdayHonor..":"..lifetimeHK;
+end
+
+function VF_RP_UpdateCharacterArenaData(_Target)
+	local characterName = UnitName(_Target);
+
+	local teamName1, teamSize1, teamRating1, teamPlayed1, teamWins1, personalPlayed1, personalRating1, bg_red1, bg_green1, bg_blue1, emblem1, emblem_red1, emblem_green1, emblem_blue1, border1, border_red1, border_green1, border_blue1;
+	local teamName2, teamSize2, teamRating2, teamPlayed2, teamWins2, personalPlayed2, personalRating2, bg_red2, bg_green2, bg_blue2, emblem2, emblem_red2, emblem_green2, emblem_blue2, border2, border_red2, border_green2, border_blue2;
+	local teamName3, teamSize3, teamRating3, teamPlayed3, teamWins3, personalPlayed3, personalRating3, bg_red3, bg_green3, bg_blue3, emblem3, emblem_red3, emblem_green3, emblem_blue3, border3, border_red3, border_green3, border_blue3;
+	if(_Target == "player") then
+		local seasonTeamPlayed1, seasonTeamWins1, seasonPlayerPlayed1, teamRank1;
+		local seasonTeamPlayed2, seasonTeamWins2, seasonPlayerPlayed2, teamRank2;
+		local seasonTeamPlayed3, seasonTeamWins3, seasonPlayerPlayed3, teamRank3;
+
+		teamName1, teamSize1, teamRating1, teamPlayed1, teamWins1, seasonTeamPlayed1, seasonTeamWins1, personalPlayed1, seasonPlayerPlayed1, teamRank1, personalRating1, bg_red1, bg_green1, bg_blue1, emblem1, emblem_red1, emblem_green1, emblem_blue1, border1, border_red1, border_green1, border_blue1 = GetArenaTeam(1);
+		teamName2, teamSize2, teamRating2, teamPlayed2, teamWins2, seasonTeamPlayed2, seasonTeamWins2, personalPlayed2, seasonPlayerPlayed2, teamRank2, personalRating2, bg_red2, bg_green2, bg_blue2, emblem2, emblem_red2, emblem_green2, emblem_blue2, border2, border_red2, border_green2, border_blue2 = GetArenaTeam(2);
+		teamName3, teamSize3, teamRating3, teamPlayed3, teamWins3, seasonTeamPlayed3, seasonTeamWins3, personalPlayed3, seasonPlayerPlayed3, teamRank3, personalRating3, bg_red3, bg_green3, bg_blue3, emblem3, emblem_red3, emblem_green3, emblem_blue3, border3, border_red3, border_green3, border_blue3 = GetArenaTeam(3);
+	else--if(_Target == "target")
+		teamName1, teamSize1, teamRating1, teamPlayed1, teamWins1, personalPlayed1, personalRating1, bg_red1, bg_green1, bg_blue1, emblem1, emblem_red1, emblem_green1, emblem_blue1, border1, border_red1, border_green1, border_blue1 = GetInspectArenaTeamData(1)
+		teamName2, teamSize2, teamRating2, teamPlayed2, teamWins2, personalPlayed2, personalRating2, bg_red2, bg_green2, bg_blue2, emblem2, emblem_red2, emblem_green2, emblem_blue2, border2, border_red2, border_green2, border_blue2 = GetInspectArenaTeamData(2)
+		teamName3, teamSize3, teamRating3, teamPlayed3, teamWins3, personalPlayed3, personalRating3, bg_red3, bg_green3, bg_blue3, emblem3, emblem_red3, emblem_green3, emblem_blue3, border3, border_red3, border_green3, border_blue3 = GetInspectArenaTeamData(3)
+	end
+	
+	local arenaStr = "";
+	if(teamName1 ~= nil) then
+		arenaStr = arenaStr..teamName1..":"..teamSize1..":"..teamRating1..":"..teamPlayed1..":"..teamWins1..":"..personalPlayed1..":"..personalRating1..",";
+	end
+	if(teamName2 ~= nil) then
+		arenaStr = arenaStr..teamName2..":"..teamSize2..":"..teamRating2..":"..teamPlayed2..":"..teamWins2..":"..personalPlayed2..":"..personalRating2..",";
+	end
+	if(teamName3 ~= nil) then
+		arenaStr = arenaStr..teamName3..":"..teamSize3..":"..teamRating3..":"..teamPlayed3..":"..teamWins3..":"..personalPlayed3..":"..personalRating3..",";
+	end
+	if(arenaStr ~= "") then
+		VF_RealmPlayersData[characterName].ArenaData = arenaStr;
+	end
+end
+
+function VF_RP_UpdateCharacterExtraData(_Target)
+	local characterName = UnitName(_Target);
+	local mount = VF_RP_GetMount(_Target);
+	if(mount ~= "") then
+		local mountData = "M:"..mount;
+		if(VF_RealmPlayersData[characterName].ExtraData == nil) then
+			VF_RealmPlayersData[characterName].ExtraData = mountData;
+		else
+			if(string.find(VF_RealmPlayersData[characterName].ExtraData, mountData) == nil) then
+				VF_RealmPlayersData[characterName].ExtraData = VF_RealmPlayersData[characterName].ExtraData..","..mountData;
+			end
+		end
+	end
+end
+
+function VF_RP_UpdateCharacterInfoData(_Target)
+	local characterName = UnitName(_Target);
+	local _, race = UnitRace(_Target);
+	local _, class = UnitClass(_Target);
+	local sex = UnitSex(_Target);
+	local level = UnitLevel(_Target);
+	local guildname, guildtitle, guildrank = GetGuildInfo(_Target);
+	local realmName = GetRealmName();
+	if(guildname == nil) then guildname = "nil"; end
+	if(guildtitle == nil) then guildtitle = "nil"; end
+	if(guildrank == nil) then guildrank = 0; end
+	VF_RealmPlayersData[characterName].PlayerData = race..":"..class..":"..guildname..":"..guildtitle..":"..guildrank..":"..sex..":"..level..":"..realmName;
+end
+
+function VF_RP_UpdateCharacterItemsData(_Target)
+	local characterName = UnitName(_Target);
+
+	local allItems = "";
+	local allItemsList = {};
+	for slotName, slotID in pairs(VF_InventorySlots) do
+		local slotItem = GetInventoryItemLink(_Target, slotID);
+		if(slotItem ~= nil) then
+			local _, _, rubbish1, item, rubbish2 = string.find(slotItem, "(.*)|Hitem:(.*)|h%[(.*)");
+			slotItem = item;
+			allItems = allItems..slotID..":"..slotItem..",";
+			table.insert(allItemsList, slotID..":"..slotItem..",");--Adding the extra comma for easier algorithm later
+		end
+	end
+
+	if(VF_RealmPlayersData[characterName].ItemsData ~= nil) then
+		--if there allready exists ItemsData, lets add only new interesting data
+		local startIndex, endIndex = string.find(VF_RealmPlayersData[characterName].ItemsData, allItems);
+		if(startIndex == 1) then
+			--Data allready exists in here, we are done
+		elseif(startIndex ~= nil) then
+			--Data allready exists in here, but not infront of everything else.
+			local newItemsData = allItems..string.gsub(VF_RealmPlayersData[characterName].ItemsData, allItems, "");
+			VF_RealmPlayersData[characterName].ItemsData = newItemsData;
+		else
+			--Data doesnt exist in here, lets add it infront of everything else
+			local oldItems = VF_RealmPlayersData[characterName].ItemsData;
+			for i, v in pairs(allItemsList) do
+				oldItems = string.gsub(oldItems, v, "");--Extra comma added earlier makes this easy
+			end
+			VF_RealmPlayersData[characterName].ItemsData = allItems..oldItems;
+		end
+	else
+		VF_RealmPlayersData[characterName].ItemsData = allItems;
+	end
+end
+
+function VF_RP_UpdateCharacterMetaData(_Target)
+	local characterName = UnitName(_Target);
+	local _, characterClass = UnitClass(_Target);
+	local currTime = GetTime();
+
+	VF_RealmPlayersData[characterName].LastInspect = currTime;
+	local currentDate = date("!%Y-%m-%d %X");
+	if(VF_RealmPlayersData[characterName].DateTimeUTC == nil or string.sub(currentDate, 1, -5) ~= string.sub(VF_RealmPlayersData[characterName].DateTimeUTC, 1, -5)) then
+		VF_RecentlyInspectedTime = currTime;
+		table.insert(VF_RecentlyInspected, VF_ClassColor[characterClass]..characterName);
+	end
+	VF_RealmPlayersData[characterName].DateTimeUTC = currentDate;
+end
+
 function VF_InspectDone(success)
 	VF_CurrentlyInspecting = nil;
 	VF_CurrentlyInspectingStage = 0;
@@ -335,7 +487,9 @@ function VF_RealmPlayers_OnUpdate()
 				return;
 			end
 			if(VF_CurrentlyInspectingStage == 0) then
-				if(CheckInteractDistance("target", 1)) then
+				if(UnitName("target") == UnitName("player")) then
+					VF_CurrentlyInspectingStage = 2;
+				elseif(CheckInteractDistance("target", 1)) then
 					if (CanInspect("target") ) then
 						NotifyInspect("target");
 						VF_CurrentlyInspectingStage = 1;
@@ -369,116 +523,22 @@ function VF_RealmPlayers_OnUpdate()
 					VF_RealmPlayersData[VF_CurrentlyInspecting] = {};
 					VF_RealmPlayersData[VF_CurrentlyInspecting].LastInspect = 0;
 				end
-				--honor etc
 				VF_Inspect_Honor_Update = false;
-				local todayHK, todayHonor, yesterdayHK, yesterdayHonor, lifetimeHK = GetInspectHonorData();
-				VF_RealmPlayersData[VF_CurrentlyInspecting].HonorData = ""..todayHK..":"..todayHonor..":"..yesterdayHK..":"..yesterdayHonor..":"..lifetimeHK;
-				--honor etc
-				
-				--arena etc
-				local teamName1, teamSize1, teamRating1, teamPlayed1, teamWins1, playerPlayed1, playerRating1, bg_red1, bg_green1, bg_blue1, emblem1, emblem_red1, emblem_green1, emblem_blue1, border1, border_red1, border_green1, border_blue1 = GetInspectArenaTeamData(1)
-				local teamName2, teamSize2, teamRating2, teamPlayed2, teamWins2, playerPlayed2, playerRating2, bg_red2, bg_green2, bg_blue2, emblem2, emblem_red2, emblem_green2, emblem_blue2, border2, border_red2, border_green2, border_blue2 = GetInspectArenaTeamData(2)
-				local teamName3, teamSize3, teamRating3, teamPlayed3, teamWins3, playerPlayed3, playerRating3, bg_red3, bg_green3, bg_blue3, emblem3, emblem_red3, emblem_green3, emblem_blue3, border3, border_red3, border_green3, border_blue3 = GetInspectArenaTeamData(3)
-				
-				local arenaStr = "";
-				if(teamName1 ~= nil) then
-					arenaStr = arenaStr..teamName1..":"..teamSize1..":"..teamRating1..":"..teamPlayed1..":"..teamWins1..":"..playerPlayed1..":"..playerRating1..",";
-				end
-				if(teamName2 ~= nil) then
-					arenaStr = arenaStr..teamName2..":"..teamSize2..":"..teamRating2..":"..teamPlayed2..":"..teamWins2..":"..playerPlayed2..":"..playerRating2..",";
-				end
-				if(teamName3 ~= nil) then
-					arenaStr = arenaStr..teamName3..":"..teamSize3..":"..teamRating3..":"..teamPlayed3..":"..teamWins3..":"..playerPlayed3..":"..playerRating3..",";
-				end
-				if(arenaStr ~= "") then
-					VF_RealmPlayersData[VF_CurrentlyInspecting].ArenaData = arenaStr;
-				end
-				--arena etc
-
-				--playerData
-				local _, race = UnitRace("target");
-				local _, class = UnitClass("target");
-				local sex = UnitSex("target");
-				local level = UnitLevel("target");
-				local guildname, guildtitle, guildrank = GetGuildInfo("target");
-				local realmName = GetRealmName();
-				if(guildname == nil) then guildname = "nil"; end
-				if(guildtitle == nil) then guildtitle = "nil"; end
-				if(guildrank == nil) then guildrank = 0; end
-				VF_RealmPlayersData[VF_CurrentlyInspecting].PlayerData = race..":"..class..":"..guildname..":"..guildtitle..":"..guildrank..":"..sex..":"..level..":"..realmName;
-				--playerData
-				
-				--extraData
-				--/script VF_RD_DebugMessage(VF_GetMount("target"));
-				local mount = VF_RP_GetMount("target");
-				if(mount ~= "") then
-					local mountData = "M:"..mount;
-					if(VF_RealmPlayersData[VF_CurrentlyInspecting].ExtraData == nil) then
-						VF_RealmPlayersData[VF_CurrentlyInspecting].ExtraData = mountData;
-						--[[
-						if(VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData ~= nil) then --not first time inspecting
-							table.insert(VF_RecentlyInspected, "|cffff00ff"..mount);
-						end--]]
-					else
-						if(string.find(VF_RealmPlayersData[VF_CurrentlyInspecting].ExtraData, mountData) == nil) then
-							VF_RealmPlayersData[VF_CurrentlyInspecting].ExtraData = VF_RealmPlayersData[VF_CurrentlyInspecting].ExtraData..","..mountData;
-							--[[
-							if(VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData ~= nil) then --not first time inspecting
-								table.insert(VF_RecentlyInspected, "|cffff00ff"..mount);
-							end--]]
-						end
-					end
-				end
-				--extraData
-				
-				--items
-				local allItems = "";
-				local allItemsList = {};
-				for slotName, slotID in pairs(VF_InventorySlots) do
-					local slotItem = GetInventoryItemLink("target", slotID);
-					if(slotItem ~= nil) then
-						local _, _, rubbish1, item, rubbish2 = string.find(slotItem, "(.*)|Hitem:(.*)|h%[(.*)");
-						slotItem = item;
-						allItems = allItems..slotID..":"..slotItem..",";
-						table.insert(allItemsList, slotID..":"..slotItem..",");--Adding the extra comma for easier algorithm later
-					--[[--realised this is not actually needed.
-					elseif(slotID == 16 or slotID == 17 or slotID == 11 or slotID == 12 or slotID == 13 or slotID == 14) then
-						--if multiple gears are recorded, make sure we dont do any misstakes for weapons, rings and trinkets
-						allItems = allItems..slotID..":0:0:0:0,";
-						table.insert(allItemsList, slotID..":0:0:0:0,");--Adding the extra comma for easier algorithm later
-						--]]
-					end
-				end
-				if(VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData ~= nil) then
-					--if there allready exists ItemsData, lets add only new interesting data
-					local startIndex, endIndex = string.find(VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData, allItems);
-					if(startIndex == 1) then
-						--Data allready exists in here, we are done
-					elseif(startIndex ~= nil) then
-						--Data allready exists in here, but not infront of everything else.
-						local newItemsData = allItems..string.gsub(VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData, allItems, "");
-						VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData = newItemsData;
-					else
-						--Data doesnt exist in here, lets add it infront of everything else
-						local oldItems = VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData;
-						for i, v in pairs(allItemsList) do
-							oldItems = string.gsub(oldItems, v, "");--Extra comma added earlier makes this easy
-						end
-						VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData = allItems..oldItems;
-					end
+				if(UnitName("target") == UnitName("player")) then
+					VF_RP_UpdateCharacterHonorData("player");
+					VF_RP_UpdateCharacterArenaData("player");
+					VF_RP_UpdateCharacterInfoData("player");
+					VF_RP_UpdateCharacterExtraData("player");
+					VF_RP_UpdateCharacterItemsData("player");
+					VF_RP_UpdateCharacterMetaData("player");
 				else
-					VF_RealmPlayersData[VF_CurrentlyInspecting].ItemsData = allItems;
+					VF_RP_UpdateCharacterHonorData("target");
+					VF_RP_UpdateCharacterArenaData("target");
+					VF_RP_UpdateCharacterInfoData("target");
+					VF_RP_UpdateCharacterExtraData("target");
+					VF_RP_UpdateCharacterItemsData("target");
+					VF_RP_UpdateCharacterMetaData("target");
 				end
-				--items
-				
-				VF_RealmPlayersData[VF_CurrentlyInspecting].LastInspect = currTime;
-				local currentDate = date("!%Y-%m-%d %X");
-				if(VF_RealmPlayersData[VF_CurrentlyInspecting].DateTimeUTC == nil or string.sub(currentDate, 1, -5) ~= string.sub(VF_RealmPlayersData[VF_CurrentlyInspecting].DateTimeUTC, 1, -5)) then
-					--VF_RealmPlayers_Debug("Successfully inspected "..VF_RP_ClassColor[class]..VF_CurrentlyInspecting);
-					VF_RecentlyInspectedTime = currTime;
-					table.insert(VF_RecentlyInspected, VF_ClassColor[class]..VF_CurrentlyInspecting);
-				end
-				VF_RealmPlayersData[VF_CurrentlyInspecting].DateTimeUTC = currentDate;
 				VF_InspectDone(true);
 			end
 		else
