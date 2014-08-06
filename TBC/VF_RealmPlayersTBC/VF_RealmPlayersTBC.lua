@@ -129,7 +129,7 @@ local VF_CurrentlyInspectingStage = 0;
 VF_PlayerChosenTarget = true;
 VF_TemporarySupressTargetChange = nil;
 function VF_StartInspectingTarget()
-	if (UnitIsPlayer("target") and UnitIsFriend("player","target")) then
+	if (UnitIsPlayer("target") and CanInspect("target")) then
 		VF_CurrentlyInspecting = UnitName("target");
 		VF_CurrentlyInspectingStage = 0;
 	else
