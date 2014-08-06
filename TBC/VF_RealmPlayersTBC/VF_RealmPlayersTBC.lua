@@ -2,6 +2,8 @@ VF_REALMPLAYERSVERSION = GetAddOnMetadata("VF_RealmPlayersTBC", "Version");
 
 VF_RealmPlayersVersion = VF_REALMPLAYERSVERSION;
 
+if string.find(GetBuildInfo(), "^2%.") then
+
 VF_ClassColor = {
 	["DRUID"] = "|cffff7d0a",
 	["WARRIOR"] = "|cffc79c6e",
@@ -43,7 +45,7 @@ function VF_RealmPlayers_Debug(_Text)
 	end
 end
 
-function VF_RealmPlayers_OnLoad()
+function VF_RealmPlayersTBC_OnLoad()
 	this:RegisterEvent("PLAYER_TARGET_CHANGED");
 	this:RegisterEvent("INSPECT_HONOR_UPDATE");
 	this:RegisterEvent("VARIABLES_LOADED");
@@ -54,7 +56,7 @@ function VF_RealmPlayers_OnLoad()
 	VF_RP_CreateGameToolTip();
 end
 
-function VF_RealmPlayers_OnEvent()
+function VF_RealmPlayersTBC_OnEvent()
 	if(event == "VARIABLES_LOADED") then
 		VF_RealmPlayersVersion = VF_REALMPLAYERSVERSION;
 		if(VF_RealmPlayers_Settings == nil) then
@@ -473,7 +475,7 @@ VF_RealmPlayers_Settings = {["DebugMode"] = true,["MaxDatabase"] = 1000};
 VF_RealmPlayersData = {};
 local VF_NextInspectTryTime = 0;
 local VF_AutomaticInspection = nil;
-function VF_RealmPlayers_OnUpdate()
+function VF_RealmPlayersTBC_OnUpdate()
 	local currTime = GetTime();
 	if(VF_CurrentlyInspecting ~= nil) then
 		local affectingCombat = UnitAffectingCombat("player");
@@ -568,3 +570,17 @@ function VF_RealmPlayers_OnUpdate()
 		VF_RecentlyInspected = {};
 	end
 end
+
+else--if not string.find(GetBuildInfo(), "^2%.") then
+	DEFAULT_CHAT_FRAME:AddMessage("ERROR! VF_RealmPlayersTBC does not work on this WoW version! Only works on World of Warcraft TBC!");
+	
+	function VF_RealmPlayersTBC_OnLoad()
+
+	end
+	function VF_RealmPlayersTBC_OnEvent()
+
+	end
+	function VF_RealmPlayersTBC_OnUpdate()
+
+	end
+end--if string.find(GetBuildInfo(), "^2%.") then

@@ -4,13 +4,13 @@
 	<Frame name="VF_RealmPlayersFrame" parent="UIParent" hidden="false">
 		<Scripts>
 			<OnLoad>
-				VF_RealmPlayers_OnLoad();
+				VF_RealmPlayersTBC_OnLoad();
 			</OnLoad>
 			<OnEvent>
-				VF_RealmPlayers_OnEvent();
+				VF_RealmPlayersTBC_OnEvent();
 			</OnEvent>
 			<OnUpdate>
-				VF_RealmPlayers_OnUpdate();
+				VF_RealmPlayersTBC_OnUpdate();
 			</OnUpdate>
 		</Scripts>
 	</Frame>
