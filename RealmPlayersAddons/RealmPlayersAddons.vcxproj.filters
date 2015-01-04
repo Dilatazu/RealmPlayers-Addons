@@ -72,6 +72,24 @@
     <None Include="tests.luatests">
       <Filter>Resource Files\Tests</Filter>
     </None>
+    <None Include="LuaCheckAll.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="LuaCheckRaidStats.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="LuaCheckRaidStatsTBC.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="LuaCheckRealmPlayers.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="LuaCheckRealmPlayersTBC.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VariousNotes.lua">
+      <Filter>Resource Files\Tests</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml">

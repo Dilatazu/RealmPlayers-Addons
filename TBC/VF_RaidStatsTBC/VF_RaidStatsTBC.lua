@@ -37,18 +37,18 @@ VF_RS_MobsType = {
 	--The Opera Event
 	--The Curator
 	["The Curator"] = VF_RS_MobType_Boss,
-	["Astral Flare"] = VF_RS_MobType_Boss, --CURATOR ADD
+	--["Astral Flare"] = VF_RS_MobType_Boss, --CURATOR ADD
 	--The Curator
 	["Shade of Aran"] = VF_RS_MobType_Boss,
 	--Terestian Illhoof
 	["Terestian Illhoof"] = VF_RS_MobType_Boss,
 	["Kil'rek"] = VF_RS_MobType_Boss, --Illhoof ADD
-	["Demon Chains"] = VF_RS_MobType_Boss, --Illhoof ADD
+	--["Demon Chains"] = VF_RS_MobType_Boss, --Illhoof ADD
 	--Terestian Illhoof
 	["Netherspite"] = VF_RS_MobType_Boss,
 	--Nightbane
 	["Nightbane"] = VF_RS_MobType_Boss,
-	["Restless Skeleton"] = VF_RS_MobType_Boss, --NIGHTBANE ADD
+	--["Restless Skeleton"] = VF_RS_MobType_Boss, --NIGHTBANE ADD
 	--Nightbane
 	["Prince Melchazzar"] = VF_RS_MobType_Boss,
 	
@@ -64,7 +64,7 @@ VF_RS_MobsType = {
 	
 	--Magtheridon's Lair
 	["Magtheridon"] = VF_RS_MobType_Boss,
-	["Hellfire Channeler"] = VF_RS_MobType_Boss, --MAGTHERIDON ADD
+	--["Hellfire Channeler"] = VF_RS_MobType_Boss, --MAGTHERIDON ADD
 	
 	--Serpentshrine Cavern
 	["Hydross the Unstable"] = VF_RS_MobType_Boss,
@@ -82,11 +82,11 @@ VF_RS_MobsType = {
 	["Morogrim Tidewalker"] = VF_RS_MobType_Boss,
 	--Lady Vashj
 	["Lady Vashj"] = VF_RS_MobType_Boss,
-	["Enchanted Elemental"] = VF_RS_MobType_Boss, --ADD
-	["Tainted Elemental"] = VF_RS_MobType_Boss, --ADD
-	["Coilfang Elite"] = VF_RS_MobType_Boss, --ADD
-	["Coilfang Strider"] = VF_RS_MobType_Boss, --ADD
-	["Toxic Spore Bat"] = VF_RS_MobType_Boss, --ADD
+	--["Enchanted Elemental"] = VF_RS_MobType_Boss, --ADD
+	--["Tainted Elemental"] = VF_RS_MobType_Boss, --ADD
+	--["Coilfang Elite"] = VF_RS_MobType_Boss, --ADD
+	--["Coilfang Strider"] = VF_RS_MobType_Boss, --ADD
+	--["Toxic Spore Bat"] = VF_RS_MobType_Boss, --ADD
 	--Lady Vashj
 	
 	--Tempest Keep
@@ -97,8 +97,8 @@ VF_RS_MobsType = {
 	["Void Reaver"] = VF_RS_MobType_Boss,
 	--High Astromancer Solarian
 	["High Astromancer Solarian"] = VF_RS_MobType_Boss, 
-	["Solarium Agent"] = VF_RS_MobType_Boss, --ADD
-	["Solarium Priest"] = VF_RS_MobType_Boss, --ADD
+	--["Solarium Agent"] = VF_RS_MobType_Boss, --ADD
+	--["Solarium Priest"] = VF_RS_MobType_Boss, --ADD
 	--High Astromancer Solarian
 	--Kael'thas Sunstrider
 	["Kael'thas Sunstrider"] = VF_RS_MobType_Boss,
@@ -122,23 +122,23 @@ VF_RS_MobsType = {
 	["Supremus"] = VF_RS_MobType_Boss,
 	--Shade of Akama
 	["Shade of Akama"] = VF_RS_MobType_Boss,
-	["Ashtongue Defender"] = VF_RS_MobType_Boss, --ADD
-	["Ashtongue Elementalist"] = VF_RS_MobType_Boss, --ADD
-	["Ashtongue Rogue"] = VF_RS_MobType_Boss, --ADD
-	["Ashtongue Spiritbinder"] = VF_RS_MobType_Boss, --ADD
-	["Ashtongue Channeler"] = VF_RS_MobType_Boss, --ADD
-	["Ashtongue Sorcerer"] = VF_RS_MobType_Boss, --ADD
+	--["Ashtongue Defender"] = VF_RS_MobType_Boss, --ADD
+	--["Ashtongue Elementalist"] = VF_RS_MobType_Boss, --ADD
+	--["Ashtongue Rogue"] = VF_RS_MobType_Boss, --ADD
+	--["Ashtongue Spiritbinder"] = VF_RS_MobType_Boss, --ADD
+	--["Ashtongue Channeler"] = VF_RS_MobType_Boss, --ADD
+	--["Ashtongue Sorcerer"] = VF_RS_MobType_Boss, --ADD
 	--Shade of Akama
 	--Teron Gorefiend
 	["Teron Gorefiend"] = VF_RS_MobType_Boss,
-	["Shadowy Construct"] = VF_RS_MobType_Boss, --ADD
+	--["Shadowy Construct"] = VF_RS_MobType_Boss, --ADD
 	--Teron Gorefiend
 	["Gurtogg Bloodboil"] = VF_RS_MobType_Boss,
 	--Reliquary of Souls
 	["Essence of Anger"] = VF_RS_MobType_Boss, --BOSSPART
 	["Essence of Desire"] = VF_RS_MobType_Boss, --BOSSPART
 	["Essence of Suffering"] = VF_RS_MobType_Boss, --BOSSPART
-	["Enslaved Soul"] = VF_RS_MobType_Boss, --ADD
+	--["Enslaved Soul"] = VF_RS_MobType_Boss, --ADD
 	--Reliquary of Souls
 	["Mother Shahraz"] = VF_RS_MobType_Boss,
 	--Illidari Council
@@ -155,6 +155,90 @@ VF_RS_MobsType = {
 	["Kaz'rogal"] = VF_RS_MobType_Boss,
 	["Azgalor"] = VF_RS_MobType_Boss,
 	["Archimonde"] = VF_RS_MobType_Boss,
+}
+
+VF_RS_YellEvents = {
+	
+}
+VF_RS_RaidZones = {
+	["Karazhan"] = true,
+	["Gruul's Lair"] = true,
+	["Magtheridon's Lair"] = true,
+	["Serpentshrine Cavern"] = true,
+	["The Eye"] = true,
+	["Hyjal Summit"] = true,
+	["Black Temple"] = true,
+	["Zul'Aman"] = true,
+	["Sunwell Plateau"] = true,
+}
+
+VF_RS_BossMap = {
+	--Karazhan
+	["Midnight"] = "Attumen the Huntsman",
+	["Baroness Dorothea Millstipe"] = "Moroes", --only 4 of theese 6 for Moroes will be needed to kill(only 4 random spawns)
+	["Lady Catriona Von'Indi"] = "Moroes",
+	["Lady Keira Berrybuck"] = "Moroes",
+	["Baron Rafe Dreuger"] = "Moroes",
+	["Lord Robin Daris"] = "Moroes",
+	["Lord Crispin Ference"] = "Moroes",
+	["Romulo"] = "Romulo and Julianne",
+	["Julianne"] = "Romulo and Julianne",
+	
+	["The Crone"] = "Wizard of Oz",
+	["Dorothee"] = "Wizard of Oz",
+	["Tito"] = "Wizard of Oz",
+	["Roar"] = "Wizard of Oz",
+	["Strawman"] = "Wizard of Oz",
+	["Tinhead"] = "Wizard of Oz",
+
+	["Kil'rek"] = "Terestian Illhoof",
+
+	--Gruul's Lair
+	["Krosh Firehand"] = "High King Maulgar",
+	["Olm the Summoner"] = "High King Maulgar",
+	["Kiggler the Crazed"] = "High King Maulgar",
+	["Blindeye the Seer"] = "High King Maulgar",
+
+	--Serpentshrine Cavern
+	["Shadow of Leotheras"] = "Leotheras the Blind",
+	
+	["Fathom-Guard Sharkkis"] = "Fathom-Lord Karathress",
+	["Fathom-Guard Tidalvess"] = "Fathom-Lord Karathress",
+	["Fathom-Guard Caribdis"] = "Fathom-Lord Karathress",
+
+	--Tempest Keep
+	["Ember of Al'ar"] = "Al'ar";
+
+	["Thaladred the Darkener"] = "Kael'thas Sunstrider", --ADD
+	["Lord Sanguinar"] = "Kael'thas Sunstrider", --ADD
+	["Grand Astromancer Capernian"] = "Kael'thas Sunstrider", --ADD
+	["Master Engineer Telonicus"] = "Kael'thas Sunstrider", --ADD
+	["Netherstrand Longbow"] = "Kael'thas Sunstrider", --WEAPON ADD
+	["Staff of Disintegration"] = "Kael'thas Sunstrider", --WEAPON ADD
+	["Cosmic Infuser"] = "Kael'thas Sunstrider", --WEAPON ADD
+	["Infinity Blade"] = "Kael'thas Sunstrider", --WEAPON ADD
+	["Warp Slicer"] = "Kael'thas Sunstrider", --WEAPON ADD
+	["Devastation"] = "Kael'thas Sunstrider", --WEAPON ADD
+	["Phaseshift Bulwark"] = "Kael'thas Sunstrider", --WEAPON ADD
+	["Phoenix"] = "Kael'thas Sunstrider", --ADD
+	["Phoenix Egg"] = "Kael'thas Sunstrider", --ADD
+	
+	--Black Temple
+	["Essence of Anger"] = "Reliquary of Souls",
+	["Essence of Desire"] = "Reliquary of Souls",
+	["Essence of Suffering"] = "Reliquary of Souls",
+	
+	["Gathios the Shatterer"] = "Illidari Council",
+	["High Nethermancer Zerevor"] = "Illidari Council",
+	["Lady Malande"] = "Illidari Council",
+	["Veras Darkshadow"] = "Illidari Council",
+}
+VF_RS_BossParts = {
+	["Romulo and Julianne"] = {[1] = "Romulo", [2] = "Julianne"},
+	["Wizard of Oz"] = {[1] = "Dorothee", [2] = "Tito", [3] = "Roar", [4] = "Strawman", [5] = "Tinhead", [6] = "The Crone"},
+	
+	["Reliquary of Souls"] = {[1] = "Essence of Anger", [2] = "Essence of Desire", [3] = "Essence of Suffering"},
+	["Illidari Council"] = {[1] = "Gathios the Shatterer", [2] = "High Nethermancer Zerevor", [3] = "Lady Malande", [4] = "Veras Darkshadow"},
 }
 
 VF_RaidStats_Settings = {["DebugMode"] = false};
@@ -384,16 +468,243 @@ VF_RS_ErrorLog = {};
 [1] = "",
 };--]]
 
-VF_RS_RaidMembers = "";
-VF_RS_RaidMembersChanged = nil;
+VF_RS_DataIndex_Damage = 0;
+VF_RS_DataIndex_EffectiveHeal = 1;
+VF_RS_DataIndex_DamageTaken = 2;
+VF_RS_DataIndex_OverHeal = 3;
+VF_RS_DataIndex_Death = 4;
+VF_RS_DataIndex_Dispels = 5;
+VF_RS_DataIndex_CCBreaks = 6;
+VF_RS_DataIndex_Interrupts = 7;
+VF_RS_DataIndex_Dispelled = 8;
+
 VF_RS_LastRecorded = {};
 
+function VF_RS_GenerateDeltaChange(_Value, _UnitID, _DataIndex, _CurrTime)
+	if(VF_RS_LastRecorded[_UnitID][_DataIndex] == nil) then
+		VF_RS_LastRecorded[_UnitID][_DataIndex] = {Value = _Value; Time = _CurrTime;}
+		if(_Value == 0) then
+			return "";
+		end
+		return _Value;
+	end
+	local deltaValue = _Value - VF_RS_LastRecorded[_UnitID][_DataIndex].Value;
+	if(deltaValue ~= 0) then
+		VF_RS_LastRecorded[_UnitID][_DataIndex].Value = _Value;
+		VF_RS_LastRecorded[_UnitID][_DataIndex].Time = _CurrTime;
+	end
+	if(deltaValue == 0) then
+		return "";
+	end
+	return deltaValue;
+end
+
+VF_RS_RaidMembers = "";
+VF_RS_RaidMembersChanged = nil;
+VF_RS_UnitIDCounter = 1;
 VF_RS_PrecisionLoggingInterval = 10;
+
+function VF_RS_IsCurrentBossKilled()
+	local bossKilled = true;
+	for addName, addData in VF_RS_CurrentBossData do
+		if(addData.Dead ~= true) then
+			bossKilled = false;
+			break;
+		end
+	end
+	return bossKilled;
+end
 
 function VF_RS_GetTime_S()
 	local currTime = GetTime();
 	local currTime_S = math.floor(currTime);
 	return currTime_S;
+end
+
+function VF_RS_UpdateBossHealth()
+	if(VF_RS_CurrentBoss == "") then
+		VF_RS_CurrentBoss_Health = 0;
+		VF_RS_CurrentBoss_MaxHealth = 0;
+	--[[elseif(UnitName("target") == VF_RD_CurrentBoss) then
+		VF_RD_CurrentBoss_Health = UnitHealth("target");
+		VF_RD_CurrentBoss_MaxHealth = UnitHealthMax("target");
+	elseif(UnitName("targettarget") == VF_RD_CurrentBoss) then
+		VF_RD_CurrentBoss_Health = UnitHealth("targettarget");
+		VF_RD_CurrentBoss_MaxHealth = UnitHealthMax("targettarget");--]]
+	else
+		for i = 1, 40 do
+			local currUnitID = "raid"..i.."target";
+			local currName = UnitName(currUnitID);
+			if(currName ~= nil) then
+				if(VF_RS_CurrentBossData[currName] ~= nil) then
+					VF_RS_CurrentBossData[currName].Health = UnitHealth(currUnitID);
+					VF_RS_CurrentBossData[currName].MaxHealth = UnitHealthMax(currUnitID);
+				end
+				if(VF_RS_GetBossName(currName) == VF_RS_CurrentBoss) then
+					VF_RS_CurrentBoss_Health = UnitHealth(currUnitID);
+					VF_RS_CurrentBoss_MaxHealth = UnitHealthMax(currUnitID);
+				end
+			end
+		end
+	end
+end
+
+function VF_RS_LogRaidStats(_Reason, _Time)
+	local totalPlayersResult = "";
+	for unitName, unitData in pairs(Recount.db2.combatants) do 
+		local unitFightData = unitData.Fights["OverallData"];
+		if(VF_RS_LastRecorded[unitName] == nil) then
+			VF_RS_LastRecorded[unitName] = {};
+			VF_RS_LastRecorded[unitName]["UnitID"] = VF_RS_UnitIDCounter;
+			totalPlayersResult = totalPlayersResult..unitName.."="..VF_RS_LastRecorded[unitName]["UnitID"]..",";
+			VF_RS_UnitIDCounter = VF_RS_UnitIDCounter + 1;
+		end
+		local unitID = VF_RS_LastRecorded[unitName]["UnitID"];
+		if(unitData.type == "Pet") then
+			if(unitData.Owner and VF_RS_LastRecorded[unitData.Owner] ~= nil) then
+				if(VF_RS_LastRecorded[unitData.Owner]["pets"] == nil) then
+					VF_RS_LastRecorded[unitData.Owner]["pets"] = {};
+				end
+				if(VF_RS_LastRecorded[unitData.Owner]["pets"][unitID] == nil) then
+					VF_RS_LastRecorded[unitData.Owner]["pets"][unitID] = 1;
+					totalPlayersResult = totalPlayersResult.."VF_PET_"..unitID.."_"..unitName.."_"..unitData.Owner.."="..unitID..",";
+				end
+			end
+		end
+		local dmg, effHeal, dmgTaken = unitFightData.Damage or 0, unitFightData.Healing or 0, unitFightData.DamageTaken or 0;
+		local overHeal, death = unitFightData.Overhealing or 0, unitFightData.DeathCount or 0;
+		local dispels, ccbreaks, interrupts, dispelled = unitFightData.Dispels or 0, unitFightData.CCBreak or 0, unitFightData.Interrupts or 0, unitFightData.Dispelled or 0;
+		
+		dmg = VF_RS_GenerateDeltaChange(dmg, unitID, VF_RS_DataIndex_Damage, _Time);
+		effHeal = VF_RS_GenerateDeltaChange(effHeal, unitID, VF_RS_DataIndex_EffectiveHeal, _Time);
+		dmgTaken = VF_RS_GenerateDeltaChange(dmgTaken, unitID, VF_RS_DataIndex_DamageTaken, _Time);
+		overHeal = VF_RS_GenerateDeltaChange(overHeal, unitID, VF_RS_DataIndex_OverHeal, _Time);
+		death = VF_RS_GenerateDeltaChange(death, unitID, VF_RS_DataIndex_Death, _Time);
+		dispels = VF_RS_GenerateDeltaChange(dispels, unitID, VF_RS_DataIndex_Dispels, _Time);
+		ccbreaks = VF_RS_GenerateDeltaChange(ccbreaks, unitID, VF_RS_DataIndex_CCBreaks, _Time);
+		interrupts = VF_RS_GenerateDeltaChange(interrupts, unitID, VF_RS_DataIndex_Interrupts, _Time);
+		dispelled = VF_RS_GenerateDeltaChange(dispelled, unitID, VF_RS_DataIndex_Dispelled, _Time);
+			
+		if(dmg ~= "" or effHeal ~= "" or dmgTaken ~= "" or overHeal ~= "" or death ~= "" or dispels ~= "" or ccbreaks ~= "" or interrupts ~= "" or dispelled ~= "") then
+			if(VF_RS_MobsType[unitName] == VF_RS_MobType_Boss) then
+				local specialBoss = VF_RS_GetBossName(unitName);
+				if(VF_RS_CurrentBoss ~= specialBoss and VF_RS_LastKilledBoss ~= specialBoss) then
+					if(_Reason ~= "") then
+						if(string.find(_Reason, "Start_C=") or string.find(_Reason, "Start_T=")) then
+								
+						else
+							_Reason = _Reason..";Start_S="..specialBoss;
+						end
+					else
+						_Reason = "Start_S="..specialBoss;
+					end
+					VF_RS_DebugMessage("Start_S="..specialBoss.."(SW_Start)");
+					VF_RS_CurrentBoss = specialBoss;
+					local bossParts = VF_RS_GetBossParts(specialBoss);
+					VF_RS_CurrentBossData = {};
+					for i, v in bossParts do
+						VF_RS_CurrentBossData[v] = {Health = 0, MaxHealth = 0};
+					end
+				elseif(death ~= "" and VF_RS_CurrentBoss == specialBoss) then
+					if(_Reason ~= "") then
+						_Reason = _Reason..";Dead_S="..unitName;
+					else
+						_Reason = "Dead_S="..unitName;
+					end
+					VF_RS_DebugMessage("Dead_S="..unitName.."(SW_Dead)");
+					if(specialBoss ~= unitName) then
+						if(VF_RS_CurrentBossData[unitName] == nil) then
+							VF_RS_CurrentBossData[unitName] = {};
+						end
+						VF_RS_CurrentBossData[unitName].Dead = true;
+						local bossParts = VF_RD_GetBossParts(specialBoss);
+						local bossKilled = true;
+						for i, v in bossParts do
+							if(VF_RS_CurrentBossData[v] == nil or VF_RS_CurrentBossData[v].Dead ~= true) then
+								bossKilled = false;
+								break;
+							end
+						end
+						if(bossKilled == true) then
+							if(_Reason ~= "") then
+								_Reason = _Reason..";Dead_S="..specialBoss;
+							else
+								_Reason = "Dead_S="..specialBoss;
+							end
+							VF_RS_DebugMessage("Dead_S="..specialBoss.."(SW_Dead)");
+						end
+					end
+				end
+				VF_RS_LastBossData = _Time;
+			end
+			local threatValue = 0;
+			local unitResultStr = unitID.." "..dmg.." "..effHeal.." "..dmgTaken.." "..overHeal.." "..death.." "..dispels.." "..ccbreaks.." "..interrupts.." "..dispelled.." "..threatValue;
+			totalPlayersResult = totalPlayersResult..unitResultStr..",";
+		end
+	end
+	
+	if(_Reason == "" and VF_RS_CurrentBoss ~= "" and VF_RS_LastBossData ~= _Time) then
+		local threatWiped = true;
+		for uN, tV in klhtm.table.raiddata do
+			if(tV == 0 or tV == nil) then
+				
+			else
+				threatWiped = false;
+				break;
+			end
+		end
+		if(threatWiped == true) then
+			_Reason = "Wipe_K="..VF_RS_CurrentBoss;
+			VF_RS_DebugMessage("Wipe_K="..VF_RS_CurrentBoss.."(ThreatWipe)");
+			VF_RS_CurrentBoss = "";
+			VF_RS_CurrentBossData = {};
+			VF_RS_SaveInstanceInfo();
+		end
+	end
+	if(VF_RS_RaidMembersChanged ~= nil and totalPlayersResult ~= "") then
+		if(_Time - VF_RS_RaidMembersChanged > 30 or (string.find(_Reason, "Start") or string.find(_Reason, "Dead") or string.find(_Reason, "Wipe"))) then
+			if(VF_RS_RaidMembers ~= "") then
+				totalPlayersResult = totalPlayersResult..VF_RS_RaidMembers..",";
+			end
+			VF_RS_RaidMembersChanged = nil;
+		end
+	end
+	VF_RS_UpdateBossHealth();
+	if(totalPlayersResult ~= "" and VF_RS_CurrentBoss_MaxHealth > 0) then
+		local healthStr = "BossHealth="..VF_RS_CurrentBoss_Health.."-"..VF_RS_CurrentBoss_MaxHealth;
+		for addName, addData in VF_RS_CurrentBossData do
+			if(addData.Health ~= nil and addData.MaxHealth ~= nil) then
+				healthStr = healthStr..";BossHealth-"..addName.."="..addData.Health.."-"..addData.MaxHealth;
+			end
+		end
+		VF_RS_CurrentBoss_MaxHealth = 0;
+		if(_Reason ~= "") then
+			_Reason = _Reason..";"..healthStr;
+		else
+			_Reason = healthStr;
+		end
+	end
+	
+	if(totalPlayersResult ~= "" or _Reason ~= "") then
+		table.insert(VF_RaidStatsData[1], 1, _Time..":".._Reason..":"..totalPlayersResult);
+		--VF_SendMessage(_Time..":"..":"..totalPlayersResult, "NONE"); 
+	end
+	if(string.find(_Reason, "Start_S") or string.find(_Reason, "Start_C")) then
+		VF_RS_BossStartTime = _Time;
+		VF_RS_PrecisionLoggingInterval = 5;
+	elseif(string.find(_Reason, "Dead")) then
+		if(VF_RS_IsCurrentBossKilled() == true) then
+			if(VF_RS_CurrentBoss ~= "") then
+				VF_RS_LastKilledBoss = VF_RS_CurrentBoss;
+				VF_RS_CurrentBoss = "";
+				VF_RS_CurrentBossData = {};
+			end
+			VF_RS_SaveInstanceInfo();
+			VF_RS_PrecisionLoggingInterval = 10;
+		end
+	elseif(string.find(_Reason, "Wipe")) then
+		VF_RS_PrecisionLoggingInterval = 10;
+	end
 end
 
 VF_RS_NextUpdateTime = nil;

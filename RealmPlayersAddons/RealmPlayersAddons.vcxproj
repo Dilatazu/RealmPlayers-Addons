@@ -20,7 +20,13 @@
     <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.lua" />
     <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.toc" />
     <None Include="CopyToWowDir.bat" />
+    <None Include="LuaCheckAll.bat" />
+    <None Include="LuaCheckRaidStats.bat" />
+    <None Include="LuaCheckRaidStatsTBC.bat" />
+    <None Include="LuaCheckRealmPlayers.bat" />
+    <None Include="LuaCheckRealmPlayersTBC.bat" />
     <None Include="tests.luatests" />
+    <None Include="VariousNotes.lua" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml" />

@@ -154,19 +154,54 @@ M.global_signatures["SlashCmdList"] = "SlashCmdList[namespace] = function; SLASH
 function GetTime() end
 M.global_signatures["GetTime"] = "GetTime()";
 function UnitIsPlayer() end
-M.global_signatures["UnitIsPlayer"] = "UnitIsPlayer(string)";
+M.global_signatures["UnitIsPlayer"] = "UnitIsPlayer(UnitID)";
 function UnitIsFriend() end
-M.global_signatures["UnitIsFriend"] = "UnitIsFriend(string, string)";
+M.global_signatures["UnitIsFriend"] = "UnitIsFriend(UnitID, UnitID)";
 function UnitName() end
-M.global_signatures["UnitName"] = "UnitName(string)";
+M.global_signatures["UnitName"] = "UnitName(UnitID)";
 function UnitCreatureFamily() end
-M.global_signatures["UnitCreatureFamily"] = "UnitCreatureFamilystring)";
+M.global_signatures["UnitCreatureFamily"] = "UnitCreatureFamily(UnitID)";
 function UnitCreatureType() end
-M.global_signatures["UnitCreatureType"] = "UnitCreatureType(string)";
+M.global_signatures["UnitCreatureType"] = "UnitCreatureType(UnitID)";
 function TargetNearestFriend() end
 M.global_signatures["TargetNearestFriend"] = "TargetNearestFriend()";
 function CreateFrame() end
 M.global_signatures["CreateFrame"] = "CreateFrame(string)";
+function GetNumRaidMembers() end
+M.global_signatures["GetNumRaidMembers"] = "GetNumRaidMembers()";
+function GetGameTime() end
+M.global_signatures["GetGameTime"] = "GetGameTime()";
+function date() end
+M.global_signatures["date"] = "date(formatstring)";
+function GetItemInfo() end
+M.global_signatures["GetItemInfo"] = "GetItemInfo(ItemID)";
+function GetZoneText() end
+M.global_signatures["GetZoneText"] = "GetZoneText()";
+function GetNumLootItems() end
+M.global_signatures["GetNumLootItems"] = "GetNumLootItems()";
+function GetLootSlotInfo() end
+M.global_signatures["GetLootSlotInfo"] = "GetLootSlotInfo(ItemSlotIndex)";
+function LootSlotIsItem() end
+M.global_signatures["LootSlotIsItem"] = "LootSlotIsItem(ItemSlotIndex)";
+function GetLootSlotLink() end
+M.global_signatures["GetLootSlotLink"] = "GetLootSlotLink(ItemSlotIndex)";
+function GetRealmName() end
+M.global_signatures["GetRealmName"] = "GetRealmName()";
+function GetRaidRosterInfo() end
+M.global_signatures["GetRaidRosterInfo"] = "name, rank, subgroup, level, class, fileName, zone, online, isDead = GetRaidRosterInfo(i)";
+function GetNumSavedInstances() end
+M.global_signatures["GetNumSavedInstances"] = "GetNumSavedInstances()";
+function GetSavedInstanceInfo() end
+M.global_signatures["GetSavedInstanceInfo"] = "raidName, raidID, raidRemaining = GetSavedInstanceInfo(i)";
+UNITDIESOTHER = "";
+M.global_signatures["UNITDIESOTHER"] = "UNITDIESOTHER is a formatting string for getting mbo name during event CHAT_MSG_COMBAT_HOSTILE_DEATH. Example: _, _, mobName = string.find(eventText, string.gsub(UNITDIESOTHER, \"%%s\", \"(.+)\"))";
+function RequestRaidInfo() end
+M.global_signatures["RequestRaidInfo"] = "RequestRaidInfo()";
+function UnitHealth() end
+M.global_signatures["UnitHealth"] = "UnitHealth(UnitID)";
+function UnitHealthMax() end
+M.global_signatures["UnitHealthMax"] = "UnitHealthMax(UnitID)";
+
 --Added by Dilatazu
 
 -- utility function.  Converts e.g. name 'math.sqrt' to its value.
