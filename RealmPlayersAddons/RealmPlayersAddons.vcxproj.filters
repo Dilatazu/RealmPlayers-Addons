@@ -31,11 +31,14 @@
     <Filter Include="Source Files\TBC\VF_RealmPlayers">
       <UniqueIdentifier>{10b1dfd4-ace0-428c-8dca-0a86766ff413}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\CopyToWowDir">
-      <UniqueIdentifier>{25922177-5c0f-450a-bc1a-1eae1abc0614}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\TBC\SavedVariables">
       <UniqueIdentifier>{fdb1e714-76fd-46a1-9bfd-8636f27200eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\CopyToWowDir">
+      <UniqueIdentifier>{25922177-5c0f-450a-bc1a-1eae1abc0614}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Tests">
+      <UniqueIdentifier>{4957fb5e-2e10-4543-ad43-70bfb1826e0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,13 +67,10 @@
       <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
     </None>
     <None Include="CopyToWowDir.bat">
-      <Filter>Source Files\CopyToWowDir</Filter>
+      <Filter>Resource Files\CopyToWowDir</Filter>
     </None>
-    <None Include="..\..\..\Program\WoW TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RaidStatsTBC.lua">
-      <Filter>Source Files\TBC\SavedVariables</Filter>
-    </None>
-    <None Include="..\..\..\Program\WoW TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RealmPlayersTBC.lua">
-      <Filter>Source Files\TBC\SavedVariables</Filter>
+    <None Include="tests.luatests">
+      <Filter>Resource Files\Tests</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -89,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

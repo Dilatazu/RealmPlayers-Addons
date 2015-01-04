@@ -11,8 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Program\WoW TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RaidStatsTBC.lua" />
-    <None Include="..\..\..\Program\WoW TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RealmPlayersTBC.lua" />
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua" />
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.toc" />
     <None Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.lua" />
@@ -22,6 +20,7 @@
     <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.lua" />
     <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.toc" />
     <None Include="CopyToWowDir.bat" />
+    <None Include="tests.luatests" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml" />

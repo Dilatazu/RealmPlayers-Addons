@@ -1,0 +1,3 @@
+function test_ThisIsATestFunction()
+	assert(1 == 1)
+end
