@@ -141,6 +141,34 @@ M.global_signatures = {
   ["table.sort"] = "table.sort (table [, comp])",
 }
 
+--Added by Dilatazu
+DEFAULT_CHAT_FRAME = { AddMessage = function() end }
+M.global_signatures["DEFAULT_CHAT_FRAME"] = "Chat Frame";
+M.global_signatures["DEFAULT_CHAT_FRAME:AddMessage"] = "DEFAULT_CHAT_FRAME:AddMessage(string)";
+function GetBuildInfo() end
+M.global_signatures["GetBuildInfo"] = "GetBuildInfo()";
+function GetAddOnMetadata() end
+M.global_signatures["GetAddOnMetadata"] = "GetAddOnMetadata(string, string)";
+SlashCmdList = {};
+M.global_signatures["SlashCmdList"] = "SlashCmdList[namespace] = function; SLASH_namespace1 = \"/command\";";
+function GetTime() end
+M.global_signatures["GetTime"] = "GetTime()";
+function UnitIsPlayer() end
+M.global_signatures["UnitIsPlayer"] = "UnitIsPlayer(string)";
+function UnitIsFriend() end
+M.global_signatures["UnitIsFriend"] = "UnitIsFriend(string, string)";
+function UnitName() end
+M.global_signatures["UnitName"] = "UnitName(string)";
+function UnitCreatureFamily() end
+M.global_signatures["UnitCreatureFamily"] = "UnitCreatureFamilystring)";
+function UnitCreatureType() end
+M.global_signatures["UnitCreatureType"] = "UnitCreatureType(string)";
+function TargetNearestFriend() end
+M.global_signatures["TargetNearestFriend"] = "TargetNearestFriend()";
+function CreateFrame() end
+M.global_signatures["CreateFrame"] = "CreateFrame(string)";
+--Added by Dilatazu
+
 -- utility function.  Converts e.g. name 'math.sqrt' to its value.
 local function resolve_global_helper_(name)
   local o = _G
@@ -284,6 +312,7 @@ M.argument_counts = {
   [table.sort] = {1,2},
   [false] = nil -- trick (relies on potentially undefined behavior)
 }
+
 
 
 -- functions with zero or nearly zero side-effects, and with deterministic results, that may be evaluated by the analyzer.
