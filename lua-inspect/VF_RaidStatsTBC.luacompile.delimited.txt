@@ -1,0 +1,531 @@
+1,19,id,id1,known global,attributes: known global;value: unknown
+23,38,id,id2,unknown global,attributes: unknown global;value: nil
+72,89,id,id3,known global,attributes: known global;value: 1
+96,114,id,id4,known global,attributes: known global;value: 2
+121,141,id,id5,known global,attributes: known global;value: 3
+149,162,id,id6,known global,attributes: known global;value: table: 0066EEC0
+232,249,id,id3,known global,attributes: known global;value: 1
+268,285,id,id3,known global,attributes: known global;value: 1
+350,367,id,id3,known global,attributes: known global;value: 1
+405,422,id,id3,known global,attributes: known global;value: 1
+468,485,id,id3,known global,attributes: known global;value: 1
+529,546,id,id3,known global,attributes: known global;value: 1
+588,605,id,id3,known global,attributes: known global;value: 1
+645,662,id,id3,known global,attributes: known global;value: 1
+706,723,id,id3,known global,attributes: known global;value: 1
+773,790,id,id3,known global,attributes: known global;value: 1
+836,853,id,id3,known global,attributes: known global;value: 1
+889,906,id,id3,known global,attributes: known global;value: 1
+925,942,id,id3,known global,attributes: known global;value: 1
+994,1011,id,id3,known global,attributes: known global;value: 1
+1030,1047,id,id3,known global,attributes: known global;value: 1
+1062,1079,id,id3,known global,attributes: known global;value: 1
+1094,1111,id,id3,known global,attributes: known global;value: 1
+1130,1147,id,id3,known global,attributes: known global;value: 1
+1165,1182,id,id3,known global,attributes: known global;value: 1
+1251,1268,id,id3,known global,attributes: known global;value: 1
+1291,1308,id,id3,known global,attributes: known global;value: 1
+1361,1378,id,id3,known global,attributes: known global;value: 1
+1427,1444,id,id3,known global,attributes: known global;value: 1
+1462,1479,id,id3,known global,attributes: known global;value: 1
+1516,1533,id,id3,known global,attributes: known global;value: 1
+1590,1607,id,id3,known global,attributes: known global;value: 1
+1640,1657,id,id3,known global,attributes: known global;value: 1
+1685,1702,id,id3,known global,attributes: known global;value: 1
+1759,1776,id,id3,known global,attributes: known global;value: 1
+1843,1860,id,id3,known global,attributes: known global;value: 1
+1885,1902,id,id3,known global,attributes: known global;value: 1
+1953,1970,id,id3,known global,attributes: known global;value: 1
+2023,2040,id,id3,known global,attributes: known global;value: 1
+2092,2109,id,id3,known global,attributes: known global;value: 1
+2170,2187,id,id3,known global,attributes: known global;value: 1
+2233,2250,id,id3,known global,attributes: known global;value: 1
+2279,2296,id,id3,known global,attributes: known global;value: 1
+2371,2388,id,id3,known global,attributes: known global;value: 1
+2415,2432,id,id3,known global,attributes: known global;value: 1
+2485,2502,id,id3,known global,attributes: known global;value: 1
+2532,2549,id,id3,known global,attributes: known global;value: 1
+2631,2648,id,id3,known global,attributes: known global;value: 1
+2680,2697,id,id3,known global,attributes: known global;value: 1
+2736,2753,id,id3,known global,attributes: known global;value: 1
+2791,2808,id,id3,known global,attributes: known global;value: 1
+2870,2887,id,id3,known global,attributes: known global;value: 1
+2922,2939,id,id3,known global,attributes: known global;value: 1
+2969,2986,id,id3,known global,attributes: known global;value: 1
+3020,3037,id,id3,known global,attributes: known global;value: 1
+3068,3085,id,id3,known global,attributes: known global;value: 1
+3118,3135,id,id3,known global,attributes: known global;value: 1
+3167,3184,id,id3,known global,attributes: known global;value: 1
+3247,3264,id,id3,known global,attributes: known global;value: 1
+3289,3306,id,id3,known global,attributes: known global;value: 1
+3343,3360,id,id3,known global,attributes: known global;value: 1
+3425,3442,id,id3,known global,attributes: known global;value: 1
+3468,3485,id,id3,known global,attributes: known global;value: 1
+3517,3534,id,id3,known global,attributes: known global;value: 1
+3624,3641,id,id3,known global,attributes: known global;value: 1
+3674,3691,id,id3,known global,attributes: known global;value: 1
+3722,3739,id,id3,known global,attributes: known global;value: 1
+3783,3800,id,id3,known global,attributes: known global;value: 1
+3842,3859,id,id3,known global,attributes: known global;value: 1
+3896,3913,id,id3,known global,attributes: known global;value: 1
+3960,3977,id,id3,known global,attributes: known global;value: 1
+4015,4032,id,id3,known global,attributes: known global;value: 1
+4070,4087,id,id3,known global,attributes: known global;value: 1
+4122,4139,id,id3,known global,attributes: known global;value: 1
+4174,4191,id,id3,known global,attributes: known global;value: 1
+4233,4250,id,id3,known global,attributes: known global;value: 1
+4281,4298,id,id3,known global,attributes: known global;value: 1
+4326,4343,id,id3,known global,attributes: known global;value: 1
+4424,4441,id,id3,known global,attributes: known global;value: 1
+4460,4477,id,id3,known global,attributes: known global;value: 1
+4520,4537,id,id3,known global,attributes: known global;value: 1
+4566,4583,id,id3,known global,attributes: known global;value: 1
+4622,4639,id,id3,known global,attributes: known global;value: 1
+4671,4688,id,id3,known global,attributes: known global;value: 1
+4727,4744,id,id3,known global,attributes: known global;value: 1
+4780,4797,id,id3,known global,attributes: known global;value: 1
+4832,4849,id,id3,known global,attributes: known global;value: 1
+4918,4935,id,id3,known global,attributes: known global;value: 1
+4963,4980,id,id3,known global,attributes: known global;value: 1
+5033,5050,id,id3,known global,attributes: known global;value: 1
+5099,5116,id,id3,known global,attributes: known global;value: 1
+5155,5172,id,id3,known global,attributes: known global;value: 1
+5214,5231,id,id3,known global,attributes: known global;value: 1
+5266,5283,id,id3,known global,attributes: known global;value: 1
+5336,5353,id,id3,known global,attributes: known global;value: 1
+5405,5422,id,id3,known global,attributes: known global;value: 1
+5469,5486,id,id3,known global,attributes: known global;value: 1
+5520,5537,id,id3,known global,attributes: known global;value: 1
+5575,5592,id,id3,known global,attributes: known global;value: 1
+5651,5668,id,id3,known global,attributes: known global;value: 1
+5711,5728,id,id3,known global,attributes: known global;value: 1
+5748,5765,id,id3,known global,attributes: known global;value: 1
+5785,5802,id,id3,known global,attributes: known global;value: 1
+5820,5837,id,id3,known global,attributes: known global;value: 1
+5858,5875,id,id3,known global,attributes: known global;value: 1
+5881,5901,id,id7,known global,attributes: known global;value: table: 006AA948
+5939,5956,id,id8,known global,attributes: known global;value: function: 004D5BC0;description: function(_Message) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:161:28
+5958,5965,id,id9,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:161:29
+5972,5992,id,id7,known global,attributes: known global;value: table: 0066F028
+5994,6004,id,id10,known field,attributes: known field;value: false
+6023,6040,id,id11,unknown global,attributes: unknown global;value: nil
+6042,6051,id,id12,unknown field,attributes: unknown field;value: error:attempt to index 'DEFAULT_CHAT_FRAME' (a nil value)
+6070,6077,id,id9,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:161:29
+6108,6120,id,id13,known global,attributes: known global;value: function: 004D5CC0;description: function(_Message) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:166:23
+6122,6129,id,id14,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:166:24
+6133,6150,id,id11,unknown global,attributes: unknown global;value: nil
+6152,6161,id,id12,unknown field,attributes: unknown field;value: error:attempt to index 'DEFAULT_CHAT_FRAME' (a nil value)
+6174,6181,id,id14,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:166:24
+6208,6226,id,id15,known global,attributes: known global;value: function: 004D5DC0;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:170:29
+6231,6234,id,id16,unknown global,attributes: unknown global;value: nil
+6236,6248,id,id17,unknown field,attributes: unknown field;value: error:attempt to index 'this' (a nil value)
+6272,6275,id,id16,unknown global,attributes: unknown global;value: nil
+6277,6289,id,id17,unknown field,attributes: unknown field;value: error:attempt to index 'this' (a nil value)
+6318,6321,id,id16,unknown global,attributes: unknown global;value: nil
+6323,6335,id,id17,unknown field,attributes: unknown field;value: error:attempt to index 'this' (a nil value)
+6365,6368,id,id16,unknown global,attributes: unknown global;value: nil
+6370,6382,id,id17,unknown field,attributes: unknown field;value: error:attempt to index 'this' (a nil value)
+6410,6413,id,id16,unknown global,attributes: unknown global;value: nil
+6415,6427,id,id17,unknown field,attributes: unknown field;value: error:attempt to index 'this' (a nil value)
+6459,6462,id,id16,unknown global,attributes: unknown global;value: nil
+6464,6476,id,id17,unknown field,attributes: unknown field;value: error:attempt to index 'this' (a nil value)
+6506,6509,id,id16,unknown global,attributes: unknown global;value: nil
+6511,6523,id,id17,unknown field,attributes: unknown field;value: error:attempt to index 'this' (a nil value)
+6573,6587,id,id18,known global,attributes: known global;value: function: 004D5A60;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:180:25
+6592,6607,id,id19,known global,attributes: known global;value: table: 006E27B8
+6616,6633,id,id20,known global,attributes: known global;value: table: 006E2D58
+6642,6663,id,id21,known global,attributes: known global;value: function: 004D4FC0;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:187:32
+6669,6681,id,id13,known global,attributes: known global;value: function: 004D5CC0;description: function(_Message) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:166:23
+6725,6746,id,id21,known global,attributes: known global;value: function: 004D4FC0;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:187:32
+6751,6755,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+6757,6762,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+6764,6779,id,id19,known global,attributes: known global;value: table: 00667B60
+6797,6807,id,id24,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:189:8
+6811,6814,id,id25,unknown global,attributes: unknown global;value: nil
+6840,6850,id,id26,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:190:8
+6854,6864,id,id27,unknown global,attributes: unknown global;value: nil
+6876,6888,id,id28,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:191:8
+6892,6899,id,id29,unknown global,attributes: unknown global;value: nil
+6919,6927,id,id30,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:192:8
+6931,6942,id,id31,unknown global,attributes: unknown global;value: nil
+6954,6962,id,id32,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:193:8
+6966,6980,id,id33,known global,attributes: known global;value: function: 004AD1E0;description: function() returns number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:393:25
+6992,7001,id,id34,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:194:8
+7004,7015,id,id35,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:194:20
+7019,7029,id,id36,unknown global,attributes: unknown global;value: nil
+7041,7051,id,id37,local mutatebind,attributes: local mutatebind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:195:8
+7077,7087,id,id24,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:189:8
+7104,7113,id,id34,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:194:8
+7121,7132,id,id35,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:194:20
+7145,7153,id,id32,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:193:8
+7167,7175,id,id30,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:192:8
+7190,7202,id,id28,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:191:8
+7223,7241,id,id38,known global,attributes: known global;value: unknown
+7253,7263,id,id26,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:190:8
+7276,7286,id,id26,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:190:8
+7302,7312,id,id37,local mutatebind,attributes: local mutatebind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:195:8
+7316,7326,id,id37,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:195:8
+7338,7348,id,id26,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:190:8
+7362,7366,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+7368,7373,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+7375,7390,id,id19,known global,attributes: known global;value: table: 00667B60
+7399,7409,id,id37,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:195:8
+7414,7435,id,id39,known global,attributes: known global;value: function: 004AD360;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:373:32
+7441,7464,id,id40,known global,attributes: known global;value: nil
+7474,7491,id,id8,known global,attributes: known global;value: function: 004D5BC0;description: function(_Message) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:161:28
+7531,7542,id,id41,known global,attributes: known global;value: function: 004D4EE0;description: function(dateStr) returns {};location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:205:22
+7544,7550,id,id42,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:205:23
+7560,7560,id,id43,local unused ignore constbind masked,attributes: local unused ignore constbind masked;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:206:8
+7563,7563,id,id44,local unused ignore constbind masking masked,attributes: local unused ignore constbind masking masked;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:206:11;masking definition at line: 206
+7566,7573,id,id45,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:206:14
+7576,7584,id,id46,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:206:24
+7587,7593,id,id47,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:206:35
+7596,7596,id,id48,local unused ignore constbind masking,attributes: local unused ignore constbind masking;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:206:44;masking definition at line: 206
+7600,7605,id,id49,known global,attributes: known global;value: table: 00448C90;description: (table) string manipulation library
+7607,7610,id,id50,known field,"attributes: known field;value: function: 003B9CA8;signature: string.find (s, pattern [, init [, plain]])"
+7612,7618,id,id42,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:205:23
+7661,7668,id,id51,known global,"attributes: known global;value: function: 003B7310;signature: tonumber (e [, base])"
+7670,7677,id,id45,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:206:14
+7689,7696,id,id51,known global,"attributes: known global;value: function: 003B7310;signature: tonumber (e [, base])"
+7698,7706,id,id46,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:206:24
+7716,7723,id,id51,known global,"attributes: known global;value: function: 003B7310;signature: tonumber (e [, base])"
+7725,7731,id,id47,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:206:35
+7750,7770,id,id52,known global,attributes: known global;value: function: 004D52A0;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:210:31
+7775,7792,id,id8,known global,attributes: known global;value: function: 004D5BC0;description: function(_Message) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:161:28
+7829,7842,id,id53,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:212:8
+7846,7849,id,id25,unknown global,attributes: unknown global;value: nil
+7875,7885,id,id54,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:213:8
+7889,7900,id,id41,known global,attributes: known global;value: function: 004D4EE0;description: function(dateStr) returns {};location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:205:22
+7902,7915,id,id53,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:212:8
+7926,7947,id,id55,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:214:8
+7951,7961,id,id54,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:213:8
+7963,7966,id,id56,unknown field,attributes: unknown field;value: nil
+7976,7986,id,id54,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:213:8
+7988,7992,id,id57,unknown field,attributes: unknown field;value: nil
+8001,8011,id,id54,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:213:8
+8013,8015,id,id58,unknown field,attributes: unknown field;value: nil
+8023,8023,id,id59,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:215:6
+8026,8032,id,id60,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:215:9
+8037,8041,id,id61,known global,attributes: known global;value: function: 004741C0;signature: pairs (t);location defined: C:\Program Files (x86)\Lua\5.1\lua\metalua\base.lua:16
+8043,8058,id,id19,known global,attributes: known global;value: table: 00667B60
+8072,8087,id,id62,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:216:9
+8091,8095,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+8097,8100,id,id63,known field,attributes: known field;value: function: 003B79D0
+8102,8108,id,id60,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:215:9
+8117,8132,id,id62,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:216:9
+8153,8163,id,id64,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:218:10
+8167,8173,id,id60,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:215:9
+8175,8190,id,id62,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:216:9
+8203,8226,id,id65,local mutatebind,attributes: local mutatebind;value: 0;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:219:10
+8242,8242,id,id66,local unused ignore constbind masked,"attributes: local unused ignore constbind masked;value: error:bad argument #1 to '?' (string expected, got nil);location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:10"
+8245,8245,id,id67,local unused ignore constbind masking masked,attributes: local unused ignore constbind masking masked;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:13;masking definition at line: 220
+8248,8258,id,id68,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:16
+8261,8261,id,id69,local unused ignore constbind masking,attributes: local unused ignore constbind masking;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:29;masking definition at line: 220
+8265,8270,id,id49,known global,attributes: known global;value: table: 00448C90;description: (table) string manipulation library
+8272,8275,id,id50,known field,"attributes: known field;value: function: 003B9CA8;signature: string.find (s, pattern [, init [, plain]])"
+8277,8287,id,id64,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:218:10
+8333,8343,id,id68,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:16
+8368,8378,id,id70,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:222:11
+8382,8393,id,id41,known global,attributes: known global;value: function: 004D4EE0;description: function(dateStr) returns {};location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:205:22
+8395,8405,id,id68,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:16
+8419,8440,id,id71,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:223:11
+8444,8454,id,id70,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:222:11
+8456,8459,id,id72,unknown field,attributes: unknown field;value: nil
+8469,8479,id,id70,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:222:11
+8481,8485,id,id73,unknown field,attributes: unknown field;value: nil
+8494,8504,id,id70,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:222:11
+8506,8508,id,id74,unknown field,attributes: unknown field;value: nil
+8518,8539,id,id55,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:214:8
+8543,8564,id,id71,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:223:11
+8581,8604,id,id65,local mutatebind,attributes: local mutatebind;value: 1;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:219:10
+8625,8648,id,id65,local mutatebind,attributes: local mutatebind;value: -1;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:219:10
+8676,8686,id,id68,local mutatebind,attributes: local mutatebind;value: ERROR;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:16
+8712,8735,id,id65,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:219:10
+8746,8756,id,id68,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:16
+8779,8794,id,id19,known global,attributes: known global;value: table: 00667B60
+8796,8796,id,id59,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:215:6
+8810,8827,id,id8,known global,attributes: known global;value: function: 004D5BC0;description: function(_Message) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:161:28
+8841,8851,id,id68,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:16
+8898,8921,id,id65,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:219:10
+8932,8947,id,id62,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:216:9
+8963,8978,id,id19,known global,attributes: known global;value: table: 00667B60
+8980,8980,id,id59,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:215:6
+8992,9002,id,id64,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:218:10
+9010,9027,id,id8,known global,attributes: known global;value: function: 004D5BC0;description: function(_Message) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:161:28
+9041,9051,id,id68,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:220:16
+9109,9109,id,id75,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:241:6
+9112,9120,id,id76,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:241:9
+9125,9129,id,id61,known global,attributes: known global;value: function: 004741C0;signature: pairs (t);location defined: C:\Program Files (x86)\Lua\5.1\lua\metalua\base.lua:16
+9131,9144,id,id77,known global,attributes: known global;value: table: 006E27E0
+9158,9166,id,id78,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:242:9
+9170,9181,id,id41,known global,attributes: known global;value: function: 004D4EE0;description: function(dateStr) returns {};location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:205:22
+9183,9191,id,id76,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:241:9
+9193,9196,id,id79,unknown field,attributes: unknown field;value: error:attempt to index 'errorData' (a nil value)
+9208,9227,id,id80,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:243:9
+9231,9239,id,id78,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:242:9
+9241,9244,id,id81,unknown field,attributes: unknown field;value: nil
+9254,9262,id,id78,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:242:9
+9264,9268,id,id82,unknown field,attributes: unknown field;value: nil
+9277,9285,id,id78,local constbind,attributes: local constbind;value: table: 006A4778;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:242:9
+9287,9289,id,id83,unknown field,attributes: unknown field;value: nil
+9297,9318,id,id55,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:214:8
+9322,9341,id,id80,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:243:9
+9356,9369,id,id77,known global,attributes: known global;value: table: 006E27E0
+9371,9371,id,id75,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:241:6
+9393,9410,id,id8,known global,attributes: known global;value: function: 004D5BC0;description: function(_Message) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:161:28
+9460,9481,id,id84,known global,attributes: known global;value: function: 004D4F00;description: function() returns boolean;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:251:32
+9492,9499,id,id85,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:252:8
+9503,9513,id,id27,unknown global,attributes: unknown global;value: nil
+9522,9529,id,id85,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:252:8
+9549,9563,id,id86,unknown global,attributes: unknown global;value: nil
+9565,9572,id,id85,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:252:8
+9620,9620,id,id87,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:258:6
+9627,9643,id,id88,unknown global,attributes: unknown global;value: nil
+9658,9661,id,id89,local unused constbind,attributes: local unused constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:9
+9664,9667,id,id90,local unused constbind,attributes: local unused constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:15
+9670,9677,id,id91,local unused constbind,attributes: local unused constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:21
+9680,9684,id,id92,local unused constbind,attributes: local unused constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:31
+9687,9691,id,id93,local unused constbind,attributes: local unused constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:38
+9694,9701,id,id94,local unused constbind,attributes: local unused constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:45
+9704,9707,id,id95,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:55
+9710,9715,id,id96,local unused constbind,attributes: local unused constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:61
+9718,9723,id,id97,local unused constbind,attributes: local unused constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:69
+9727,9743,id,id98,unknown global,attributes: unknown global;value: nil
+9745,9745,id,id87,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:258:6
+9754,9757,id,id95,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:55
+9778,9792,id,id86,unknown global,attributes: unknown global;value: nil
+9794,9797,id,id95,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:259:55
+9877,9900,id,id99,known global,"attributes: known global;value: function: 004D56E0;description: function(event , arg1 , arg2) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:34"
+9902,9906,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+9909,9912,id,id101,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:42
+9915,9918,id,id102,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:48
+9928,9936,id,id103,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:270:8
+9940,9943,id,id101,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:42
+9950,9954,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+9984,10002,id,id38,known global,attributes: known global;value: unknown
+10006,10024,id,id1,known global,attributes: known global;value: unknown
+10032,10052,id,id7,known global,attributes: known global;value: table: 0066F028
+10070,10090,id,id7,known global,attributes: known global;value: table: 0066F028
+10109,10124,id,id19,known global,attributes: known global;value: table: 00667B60
+10142,10157,id,id19,known global,attributes: known global;value: table: 00667B60
+10176,10189,id,id77,known global,attributes: known global;value: table: 006E27E0
+10207,10220,id,id77,known global,attributes: known global;value: table: 006E27E0
+10236,10256,id,id52,known global,attributes: known global;value: function: 004D52A0;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:210:31
+10263,10284,id,id21,known global,attributes: known global;value: function: 004D4FC0;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:187:32
+10291,10308,id,id11,unknown global,attributes: unknown global;value: nil
+10310,10319,id,id12,unknown field,attributes: unknown field;value: error:attempt to index 'DEFAULT_CHAT_FRAME' (a nil value)
+10353,10371,id,id38,known global,attributes: known global;value: unknown
+10404,10408,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+10451,10461,id,id104,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:286:9
+10465,10475,id,id27,unknown global,attributes: unknown global;value: nil
+10485,10490,id,id49,known global,attributes: known global;value: table: 00448C90;description: (table) string manipulation library
+10492,10495,id,id50,known field,"attributes: known field;value: function: 003B9CA8;signature: string.find (s, pattern [, init [, plain]])"
+10497,10512,id,id19,known global,attributes: known global;value: table: 006AA998
+10547,10562,id,id19,known global,attributes: known global;value: table: 006AA998
+10572,10587,id,id19,known global,attributes: known global;value: table: 006AA998
+10605,10615,id,id104,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:286:9
+10633,10637,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+10639,10644,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+10646,10661,id,id19,known global,attributes: known global;value: table: 006AA998
+10692,10702,id,id104,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:286:9
+10725,10729,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+10772,10782,id,id105,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:293:9
+10786,10789,id,id102,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:48
+10797,10810,id,id6,known global,attributes: known global;value: table: 0066EEC0
+10812,10822,id,id105,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:293:9
+10828,10845,id,id3,known global,attributes: known global;value: 1
+10856,10860,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+10862,10867,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+10869,10884,id,id19,known global,attributes: known global;value: table: 006AA998
+10897,10911,id,id33,known global,attributes: known global;value: function: 004AD1E0;description: function() returns number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:393:25
+10927,10937,id,id105,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:293:9
+10950,10958,id,id103,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:270:8
+10976,10980,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+11024,11034,id,id106,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:298:9
+11038,11041,id,id102,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:48
+11049,11062,id,id6,known global,attributes: known global;value: table: 0066EEC0
+11064,11074,id,id106,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:298:9
+11080,11097,id,id3,known global,attributes: known global;value: 1
+11108,11112,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+11114,11119,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+11121,11136,id,id19,known global,attributes: known global;value: table: 006AA998
+11149,11163,id,id33,known global,attributes: known global;value: function: 004AD1E0;description: function() returns number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:393:25
+11179,11189,id,id106,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:298:9
+11203,11211,id,id103,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:270:8
+11229,11233,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+11275,11285,id,id107,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:303:9
+11289,11292,id,id102,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:48
+11300,11313,id,id6,known global,attributes: known global;value: table: 0066EEC0
+11315,11325,id,id107,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:303:9
+11331,11348,id,id3,known global,attributes: known global;value: 1
+11359,11363,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+11365,11370,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+11372,11387,id,id19,known global,attributes: known global;value: table: 006AA998
+11400,11414,id,id33,known global,attributes: known global;value: function: 004AD1E0;description: function() returns number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:393:25
+11430,11440,id,id107,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:303:9
+11452,11460,id,id103,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:270:8
+11478,11482,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+11528,11538,id,id108,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:308:9
+11542,11545,id,id102,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:48
+11553,11566,id,id6,known global,attributes: known global;value: table: 0066EEC0
+11568,11578,id,id108,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:308:9
+11584,11601,id,id3,known global,attributes: known global;value: 1
+11612,11616,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+11618,11623,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+11625,11640,id,id19,known global,attributes: known global;value: table: 006AA998
+11653,11667,id,id33,known global,attributes: known global;value: function: 004AD1E0;description: function() returns number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:393:25
+11683,11693,id,id108,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:308:9
+11709,11717,id,id103,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:270:8
+11735,11739,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+11783,11793,id,id109,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:313:9
+11797,11800,id,id102,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:48
+11808,11821,id,id6,known global,attributes: known global;value: table: 0066EEC0
+11823,11833,id,id109,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:313:9
+11839,11856,id,id3,known global,attributes: known global;value: 1
+11867,11871,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+11873,11878,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+11880,11895,id,id19,known global,attributes: known global;value: table: 006AA998
+11908,11922,id,id33,known global,attributes: known global;value: function: 004AD1E0;description: function() returns number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:393:25
+11938,11948,id,id109,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:313:9
+11962,11970,id,id103,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:270:8
+11988,11992,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+12031,12056,id,id110,known global,attributes: known global;value: true
+12079,12079,id,id111,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:319:8
+12086,12105,id,id112,unknown global,attributes: unknown global;value: nil
+12122,12129,id,id113,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:320:11
+12132,12137,id,id114,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:320:21
+12140,12152,id,id115,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:320:29
+12156,12175,id,id116,unknown global,attributes: unknown global;value: nil
+12177,12177,id,id111,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:319:8
+12188,12193,id,id49,known global,attributes: known global;value: table: 00448C90;description: (table) string manipulation library
+12195,12198,id,id50,known field,"attributes: known field;value: function: 003B9CA8;signature: string.find (s, pattern [, init [, plain]])"
+12200,12215,id,id19,known global,attributes: known global;value: table: 006AA998
+12252,12267,id,id19,known global,attributes: known global;value: table: 006AA998
+12277,12292,id,id19,known global,attributes: known global;value: table: 006AA998
+12311,12311,id,id111,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:319:8
+12319,12326,id,id113,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:320:11
+12334,12339,id,id114,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:320:21
+12347,12359,id,id115,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:320:29
+12381,12385,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+12387,12392,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+12394,12409,id,id19,known global,attributes: known global;value: table: 006AA998
+12441,12441,id,id111,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:319:8
+12449,12456,id,id113,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:320:11
+12464,12469,id,id114,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:320:21
+12477,12489,id,id115,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:320:29
+12516,12541,id,id110,known global,attributes: known global;value: true
+12566,12570,id,id100,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:35
+12621,12627,id,id117,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:330:9
+12632,12632,id,id118,known global,attributes: known global;value: unknown
+12635,12635,id,id118,known global,attributes: known global;value: unknown
+12638,12644,id,id117,local mutatebind,attributes: local mutatebind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:330:9
+12648,12653,id,id49,known global,attributes: known global;value: table: 00448C90;description: (table) string manipulation library
+12655,12658,id,id50,known field,"attributes: known field;value: function: 003B9CA8;signature: string.find (s, pattern [, init [, plain]])"
+12660,12668,id,id103,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:270:8
+12671,12676,id,id49,known global,attributes: known global;value: table: 00448C90;description: (table) string manipulation library
+12678,12681,id,id119,known field,"attributes: known field;value: function: 003B9DA8;signature: string.gsub (s, pattern, repl [, n])"
+12683,12695,id,id120,unknown global,attributes: unknown global;value: nil
+12723,12736,id,id6,known global,attributes: known global;value: table: 0066EEC0
+12738,12744,id,id117,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:330:9
+12750,12767,id,id3,known global,attributes: known global;value: 1
+12778,12782,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+12784,12789,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+12791,12806,id,id19,known global,attributes: known global;value: table: 006AA998
+12819,12833,id,id33,known global,attributes: known global;value: function: 004AD1E0;description: function() returns number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:393:25
+12849,12855,id,id117,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:330:9
+12871,12892,id,id39,known global,attributes: known global;value: function: 004AD360;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:373:32
+12991,13006,id,id121,known global,"attributes: known global;value: function: 004D5AE0;description: function(func , arg1 , arg2 , arg3 , arg4 , arg5 , arg6 , arg7 , arg8 , arg9) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:26"
+13008,13011,id,id122,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:27
+13014,13017,id,id123,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:33
+13020,13023,id,id124,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:39
+13026,13029,id,id125,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:45
+13032,13035,id,id126,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:51
+13038,13041,id,id127,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:57
+13044,13047,id,id128,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:63
+13050,13053,id,id129,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:69
+13056,13059,id,id130,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:75
+13062,13065,id,id131,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:81
+13075,13079,id,id132,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:342:8
+13082,13090,id,id133,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:342:15
+13094,13098,id,id134,known global,"attributes: known global;value: function: 00447FB0;signature: pcall (f, arg1, ...)"
+13100,13103,id,id122,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:27
+13106,13109,id,id123,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:33
+13112,13115,id,id124,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:39
+13118,13121,id,id125,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:45
+13124,13127,id,id126,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:51
+13130,13133,id,id127,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:57
+13136,13139,id,id128,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:63
+13142,13145,id,id129,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:69
+13148,13151,id,id130,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:75
+13154,13157,id,id131,local param constbind,attributes: local param constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:81
+13165,13169,id,id132,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:342:8
+13190,13194,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+13196,13199,id,id63,known field,attributes: known field;value: function: 003B79D0
+13201,13214,id,id77,known global,attributes: known global;value: table: 006AAE20
+13233,13246,id,id77,known global,attributes: known global;value: table: 006AAE20
+13248,13252,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+13254,13257,id,id63,known field,attributes: known field;value: function: 003B79D0
+13259,13272,id,id77,known global,attributes: known global;value: table: 006AAE20
+13297,13304,id,id135,local mutatebind,attributes: local mutatebind;value: table: 006B7078;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13314,13321,id,id135,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13323,13326,id,id136,unknown field,attributes: unknown field;value: unknown
+13330,13333,id,id25,unknown global,attributes: unknown global;value: nil
+13354,13361,id,id135,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13363,13366,id,id137,unknown field,attributes: unknown field;value: unknown
+13370,13384,id,id33,known global,attributes: known global;value: function: 004AD1E0;description: function() returns number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:393:25
+13391,13398,id,id135,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13400,13408,id,id138,unknown field,attributes: unknown field;value: unknown
+13412,13420,id,id133,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:342:15
+13434,13444,id,id139,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:354:9
+13448,13461,id,id77,known global,attributes: known global;value: table: 006AAE20
+13472,13482,id,id139,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:354:9
+13503,13513,id,id139,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:354:9
+13515,13518,id,id140,unknown field,attributes: unknown field;value: error:attempt to index 'latestError' (a nil value)
+13523,13530,id,id135,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13532,13535,id,id137,unknown field,attributes: unknown field;value: error:attempt to index 'newError' (a nil value)
+13541,13546,id,id49,known global,attributes: known global;value: table: 00448C90;description: (table) string manipulation library
+13548,13551,id,id50,known field,"attributes: known field;value: function: 003B9CA8;signature: string.find (s, pattern [, init [, plain]])"
+13553,13563,id,id139,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:354:9
+13565,13573,id,id141,unknown field,attributes: unknown field;value: error:attempt to index 'latestError' (a nil value)
+13576,13583,id,id135,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13585,13593,id,id138,unknown field,attributes: unknown field;value: error:attempt to index 'newError' (a nil value)
+13606,13616,id,id139,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:354:9
+13618,13626,id,id141,unknown field,attributes: unknown field;value: unknown
+13643,13653,id,id139,local constbind,attributes: local constbind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:354:9
+13655,13663,id,id141,unknown field,attributes: unknown field;value: error:attempt to index 'latestError' (a nil value)
+13670,13677,id,id135,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13704,13711,id,id135,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13729,13733,id,id22,known global,attributes: known global;value: table: 004489E8;description: (table) table manipulation library
+13735,13740,id,id23,known field,"attributes: known field;value: function: 003B7A50;signature: table.insert (table, [pos,] value)"
+13742,13755,id,id77,known global,attributes: known global;value: table: 006AAE20
+13761,13768,id,id135,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13775,13787,id,id13,known global,attributes: known global;value: function: 004D5CC0;description: function(_Message) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:166:23
+13894,13901,id,id135,local mutatebind,attributes: local mutatebind;value: nil;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:349:9
+13903,13911,id,id138,unknown field,attributes: unknown field;value: error:attempt to index 'newError' (a nil value)
+13940,13959,id,id142,known global,attributes: known global;value: function: 004ACF60;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:368:30
+13964,13979,id,id121,known global warn,"attributes: known global warn;value: function: 004D5AE0;description: function(func , arg1 , arg2 , arg3 , arg4 , arg5 , arg6 , arg7 , arg8 , arg9) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:341:26;WARNING: Too few arguments.  Expected 10 but got 4."
+13981,14004,id,id99,known global warn,"attributes: known global warn;value: function: 004D56E0;description: function(event , arg1 , arg2) no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:269:34;WARNING: Too few arguments.  Expected 10 but got 4."
+14007,14011,id,id143,unknown global warn,attributes: unknown global warn;value: nil;WARNING: Too few arguments.  Expected 10 but got 4.
+14014,14017,id,id144,unknown global warn,attributes: unknown global warn;value: nil;WARNING: Too few arguments.  Expected 10 but got 4.
+14020,14023,id,id145,unknown global warn,attributes: unknown global warn;value: nil;WARNING: Too few arguments.  Expected 10 but got 4.
+14032,14057,id,id110,known global,attributes: known global;value: false
+14077,14098,id,id39,known global,attributes: known global;value: function: 004AD360;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:373:32
+14103,14128,id,id110,known global,attributes: known global;value: false
+14139,14153,id,id146,unknown global,attributes: unknown global;value: nil
+14164,14179,id,id19,known global,attributes: known global;value: table: 006AA998
+14187,14200,id,id77,known global,attributes: known global;value: table: 006AAE20
+14302,14318,id,id147,known global,attributes: known global;value: 
+14326,14349,id,id40,known global,attributes: known global;value: nil
+14358,14375,id,id20,known global,attributes: known global;value: table: 00667D68
+14384,14413,id,id148,known global,attributes: known global;value: 10
+14431,14445,id,id33,known global,attributes: known global;value: function: 004AD1E0;description: function() returns number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:393:25
+14456,14463,id,id149,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:394:8
+14467,14473,id,id150,unknown global,attributes: unknown global;value: nil
+14485,14494,id,id151,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:395:8
+14498,14501,id,id152,known global,attributes: known global;value: table: 00448D08;description: (table) math functions libary
+14503,14507,id,id153,known field,attributes: known field;value: function: 003BA268;signature: math.floor (x)
+14509,14516,id,id149,local constbind,attributes: local constbind;value: unknown;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:394:8
+14528,14537,id,id151,local constbind,attributes: local constbind;value: number;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:395:8
+14545,14564,id,id154,known global,attributes: known global;value: nil
+14582,14606,id,id155,known global,attributes: known global;value: function: 0070C070;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:400:35
+15111,15131,id,id156,known global,attributes: known global;value: function: 0070C030;description: function() no returns;location defined: ..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.lua:417:31
