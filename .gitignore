@@ -185,3 +185,6 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+*.luainspected.html
+*.luainspected.txt
