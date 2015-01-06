@@ -157,6 +157,21 @@ VF_RS_MobsType = {
 	["Archimonde"] = VF_RS_MobType_Boss,
 }
 
+VF_RS_YellEvents_Start = 1;
+VF_RS_YellEvents_Phase1 = 2;
+VF_RS_YellEvents_Phase2 = 3;
+VF_RS_YellEvents_Phase3 = 4;
+VF_RS_YellEvents_End = 5;
+VF_RS_YellEvents_NotImportant = 99;
+
+VF_RS_YellEventsStr = {
+	[VF_RS_YellEvents_Start] = "Start_Y",
+	[VF_RS_YellEvents_Phase1] = "Phase1_Y",
+	[VF_RS_YellEvents_Phase2] = "Phase2_Y",
+	[VF_RS_YellEvents_Phase3] = "Phase3_Y",
+	[VF_RS_YellEvents_End] = "Dead_Y",
+}
+
 VF_RS_YellEvents = {
 	
 }
@@ -241,6 +256,41 @@ VF_RS_BossParts = {
 	["Illidari Council"] = {[1] = "Gathios the Shatterer", [2] = "High Nethermancer Zerevor", [3] = "Lady Malande", [4] = "Veras Darkshadow"},
 }
 
+function VF_RS_GetBossName(unitName)
+	if(VF_RS_BossMap[unitName] ~= nil) then
+		return VF_RS_BossMap[unitName];
+	else
+		return unitName;
+	end
+end
+function VF_RS_GetBossParts(bossName)
+	if(VF_RS_BossParts[bossName] ~= nil) then
+		return VF_RS_BossParts[bossName];
+	else
+		return {[1] = bossName};
+	end
+end
+
+function VF_RS_HaveStartYell(bossName)
+	if(VF_RS_YellEvents[bossName] ~= nil) then
+		for i, v in pairs(VF_RS_YellEvents[bossName]) do
+			if(v == VF_RS_YellEvents_Start) then
+				return true;
+			end
+		end
+	end
+	return false;
+end
+
+VF_RS_OldRecount_SyncReset = Recount.ResetLazySyncData;
+function VF_RS_NewRecount_SyncReset(name)
+	VF_RS_ExecuteSub(VF_RS_LogRaidStats, "RCReset", VF_RS_GetTime_S());
+	VF_RS_OldRecount_SyncReset(name);
+	VF_RS_ExecuteSub(VF_RS_ResetLastRecordedCacheForAccumulaters);
+	VF_RS_DebugMessage("Recount resetted");
+end
+Recount.ResetLazySyncData = VF_RS_NewRecount_SyncReset
+
 VF_RaidStats_Settings = {["DebugMode"] = false};
 function VF_RS_DebugMessage(_Message)
 	if(VF_RaidStats_Settings["DebugMode"] == true) then
@@ -259,6 +309,24 @@ function VF_RaidStats_OnLoad()
 	this:RegisterEvent("CHAT_MSG_MONSTER_WHISPER");
 	this:RegisterEvent("CHAT_MSG_MONSTER_PARTY");
 	this:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH");
+	
+	SlashCmdList["RAIDSTATS_CLEAR"] = VF_RS_ClearData;
+	SlashCmdList["RAIDSTATS_HELP"] = VF_RS_Help;
+	SlashCmdList["RAIDSTATS_PRINTRECORDED"] = VF_RS_PrintRecorded;
+
+	SLASH_RAIDSTATS_CLEAR1 = "/VFRS_Clear";
+	SLASH_RAIDSTATS_CLEAR2 = "/RaidStats_Clear";
+	SLASH_RAIDSTATS_CLEAR3 = "/VFRSClear";
+	SLASH_RAIDSTATS_HELP1 = "/VFRS";
+	SLASH_RAIDSTATS_HELP2 = "/VFRS_Help";
+	SLASH_RAIDSTATS_PRINTRECORDED1 = "/VFRS_PrintRecorded";
+end
+
+function VF_RS_Help()
+	VF_RS_Message("VF RaidDamage Version = "..VF_RaidStatsVersion);
+	VF_RS_Message("/VFRD_PrintRecorded - Prints all the boss fights that has been recorded so far(only counts actual boss kills)");
+	VF_RS_Message("/VFRD_Clear - clears all data from all sessions, this removes all data saved in SavedVariables/VF_RaidDamage.lua");
+	VF_RS_Message("/VFRD - shows all commands");
 end
 
 function VF_RS_ClearData()
@@ -477,6 +545,7 @@ VF_RS_DataIndex_Dispels = 5;
 VF_RS_DataIndex_CCBreaks = 6;
 VF_RS_DataIndex_Interrupts = 7;
 VF_RS_DataIndex_Dispelled = 8;
+VF_RS_DataIndex_Threat = 9;
 
 VF_RS_LastRecorded = {};
 
@@ -499,6 +568,16 @@ function VF_RS_GenerateDeltaChange(_Value, _UnitID, _DataIndex, _CurrTime)
 	return deltaValue;
 end
 
+function VF_RS_ResetLastRecordedCacheForAccumulaters()
+	for i, v in pairs(VF_RS_LastRecorded) do
+		local oldData = VF_RS_LastRecorded[i];
+		VF_RS_LastRecorded[i] = {};
+		--save data that doesnt get accumulated
+		VF_RS_LastRecorded[i][VF_RS_DataIndex_Threat] = oldData[VF_RS_DataIndex_Threat];
+		--save data that doesnt get accumulated
+	end
+end
+
 VF_RS_RaidMembers = "";
 VF_RS_RaidMembersChanged = nil;
 VF_RS_UnitIDCounter = 1;
@@ -506,7 +585,7 @@ VF_RS_PrecisionLoggingInterval = 10;
 
 function VF_RS_IsCurrentBossKilled()
 	local bossKilled = true;
-	for addName, addData in VF_RS_CurrentBossData do
+	for addName, addData in pairs(VF_RS_CurrentBossData) do
 		if(addData.Dead ~= true) then
 			bossKilled = false;
 			break;
@@ -617,7 +696,7 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 							VF_RS_CurrentBossData[unitName] = {};
 						end
 						VF_RS_CurrentBossData[unitName].Dead = true;
-						local bossParts = VF_RD_GetBossParts(specialBoss);
+						local bossParts = VF_RS_GetBossParts(specialBoss);
 						local bossKilled = true;
 						for i, v in bossParts do
 							if(VF_RS_CurrentBossData[v] == nil or VF_RS_CurrentBossData[v].Dead ~= true) then

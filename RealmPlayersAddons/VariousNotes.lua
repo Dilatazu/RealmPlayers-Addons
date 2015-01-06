@@ -32,3 +32,5 @@ and not Recount.db.profile.Filters.Show[Recount.db2.combatants[v.Owner].type])  
 							if type(PerSec)=="number" then
 								TotalPerSec=TotalPerSec + PerSec
 							end
+
+/script DEFAULT_CHAT_FRAME:AddMessage(LibStub("Threat-2.0"):GetMaxThreatOnTarget(UnitGUID("target")));
