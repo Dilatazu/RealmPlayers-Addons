@@ -1,5 +1,8 @@
 VF_RAIDSTATSVERSION = GetAddOnMetadata("VF_RaidStatsTBC", "Version");
 
+local OmenThreatLib = LibStub("Threat-2.0");
+local GUIDRegistryLib = LibStub("LibGUIDRegistry-0.1");
+
 VF_RS_MobType_Boss = 1;
 VF_RS_MobType_Trash = 2;
 VF_RS_MobType_Unknown = 3;
@@ -282,14 +285,48 @@ function VF_RS_HaveStartYell(bossName)
 	return false;
 end
 
-VF_RS_OldRecount_SyncReset = Recount.ResetLazySyncData;
-function VF_RS_NewRecount_SyncReset(name)
+function VF_RS_OmenThreat_GetHighestThreat(player_guid)
+	if not player_guid then
+		return 0;
+	end
+	local maxVal = 0
+	local maxGUID = nil
+	local data = OmenThreatLib.threatTargets[player_guid];
+	if not data then
+		return 0;
+	end
+	for k, v in pairs(data) do
+		if v > maxVal then
+			maxVal = v
+			maxGUID = k
+		end
+	end
+	return maxVal, maxGUID
+end
+function VF_RS_OmenThreat_IsWipe()
+	for player_guid, data in pairs(OmenThreatLib.threatTargets) do
+		for target_guid, threatValue in pairs(data) do
+			if(threatValue ~= 0) then
+				local targetName = GUIDRegistryLib:GetName(target_guid);
+				if(targetName ~= nil) then
+					if(VF_RS_MobsType[targetName] == VF_RS_MobType_Boss) then
+						return false;--Not wipe
+					end
+				end
+			end
+		end
+	end
+	return true;--Wipe
+end
+--ResetData
+VF_RS_OldRecount_ResetData = Recount.ResetData;
+function VF_RS_NewRecount_ResetData(name)
 	VF_RS_ExecuteSub(VF_RS_LogRaidStats, "RCReset", VF_RS_GetTime_S());
-	VF_RS_OldRecount_SyncReset(name);
+	VF_RS_OldRecount_ResetData(name);
 	VF_RS_ExecuteSub(VF_RS_ResetLastRecordedCacheForAccumulaters);
 	VF_RS_DebugMessage("Recount resetted");
 end
-Recount.ResetLazySyncData = VF_RS_NewRecount_SyncReset
+Recount.ResetData = VF_RS_NewRecount_ResetData
 
 VF_RaidStats_Settings = {["DebugMode"] = false};
 function VF_RS_DebugMessage(_Message)
@@ -308,7 +345,7 @@ function VF_RaidStats_OnLoad()
 	this:RegisterEvent("CHAT_MSG_MONSTER_SAY");
 	this:RegisterEvent("CHAT_MSG_MONSTER_WHISPER");
 	this:RegisterEvent("CHAT_MSG_MONSTER_PARTY");
-	this:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH");
+	this:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
 	
 	SlashCmdList["RAIDSTATS_CLEAR"] = VF_RS_ClearData;
 	SlashCmdList["RAIDSTATS_HELP"] = VF_RS_Help;
@@ -334,6 +371,27 @@ function VF_RS_ClearData()
 	VF_RS_LastRecorded = {};
 	VF_RS_CreateNewSession();
 	VF_RS_Message("Cleared all saved data!");
+end
+
+function VF_RS_PrintRecorded()
+	local killCount = {};
+	local lastWasDead = nil;
+	for i, session in pairs(VF_RaidStatsData) do
+		for i, data in pairs(session) do
+			if(string.find(data, ":Dead_")) then
+				local _, _, time, killPrecision, bossName, _ = string.find(data, "(.*):Dead_(.*) (.*):(.*)");
+				if(time ~= nil and bossName ~= nil and lastWasDead ~= bossName) then
+					table.insert(killCount, 1, bossName);
+					lastWasDead = bossName;
+				end
+			end
+		end
+	end
+	local bossKills = "Total bosses killed("..table.getn(killCount).."): ";
+	for i, bossName in killCount do
+		bossKills = bossKills..bossName..", "
+	end
+	VF_RS_Message(bossKills);
 end
 
 function VF_RS_CreateNewSession()
@@ -418,7 +476,13 @@ function VF_RS_DetermineLogging()
 	return false;
 end
 
-function VF_RaidStats_SafeOnEvent(event, arg1, arg2)
+function VF_RS_CombatLogUnfiltered(_,timestamp, eventtype, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
+	if(eventtype == "UNIT_DIED" or eventtype == "UNIT_DESTROYED") then
+		VF_RS_DebugMessage(srcName.." died");
+	end
+end
+
+function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 	local eventText = arg1;
 	if(event=="VARIABLES_LOADED") then
 		VF_RaidStatsVersion = VF_RAIDSTATSVERSION;
@@ -478,13 +542,32 @@ function VF_RaidStats_SafeOnEvent(event, arg1, arg2)
 			end
 			VF_RS_SaveInstanceInfoBool = false;
 		end
-	elseif(event == "CHAT_MSG_COMBAT_HOSTILE_DEATH") then
-		local mobName;
-		_, _, mobName = string.find(eventText, string.gsub(UNITDIESOTHER, "%%s", "(.+)"));
-		
-		if(VF_RS_MobsType[mobName] == VF_RS_MobType_Boss) then
-			table.insert(VF_RaidStatsData[1], 1, ""..VF_RS_GetTime_S()..":Debug:"..mobName.."=Dead");
-			VF_RS_SaveInstanceInfo();
+	elseif(event == "COMBAT_LOG_EVENT_UNFILTERED") then
+		local timestamp, eventtype, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags = arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9
+		if(eventtype == "UNIT_DIED" or eventtype == "UNIT_DESTROYED") then
+			local mobName = dstName;
+			if(VF_RS_MobsType[mobName] == VF_RS_MobType_Boss) then
+				local deadReason = "Dead_C="..mobName;
+				VF_RS_DebugMessage("Dead_C="..mobName.."(CombatMsgDeath)");
+				local specialBoss = VF_RS_GetBossName(mobName);
+				if(specialBoss ~= mobName) then
+					if(VF_RS_CurrentBossData[mobName] ~= nil) then
+						VF_RS_CurrentBossData[mobName] = {};
+						VF_RS_CurrentBossData[mobName].Dead = true;
+					end
+					if(VF_RS_IsCurrentBossKilled() == true) then
+						deadReason = deadReason..";Dead_C="..specialBoss;
+						VF_RS_DebugMessage("Dead_C="..specialBoss.."(CombatMsgDeath)");
+					end
+				end
+				VF_RS_LogRaidStats(deadReason, VF_RS_GetTime_S());
+			end
+		end
+	elseif(event == "RAID_ROSTER_UPDATE") then
+		local oldRaidMembers = VF_RS_RaidMembers;
+		VF_RS_RaidMembers = VF_RS_GetRaidMembers();
+		if(VF_RS_RaidMembers ~= oldRaidMembers and VF_RS_RaidMembers ~= "") then
+			VF_RS_RaidMembersChanged = VF_RS_GetTime_S();
 		end
 	end
 end
@@ -518,7 +601,7 @@ function VF_RS_ExecuteSub(func, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, 
 end
 
 function VF_RaidStats_OnEvent()
-	VF_RS_ExecuteSub(VF_RaidStats_SafeOnEvent, event, arg1, arg2);
+	VF_RS_ExecuteSub(VF_RaidStats_SafeOnEvent, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 end
 
 VF_RS_SaveInstanceInfoBool = false;
@@ -546,21 +629,32 @@ VF_RS_DataIndex_CCBreaks = 6;
 VF_RS_DataIndex_Interrupts = 7;
 VF_RS_DataIndex_Dispelled = 8;
 VF_RS_DataIndex_Threat = 9;
+VF_RS_DataIndex_FriendlyDamage = 10;
 
 VF_RS_LastRecorded = {};
 
-function VF_RS_GenerateDeltaChange(_Value, _UnitID, _DataIndex, _CurrTime)
-	if(VF_RS_LastRecorded[_UnitID][_DataIndex] == nil) then
-		VF_RS_LastRecorded[_UnitID][_DataIndex] = {Value = _Value; Time = _CurrTime;}
+function VF_RS_PeekDeltaChange(_Value, _UnitGUID, _DataIndex)
+	if(VF_RS_LastRecorded[_UnitGUID] == nil) then
+		return _Value;
+	end
+	if(VF_RS_LastRecorded[_UnitGUID][_DataIndex] == nil) then ---error
+		return _Value;
+	end
+	return _Value - VF_RS_LastRecorded[_UnitGUID][_DataIndex].Value;
+end
+
+function VF_RS_GenerateDeltaChange(_Value, _UnitGUID, _DataIndex, _CurrTime)
+	if(VF_RS_LastRecorded[_UnitGUID][_DataIndex] == nil) then
+		VF_RS_LastRecorded[_UnitGUID][_DataIndex] = {Value = _Value; Time = _CurrTime;}
 		if(_Value == 0) then
 			return "";
 		end
 		return _Value;
 	end
-	local deltaValue = _Value - VF_RS_LastRecorded[_UnitID][_DataIndex].Value;
+	local deltaValue = _Value - VF_RS_LastRecorded[_UnitGUID][_DataIndex].Value;
 	if(deltaValue ~= 0) then
-		VF_RS_LastRecorded[_UnitID][_DataIndex].Value = _Value;
-		VF_RS_LastRecorded[_UnitID][_DataIndex].Time = _CurrTime;
+		VF_RS_LastRecorded[_UnitGUID][_DataIndex].Value = _Value;
+		VF_RS_LastRecorded[_UnitGUID][_DataIndex].Time = _CurrTime;
 	end
 	if(deltaValue == 0) then
 		return "";
@@ -572,16 +666,107 @@ function VF_RS_ResetLastRecordedCacheForAccumulaters()
 	for i, v in pairs(VF_RS_LastRecorded) do
 		local oldData = VF_RS_LastRecorded[i];
 		VF_RS_LastRecorded[i] = {};
+		VF_RS_LastRecorded[i]["UnitID"] = oldData["UnitID"];
 		--save data that doesnt get accumulated
 		VF_RS_LastRecorded[i][VF_RS_DataIndex_Threat] = oldData[VF_RS_DataIndex_Threat];
 		--save data that doesnt get accumulated
 	end
 end
 
+function VF_RS_DetectBossStart()
+	if(VF_RS_CurrentBoss == "") then
+		for unitName, unitData in pairs(Recount.db2.combatants) do
+			local unitFightData = unitData.Fights["OverallData"];
+			local unitGUID = unitData.GUID;
+			if(unitFightData ~= nil and unitGUID ~= nil) then
+				if(VF_RS_MobsType[unitName] == VF_RS_MobType_Boss) then
+					local bossName = VF_RS_GetBossName(unitName);
+					if(VF_RS_LastKilledBoss ~= bossName) then
+						if(VF_RS_PeekDeltaChange(unitFightData.Damage or 0, unitGUID, VF_RS_DataIndex_Damage) > 0 or VF_RS_PeekDeltaChange(unitFightData.DamageTaken or 0, unitGUID, VF_RS_DataIndex_DamageTaken) > 0 or VF_RS_PeekDeltaChange(unitFightData.Healing or 0, unitGUID, VF_RS_DataIndex_EffectiveHeal) > 0) then
+							--Boss Fight start
+							local startReason = "Start_C="..unitName;
+							if(bossName ~= unitName) then
+								startReason = startReason..";Start_C="..bossName;
+							end
+							VF_RS_DebugMessage(startReason.."(CombatMsgScan)");
+							VF_RS_LogRaidStats(startReason, VF_RS_GetTime_S());
+							VF_RS_NextUpdateTime = VF_RS_GetTime_S() + 1;
+							return;
+						end
+					end
+				end
+			end
+		end
+		
+		for i = 1, 40 do
+			local currUnitID = "raid"..i.."target";
+			local unitTarget = UnitName(currUnitID);
+			if(unitTarget ~= nil) then
+				if(VF_RS_MobsType[unitTarget] == VF_RS_MobType_Boss) then
+					local bossName = VF_RS_GetBossName(unitTarget);
+					if(VF_RS_LastKilledBoss ~= bossName and VF_RS_HaveStartYell(bossName) ~= true) then
+						if(UnitHealth(currUnitID) ~= UnitHealthMax(currUnitID) and UnitHealth(currUnitID) ~= 0) then
+							local startReason = "Start_T="..unitTarget;
+							if(bossName ~= unitTarget) then
+								startReason = startReason..";Start_T="..bossName;
+							end
+							VF_RS_DebugMessage(startReason.."(TargetHealthScan)");
+							VF_RS_LogRaidStats(startReason, VF_RS_GetTime_S());
+							VF_RS_NextUpdateTime = VF_RS_GetTime_S() + 1;
+							return;
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+function VF_RS_DetectBossEnd()
+	if(VF_RS_CurrentBoss ~= "") then
+		local bossKilled = true;
+		local deadReason = nil;
+		for addName, addData in pairs(VF_RS_CurrentBossData) do
+			if(addData.Dead ~= true) then
+				if(addData.Health ~= nil and addData.MaxHealth ~= nil and addData.Health <= 0 and addData.MaxHealth > 1000) then
+					addData.Dead = true;
+					if(deadReason == nil) then
+						deadReason = "Dead_T="..addName;
+					else
+						deadReason = deadReason..";Dead_T="..addName;
+					end
+					VF_RS_DebugMessage("Dead_T="..addName.."(TargetHealthScan)");
+				else
+					bossKilled = false;
+				end
+			end
+		end
+		
+		if(bossKilled == true) then
+			if(deadReason ~= "Dead_T="..VF_RS_CurrentBoss) then
+				if(deadReason ~= nil) then
+					deadReason = deadReason..";Dead_T="..VF_RS_CurrentBoss;
+				end
+				VF_RS_DebugMessage("Dead_T="..VF_RS_CurrentBoss.."(TargetHealthScan)");
+			end
+		end
+		if(deadReason ~= nil) then
+			VF_RS_LogRaidStats(deadReason, VF_RS_GetTime_S());
+		end
+	end
+end
 VF_RS_RaidMembers = "";
 VF_RS_RaidMembersChanged = nil;
 VF_RS_UnitIDCounter = 1;
 VF_RS_PrecisionLoggingInterval = 10;
+
+VF_RS_CurrentBoss = "";
+VF_RS_CurrentBossData = {};
+VF_RS_CurrentBoss_Health = 0;
+VF_RS_CurrentBoss_MaxHealth = 0;
+VF_RS_LastBossData = 0;
+VF_RS_LastKilledBoss = "";
+VF_RS_BossStartTime = 0;
 
 function VF_RS_IsCurrentBossKilled()
 	local bossKilled = true;
@@ -628,111 +813,129 @@ function VF_RS_UpdateBossHealth()
 	end
 end
 
+function VF_RS_GetRaidMembers()
+	local raidMembers = "";
+	for i = 1, 40 do
+		local currGUID = UnitGUID("raid"..i);
+		if(currGUID ~= nil and VF_RS_LastRecorded[currGUID] ~= nil) then
+			local currID = VF_RS_LastRecorded[currGUID]["UnitID"];
+			if(currID ~= nil) then
+				raidMembers = raidMembers.." "..currID;
+			end
+		end
+	end
+	if(raidMembers ~= "") then
+		raidMembers = "R"..raidMembers;
+	end
+	return raidMembers;	
+end
+
 function VF_RS_LogRaidStats(_Reason, _Time)
 	local totalPlayersResult = "";
 	for unitName, unitData in pairs(Recount.db2.combatants) do 
 		local unitFightData = unitData.Fights["OverallData"];
-		if(VF_RS_LastRecorded[unitName] == nil) then
-			VF_RS_LastRecorded[unitName] = {};
-			VF_RS_LastRecorded[unitName]["UnitID"] = VF_RS_UnitIDCounter;
-			totalPlayersResult = totalPlayersResult..unitName.."="..VF_RS_LastRecorded[unitName]["UnitID"]..",";
-			VF_RS_UnitIDCounter = VF_RS_UnitIDCounter + 1;
-		end
-		local unitID = VF_RS_LastRecorded[unitName]["UnitID"];
-		if(unitData.type == "Pet") then
-			if(unitData.Owner and VF_RS_LastRecorded[unitData.Owner] ~= nil) then
-				if(VF_RS_LastRecorded[unitData.Owner]["pets"] == nil) then
-					VF_RS_LastRecorded[unitData.Owner]["pets"] = {};
-				end
-				if(VF_RS_LastRecorded[unitData.Owner]["pets"][unitID] == nil) then
-					VF_RS_LastRecorded[unitData.Owner]["pets"][unitID] = 1;
-					totalPlayersResult = totalPlayersResult.."VF_PET_"..unitID.."_"..unitName.."_"..unitData.Owner.."="..unitID..",";
+		local unitGUID = unitData.GUID;
+		if(unitFightData ~= nil and unitGUID ~= nil) then
+			if(VF_RS_LastRecorded[unitGUID] == nil) then
+				VF_RS_LastRecorded[unitGUID] = {};
+				VF_RS_LastRecorded[unitGUID]["UnitID"] = VF_RS_UnitIDCounter;
+				totalPlayersResult = totalPlayersResult..unitName.."="..VF_RS_LastRecorded[unitGUID]["UnitID"]..",";
+				VF_RS_UnitIDCounter = VF_RS_UnitIDCounter + 1;
+			end
+			local unitID = VF_RS_LastRecorded[unitGUID]["UnitID"];
+			if(unitData.type == "Pet") then
+				if(unitData.Owner) then
+					local unitOwnerGUID = GUIDRegistryLib:GetGUID(unitData.Owner);
+					if(unitOwnerGUID and VF_RS_LastRecorded[unitOwnerGUID] ~= nil) then
+						if(VF_RS_LastRecorded[unitOwnerGUID]["pets"] == nil) then
+							VF_RS_LastRecorded[unitOwnerGUID]["pets"] = {};
+						end
+						if(VF_RS_LastRecorded[unitOwnerGUID]["pets"][unitID] == nil) then
+							VF_RS_LastRecorded[unitOwnerGUID]["pets"][unitID] = 1;
+							totalPlayersResult = totalPlayersResult.."VF_PET_"..unitID.."_"..unitName.."_"..unitData.Owner.."="..unitID..",";
+						end
+					end
 				end
 			end
-		end
-		local dmg, effHeal, dmgTaken = unitFightData.Damage or 0, unitFightData.Healing or 0, unitFightData.DamageTaken or 0;
-		local overHeal, death = unitFightData.Overhealing or 0, unitFightData.DeathCount or 0;
-		local dispels, ccbreaks, interrupts, dispelled = unitFightData.Dispels or 0, unitFightData.CCBreak or 0, unitFightData.Interrupts or 0, unitFightData.Dispelled or 0;
+			local dmg, effHeal, dmgTaken = unitFightData.Damage or 0, unitFightData.Healing or 0, unitFightData.DamageTaken or 0;
+			local overHeal, death, friendlydmg = unitFightData.Overhealing or 0, unitFightData.DeathCount or 0, unitFightData.FDamage or 0;
+			local dispels, ccbreaks, interrupts, dispelled = unitFightData.Dispels or 0, unitFightData.CCBreak or 0, unitFightData.Interrupts or 0, unitFightData.Dispelled or 0;
 		
-		dmg = VF_RS_GenerateDeltaChange(dmg, unitID, VF_RS_DataIndex_Damage, _Time);
-		effHeal = VF_RS_GenerateDeltaChange(effHeal, unitID, VF_RS_DataIndex_EffectiveHeal, _Time);
-		dmgTaken = VF_RS_GenerateDeltaChange(dmgTaken, unitID, VF_RS_DataIndex_DamageTaken, _Time);
-		overHeal = VF_RS_GenerateDeltaChange(overHeal, unitID, VF_RS_DataIndex_OverHeal, _Time);
-		death = VF_RS_GenerateDeltaChange(death, unitID, VF_RS_DataIndex_Death, _Time);
-		dispels = VF_RS_GenerateDeltaChange(dispels, unitID, VF_RS_DataIndex_Dispels, _Time);
-		ccbreaks = VF_RS_GenerateDeltaChange(ccbreaks, unitID, VF_RS_DataIndex_CCBreaks, _Time);
-		interrupts = VF_RS_GenerateDeltaChange(interrupts, unitID, VF_RS_DataIndex_Interrupts, _Time);
-		dispelled = VF_RS_GenerateDeltaChange(dispelled, unitID, VF_RS_DataIndex_Dispelled, _Time);
+			dmg = VF_RS_GenerateDeltaChange(dmg, unitGUID, VF_RS_DataIndex_Damage, _Time);
+			effHeal = VF_RS_GenerateDeltaChange(effHeal, unitGUID, VF_RS_DataIndex_EffectiveHeal, _Time);
+			dmgTaken = VF_RS_GenerateDeltaChange(dmgTaken, unitGUID, VF_RS_DataIndex_DamageTaken, _Time);
+			overHeal = VF_RS_GenerateDeltaChange(overHeal, unitGUID, VF_RS_DataIndex_OverHeal, _Time);
+			death = VF_RS_GenerateDeltaChange(death, unitGUID, VF_RS_DataIndex_Death, _Time);
+			friendlydmg = VF_RS_GenerateDeltaChange(friendlydmg, unitGUID, VF_RS_DataIndex_FriendlyDamage, _Time);
+			dispels = VF_RS_GenerateDeltaChange(dispels, unitGUID, VF_RS_DataIndex_Dispels, _Time);
+			ccbreaks = VF_RS_GenerateDeltaChange(ccbreaks, unitGUID, VF_RS_DataIndex_CCBreaks, _Time);
+			interrupts = VF_RS_GenerateDeltaChange(interrupts, unitGUID, VF_RS_DataIndex_Interrupts, _Time);
+			dispelled = VF_RS_GenerateDeltaChange(dispelled, unitGUID, VF_RS_DataIndex_Dispelled, _Time);
 			
-		if(dmg ~= "" or effHeal ~= "" or dmgTaken ~= "" or overHeal ~= "" or death ~= "" or dispels ~= "" or ccbreaks ~= "" or interrupts ~= "" or dispelled ~= "") then
-			if(VF_RS_MobsType[unitName] == VF_RS_MobType_Boss) then
-				local specialBoss = VF_RS_GetBossName(unitName);
-				if(VF_RS_CurrentBoss ~= specialBoss and VF_RS_LastKilledBoss ~= specialBoss) then
-					if(_Reason ~= "") then
-						if(string.find(_Reason, "Start_C=") or string.find(_Reason, "Start_T=")) then
+			if(dmg ~= "" or effHeal ~= "" or dmgTaken ~= "" or overHeal ~= "" or death ~= "" or friendlydmg ~= "" or dispels ~= "" or ccbreaks ~= "" or interrupts ~= "" or dispelled ~= "") then
+				if(VF_RS_MobsType[unitName] == VF_RS_MobType_Boss) then
+					local specialBoss = VF_RS_GetBossName(unitName);
+					if(VF_RS_CurrentBoss ~= specialBoss and VF_RS_LastKilledBoss ~= specialBoss) then
+						if(_Reason ~= "") then
+							if(string.find(_Reason, "Start_C=") or string.find(_Reason, "Start_T=")) then
 								
-						else
-							_Reason = _Reason..";Start_S="..specialBoss;
-						end
-					else
-						_Reason = "Start_S="..specialBoss;
-					end
-					VF_RS_DebugMessage("Start_S="..specialBoss.."(SW_Start)");
-					VF_RS_CurrentBoss = specialBoss;
-					local bossParts = VF_RS_GetBossParts(specialBoss);
-					VF_RS_CurrentBossData = {};
-					for i, v in bossParts do
-						VF_RS_CurrentBossData[v] = {Health = 0, MaxHealth = 0};
-					end
-				elseif(death ~= "" and VF_RS_CurrentBoss == specialBoss) then
-					if(_Reason ~= "") then
-						_Reason = _Reason..";Dead_S="..unitName;
-					else
-						_Reason = "Dead_S="..unitName;
-					end
-					VF_RS_DebugMessage("Dead_S="..unitName.."(SW_Dead)");
-					if(specialBoss ~= unitName) then
-						if(VF_RS_CurrentBossData[unitName] == nil) then
-							VF_RS_CurrentBossData[unitName] = {};
-						end
-						VF_RS_CurrentBossData[unitName].Dead = true;
-						local bossParts = VF_RS_GetBossParts(specialBoss);
-						local bossKilled = true;
-						for i, v in bossParts do
-							if(VF_RS_CurrentBossData[v] == nil or VF_RS_CurrentBossData[v].Dead ~= true) then
-								bossKilled = false;
-								break;
-							end
-						end
-						if(bossKilled == true) then
-							if(_Reason ~= "") then
-								_Reason = _Reason..";Dead_S="..specialBoss;
 							else
-								_Reason = "Dead_S="..specialBoss;
+								_Reason = _Reason..";Start_S="..specialBoss;
 							end
-							VF_RS_DebugMessage("Dead_S="..specialBoss.."(SW_Dead)");
+						else
+							_Reason = "Start_S="..specialBoss;
+						end
+						VF_RS_DebugMessage("Start_S="..specialBoss.."(RC_Start)");
+						VF_RS_CurrentBoss = specialBoss;
+						local bossParts = VF_RS_GetBossParts(specialBoss);
+						VF_RS_CurrentBossData = {};
+						for i, v in pairs(bossParts) do
+							VF_RS_CurrentBossData[v] = {Health = 0, MaxHealth = 0};
+						end
+					elseif(death ~= "" and VF_RS_CurrentBoss == specialBoss) then
+						if(_Reason ~= "") then
+							_Reason = _Reason..";Dead_S="..unitName;
+						else
+							_Reason = "Dead_S="..unitName;
+						end
+						VF_RS_DebugMessage("Dead_S="..unitName.."(RC_Dead)");
+						if(specialBoss ~= unitName) then
+							if(VF_RS_CurrentBossData[unitName] == nil) then
+								VF_RS_CurrentBossData[unitName] = {};
+							end
+							VF_RS_CurrentBossData[unitName].Dead = true;
+							local bossParts = VF_RS_GetBossParts(specialBoss);
+							local bossKilled = true;
+							for i, v in pairs(bossParts) do
+								if(VF_RS_CurrentBossData[v] == nil or VF_RS_CurrentBossData[v].Dead ~= true) then
+									bossKilled = false;
+									break;
+								end
+							end
+							if(bossKilled == true) then
+								if(_Reason ~= "") then
+									_Reason = _Reason..";Dead_S="..specialBoss;
+								else
+									_Reason = "Dead_S="..specialBoss;
+								end
+								VF_RS_DebugMessage("Dead_S="..specialBoss.."(RC_Dead)");
+							end
 						end
 					end
+					VF_RS_LastBossData = _Time;
 				end
-				VF_RS_LastBossData = _Time;
+				local threatValue, threatTarget = VF_RS_OmenThreat_GetHighestThreat(GUIDRegistryLib:GetGUID(unitName));
+				if(threatValue ~= 0 and threatTarget ~= nil) then
+					--threatTarget is a GUID. Possibly get name here and do something interesting with it
+				end
+				local unitResultStr = unitID.." "..dmg.." "..effHeal.." "..dmgTaken.." "..overHeal.." "..death.." "..friendlydmg.." "..dispels.." "..ccbreaks.." "..interrupts.." "..dispelled.." "..threatValue;
+				totalPlayersResult = totalPlayersResult..unitResultStr..",";
 			end
-			local threatValue = 0;
-			local unitResultStr = unitID.." "..dmg.." "..effHeal.." "..dmgTaken.." "..overHeal.." "..death.." "..dispels.." "..ccbreaks.." "..interrupts.." "..dispelled.." "..threatValue;
-			totalPlayersResult = totalPlayersResult..unitResultStr..",";
 		end
 	end
 	
 	if(_Reason == "" and VF_RS_CurrentBoss ~= "" and VF_RS_LastBossData ~= _Time) then
-		local threatWiped = true;
-		for uN, tV in klhtm.table.raiddata do
-			if(tV == 0 or tV == nil) then
-				
-			else
-				threatWiped = false;
-				break;
-			end
-		end
-		if(threatWiped == true) then
+		if(VF_RS_OmenThreat_IsWipe() == true) then
 			_Reason = "Wipe_K="..VF_RS_CurrentBoss;
 			VF_RS_DebugMessage("Wipe_K="..VF_RS_CurrentBoss.."(ThreatWipe)");
 			VF_RS_CurrentBoss = "";
@@ -751,7 +954,7 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 	VF_RS_UpdateBossHealth();
 	if(totalPlayersResult ~= "" and VF_RS_CurrentBoss_MaxHealth > 0) then
 		local healthStr = "BossHealth="..VF_RS_CurrentBoss_Health.."-"..VF_RS_CurrentBoss_MaxHealth;
-		for addName, addData in VF_RS_CurrentBossData do
+		for addName, addData in pairs(VF_RS_CurrentBossData) do
 			if(addData.Health ~= nil and addData.MaxHealth ~= nil) then
 				healthStr = healthStr..";BossHealth-"..addName.."="..addData.Health.."-"..addData.MaxHealth;
 			end
@@ -787,23 +990,34 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 end
 
 VF_RS_NextUpdateTime = nil;
+VF_RS_NextBossCheckTime = nil;
 function VF_RaidStats_SafeOnUpdate()
-	--[[if(GetNumRaidMembers() ~= 0) then
+	if(GetNumRaidMembers() ~= 0) then
 		local currTime = GetTime();
 		local currTime_S = VF_RS_GetTime_S();
-		if(VF_RS_NextUpdateTime == nil) then
+		if(VF_RS_NextUpdateTime == nil or VF_RS_NextBossCheckTime == nil) then
 			VF_RS_NextUpdateTime = currTime_S + 5;
+			VF_RS_NextBossCheckTime = currTime + 0.5;
+		end
+		if(currTime >= VF_RS_NextBossCheckTime) then
+			VF_RS_DetectBossStart();
+			VF_RS_NextBossCheckTime = currTime + 0.5;
 		end
 		if(currTime_S >= VF_RS_NextUpdateTime) then
+			VF_RS_LogRaidStats("", currTime_S);
 			if(currTime_S - VF_RS_BossStartTime < 5) then
 				--log every second the first 5 seconds of fight
 				VF_RS_NextUpdateTime = currTime_S + 1;
 			else
 				VF_RS_NextUpdateTime = currTime_S + VF_RS_PrecisionLoggingInterval;
 			end
+		else
+			VF_RS_UpdateBossHealth();
 		end
-	end--]]
+		VF_RS_DetectBossEnd();
+	end
 end
+
 function VF_RaidStats_OnUpdate()
-	--VF_RS_ExecuteSub(VF_RaidStats_SafeOnUpdate);
+	VF_RS_ExecuteSub(VF_RaidStats_SafeOnUpdate);
 end

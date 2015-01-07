@@ -90,6 +90,15 @@
     <None Include="VariousNotes.lua">
       <Filter>Resource Files\Tests</Filter>
     </None>
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RaidStatsTBC.lua">
+      <Filter>Source Files\TBC\SavedVariables</Filter>
+    </None>
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RealmPlayersTBC.lua">
+      <Filter>Source Files\TBC\SavedVariables</Filter>
+    </None>
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\NEHEROMAR\SavedVariables\VF_RaidStatsTBC.lua">
+      <Filter>Source Files\TBC\SavedVariables</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml">

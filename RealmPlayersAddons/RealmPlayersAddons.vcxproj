@@ -11,6 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RaidStatsTBC.lua" />
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RealmPlayersTBC.lua" />
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\NEHEROMAR\SavedVariables\VF_RaidStatsTBC.lua" />
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua" />
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.toc" />
     <None Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.lua" />

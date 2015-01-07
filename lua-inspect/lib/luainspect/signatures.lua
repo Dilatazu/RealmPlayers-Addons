@@ -201,6 +201,8 @@ function UnitHealth() end
 M.global_signatures["UnitHealth"] = "UnitHealth(UnitID)";
 function UnitHealthMax() end
 M.global_signatures["UnitHealthMax"] = "UnitHealthMax(UnitID)";
+function UnitGUID() end
+M.global_signatures["UnitGUID"] = "UnitGUID(UnitID)";
 
 --Added by Dilatazu
 
