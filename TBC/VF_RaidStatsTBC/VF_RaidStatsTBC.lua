@@ -346,6 +346,10 @@ function VF_RaidStats_OnLoad()
 	this:RegisterEvent("CHAT_MSG_MONSTER_WHISPER");
 	this:RegisterEvent("CHAT_MSG_MONSTER_PARTY");
 	this:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
+	this:RegisterEvent("ZONE_CHANGED_NEW_AREA");
+	this:RegisterEvent("UPDATE_INSTANCE_INFO");
+	this:RegisterEvent("RAID_ROSTER_UPDATE");
+	this:RegisterEvent("CHAT_MSG_LOOT");
 	
 	SlashCmdList["RAIDSTATS_CLEAR"] = VF_RS_ClearData;
 	SlashCmdList["RAIDSTATS_HELP"] = VF_RS_Help;
@@ -482,6 +486,10 @@ function VF_RS_CombatLogUnfiltered(_,timestamp, eventtype, srcGUID, srcName, src
 	end
 end
 
+function VF_RS_AssertSpecialSettings()
+	Recount.db.profile.Filters.Data["Nontrivial"] = true; --Force data collection for Nontriival units(needed for boss adds etc)
+end
+
 function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 	local eventText = arg1;
 	if(event=="VARIABLES_LOADED") then
@@ -498,6 +506,7 @@ function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg
 		VF_RS_CleanupSessions();
 		VF_RS_CreateNewSession();
 		DEFAULT_CHAT_FRAME:AddMessage("VF_RaidStats(/VFRS) version "..VF_RaidStatsVersion.." loaded!", 1, 1, 0);
+		VF_RS_AssertSpecialSettings();
 	elseif(event == "ZONE_CHANGED_NEW_AREA") then
 		local currentZone = GetZoneText();
 		if(string.find(VF_RaidStatsData[1][1], "Session:Info:")) then
@@ -508,27 +517,27 @@ function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg
 	elseif(event == "CHAT_MSG_MONSTER_YELL") then
 		local monsterName = arg2;
 		if(VF_RS_MobsType[monsterName] == VF_RS_MobType_Boss) then
-			table.insert(VF_RaidStatsData[1], 1, ""..VF_RS_GetTime_S()..":Debug:"..monsterName.."=Yell-"..eventText);
+			table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=Yell-"..eventText..":"..VF_RS_GetTime_S());
 		end
 	elseif(event == "CHAT_MSG_MONSTER_EMOTE") then
 		local monsterName = arg2;
 		if(VF_RS_MobsType[monsterName] == VF_RS_MobType_Boss) then
-			table.insert(VF_RaidStatsData[1], 1, ""..VF_RS_GetTime_S()..":Debug:"..monsterName.."=Emote-"..eventText);
+			table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=Emote-"..eventText..":"..VF_RS_GetTime_S());
 		end
 	elseif(event == "CHAT_MSG_MONSTER_SAY") then
 		local monsterName = arg2;
 		if(VF_RS_MobsType[monsterName] == VF_RS_MobType_Boss) then
-			table.insert(VF_RaidStatsData[1], 1, ""..VF_RS_GetTime_S()..":Debug:"..monsterName.."=Say-"..eventText);
+			table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=Say-"..eventText..":"..VF_RS_GetTime_S());
 		end
 	elseif(event == "CHAT_MSG_MONSTER_WHISPER") then
 		local monsterName = arg2;
 		if(VF_RS_MobsType[monsterName] == VF_RS_MobType_Boss) then
-			table.insert(VF_RaidStatsData[1], 1, ""..VF_RS_GetTime_S()..":Debug:"..monsterName.."=Whisper-"..eventText);
+			table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=Whisper-"..eventText..":"..VF_RS_GetTime_S());
 		end
 	elseif(event == "CHAT_MSG_MONSTER_PARTY") then
 		local monsterName = arg2;
 		if(VF_RS_MobsType[monsterName] == VF_RS_MobType_Boss) then
-			table.insert(VF_RaidStatsData[1], 1, ""..VF_RS_GetTime_S()..":Debug:"..monsterName.."=Party-"..eventText);
+			table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=Party-"..eventText..":"..VF_RS_GetTime_S());
 		end
 	elseif(event == "UPDATE_INSTANCE_INFO") then
 		if(VF_RS_SaveInstanceInfoBool == true) then
