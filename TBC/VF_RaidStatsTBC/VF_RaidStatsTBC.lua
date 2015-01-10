@@ -53,7 +53,7 @@ VF_RS_MobsType = {
 	["Nightbane"] = VF_RS_MobType_Boss,
 	--["Restless Skeleton"] = VF_RS_MobType_Boss, --NIGHTBANE ADD
 	--Nightbane
-	["Prince Melchazzar"] = VF_RS_MobType_Boss,
+	["Prince Malchezaar"] = VF_RS_MobType_Boss,
 	
 	--Gruul's Lair
 	--High King Maulgar
