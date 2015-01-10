@@ -639,6 +639,8 @@ VF_RS_DataIndex_Interrupts = 7;
 VF_RS_DataIndex_Dispelled = 8;
 VF_RS_DataIndex_Threat = 9;
 VF_RS_DataIndex_FriendlyDamage = 10;
+VF_RS_DataIndex_EffectiveHealRecv = 11;
+VF_RS_DataIndex_OverHealRecv = 12;
 
 VF_RS_LastRecorded = {};
 
@@ -869,7 +871,8 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 			local dmg, effHeal, dmgTaken = unitFightData.Damage or 0, unitFightData.Healing or 0, unitFightData.DamageTaken or 0;
 			local overHeal, death, friendlydmg = unitFightData.Overhealing or 0, unitFightData.DeathCount or 0, unitFightData.FDamage or 0;
 			local dispels, ccbreaks, interrupts, dispelled = unitFightData.Dispels or 0, unitFightData.CCBreak or 0, unitFightData.Interrupts or 0, unitFightData.Dispelled or 0;
-		
+			local effHealRecv, overHealRecv = unitFightData.HealingTaken or 0, 0; --not 100% correct
+
 			dmg = VF_RS_GenerateDeltaChange(dmg, unitGUID, VF_RS_DataIndex_Damage, _Time);
 			effHeal = VF_RS_GenerateDeltaChange(effHeal, unitGUID, VF_RS_DataIndex_EffectiveHeal, _Time);
 			dmgTaken = VF_RS_GenerateDeltaChange(dmgTaken, unitGUID, VF_RS_DataIndex_DamageTaken, _Time);
@@ -880,7 +883,10 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 			ccbreaks = VF_RS_GenerateDeltaChange(ccbreaks, unitGUID, VF_RS_DataIndex_CCBreaks, _Time);
 			interrupts = VF_RS_GenerateDeltaChange(interrupts, unitGUID, VF_RS_DataIndex_Interrupts, _Time);
 			dispelled = VF_RS_GenerateDeltaChange(dispelled, unitGUID, VF_RS_DataIndex_Dispelled, _Time);
-			
+			effHealRecv = VF_RS_GenerateDeltaChange(effHealRecv, unitGUID, VF_RS_DataIndex_EffectiveHealRecv, _Time);
+			overHealRecv = VF_RS_GenerateDeltaChange(overHealRecv, unitGUID, VF_RS_DataIndex_OverHealRecv, _Time);
+
+
 			if(dmg ~= "" or effHeal ~= "" or dmgTaken ~= "" or overHeal ~= "" or death ~= "" or friendlydmg ~= "" or dispels ~= "" or ccbreaks ~= "" or interrupts ~= "" or dispelled ~= "") then
 				if(VF_RS_MobsType[unitName] == VF_RS_MobType_Boss) then
 					local specialBoss = VF_RS_GetBossName(unitName);
@@ -937,7 +943,7 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 				if(threatValue ~= 0 and threatTarget ~= nil) then
 					--threatTarget is a GUID. Possibly get name here and do something interesting with it
 				end
-				local unitResultStr = unitID.." "..dmg.." "..effHeal.." "..dmgTaken.." "..overHeal.." "..death.." "..friendlydmg.." "..dispels.." "..ccbreaks.." "..interrupts.." "..dispelled.." "..threatValue;
+				local unitResultStr = unitID.." "..dmg.." "..effHeal.." "..dmgTaken.." "..overHeal.." "..death.." "..friendlydmg.." "..dispels.." "..ccbreaks.." "..interrupts.." "..dispelled.." "..effHealRecv.." "..overHealRecv.." "..threatValue;
 				totalPlayersResult = totalPlayersResult..unitResultStr..",";
 			end
 		end
