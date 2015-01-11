@@ -846,6 +846,12 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 	for unitName, unitData in pairs(Recount.db2.combatants) do 
 		local unitFightData = unitData.Fights["OverallData"];
 		local unitGUID = unitData.GUID;
+		if(unitGUID == nil) then
+			unitGUID = GUIDRegistryLib:GetGUID(unitName);
+			if(unitGUID ~= nil) then
+				VF_RS_DebugMessage("GUID was missing for "..unitName.." but was looked up to be: "..unitGUID);
+			end
+		end
 		if(unitFightData ~= nil and unitGUID ~= nil) then
 			if(VF_RS_LastRecorded[unitGUID] == nil) then
 				VF_RS_LastRecorded[unitGUID] = {};
