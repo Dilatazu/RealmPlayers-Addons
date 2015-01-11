@@ -841,6 +841,7 @@ function VF_RS_GetRaidMembers()
 	return raidMembers;	
 end
 
+VF_RS_ErroredGUIDs = {}; --To prevent this from happening too often.
 function VF_RS_LogRaidStats(_Reason, _Time)
 	local totalPlayersResult = "";
 	for unitName, unitData in pairs(Recount.db2.combatants) do 
@@ -848,8 +849,10 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 		local unitGUID = unitData.GUID;
 		if(unitGUID == nil) then
 			unitGUID = GUIDRegistryLib:GetGUID(unitName);
-			if(unitGUID ~= nil) then
+			if(unitGUID ~= nil and VF_RS_ErroredGUIDs[unitGUID] == nil) then --To prevent this from happening too often.
 				VF_RS_DebugMessage("GUID was missing for "..unitName.." but was looked up to be: "..unitGUID);
+				table.insert(VF_RS_ErrorLog, 1, "GUID was missing for "..unitName.." but was looked up to be: "..unitGUID);
+				VF_RS_ErroredGUIDs[unitGUID] = 1; --To prevent this from happening too often.
 			end
 		end
 		if(unitFightData ~= nil and unitGUID ~= nil) then
