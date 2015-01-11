@@ -364,10 +364,10 @@ function VF_RaidStats_OnLoad()
 end
 
 function VF_RS_Help()
-	VF_RS_Message("VF RaidDamage Version = "..VF_RaidStatsVersion);
-	VF_RS_Message("/VFRD_PrintRecorded - Prints all the boss fights that has been recorded so far(only counts actual boss kills)");
-	VF_RS_Message("/VFRD_Clear - clears all data from all sessions, this removes all data saved in SavedVariables/VF_RaidDamage.lua");
-	VF_RS_Message("/VFRD - shows all commands");
+	VF_RS_Message("VF RaidStatsTBC Version = "..VF_RaidStatsVersion);
+	VF_RS_Message("/VFRS_PrintRecorded - Prints all the boss fights that has been recorded so far(only counts actual boss kills)");
+	VF_RS_Message("/VFRS_Clear - clears all data from all sessions, this removes all data saved in SavedVariables/VF_RaidStatsTBC.lua");
+	VF_RS_Message("/VFRS - shows all commands");
 end
 
 function VF_RS_ClearData()
