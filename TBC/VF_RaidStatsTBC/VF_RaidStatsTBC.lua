@@ -844,9 +844,20 @@ end
 VF_RS_ErroredGUIDs = {}; --To prevent this from happening too often.
 function VF_RS_LogRaidStats(_Reason, _Time)
 	local totalPlayersResult = "";
-	for unitName, unitData in pairs(Recount.db2.combatants) do 
+	for unitRecountID, unitData in pairs(Recount.db2.combatants) do 
 		local unitFightData = unitData.Fights["OverallData"];
 		local unitGUID = unitData.GUID;
+		local unitName = unitData.Name;
+		if(unitName == nil) then
+			VF_RS_DebugMessage("Name was missing for "..unitRecountID);
+			local newError = {};
+			newError.Date = date("!%Y-%m-%d %X");
+			newError.Time = VF_RS_GetTime_S();
+			newError.ErrorText = "Name was missing for "..unitRecountID;
+			table.insert(VF_RS_ErrorLog, 1, newError);
+			VF_RS_ErroredGUIDs[unitRecountID] = 1; --To prevent this from happening too often.
+			unitData.Name = unitRecountID;
+		end
 		if(unitGUID == nil) then
 			unitGUID = GUIDRegistryLib:GetGUID(unitName);
 			if(unitGUID ~= nil and VF_RS_ErroredGUIDs[unitGUID] == nil) then --To prevent this from happening too often.
