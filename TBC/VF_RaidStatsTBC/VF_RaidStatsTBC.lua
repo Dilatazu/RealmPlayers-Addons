@@ -851,7 +851,11 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 			unitGUID = GUIDRegistryLib:GetGUID(unitName);
 			if(unitGUID ~= nil and VF_RS_ErroredGUIDs[unitGUID] == nil) then --To prevent this from happening too often.
 				VF_RS_DebugMessage("GUID was missing for "..unitName.." but was looked up to be: "..unitGUID);
-				table.insert(VF_RS_ErrorLog, 1, "GUID was missing for "..unitName.." but was looked up to be: "..unitGUID);
+				local newError = {};
+				newError.Date = date("!%Y-%m-%d %X");
+				newError.Time = VF_RS_GetTime_S();
+				newError.ErrorText = "GUID was missing for "..unitName.." but was looked up to be: "..unitGUID;
+				table.insert(VF_RS_ErrorLog, 1, newError);
 				VF_RS_ErroredGUIDs[unitGUID] = 1; --To prevent this from happening too often.
 			end
 		end
