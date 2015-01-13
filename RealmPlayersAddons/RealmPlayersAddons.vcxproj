@@ -14,6 +14,8 @@
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RaidStatsTBC.lua" />
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RealmPlayersTBC.lua" />
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\NEHEROMAR\SavedVariables\VF_RaidStatsTBC.lua" />
+    <None Include="..\Classic\VF_BGStats\VF_BGStats.lua" />
+    <None Include="..\Classic\VF_BGStats\VF_BGStats.toc" />
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua" />
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.toc" />
     <None Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.lua" />
@@ -32,6 +34,7 @@
     <None Include="VariousNotes.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="..\Classic\VF_BGStats\VF_BGStats.xml" />
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml" />
     <Xml Include="..\Classic\VF_RealmPlayers\VF_RealmPlayers.xml" />
     <Xml Include="..\TBC\VF_RaidStatsTBC\VF_RaidStatsTBC.xml" />

@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: VF_BGStats
+## Author: Dilatazu, www.realmplayers.com, Dilatazu@gmail.com
+## Version: 1.0.0
+## Notes: 
+## Dependencies: SW_Stats
+## OptionalDeps: 
+## SavedVariablesPerCharacter: 
+## SavedVariables: VF_BGStatsData, VF_BGStatsVersion, VF_BGStats_Settings, VF_BGStats_ErrorLog
+VF_BGStats.xml

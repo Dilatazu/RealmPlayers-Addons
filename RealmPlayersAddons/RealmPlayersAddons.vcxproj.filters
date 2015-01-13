@@ -40,6 +40,9 @@
     <Filter Include="Resource Files\Tests">
       <UniqueIdentifier>{4957fb5e-2e10-4543-ad43-70bfb1826e0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classic\VF_BGStats">
+      <UniqueIdentifier>{f45dd2ac-354b-4784-b664-f2be4d3f9192}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua">
@@ -99,6 +102,12 @@
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\NEHEROMAR\SavedVariables\VF_RaidStatsTBC.lua">
       <Filter>Source Files\TBC\SavedVariables</Filter>
     </None>
+    <None Include="..\Classic\VF_BGStats\VF_BGStats.lua">
+      <Filter>Source Files\Classic\VF_BGStats</Filter>
+    </None>
+    <None Include="..\Classic\VF_BGStats\VF_BGStats.toc">
+      <Filter>Source Files\Classic\VF_BGStats</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml">
@@ -112,6 +121,9 @@
     </Xml>
     <Xml Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.xml">
       <Filter>Source Files\TBC\VF_RealmPlayers</Filter>
+    </Xml>
+    <Xml Include="..\Classic\VF_BGStats\VF_BGStats.xml">
+      <Filter>Source Files\Classic\VF_BGStats</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>
