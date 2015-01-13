@@ -856,7 +856,7 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 			newError.ErrorText = "Name was missing for "..unitRecountID;
 			table.insert(VF_RS_ErrorLog, 1, newError);
 			VF_RS_ErroredGUIDs[unitRecountID] = 1; --To prevent this from happening too often.
-			unitData.Name = unitRecountID;
+			unitData.Name = unitRecountID; unitName = unitData.Name;
 		end
 		if(unitGUID == nil) then
 			unitGUID = GUIDRegistryLib:GetGUID(unitName);
