@@ -1,5 +1,7 @@
 VF_BGSTATSVERSION = GetAddOnMetadata("VF_BGStats", "Version");
 
+--VF_BGStatsFrame = nil;
+
 VF_BGStats_Settings = {["DebugMode"] = false};
 function VF_BGS_DebugMessage(_Message)
 	if(VF_BGStats_Settings["DebugMode"] == true) then
@@ -28,26 +30,26 @@ function VF_BGS_NewSW_NukeDataCollection()
 end
 SW_NukeDataCollection = VF_BGS_NewSW_NukeDataCollection;
 
-function VF_RD_ClearData()
-	VF_BGStatsData = {};
+function VF_BGS_ClearData()
+	VF_BGStats_Data = {};
 	VF_BGS_LastRecorded = {};
 	VF_BGS_CreateNewSession();
 	VF_BGS_Message("Cleared all saved data!");
 end
 
 function VF_BGS_CreateNewSession()
-	table.insert(VF_BGStatsData, 1, {});
+	table.insert(VF_BGStats_Data, 1, {});
 	local currentDate = date("!%Y-%m-%d %X");
 	local currentZone = GetZoneText();
 	local currentPlayer = UnitName("player");
 	local realmName = GetRealmName();
 	local startTime = VF_BGS_GetTime_S();
 	local serverHour, serverMinute = GetGameTime();
-	local sessionInfo = "Session:Info:Date="..currentDate..",ServerTime="..serverHour..":"..serverMinute..",Time="..startTime..",Realm="..realmName..",Player="..currentPlayer..",AddonVersion="..VF_BGStatsVersion..",";
+	local sessionInfo = "Session:Info:Date="..currentDate..",ServerTime="..serverHour..":"..serverMinute..",Time="..startTime..",Realm="..realmName..",Player="..currentPlayer..",AddonVersion="..VF_BGStats_Version..",";
 	if(currentZone ~= nil and currentZone ~= "") then
 		sessionInfo = sessionInfo.."Zone="..currentZone..",";
 	end
-	table.insert(VF_BGStatsData[1], 1, sessionInfo);
+	table.insert(VF_BGStats_Data[1], 1, sessionInfo);
 	VF_BGS_DebugMessage("Created new Session");
 end
 
@@ -56,21 +58,20 @@ function VF_ParseDate(dateStr)
 	return {Year = tonumber(currYear), Month = tonumber(currMonth), Day = tonumber(currDay)};
 end
 
-function VF_BGStats_SafeOnEvent(event, arg1, arg2)
-	local eventText = arg1;
+function VF_BGStats_SafeOnEvent(event)--, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 	if(event=="VARIABLES_LOADED") then
-		VF_BGStatsVersion = VF_RAIDDAMAGEVERSION;
+		VF_BGStats_Version = VF_BGSTATSVERSION;
 		if(VF_BGStats_Settings == nil) then
 			VF_BGStats_Settings = {};
 		end
-		if(VF_BGStatsData == nil) then
-			VF_BGStatsData = {};
+		if(VF_BGStats_Data == nil) then
+			VF_BGStats_Data = {};
 		end
 		if(VF_BGStats_ErrorLog == nil) then
 			VF_BGStats_ErrorLog = {};
 		end
 		VF_BGS_CreateNewSession();
-		DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
+		VF_BGS_Message("VF_BGStats(/VFBGS) version "..VF_BGStats_Version.." loaded!");
 	end
 end
 
@@ -103,10 +104,10 @@ function VF_BGS_ExecuteSub(func, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8,
 end
 
 function VF_BGStats_OnEvent()
-	VF_BGS_ExecuteSub(VF_BGStats_SafeOnEvent, event, arg1, arg2);
+	VF_BGS_ExecuteSub(VF_BGStats_SafeOnEvent, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 end
 
-VF_BGStatsData = {};
+VF_BGStats_Data = {};
 VF_BGStats_ErrorLog = {};
 
 function VF_BGS_GetTime_S()

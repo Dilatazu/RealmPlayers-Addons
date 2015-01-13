@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft Classic\WTF\Account\DILATAZU\SavedVariables\VF_BGStats.lua" />
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RaidStatsTBC.lua" />
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RealmPlayersTBC.lua" />
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\NEHEROMAR\SavedVariables\VF_RaidStatsTBC.lua" />
@@ -26,6 +27,7 @@
     <None Include="..\TBC\VF_RealmPlayersTBC\VF_RealmPlayersTBC.toc" />
     <None Include="CopyToWowDir.bat" />
     <None Include="LuaCheckAll.bat" />
+    <None Include="LuaCheckBGStats.bat" />
     <None Include="LuaCheckRaidStats.bat" />
     <None Include="LuaCheckRaidStatsTBC.bat" />
     <None Include="LuaCheckRealmPlayers.bat" />

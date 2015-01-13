@@ -43,6 +43,9 @@
     <Filter Include="Source Files\Classic\VF_BGStats">
       <UniqueIdentifier>{f45dd2ac-354b-4784-b664-f2be4d3f9192}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classic\SavedVariables">
+      <UniqueIdentifier>{9518b0d6-c494-4d2e-b2e7-9bee38081c4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua">
@@ -107,6 +110,12 @@
     </None>
     <None Include="..\Classic\VF_BGStats\VF_BGStats.toc">
       <Filter>Source Files\Classic\VF_BGStats</Filter>
+    </None>
+    <None Include="LuaCheckBGStats.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft Classic\WTF\Account\DILATAZU\SavedVariables\VF_BGStats.lua">
+      <Filter>Source Files\Classic\SavedVariables</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

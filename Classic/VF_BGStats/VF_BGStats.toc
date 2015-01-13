@@ -6,5 +6,5 @@
 ## Dependencies: SW_Stats
 ## OptionalDeps: 
 ## SavedVariablesPerCharacter: 
-## SavedVariables: VF_BGStatsData, VF_BGStatsVersion, VF_BGStats_Settings, VF_BGStats_ErrorLog
+## SavedVariables: VF_BGStats_Data, VF_BGStats_Version, VF_BGStats_Settings, VF_BGStats_ErrorLog
 VF_BGStats.xml
