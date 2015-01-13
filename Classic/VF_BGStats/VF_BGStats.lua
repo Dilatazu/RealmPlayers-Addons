@@ -14,6 +14,9 @@ end
 
 function VF_BGStats_OnLoad()
 	this:RegisterEvent("VARIABLES_LOADED");
+	this:RegisterEvent("UPDATE_BATTLEFIELD_SCORE");
+	this:RegisterEvent("UPDATE_WORLD_STATES");
+	this:RegisterEvent("PLAYER_ENTERING_WORLD");
 end
 
 VF_BGS_OldSW_SyncReset = SW_SyncReset;
@@ -58,6 +61,49 @@ function VF_ParseDate(dateStr)
 	return {Year = tonumber(currYear), Month = tonumber(currMonth), Day = tonumber(currDay)};
 end
 
+local VF_BGS_SessionData = {};
+local VF_BGS_UnitIDCounter = 1;
+
+local function VF_BGS_GetUnitData(_Name)
+	if(_Name == nil) then
+		return nil;
+	end
+	if(VF_BGS_SessionData[_Name] == nil) then
+		VF_BGS_SessionData[_Name] = {};
+		VF_BGS_SessionData[_Name].UnitID = VF_BGS_UnitIDCounter;
+		VF_BGS_UnitIDCounter = VF_BGS_UnitIDCounter + 1;
+	end
+	return VF_BGS_SessionData[_Name];
+end
+
+local function VF_BGS_DeltaUnitDataChange(_UnitData, _DataIndex, _Value, _Time)
+	if(_UnitData[_DataIndex] == nil) then
+		_UnitData[_DataIndex] = {Value = _Value; Time = _Time;}
+		if(_Value == 0) then
+			return "";
+		end
+		return _Value;
+	end
+	local deltaValue = _Value - _UnitData[_DataIndex].Value;
+	if(deltaValue ~= 0) then
+		_UnitData[_DataIndex].Value = _Value;
+		_UnitData[_DataIndex].Time = _Time;
+	end
+	if(deltaValue == 0) then
+		return "";
+	end
+	return deltaValue;
+end
+
+local VF_BGS_DataIndex_KillingBlows = 1;
+local VF_BGS_DataIndex_HonorableKills = 2;
+local VF_BGS_DataIndex_Deaths = 3;
+local VF_BGS_DataIndex_HonorGained = 4;
+local VF_BGS_DataIndex_BGStat1 = 5;
+local VF_BGS_DataIndex_BGStat2 = 6;
+local VF_BGS_DataIndex_BGStat3 = 7;
+local VF_BGS_DataIndex_BGStat4 = 8;
+
 function VF_BGStats_SafeOnEvent(event)--, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 	if(event=="VARIABLES_LOADED") then
 		VF_BGStats_Version = VF_BGSTATSVERSION;
@@ -72,6 +118,87 @@ function VF_BGStats_SafeOnEvent(event)--, arg1, arg2, arg3, arg4, arg5, arg6, ar
 		end
 		VF_BGS_CreateNewSession();
 		VF_BGS_Message("VF_BGStats(/VFBGS) version "..VF_BGStats_Version.." loaded!");
+	elseif(event=="UPDATE_BATTLEFIELD_SCORE") then
+		VF_BGS_DebugMessage("UPDATE_BATTLEFIELD_SCORE");
+		if ( GetBattlefieldWinner() ) then
+			--We have a winner
+			local battlefieldWinner = GetBattlefieldWinner(); --nil == noone, 0 == Horde, 1 == Alliance
+			if(battlefieldWinner == 0) then
+				--Horde
+
+			else
+				--Alliance
+
+			end
+		end
+		
+		local time = VF_BGS_GetTime_S();
+		
+		local totalsResult = "";
+
+		local numScores = GetNumBattlefieldScores();
+		for i=1, numScores do
+			local name, killingBlows, honorableKills, deaths, honorGained, faction, rank, race, class = GetBattlefieldScore(i);
+			local rankName, rankNumber = GetPVPRankInfo(rank, faction);
+			local unitData = VF_BGS_GetUnitData(name);
+			if(unitData ~= nil) then
+				local deltaKB = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_KillingBlows, killingBlows, time);
+				local deltaHK = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_HonorableKills, honorableKills, time);
+				local deltaDeaths = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_Deaths, deaths, time);
+				local deltaHonor = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_HonorGained, honorGained, time);
+				
+				-- first call RequestBattlefieldScoreData()
+				--MAX_NUM_STAT_COLUMNS == 7
+				--[[
+				for j=1, MAX_NUM_STAT_COLUMNS do
+					local columnData = GetBattlefieldStatData(i, j);
+					if(columnData > 0) then
+						
+					end
+				end
+				--]]
+
+				local deltaStat1 = "";
+				local deltaStat2 = "";
+				local deltaStat3 = "";
+				local deltaStat4 = "";
+
+				local zone = "Warsong Gulch";
+				if(zone == "Warsong Gulch") then
+					local flagCaptures = GetBattlefieldStatData(i, 1);
+					local flagReturns = GetBattlefieldStatData(i, 2);
+
+					deltaStat1 = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_BGStat1, flagCaptures, time);
+					deltaStat2 = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_BGStat2, flagReturns, time);
+				elseif(zone == "Arathi Basin") then
+					local basesAssaulted = GetBattlefieldStatData(i, 1);
+					local basesDefended = GetBattlefieldStatData(i, 2);
+
+					deltaStat1 = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_BGStat1, basesAssaulted, time);
+					deltaStat2 = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_BGStat2, basesDefended, time);
+				elseif(zone == "Alterac Valley") then
+					local gyAssaulted = GetBattlefieldStatData(i, 1);
+					local gyDefended = GetBattlefieldStatData(i, 2);
+					local towerAssaulted = GetBattlefieldStatData(i, 3);
+					local towerDefended = GetBattlefieldStatData(i, 4);
+					local minesCaptured = GetBattlefieldStatData(i, 5); --"always" 0
+					local leadersKilled = GetBattlefieldStatData(i, 6); --"always" 0
+					local secondaryObjectives = GetBattlefieldStatData(i, 7); --"always" 0
+
+					deltaStat1 = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_BGStat1, gyAssaulted, time);
+					deltaStat2 = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_BGStat2, gyDefended, time);
+					deltaStat3 = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_BGStat3, towerAssaulted, time);
+					deltaStat4 = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_BGStat4, towerDefended, time);
+				end
+
+
+				if(deltaKB ~= "" or deltaHK ~= "" or deltaDeaths ~= "" or deltaHonor ~= "" or deltaStat1 ~= "" or deltaStat2 ~= "" or deltaStat3 ~= "" or deltaStat4 ~= "") then
+					local unitResult = unitData.UnitID.." "..killingBlows.." "..honorableKills.." "..deaths.." "..honorGained.." "..deltaStat1.." "..deltaStat2.." "..deltaStat3.." "..deltaStat4;
+
+					totalsResult = totalsResult..unitResult..",";
+				end
+			end
+		end
 	end
 end
 
