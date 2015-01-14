@@ -362,14 +362,6 @@ function VF_RealmPlayers_OnUpdate()
 					VF_RealmPlayersData[VF_CurrentlyInspecting] = {};
 					VF_RealmPlayersData[VF_CurrentlyInspecting].LastInspect = 0;
 				end
-				--honor etc
-				local todayHK, todayDK, yesterdayHK, yesterdayHonor, thisweekHK, thisweekHonor, lastweekHK, lastweekHonor, lastweekStanding, lifetimeHK, lifetimeDK, lifetimeHighestRank = GetInspectHonorData();
-				local _, lifetimeHighestRank = GetPVPRankInfo(lifetimeHighestRank);
-				local _, currentRank = GetPVPRankInfo(UnitPVPRank("target"));
-				local currentRankProgress = GetInspectPVPRankProgress();
-				VF_RealmPlayersData[VF_CurrentlyInspecting].HonorData = ""..currentRank..":"..currentRankProgress..":"..thisweekHK..":"..thisweekHonor..":"..lastweekHK..":"..lastweekHonor..":"..lastweekStanding..":"..lifetimeHK..":"..lifetimeDK..":"..lifetimeHighestRank..":"..todayHK..":"..todayDK..":"..yesterdayHK..":"..yesterdayHonor;
-				--honor etc
-				
 				--playerData
 				local _, race = UnitRace("target");
 				local _, class = UnitClass("target");
@@ -380,8 +372,22 @@ function VF_RealmPlayers_OnUpdate()
 				if(guildname == nil) then guildname = "nil"; end
 				if(guildtitle == nil) then guildtitle = "nil"; end
 				if(guildrank == nil) then guildrank = 0; end
+				if(VF_RealmPlayersData[VF_CurrentlyInspecting].PlayerData ~= nil) then
+					if(string.sub(VF_RealmPlayersData[VF_CurrentlyInspecting].PlayerData,-string.len(realmName)) ~= realmName) then
+						VF_RealmPlayersData[VF_CurrentlyInspecting] = {};
+						VF_RealmPlayersData[VF_CurrentlyInspecting].LastInspect = 0;
+					end
+				end
 				VF_RealmPlayersData[VF_CurrentlyInspecting].PlayerData = race..":"..class..":"..guildname..":"..guildtitle..":"..guildrank..":"..sex..":"..level..":"..realmName;
 				--playerData
+				
+				--honor etc
+				local todayHK, todayDK, yesterdayHK, yesterdayHonor, thisweekHK, thisweekHonor, lastweekHK, lastweekHonor, lastweekStanding, lifetimeHK, lifetimeDK, lifetimeHighestRank = GetInspectHonorData();
+				local _, lifetimeHighestRank = GetPVPRankInfo(lifetimeHighestRank);
+				local _, currentRank = GetPVPRankInfo(UnitPVPRank("target"));
+				local currentRankProgress = GetInspectPVPRankProgress();
+				VF_RealmPlayersData[VF_CurrentlyInspecting].HonorData = ""..currentRank..":"..currentRankProgress..":"..thisweekHK..":"..thisweekHonor..":"..lastweekHK..":"..lastweekHonor..":"..lastweekStanding..":"..lifetimeHK..":"..lifetimeDK..":"..lifetimeHighestRank..":"..todayHK..":"..todayDK..":"..yesterdayHK..":"..yesterdayHonor;
+				--honor etc
 				
 				--extraData
 				--/script VF_RD_DebugMessage(VF_GetMount("target"));
