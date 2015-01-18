@@ -68,12 +68,14 @@ local function VF_BGS_GetUnitData(_Name)
 	if(_Name == nil) then
 		return nil;
 	end
+	local addedString = nil;
 	if(VF_BGS_SessionData[_Name] == nil) then
 		VF_BGS_SessionData[_Name] = {};
 		VF_BGS_SessionData[_Name].UnitID = VF_BGS_UnitIDCounter;
 		VF_BGS_UnitIDCounter = VF_BGS_UnitIDCounter + 1;
+		addedString = _Name.."="..VF_BGS_SessionData[_Name].UnitID;
 	end
-	return VF_BGS_SessionData[_Name];
+	return VF_BGS_SessionData[_Name], addedString;
 end
 
 local function VF_BGS_DeltaUnitDataChange(_UnitData, _DataIndex, _Value, _Time)
@@ -140,7 +142,10 @@ function VF_BGStats_SafeOnEvent(event)--, arg1, arg2, arg3, arg4, arg5, arg6, ar
 		for i=1, numScores do
 			local name, killingBlows, honorableKills, deaths, honorGained, faction, rank, race, class = GetBattlefieldScore(i);
 			local rankName, rankNumber = GetPVPRankInfo(rank, faction);
-			local unitData = VF_BGS_GetUnitData(name);
+			local unitData, addedString = VF_BGS_GetUnitData(name);
+			if(addedString ~= nil) then
+				totalsResult = totalsResult..addedString..","
+			end
 			if(unitData ~= nil) then
 				local deltaKB = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_KillingBlows, killingBlows, time);
 				local deltaHK = VF_BGS_DeltaUnitDataChange(unitData, VF_BGS_DataIndex_HonorableKills, honorableKills, time);
@@ -194,11 +199,11 @@ function VF_BGStats_SafeOnEvent(event)--, arg1, arg2, arg3, arg4, arg5, arg6, ar
 
 				if(deltaKB ~= "" or deltaHK ~= "" or deltaDeaths ~= "" or deltaHonor ~= "" or deltaStat1 ~= "" or deltaStat2 ~= "" or deltaStat3 ~= "" or deltaStat4 ~= "") then
 					local unitResult = unitData.UnitID.." "..killingBlows.." "..honorableKills.." "..deaths.." "..honorGained.." "..deltaStat1.." "..deltaStat2.." "..deltaStat3.." "..deltaStat4;
-
 					totalsResult = totalsResult..unitResult..",";
 				end
 			end
 		end
+		table.insert(VF_BGStats_Data[1], 1, _Time..":"..totalsResult);
 	end
 end
 
