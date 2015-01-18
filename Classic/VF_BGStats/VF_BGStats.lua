@@ -2,6 +2,58 @@ VF_BGSTATSVERSION = GetAddOnMetadata("VF_BGStats", "Version");
 
 --VF_BGStatsFrame = nil;
 
+VF_BGS_Event_Assaulted = 1;
+VF_BGS_Event_Claim = 2;
+VF_BGS_Event_Defended = 3;
+VF_BGS_Event_Taken = 4;
+VF_BGS_Event_Attacked = 5;
+
+VF_BGS_Objective_Stormpike_Aid_Station = 16;
+VF_BGS_Objective_Dun_Baldar_North_Bunker = 17;
+VF_BGS_Objective_Dun_Baldar_South_Bunker = 18;
+VF_BGS_Objective_Stormpike_Graveyard = 19;
+VF_BGS_Objective_Icewing_Bunker = 20;
+VF_BGS_Objective_Stonehearth_Graveyard = 6;
+VF_BGS_Objective_Stonehearth_Bunker = 7;
+VF_BGS_Objective_Snowfall_Graveyard = 8;
+VF_BGS_Objective_Iceblood_Tower = 9;
+VF_BGS_Objective_Iceblood_Graveyard = 10;
+VF_BGS_Objective_Tower_Point = 11;
+VF_BGS_Objective_Frostwolf_Graveyard = 12;
+VF_BGS_Objective_West_Frostwolf_Tower = 13;
+VF_BGS_Objective_East_Frostwolf_Tower = 14;
+VF_BGS_Objective_Frostwolf_Relief_Hut = 15;
+VF_BGS_Objective_Farm = 1;
+VF_BGS_Objective_Lumber_Mill = 2;
+VF_BGS_Objective_Blacksmith = 3;
+VF_BGS_Objective_Mine = 4;
+VF_BGS_Objective_Stables = 5;
+
+VF_BGS_AV_Objectives={
+	["Stormpike Aid Station"] = VF_BGS_Objective_Stormpike_Aid_Station
+	,["Dun Baldar North Bunker"] = VF_BGS_Objective_Dun_Baldar_North_Bunker
+	,["Dun Baldar South Bunker"] = VF_BGS_Objective_Dun_Baldar_South_Bunker
+	,["Stormpike Graveyard"] = VF_BGS_Objective_Stormpike_Graveyard
+	,["Icewing Bunker"]
+	,["Stonehearth Graveyard"]
+	,["Stonehearth Bunker"]
+	,["Snowfall Graveyard"]
+	,["Iceblood Tower"]
+	,["Iceblood Graveyard"]
+	,["Tower Point"]
+	,["Frostwolf Graveyard"]
+	,["West Frostwolf Tower"]
+	,["East Frostwolf Tower"]
+	,["Frostwolf Relief Hut"]
+}
+
+VF_BGS_AB_Objectives={"farm","lumber mill","blacksmith","mine","stables"}
+VF_BGS_WSG_Objectives={"flag"}
+
+VF_GAV_ConversionTable={["Stormpike Aid Station"] = "SPAS",["Dun Baldar North Bunker"] = "DBNB",["Dun Baldar South Bunker"] = "DBSB",["Stormpike Graveyard"] = "SPGY",["Icewing Bunker"] = "IWB",
+		["Stonehearth Graveyard"] = "SHGY",["Stonehearth Bunker"] = "SHB",["Snowfall Graveyard"] = "SFGY",["Iceblood Tower"] = "IBT",["Iceblood Graveyard"] = "IBGY",["Tower Point"] = "TP",
+		["Frostwolf Graveyard"] = "FWGY",["West Frostwolf Tower"] = "WFWT",["East Frostwolf Tower"] = "EFWT",["Frostwolf Relief Hut"] = "FWRH"}
+
 VF_BGStats_Settings = {["DebugMode"] = false};
 function VF_BGS_DebugMessage(_Message)
 	if(VF_BGStats_Settings["DebugMode"] == true) then
@@ -17,6 +69,10 @@ function VF_BGStats_OnLoad()
 	this:RegisterEvent("UPDATE_BATTLEFIELD_SCORE");
 	this:RegisterEvent("UPDATE_WORLD_STATES");
 	this:RegisterEvent("PLAYER_ENTERING_WORLD");
+	this:RegisterEvent("CHAT_MSG_MONSTER_YELL");
+	this:RegisterEvent("CHAT_MSG_BG_SYSTEM_ALLIANCE");
+	this:RegisterEvent("CHAT_MSG_BG_SYSTEM_HORDE");
+	this:RegisterEvent("CHAT_MSG_BG_SYSTEM_NEUTRAL");
 end
 
 VF_BGS_OldSW_SyncReset = SW_SyncReset;
@@ -203,7 +259,9 @@ function VF_BGStats_SafeOnEvent(event)--, arg1, arg2, arg3, arg4, arg5, arg6, ar
 				end
 			end
 		end
-		table.insert(VF_BGStats_Data[1], 1, _Time..":"..totalsResult);
+		if(totalsResult ~= "") then
+			table.insert(VF_BGStats_Data[1], 1, time..":"..totalsResult);
+		end
 	end
 end
 
