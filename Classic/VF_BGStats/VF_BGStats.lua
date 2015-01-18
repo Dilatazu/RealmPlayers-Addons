@@ -34,25 +34,27 @@ VF_BGS_AV_Objectives={
 	,["Dun Baldar North Bunker"] = VF_BGS_Objective_Dun_Baldar_North_Bunker
 	,["Dun Baldar South Bunker"] = VF_BGS_Objective_Dun_Baldar_South_Bunker
 	,["Stormpike Graveyard"] = VF_BGS_Objective_Stormpike_Graveyard
-	,["Icewing Bunker"]
-	,["Stonehearth Graveyard"]
-	,["Stonehearth Bunker"]
-	,["Snowfall Graveyard"]
-	,["Iceblood Tower"]
-	,["Iceblood Graveyard"]
-	,["Tower Point"]
-	,["Frostwolf Graveyard"]
-	,["West Frostwolf Tower"]
-	,["East Frostwolf Tower"]
-	,["Frostwolf Relief Hut"]
+	,["Icewing Bunker"] = VF_BGS_Objective_Icewing_Bunker
+	,["Stonehearth Graveyard"] = VF_BGS_Objective_Stonehearth_Graveyard
+	,["Stonehearth Bunker"] = VF_BGS_Objective_Stonehearth_Bunker
+	,["Snowfall Graveyard"] = VF_BGS_Objective_Snowfall_Graveyard
+	,["Iceblood Tower"] = VF_BGS_Objective_Iceblood_Tower
+	,["Iceblood Graveyard"] = VF_BGS_Objective_Iceblood_Graveyard
+	,["Tower Point"] = VF_BGS_Objective_Tower_Point
+	,["Frostwolf Graveyard"] = VF_BGS_Objective_Frostwolf_Graveyard
+	,["West Frostwolf Tower"] = VF_BGS_Objective_West_Frostwolf_Tower
+	,["East Frostwolf Tower"] = VF_BGS_Objective_East_Frostwolf_Tower
+	,["Frostwolf Relief Hut"] = VF_BGS_Objective_Frostwolf_Relief_Hut
 }
 
-VF_BGS_AB_Objectives={"farm","lumber mill","blacksmith","mine","stables"}
+VF_BGS_AB_Objectives={
+	["farm"] = VF_BGS_Objective_Farm
+	,["lumber mill"] = VF_BGS_Objective_Lumber_Mill
+	,["blacksmith"] = VF_BGS_Objective_Blacksmith
+	,["mine"] = VF_BGS_Objective_Mine
+	,["stables"] = VF_BGS_Objective_Stables
+}
 VF_BGS_WSG_Objectives={"flag"}
-
-VF_GAV_ConversionTable={["Stormpike Aid Station"] = "SPAS",["Dun Baldar North Bunker"] = "DBNB",["Dun Baldar South Bunker"] = "DBSB",["Stormpike Graveyard"] = "SPGY",["Icewing Bunker"] = "IWB",
-		["Stonehearth Graveyard"] = "SHGY",["Stonehearth Bunker"] = "SHB",["Snowfall Graveyard"] = "SFGY",["Iceblood Tower"] = "IBT",["Iceblood Graveyard"] = "IBGY",["Tower Point"] = "TP",
-		["Frostwolf Graveyard"] = "FWGY",["West Frostwolf Tower"] = "WFWT",["East Frostwolf Tower"] = "EFWT",["Frostwolf Relief Hut"] = "FWRH"}
 
 VF_BGStats_Settings = {["DebugMode"] = false};
 function VF_BGS_DebugMessage(_Message)
