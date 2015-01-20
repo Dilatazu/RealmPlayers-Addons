@@ -316,6 +316,11 @@ function VF_RS_OmenThreat_IsWipe()
 			end
 		end
 	end
+	for i = 1, GetNumRaidMembers() do
+		if(UnitAffectingCombat("raid"..i) == true) then
+			return false;
+		end
+	end
 	return true;--Wipe
 end
 --ResetData
@@ -844,6 +849,7 @@ end
 VF_RS_ErroredGUIDs = {}; --To prevent this from happening too often.
 function VF_RS_LogRaidStats(_Reason, _Time)
 	local totalPlayersResult = "";
+	local sessionDebugResult = "";
 	for unitRecountID, unitData in pairs(Recount.db2.combatants) do 
 		local unitFightData = unitData.Fights["OverallData"];
 		local unitGUID = unitData.GUID;
@@ -856,7 +862,8 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 			newError.ErrorText = "Name was missing for "..unitRecountID;
 			table.insert(VF_RS_ErrorLog, 1, newError);
 			VF_RS_ErroredGUIDs[unitRecountID] = 1; --To prevent this from happening too often.
-			unitData.Name = unitRecountID; unitName = unitData.Name;
+			unitData.Name = unitRecountID; 
+			unitName = unitData.Name;
 		end
 		if(unitGUID == nil) then
 			unitGUID = GUIDRegistryLib:GetGUID(unitName);
@@ -870,11 +877,12 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 				VF_RS_ErroredGUIDs[unitGUID] = 1; --To prevent this from happening too often.
 			end
 		end
-		if(unitFightData ~= nil and unitGUID ~= nil) then
+		if(unitFightData ~= nil and unitGUID ~= nil and unitName ~= "No One") then
 			if(VF_RS_LastRecorded[unitGUID] == nil) then
 				VF_RS_LastRecorded[unitGUID] = {};
 				VF_RS_LastRecorded[unitGUID]["UnitID"] = VF_RS_UnitIDCounter;
 				totalPlayersResult = totalPlayersResult..unitName.."="..VF_RS_LastRecorded[unitGUID]["UnitID"]..",";
+				sessionDebugResult = sessionDebugResult..unitName.."="..unitGUID..",";
 				VF_RS_UnitIDCounter = VF_RS_UnitIDCounter + 1;
 			end
 			local unitID = VF_RS_LastRecorded[unitGUID]["UnitID"];
@@ -1009,6 +1017,9 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 	if(totalPlayersResult ~= "" or _Reason ~= "") then
 		table.insert(VF_RaidStatsData[1], 1, _Time..":".._Reason..":"..totalPlayersResult);
 		--VF_SendMessage(_Time..":"..":"..totalPlayersResult, "NONE"); 
+	end
+	if(sessionDebugResult ~= "") then
+		table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..sessionDebugResult);
 	end
 	if(string.find(_Reason, "Start_S") or string.find(_Reason, "Start_C")) then
 		VF_RS_BossStartTime = _Time;
