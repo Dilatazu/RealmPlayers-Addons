@@ -488,6 +488,12 @@ end
 
 VF_BGS_NextUpdateTime = nil;
 function VF_BGStats_SafeOnUpdate()
+	if(VF_BGS_Inside_BG ~= GetZoneText()) then
+		local currTime_S = VF_BGS_GetTime_S();
+		VF_BGS_DebugMessage("WORLD: Left BG "..VF_BGS_Inside_BG);
+		table.insert(VF_BGStats_Data[1], 1, currTime_S..":BGLEFT "..VF_BGS_Battlefield_Zones[VF_BGS_Inside_BG]);
+		VF_BGS_Inside_BG = nil;
+	end
 	if(VF_BGS_Battlefield_Zones[GetZoneText()] ~= nil) then
 		local currTime_S = VF_BGS_GetTime_S();
 		if(VF_BGS_Inside_BG ~= GetZoneText()) then
@@ -502,11 +508,6 @@ function VF_BGStats_SafeOnUpdate()
 			RequestBattlefieldScoreData();
 			VF_BGS_NextUpdateTime = currTime_S + 5;
 		end
-	elseif(VF_BGS_Inside_BG ~= nil) then
-		local currTime_S = VF_BGS_GetTime_S();
-		VF_BGS_DebugMessage("WORLD: Left BG "..VF_BGS_Inside_BG);
-		table.insert(VF_BGStats_Data[1], 1, currTime_S..":BGLEFT "..VF_BGS_Battlefield_Zones[VF_BGS_Inside_BG]);
-		VF_BGS_Inside_BG = nil;
 	end
 end
 function VF_BGStats_OnUpdate()
