@@ -2,59 +2,53 @@ VF_BGSTATSVERSION = GetAddOnMetadata("VF_BGStats", "Version");
 
 --VF_BGStatsFrame = nil;
 
+--AB/AV
 VF_BGS_Event_Assaulted = 1;
 VF_BGS_Event_Claim = 2;
 VF_BGS_Event_Defended = 3;
 VF_BGS_Event_Taken = 4;
 VF_BGS_Event_Attacked = 5;
+VF_BGS_Event_Summoned = 9;
 
-VF_BGS_Objective_Stormpike_Aid_Station = 16;
-VF_BGS_Objective_Dun_Baldar_North_Bunker = 17;
-VF_BGS_Objective_Dun_Baldar_South_Bunker = 18;
-VF_BGS_Objective_Stormpike_Graveyard = 19;
-VF_BGS_Objective_Icewing_Bunker = 20;
-VF_BGS_Objective_Stonehearth_Graveyard = 6;
-VF_BGS_Objective_Stonehearth_Bunker = 7;
-VF_BGS_Objective_Snowfall_Graveyard = 8;
-VF_BGS_Objective_Iceblood_Tower = 9;
-VF_BGS_Objective_Iceblood_Graveyard = 10;
-VF_BGS_Objective_Tower_Point = 11;
-VF_BGS_Objective_Frostwolf_Graveyard = 12;
-VF_BGS_Objective_West_Frostwolf_Tower = 13;
-VF_BGS_Objective_East_Frostwolf_Tower = 14;
-VF_BGS_Objective_Frostwolf_Relief_Hut = 15;
-VF_BGS_Objective_Farm = 1;
-VF_BGS_Objective_Lumber_Mill = 2;
-VF_BGS_Objective_Blacksmith = 3;
-VF_BGS_Objective_Mine = 4;
-VF_BGS_Objective_Stables = 5;
+--WSG
+VF_BGS_Event_PickedUp = 6;
+VF_BGS_Event_Dropped = 7;
+VF_BGS_Event_Returned = 8;
+
+VF_BGS_Battlefield_Zones = {
+	["Alterac Valley"] = "AV",
+	["Arathi Basin"] = "AB",
+	["Warsong Gulch"] = "WSG",
+};
 
 VF_BGS_AV_Objectives={
-	["Stormpike Aid Station"] = VF_BGS_Objective_Stormpike_Aid_Station
-	,["Dun Baldar North Bunker"] = VF_BGS_Objective_Dun_Baldar_North_Bunker
-	,["Dun Baldar South Bunker"] = VF_BGS_Objective_Dun_Baldar_South_Bunker
-	,["Stormpike Graveyard"] = VF_BGS_Objective_Stormpike_Graveyard
-	,["Icewing Bunker"] = VF_BGS_Objective_Icewing_Bunker
-	,["Stonehearth Graveyard"] = VF_BGS_Objective_Stonehearth_Graveyard
-	,["Stonehearth Bunker"] = VF_BGS_Objective_Stonehearth_Bunker
-	,["Snowfall Graveyard"] = VF_BGS_Objective_Snowfall_Graveyard
-	,["Iceblood Tower"] = VF_BGS_Objective_Iceblood_Tower
-	,["Iceblood Graveyard"] = VF_BGS_Objective_Iceblood_Graveyard
-	,["Tower Point"] = VF_BGS_Objective_Tower_Point
-	,["Frostwolf Graveyard"] = VF_BGS_Objective_Frostwolf_Graveyard
-	,["West Frostwolf Tower"] = VF_BGS_Objective_West_Frostwolf_Tower
-	,["East Frostwolf Tower"] = VF_BGS_Objective_East_Frostwolf_Tower
-	,["Frostwolf Relief Hut"] = VF_BGS_Objective_Frostwolf_Relief_Hut
+	["Stormpike Aid Station"] = 31
+	,["Dun Baldar North Bunker"] = 32
+	,["Dun Baldar South Bunker"] = 33
+	,["Stormpike Graveyard"] = 34
+	,["Icewing Bunker"] = 35
+	,["Stonehearth Graveyard"] = 36
+	,["Stonehearth Bunker"] = 37
+	,["Snowfall Graveyard"] = 38
+	,["Iceblood Tower"] = 39
+	,["Iceblood Graveyard"] = 40
+	,["Tower Point"] = 41
+	,["Frostwolf Graveyard"] = 42
+	,["West Frostwolf Tower"] = 43
+	,["East Frostwolf Tower"] = 44
+	,["Frostwolf Relief Hut"] = 45
+	,["Ivus the Forest Lord"] = 46
+	,["Lokholar the Ice Lord"] = 47
 }
 
 VF_BGS_AB_Objectives={
-	["farm"] = VF_BGS_Objective_Farm
-	,["lumber mill"] = VF_BGS_Objective_Lumber_Mill
-	,["blacksmith"] = VF_BGS_Objective_Blacksmith
-	,["mine"] = VF_BGS_Objective_Mine
-	,["stables"] = VF_BGS_Objective_Stables
+	["farm"] = 1
+	,["lumber mill"] = 2
+	,["blacksmith"] = 3
+	,["mine"] = 4
+	,["stables"] = 5
 }
-VF_BGS_WSG_Objectives={"flag"}
+VF_BGS_WSG_Objectives={["flag"] = 6}
 
 VF_BGStats_Settings = {["DebugMode"] = false};
 function VF_BGS_DebugMessage(_Message)
@@ -164,6 +158,112 @@ local VF_BGS_DataIndex_BGStat2 = 6;
 local VF_BGS_DataIndex_BGStat3 = 7;
 local VF_BGS_DataIndex_BGStat4 = 8;
 
+function VF_BGStats_Parse_BGMSG(_Message)
+	local eventAction = nil;
+	local eventActionStr = nil;
+	local eventObjective = nil;
+	local eventObjectiveStr = nil;
+	local eventByWho = nil;
+	for objective, objectiveID in pairs(VF_BGS_AB_Objectives) do
+		if(string.find(_Message, objective)) then
+			eventObjectiveStr = objective;
+			eventObjective = objectiveID;
+			if(string.find(_Message, "has assaulted")) then
+				local _1, _2, playerName = string.find(_Message, "(.*) has assaulted");
+				if(playerName ~= nil) then eventByWho = playerName; end
+				eventActionStr = "assaulted";
+				eventAction = VF_BGS_Event_Assaulted;
+			elseif(string.find(_Message, "claims the")) then
+				local _1, _2, playerName = string.find(_Message, "(.*) claims the");
+				if(playerName ~= nil) then eventByWho = playerName; end
+				eventActionStr = "claims";
+				eventAction = VF_BGS_Event_Claim;
+			elseif(string.find(_Message, "has defended the")) then
+				eventActionStr = "defended";
+				eventAction = VF_BGS_Event_Defended;
+			elseif(string.find(_Message, "has taken the")) then
+				eventActionStr = "takes";
+				eventAction = VF_BGS_Event_Taken;
+			end
+		end
+	end
+	if(string.find(_Message, "Snowfall Graveyard")) then
+		eventActionStr = "claims";
+		eventAction = VF_BGS_Event_Claim;
+		eventObjectiveStr = "Snowfall Graveyard";
+		eventObjective = VF_BGS_AV_Objectives["Snowfall Graveyard"];
+	end
+	if(eventObjective == nil and string.find(_Message, "flag")) then
+		eventObjectiveStr = "flag";
+		eventObjective = VF_BGS_WSG_Objectives["flag"];
+		if(string.find(_Message, "picked up by")) then
+			local _1, _2, playerName = string.find(_Message, "picked up by (.*)!");
+			if(playerName ~= nil) then eventByWho = playerName; end
+			eventActionStr = "picked up";
+			eventAction = VF_BGS_Event_PickedUp;
+		elseif(string.find(_Message, "dropped by")) then
+			local _1, _2, playerName = string.find(_Message, "dropped by (.*)!");
+			if(playerName ~= nil) then eventByWho = playerName; end
+			eventActionStr = "dropped";
+			eventAction = VF_BGS_Event_Dropped;
+		elseif(string.find(_Message, "returned to its base by")) then
+			local _1, _2, playerName = string.find(_Message, "returned to its base by (.*)!");
+			if(playerName ~= nil) then eventByWho = playerName; end
+			eventActionStr = "returned";
+			eventAction = VF_BGS_Event_Returned;
+		elseif(string.find(_Message, "returned to its base")) then --happens if no flag change for a long time or flag is left on ground
+			eventActionStr = "returned";
+			eventAction = VF_BGS_Event_Returned;
+		end
+	end
+	return eventAction, eventObjective, eventByWho, eventActionStr, eventObjectiveStr
+end
+
+function VF_BGStats_Parse_BGYELL(_Message, _Yeller)
+	local eventAction = nil;
+	local eventActionStr = nil;
+	local eventObjective = nil;
+	local eventObjectiveStr = nil;
+	local eventByWho = nil;
+
+	for objective, objectiveID in pairs(VF_BGS_AV_Objectives) do
+		if(string.find(_Message, objective)) then
+			eventObjectiveStr = objective;
+			eventObjective = objectiveID;
+			if(string.find(_Message, "Horde")) then
+				eventByWho = "Horde";
+			elseif(string.find(_Message, "Alliance")) then
+				eventByWho = "Alliance";
+			end
+			if(string.find(_Message, "under attack")) then
+				eventAction = VF_BGS_Event_Attacked;
+				eventActionStr = "attacked";
+			elseif(string.find(_Message, "taken by") or string.find(_Message, "has taken the")) then
+				eventAction = VF_BGS_Event_Taken;
+				eventActionStr = "takes";
+			end
+		end
+	end
+	if(_Yeller == "Ivus the Forest Lord") then
+		if(string.find(_Message, "wicked")) then --first summon text
+			eventByWho = "Alliance";
+			eventAction = VF_BGS_Event_Summoned;
+			eventActionStr = "summoned";
+			eventObjectiveStr = "Ivus the Forest Lord";
+			eventObjective = VF_BGS_AV_Objectives["Ivus the Forest Lord"];
+		end
+	elseif(string.find(_Message, "WHO DARES SUMMON LOKHOLAR")) then
+		eventByWho = "Horde";
+		eventAction = VF_BGS_Event_Summoned;
+		eventActionStr = "summoned";
+		eventObjectiveStr = "Lokholar the Ice Lord";
+		eventObjective = VF_BGS_AV_Objectives["Lokholar the Ice Lord"];
+	end
+	return eventAction, eventObjective, eventByWho, eventActionStr, eventObjectiveStr
+end
+
+VF_BGS_Inside_BG = nil;
+
 function VF_BGStats_SafeOnEvent(event)--, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 	if(event=="VARIABLES_LOADED") then
 		VF_BGStats_Version = VF_BGSTATSVERSION;
@@ -178,6 +278,72 @@ function VF_BGStats_SafeOnEvent(event)--, arg1, arg2, arg3, arg4, arg5, arg6, ar
 		end
 		VF_BGS_CreateNewSession();
 		VF_BGS_Message("VF_BGStats(/VFBGS) version "..VF_BGStats_Version.." loaded!");
+	elseif(event=="CHAT_MSG_MONSTER_YELL") then
+		local eventAction, eventObjective, eventByWho, eventActionStr, eventObjectiveStr = VF_BGStats_Parse_BGYELL(arg1, arg2);
+		if(eventActionStr ~= nil and eventObjectiveStr ~= nil) then
+			if(eventByWho ~= nil) then
+				local time = VF_BGS_GetTime_S();
+				VF_BGS_DebugMessage("YellEvent: "..eventByWho.." "..eventActionStr.." "..eventObjectiveStr);
+				table.insert(VF_BGStats_Data[1], 1, time..":"..eventAction.." "..eventObjective.." "..eventByWho);
+			else
+				VF_BGS_DebugMessage("YellEvent: UNKNOWN "..eventActionStr.." "..eventObjectiveStr);
+			end
+		else
+			--VF_BGS_DebugMessage("Unknown Yell!");
+		end
+	elseif(event=="CHAT_MSG_BG_SYSTEM_ALLIANCE") then
+		local eventAction, eventObjective, eventByWho, eventActionStr, eventObjectiveStr = VF_BGStats_Parse_BGMSG(arg1);
+		
+		if(eventActionStr ~= nil and eventObjectiveStr ~= nil) then
+			local time = VF_BGS_GetTime_S();
+			if(eventByWho ~= nil) then
+				VF_BGS_DebugMessage("BGMSG: "..eventByWho.."(A) "..eventActionStr.." "..eventObjectiveStr);
+				table.insert(VF_BGStats_Data[1], 1, time..":"..eventAction.." "..eventObjective.." "..eventByWho);
+			else
+				VF_BGS_DebugMessage("BGMSG: Alliance "..eventActionStr.." "..eventObjectiveStr);
+				table.insert(VF_BGStats_Data[1], 1, time..":"..eventAction.." "..eventObjective.." Alliance");
+			end
+		else
+			VF_BGS_DebugMessage("Unknown BG Message!");
+		end
+	elseif(event=="CHAT_MSG_BG_SYSTEM_HORDE") then
+		local eventAction, eventObjective, eventByWho, eventActionStr, eventObjectiveStr = VF_BGStats_Parse_BGMSG(arg1);
+		
+		if(eventActionStr ~= nil and eventObjectiveStr ~= nil) then
+			local time = VF_BGS_GetTime_S();
+			if(eventByWho ~= nil) then
+				VF_BGS_DebugMessage("BGMSG: "..eventByWho.."(H) "..eventActionStr.." "..eventObjectiveStr);
+				table.insert(VF_BGStats_Data[1], 1, time..":"..eventAction.." "..eventObjective.." "..eventByWho);
+			else
+				VF_BGS_DebugMessage("BGMSG: Horde "..eventActionStr.." "..eventObjectiveStr);
+				table.insert(VF_BGStats_Data[1], 1, time..":"..eventAction.." "..eventObjective.." Horde");
+			end
+		else
+			VF_BGS_DebugMessage("Unknown BG Message!");
+		end
+	elseif(event=="CHAT_MSG_BG_SYSTEM_NEUTRAL") then
+		local time = VF_BGS_GetTime_S();
+		if(string.find(arg1, "1 minute")) then
+			VF_BGS_DebugMessage("BGMSG: Starting BG in 1 minute");
+			table.insert(VF_BGStats_Data[1], 1, time..":BG1M");
+		elseif(string.find(arg1, "30 seconds")) then
+			VF_BGS_DebugMessage("BGMSG: Starting BG in 30 seconds");
+			table.insert(VF_BGStats_Data[1], 1, time..":BG30S");
+		elseif(string.find(arg1, "has begun")) then
+			VF_BGS_DebugMessage("BGMSG: Starting BG now");
+			table.insert(VF_BGStats_Data[1], 1, time..":BGNOW");
+		end
+	elseif(event=="PLAYER_ENTERING_WORLD") then
+		local time = VF_BGS_GetTime_S();
+		if(VF_BGS_Battlefield_Zones[GetZoneText()] ~= nil) then
+			VF_BGS_Inside_BG = GetZoneText();
+			VF_BGS_DebugMessage("WORLD: Joined BG "..VF_BGS_Inside_BG);
+			table.insert(VF_BGStats_Data[1], 1, time..":BGJOIN "..VF_BGS_Battlefield_Zones[VF_BGS_Inside_BG]);
+		elseif(VF_BGS_Inside_BG ~= nil) then
+			VF_BGS_DebugMessage("WORLD: Left BG "..VF_BGS_Inside_BG);
+			table.insert(VF_BGStats_Data[1], 1, time..":BGLEFT "..VF_BGS_Battlefield_Zones[VF_BGS_Inside_BG]);
+			VF_BGS_Inside_BG = nil;
+		end
 	elseif(event=="UPDATE_BATTLEFIELD_SCORE") then
 		VF_BGS_DebugMessage("UPDATE_BATTLEFIELD_SCORE");
 		if ( GetBattlefieldWinner() ) then
@@ -308,8 +474,18 @@ function VF_BGS_GetTime_S()
 	return currTime_S;
 end
 
+VF_BGS_NextUpdateTime = nil;
 function VF_BGStats_SafeOnUpdate()
-	--Do something?
+	if(VF_BGS_Battlefield_Zones[GetZoneText()] ~= nil) then
+		local currTime_S = VF_RD_GetTime_S();
+		if(VF_BGS_NextUpdateTime == nil) then
+			VF_BGS_NextUpdateTime = currTime_S + 5;
+		end
+		if(currTime_S >= VF_BGS_NextUpdateTime) then
+			RequestBattlefieldScoreData();
+			VF_BGS_NextUpdateTime = currTime_S + 5;
+		end
+	end
 end
 function VF_BGStats_OnUpdate()
 	VF_BGS_ExecuteSub(VF_BGStats_SafeOnUpdate);
