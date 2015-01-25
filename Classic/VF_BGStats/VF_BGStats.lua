@@ -333,28 +333,40 @@ function VF_BGStats_SafeOnEvent(event)--, arg1, arg2, arg3, arg4, arg5, arg6, ar
 			VF_BGS_DebugMessage("BGMSG: Starting BG now");
 			table.insert(VF_BGStats_Data[1], 1, time..":BGNOW");
 		end
+		--"The Alliance wins!"
 	elseif(event=="PLAYER_ENTERING_WORLD") then
-		local time = VF_BGS_GetTime_S();
-		if(VF_BGS_Battlefield_Zones[GetZoneText()] ~= nil) then
-			VF_BGS_Inside_BG = GetZoneText();
-			VF_BGS_DebugMessage("WORLD: Joined BG "..VF_BGS_Inside_BG);
-			table.insert(VF_BGStats_Data[1], 1, time..":BGJOIN "..VF_BGS_Battlefield_Zones[VF_BGS_Inside_BG]);
-		elseif(VF_BGS_Inside_BG ~= nil) then
-			VF_BGS_DebugMessage("WORLD: Left BG "..VF_BGS_Inside_BG);
-			table.insert(VF_BGStats_Data[1], 1, time..":BGLEFT "..VF_BGS_Battlefield_Zones[VF_BGS_Inside_BG]);
-			VF_BGS_Inside_BG = nil;
-		end
+		
 	elseif(event=="UPDATE_BATTLEFIELD_SCORE") then
-		VF_BGS_DebugMessage("UPDATE_BATTLEFIELD_SCORE");
+		--VF_BGS_DebugMessage("UPDATE_BATTLEFIELD_SCORE");
 		if ( GetBattlefieldWinner() ) then
 			--We have a winner
 			local battlefieldWinner = GetBattlefieldWinner(); --nil == noone, 0 == Horde, 1 == Alliance
 			if(battlefieldWinner == 0) then
 				--Horde
-
+				VF_BGS_DebugMessage("SCORE: Horde Wins "..VF_BGS_Inside_BG.."!");
 			else
 				--Alliance
-
+				VF_BGS_DebugMessage("SCORE: Alliance Wins "..VF_BGS_Inside_BG.."!");
+			end	
+		else
+			local worldState = {};
+			local numUI = GetNumWorldStateUI();
+			for i=1, numUI do
+				local state, text, icon, dynamicIcon, tooltip, dynamicTooltip, extendedUI, extendedUIState1, extendedUIState2, extendedUIState3 = GetWorldStateUIInfo(i);
+				if(state > 0) then
+					if ( extendedUI ~= "" ) then
+						
+					else
+						worldState[state] = text;
+					end
+				end
+			end
+			for faction, score in pairs(worldState) do
+				if(faction == 1) then --Alliance
+					VF_BGS_DebugMessage("SCORE: Alliance Score="..score);
+				elseif(faction == 2) then --Horde
+					VF_BGS_DebugMessage("SCORE: Horde Score="..score);
+				end
 			end
 		end
 		
@@ -477,7 +489,12 @@ end
 VF_BGS_NextUpdateTime = nil;
 function VF_BGStats_SafeOnUpdate()
 	if(VF_BGS_Battlefield_Zones[GetZoneText()] ~= nil) then
-		local currTime_S = VF_RD_GetTime_S();
+		local currTime_S = VF_BGS_GetTime_S();
+		if(VF_BGS_Inside_BG ~= GetZoneText()) then
+			VF_BGS_Inside_BG = GetZoneText();
+			VF_BGS_DebugMessage("WORLD: Joined BG "..VF_BGS_Inside_BG);
+			table.insert(VF_BGStats_Data[1], 1, currTime_S..":BGJOIN "..VF_BGS_Battlefield_Zones[VF_BGS_Inside_BG]);
+		end
 		if(VF_BGS_NextUpdateTime == nil) then
 			VF_BGS_NextUpdateTime = currTime_S + 5;
 		end
@@ -485,6 +502,11 @@ function VF_BGStats_SafeOnUpdate()
 			RequestBattlefieldScoreData();
 			VF_BGS_NextUpdateTime = currTime_S + 5;
 		end
+	elseif(VF_BGS_Inside_BG ~= nil) then
+		local currTime_S = VF_BGS_GetTime_S();
+		VF_BGS_DebugMessage("WORLD: Left BG "..VF_BGS_Inside_BG);
+		table.insert(VF_BGStats_Data[1], 1, currTime_S..":BGLEFT "..VF_BGS_Battlefield_Zones[VF_BGS_Inside_BG]);
+		VF_BGS_Inside_BG = nil;
 	end
 end
 function VF_BGStats_OnUpdate()

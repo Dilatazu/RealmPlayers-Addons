@@ -38,3 +38,10 @@ and not Recount.db.profile.Filters.Show[Recount.db2.combatants[v.Owner].type])  
 /script DEFAULT_CHAT_FRAME:AddMessage(GetAddOnMetadata("VF_BGStats", "Version"));
 
 BGStats ideer: Recorda folks positioner på kartan!
+
+
+GetNumBattlefieldPositions
+GetBattlefieldPosition
+GetNumBattlefieldFlagPositions();
+GetPlayerMapPosition
+GetBattlefieldFlagPosition
