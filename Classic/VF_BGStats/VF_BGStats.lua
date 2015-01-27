@@ -488,7 +488,7 @@ end
 
 VF_BGS_NextUpdateTime = nil;
 function VF_BGStats_SafeOnUpdate()
-	if(VF_BGS_Inside_BG ~= GetZoneText()) then
+	if(VF_BGS_Inside_BG ~= GetZoneText() and VF_BGS_Inside_BG ~= nil) then
 		local currTime_S = VF_BGS_GetTime_S();
 		VF_BGS_DebugMessage("WORLD: Left BG "..VF_BGS_Inside_BG);
 		table.insert(VF_BGStats_Data[1], 1, currTime_S..":BGLEFT "..VF_BGS_Battlefield_Zones[VF_BGS_Inside_BG]);
