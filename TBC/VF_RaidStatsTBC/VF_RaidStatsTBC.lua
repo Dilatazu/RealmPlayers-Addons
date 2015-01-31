@@ -649,28 +649,28 @@ VF_RS_DataIndex_OverHealRecv = 12;
 
 VF_RS_LastRecorded = {};
 
-function VF_RS_PeekDeltaChange(_Value, _UnitGUID, _DataIndex)
-	if(VF_RS_LastRecorded[_UnitGUID] == nil) then
+function VF_RS_PeekDeltaChange(_Value, _UnitUniqueID, _DataIndex)
+	if(VF_RS_LastRecorded[_UnitUniqueID] == nil) then
 		return _Value;
 	end
-	if(VF_RS_LastRecorded[_UnitGUID][_DataIndex] == nil) then ---error
+	if(VF_RS_LastRecorded[_UnitUniqueID][_DataIndex] == nil) then ---error
 		return _Value;
 	end
-	return _Value - VF_RS_LastRecorded[_UnitGUID][_DataIndex].Value;
+	return _Value - VF_RS_LastRecorded[_UnitUniqueID][_DataIndex].Value;
 end
 
-function VF_RS_GenerateDeltaChange(_Value, _UnitGUID, _DataIndex, _CurrTime)
-	if(VF_RS_LastRecorded[_UnitGUID][_DataIndex] == nil) then
-		VF_RS_LastRecorded[_UnitGUID][_DataIndex] = {Value = _Value; Time = _CurrTime;}
+function VF_RS_GenerateDeltaChange(_Value, _UnitUniqueID, _DataIndex, _CurrTime)
+	if(VF_RS_LastRecorded[_UnitUniqueID][_DataIndex] == nil) then
+		VF_RS_LastRecorded[_UnitUniqueID][_DataIndex] = {Value = _Value; Time = _CurrTime;}
 		if(_Value == 0) then
 			return "";
 		end
 		return _Value;
 	end
-	local deltaValue = _Value - VF_RS_LastRecorded[_UnitGUID][_DataIndex].Value;
+	local deltaValue = _Value - VF_RS_LastRecorded[_UnitUniqueID][_DataIndex].Value;
 	if(deltaValue ~= 0) then
-		VF_RS_LastRecorded[_UnitGUID][_DataIndex].Value = _Value;
-		VF_RS_LastRecorded[_UnitGUID][_DataIndex].Time = _CurrTime;
+		VF_RS_LastRecorded[_UnitUniqueID][_DataIndex].Value = _Value;
+		VF_RS_LastRecorded[_UnitUniqueID][_DataIndex].Time = _CurrTime;
 	end
 	if(deltaValue == 0) then
 		return "";
@@ -693,12 +693,12 @@ function VF_RS_DetectBossStart()
 	if(VF_RS_CurrentBoss == "") then
 		for unitName, unitData in pairs(Recount.db2.combatants) do
 			local unitFightData = unitData.Fights["OverallData"];
-			local unitGUID = unitData.GUID;
-			if(unitFightData ~= nil and unitGUID ~= nil) then
+			local unitUniqueID = unitData.Name;
+			if(unitFightData ~= nil and unitUniqueID ~= nil) then
 				if(VF_RS_MobsType[unitName] == VF_RS_MobType_Boss) then
 					local bossName = VF_RS_GetBossName(unitName);
 					if(VF_RS_LastKilledBoss ~= bossName) then
-						if(VF_RS_PeekDeltaChange(unitFightData.Damage or 0, unitGUID, VF_RS_DataIndex_Damage) > 0 or VF_RS_PeekDeltaChange(unitFightData.DamageTaken or 0, unitGUID, VF_RS_DataIndex_DamageTaken) > 0 or VF_RS_PeekDeltaChange(unitFightData.Healing or 0, unitGUID, VF_RS_DataIndex_EffectiveHeal) > 0) then
+						if(VF_RS_PeekDeltaChange(unitFightData.Damage or 0, unitUniqueID, VF_RS_DataIndex_Damage) > 0 or VF_RS_PeekDeltaChange(unitFightData.DamageTaken or 0, unitUniqueID, VF_RS_DataIndex_DamageTaken) > 0 or VF_RS_PeekDeltaChange(unitFightData.Healing or 0, unitUniqueID, VF_RS_DataIndex_EffectiveHeal) > 0) then
 							--Boss Fight start
 							local startReason = "Start_C="..unitName;
 							if(bossName ~= unitName) then
@@ -832,9 +832,9 @@ end
 function VF_RS_GetRaidMembers()
 	local raidMembers = "";
 	for i = 1, 40 do
-		local currGUID = UnitGUID("raid"..i);
-		if(currGUID ~= nil and VF_RS_LastRecorded[currGUID] ~= nil) then
-			local currID = VF_RS_LastRecorded[currGUID]["UnitID"];
+		local unitUniqueID = UnitName("raid"..i);
+		if(unitUniqueID ~= nil and VF_RS_LastRecorded[unitUniqueID] ~= nil) then
+			local currID = VF_RS_LastRecorded[unitUniqueID]["UnitID"];
 			if(currID ~= nil) then
 				raidMembers = raidMembers.." "..currID;
 			end
@@ -846,13 +846,18 @@ function VF_RS_GetRaidMembers()
 	return raidMembers;	
 end
 
+function VF_RS_GetUniqueID(_Name)
+	--return GUIDRegistryLib:GetGUID(unitName);
+	return _Name;
+end
+
 VF_RS_ErroredGUIDs = {}; --To prevent this from happening too often.
 function VF_RS_LogRaidStats(_Reason, _Time)
 	local totalPlayersResult = "";
 	local sessionDebugResult = "";
 	for unitRecountID, unitData in pairs(Recount.db2.combatants) do 
 		local unitFightData = unitData.Fights["OverallData"];
-		local unitGUID = unitData.GUID;
+		local unitUniqueID = VF_RS_GetUniqueID(unitData.Name);
 		local unitName = unitData.Name;
 		if(unitName == nil) then
 			VF_RS_DebugMessage("Name was missing for "..unitRecountID);
@@ -865,8 +870,8 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 			unitData.Name = unitRecountID; 
 			unitName = unitData.Name;
 		end
-		if(unitGUID == nil) then
-			unitGUID = GUIDRegistryLib:GetGUID(unitName);
+		--[[if(unitGUID == nil) then
+			unitGUID = VF_RS_GetUniqueID(unitName);
 			if(unitGUID ~= nil and VF_RS_ErroredGUIDs[unitGUID] == nil) then --To prevent this from happening too often.
 				VF_RS_DebugMessage("GUID was missing for "..unitName.." but was looked up to be: "..unitGUID);
 				local newError = {};
@@ -876,25 +881,25 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 				table.insert(VF_RS_ErrorLog, 1, newError);
 				VF_RS_ErroredGUIDs[unitGUID] = 1; --To prevent this from happening too often.
 			end
-		end
-		if(unitFightData ~= nil and unitGUID ~= nil and unitName ~= "No One") then
-			if(VF_RS_LastRecorded[unitGUID] == nil) then
-				VF_RS_LastRecorded[unitGUID] = {};
-				VF_RS_LastRecorded[unitGUID]["UnitID"] = VF_RS_UnitIDCounter;
-				totalPlayersResult = totalPlayersResult..unitName.."="..VF_RS_LastRecorded[unitGUID]["UnitID"]..",";
-				sessionDebugResult = sessionDebugResult..unitName.."="..unitGUID..",";
+		end--]]
+		if(unitFightData ~= nil and unitUniqueID ~= nil and unitName ~= "No One") then
+			if(VF_RS_LastRecorded[unitUniqueID] == nil) then
+				VF_RS_LastRecorded[unitUniqueID] = {};
+				VF_RS_LastRecorded[unitUniqueID]["UnitID"] = VF_RS_UnitIDCounter;
+				totalPlayersResult = totalPlayersResult..unitName.."="..VF_RS_LastRecorded[unitUniqueID]["UnitID"]..",";
+				sessionDebugResult = sessionDebugResult..unitName.."="..unitUniqueID..",";
 				VF_RS_UnitIDCounter = VF_RS_UnitIDCounter + 1;
 			end
-			local unitID = VF_RS_LastRecorded[unitGUID]["UnitID"];
+			local unitID = VF_RS_LastRecorded[unitUniqueID]["UnitID"];
 			if(unitData.type == "Pet") then
 				if(unitData.Owner) then
-					local unitOwnerGUID = GUIDRegistryLib:GetGUID(unitData.Owner);
-					if(unitOwnerGUID and VF_RS_LastRecorded[unitOwnerGUID] ~= nil) then
-						if(VF_RS_LastRecorded[unitOwnerGUID]["pets"] == nil) then
-							VF_RS_LastRecorded[unitOwnerGUID]["pets"] = {};
+					local unitOwnerUniqueID = VF_RS_GetUniqueID(unitData.Owner);
+					if(unitOwnerUniqueID and VF_RS_LastRecorded[unitOwnerUniqueID] ~= nil) then
+						if(VF_RS_LastRecorded[unitOwnerUniqueID]["pets"] == nil) then
+							VF_RS_LastRecorded[unitOwnerUniqueID]["pets"] = {};
 						end
-						if(VF_RS_LastRecorded[unitOwnerGUID]["pets"][unitID] == nil) then
-							VF_RS_LastRecorded[unitOwnerGUID]["pets"][unitID] = 1;
+						if(VF_RS_LastRecorded[unitOwnerUniqueID]["pets"][unitID] == nil) then
+							VF_RS_LastRecorded[unitOwnerUniqueID]["pets"][unitID] = 1;
 							totalPlayersResult = totalPlayersResult.."VF_PET_"..unitID.."_"..unitName.."_"..unitData.Owner.."="..unitID..",";
 						end
 					end
@@ -905,18 +910,18 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 			local dispels, ccbreaks, interrupts, dispelled = unitFightData.Dispels or 0, unitFightData.CCBreak or 0, unitFightData.Interrupts or 0, unitFightData.Dispelled or 0;
 			local effHealRecv, overHealRecv = unitFightData.HealingTaken or 0, 0; --not 100% correct
 
-			dmg = VF_RS_GenerateDeltaChange(dmg, unitGUID, VF_RS_DataIndex_Damage, _Time);
-			effHeal = VF_RS_GenerateDeltaChange(effHeal, unitGUID, VF_RS_DataIndex_EffectiveHeal, _Time);
-			dmgTaken = VF_RS_GenerateDeltaChange(dmgTaken, unitGUID, VF_RS_DataIndex_DamageTaken, _Time);
-			overHeal = VF_RS_GenerateDeltaChange(overHeal, unitGUID, VF_RS_DataIndex_OverHeal, _Time);
-			death = VF_RS_GenerateDeltaChange(death, unitGUID, VF_RS_DataIndex_Death, _Time);
-			friendlydmg = VF_RS_GenerateDeltaChange(friendlydmg, unitGUID, VF_RS_DataIndex_FriendlyDamage, _Time);
-			dispels = VF_RS_GenerateDeltaChange(dispels, unitGUID, VF_RS_DataIndex_Dispels, _Time);
-			ccbreaks = VF_RS_GenerateDeltaChange(ccbreaks, unitGUID, VF_RS_DataIndex_CCBreaks, _Time);
-			interrupts = VF_RS_GenerateDeltaChange(interrupts, unitGUID, VF_RS_DataIndex_Interrupts, _Time);
-			dispelled = VF_RS_GenerateDeltaChange(dispelled, unitGUID, VF_RS_DataIndex_Dispelled, _Time);
-			effHealRecv = VF_RS_GenerateDeltaChange(effHealRecv, unitGUID, VF_RS_DataIndex_EffectiveHealRecv, _Time);
-			overHealRecv = VF_RS_GenerateDeltaChange(overHealRecv, unitGUID, VF_RS_DataIndex_OverHealRecv, _Time);
+			dmg = VF_RS_GenerateDeltaChange(dmg, unitUniqueID, VF_RS_DataIndex_Damage, _Time);
+			effHeal = VF_RS_GenerateDeltaChange(effHeal, unitUniqueID, VF_RS_DataIndex_EffectiveHeal, _Time);
+			dmgTaken = VF_RS_GenerateDeltaChange(dmgTaken, unitUniqueID, VF_RS_DataIndex_DamageTaken, _Time);
+			overHeal = VF_RS_GenerateDeltaChange(overHeal, unitUniqueID, VF_RS_DataIndex_OverHeal, _Time);
+			death = VF_RS_GenerateDeltaChange(death, unitUniqueID, VF_RS_DataIndex_Death, _Time);
+			friendlydmg = VF_RS_GenerateDeltaChange(friendlydmg, unitUniqueID, VF_RS_DataIndex_FriendlyDamage, _Time);
+			dispels = VF_RS_GenerateDeltaChange(dispels, unitUniqueID, VF_RS_DataIndex_Dispels, _Time);
+			ccbreaks = VF_RS_GenerateDeltaChange(ccbreaks, unitUniqueID, VF_RS_DataIndex_CCBreaks, _Time);
+			interrupts = VF_RS_GenerateDeltaChange(interrupts, unitUniqueID, VF_RS_DataIndex_Interrupts, _Time);
+			dispelled = VF_RS_GenerateDeltaChange(dispelled, unitUniqueID, VF_RS_DataIndex_Dispelled, _Time);
+			effHealRecv = VF_RS_GenerateDeltaChange(effHealRecv, unitUniqueID, VF_RS_DataIndex_EffectiveHealRecv, _Time);
+			overHealRecv = VF_RS_GenerateDeltaChange(overHealRecv, unitUniqueID, VF_RS_DataIndex_OverHealRecv, _Time);
 
 
 			if(dmg ~= "" or effHeal ~= "" or dmgTaken ~= "" or overHeal ~= "" or death ~= "" or friendlydmg ~= "" or dispels ~= "" or ccbreaks ~= "" or interrupts ~= "" or dispelled ~= "") then
