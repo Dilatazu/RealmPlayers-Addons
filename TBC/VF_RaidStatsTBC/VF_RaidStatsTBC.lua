@@ -1,5 +1,7 @@
 VF_RAIDSTATSVERSION = GetAddOnMetadata("VF_RaidStatsTBC", "Version");
 
+if string.find(GetBuildInfo(), "^2%.") then
+
 local OmenThreatLib = LibStub("Threat-2.0");
 local GUIDRegistryLib = LibStub("LibGUIDRegistry-0.1");
 
@@ -691,9 +693,13 @@ end
 
 function VF_RS_DetectBossStart()
 	if(VF_RS_CurrentBoss == "") then
-		for unitName, unitData in pairs(Recount.db2.combatants) do
+		for recountID, unitData in pairs(Recount.db2.combatants) do
 			local unitFightData = unitData.Fights["OverallData"];
-			local unitUniqueID = unitData.Name;
+			local unitName = unitData.Name;
+			local unitUniqueID = recountID;
+			if(unitName == nil) then
+				unitName = recountID;
+			end
 			if(unitFightData ~= nil and unitUniqueID ~= nil) then
 				if(VF_RS_MobsType[unitName] == VF_RS_MobType_Boss) then
 					local bossName = VF_RS_GetBossName(unitName);
@@ -857,7 +863,7 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 	local sessionDebugResult = "";
 	for unitRecountID, unitData in pairs(Recount.db2.combatants) do 
 		local unitFightData = unitData.Fights["OverallData"];
-		local unitUniqueID = VF_RS_GetUniqueID(unitData.Name);
+		local unitUniqueID = unitRecountID;--VF_RS_GetUniqueID(unitData.Name);
 		local unitName = unitData.Name;
 		if(unitName == nil) then
 			VF_RS_DebugMessage("Name was missing for "..unitRecountID);
@@ -886,21 +892,26 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 			if(VF_RS_LastRecorded[unitUniqueID] == nil) then
 				VF_RS_LastRecorded[unitUniqueID] = {};
 				VF_RS_LastRecorded[unitUniqueID]["UnitID"] = VF_RS_UnitIDCounter;
-				totalPlayersResult = totalPlayersResult..unitName.."="..VF_RS_LastRecorded[unitUniqueID]["UnitID"]..",";
-				sessionDebugResult = sessionDebugResult..unitName.."="..unitUniqueID..",";
+				VF_RS_LastRecorded[unitUniqueID]["UnitName"] = unitName;
+				totalPlayersResult = totalPlayersResult..unitUniqueID.."="..VF_RS_LastRecorded[unitUniqueID]["UnitID"]..",";
+				local thisUnitDebugInfo = unitName.."="..unitUniqueID;
+				if(unitData.GUID ~= nil) then
+					thisUnitDebugInfo = thisUnitDebugInfo.."="..unitData.GUID;
+				end
+				sessionDebugResult = sessionDebugResult..thisUnitDebugInfo..",";
 				VF_RS_UnitIDCounter = VF_RS_UnitIDCounter + 1;
 			end
 			local unitID = VF_RS_LastRecorded[unitUniqueID]["UnitID"];
 			if(unitData.type == "Pet") then
 				if(unitData.Owner) then
-					local unitOwnerUniqueID = VF_RS_GetUniqueID(unitData.Owner);
+					local unitOwnerUniqueID = unitData.Owner; --Owner is of RecountID style
 					if(unitOwnerUniqueID and VF_RS_LastRecorded[unitOwnerUniqueID] ~= nil) then
 						if(VF_RS_LastRecorded[unitOwnerUniqueID]["pets"] == nil) then
 							VF_RS_LastRecorded[unitOwnerUniqueID]["pets"] = {};
 						end
 						if(VF_RS_LastRecorded[unitOwnerUniqueID]["pets"][unitID] == nil) then
 							VF_RS_LastRecorded[unitOwnerUniqueID]["pets"][unitID] = 1;
-							totalPlayersResult = totalPlayersResult.."VF_PET_"..unitID.."_"..unitName.."_"..unitData.Owner.."="..unitID..",";
+							totalPlayersResult = totalPlayersResult.."VF_PET_"..unitID.."_"..unitUniqueID.."_"..unitOwnerUniqueID.."="..unitID..",";
 						end
 					end
 				end
@@ -1076,3 +1087,17 @@ end
 function VF_RaidStats_OnUpdate()
 	VF_RS_ExecuteSub(VF_RaidStats_SafeOnUpdate);
 end
+
+else--if not string.find(GetBuildInfo(), "^2%.") then
+	DEFAULT_CHAT_FRAME:AddMessage("ERROR! VF_RaidStatsTBC does not work on this WoW version! Only works on World of Warcraft TBC!");
+	
+	function VF_RaidStats_OnLoad()
+
+	end
+	function VF_RaidStats_OnEvent()
+
+	end
+	function VF_RaidStats_OnUpdate()
+
+	end
+end--if string.find(GetBuildInfo(), "^2%.") then
