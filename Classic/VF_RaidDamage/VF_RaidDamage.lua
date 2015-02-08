@@ -1160,6 +1160,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	end
 end
 
+VF_RD_BuffID = {};
 VF_RD_LastBuffData = {};
 VF_RD_BuffIDCounter = 0;
 function VF_RD_GetBuffID(_BuffName)
