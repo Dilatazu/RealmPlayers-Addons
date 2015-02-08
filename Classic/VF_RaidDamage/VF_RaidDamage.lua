@@ -1,5 +1,7 @@
 VF_RAIDDAMAGEVERSION = GetAddOnMetadata("VF_RaidDamage", "Version");
 
+if string.find(GetBuildInfo(), "^1%.") then
+
 VF_RD_DataIndex_Damage = 0;
 VF_RD_DataIndex_EffectiveHeal = 1;
 VF_RD_DataIndex_DamageTaken = 2;
@@ -1384,3 +1386,17 @@ function VF_RD_NewLootFrame_OnShow()
 	VF_RD_ExecuteSub(VF_RD_SafeSaveLoot);
 end
 LootFrame_OnShow = VF_RD_NewLootFrame_OnShow
+
+else--if not string.find(GetBuildInfo(), "^1%.") then
+	DEFAULT_CHAT_FRAME:AddMessage("ERROR! VF_RaidStats does not work on this WoW version! Only works on World of Warcraft Classic!");
+	
+	function VF_RaidDamage_OnLoad()
+
+	end
+	function VF_RaidDamage_OnEvent()
+
+	end
+	function VF_RaidDamage_OnUpdate()
+
+	end
+end--if string.find(GetBuildInfo(), "^1%.") then
