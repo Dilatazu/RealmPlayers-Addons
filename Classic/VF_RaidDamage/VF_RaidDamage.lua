@@ -1070,6 +1070,72 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 		end
 	end
 	
+	---
+	local totalBuffsResult = "";
+	for i = 1, 40 do
+		local currUnitID = "raid"..i;
+		local currName = UnitName(currUnitID);
+		if(currName ~= nil) then
+			local currPlayerID = SW_StrTable:hasID(currName);
+			if(currPlayerID ~= nil) then
+				local playerLastBuffData = VF_RD_LastBuffData[currPlayerID];
+				if(playerLastBuffData == nil) then
+					VF_RD_LastBuffData[currPlayerID] = {};
+					playerLastBuffData = VF_RD_LastBuffData[currPlayerID];
+				end
+				local oldPlayerLastBuffData = {};
+				for buffID, counter in pairs(playerLastBuffData) do
+					oldPlayerLastBuffData[buffID] = counter;
+				end
+				local buffPlayerAddResult = ".";
+				local buffPlayerEqResult = ".";
+				local buffPlayerSubResult = ".";
+				local allBuffs = VF_RD_GetAllBuffs(currUnitID);
+				for buffName in allBuffs do
+					local buffID, buffIDCreated = VF_RD_GetBuffID(buffName);
+					if(buffIDCreated == true) then
+						totalBuffsResult = totalBuffsResult.."B."..buffName.."="..buffID..",";
+					end
+					if(playerLastBuffData[buffID] == nil) then
+						if(buffPlayerAddResult == ".") then
+							buffPlayerAddResult = buffPlayerAddResult..buffID;
+						else
+							buffPlayerAddResult = buffPlayerAddResult.." "..buffID;
+						end
+						playerLastBuffData[buffID] = 1;
+					elseif(playerLastBuffData[buffID] > 20) then
+						if(buffPlayerEqResult == ".") then
+							buffPlayerEqResult = buffPlayerEqResult..buffID;
+						else
+							buffPlayerEqResult = buffPlayerEqResult.." "..buffID;
+						end
+						playerLastBuffData[buffID] = 1;
+					else
+						playerLastBuffData[buffID] = playerLastBuffData[buffID] + 1;
+					end
+				end
+				for buffID, counter in pairs(oldPlayerLastBuffData) do
+					if(playerLastBuffData[buffID] == counter) then
+						playerLastBuffData[buffID] = nil;
+						if(buffPlayerSubResult == ".") then
+							buffPlayerSubResult = buffPlayerSubResult..buffID;
+						else
+							buffPlayerSubResult = buffPlayerSubResult.." "..buffID;
+						end
+					end
+				end
+				if(buffPlayerEqResult ~= "." or buffPlayerSubResult ~= "." or buffPlayerAddResult ~= ".") then
+					if(table.getn(allBuffs) == 16) then
+						totalBuffsResult = totalBuffsResult.."BF"..currPlayerID..buffPlayerEqResult..buffPlayerSubResult..buffPlayerAddResult..",";
+					else
+						totalBuffsResult = totalBuffsResult.."B"..currPlayerID..buffPlayerEqResult..buffPlayerSubResult..buffPlayerAddResult..",";
+					end
+				end
+			end
+		end
+	end
+	totalPlayersResult = totalPlayersResult..totalBuffsResult;
+	---
 	if(totalPlayersResult ~= "" or _Reason ~= "") then
 		table.insert(VF_RaidDamageData[1], 1, _Time..":".._Reason..":"..totalPlayersResult);
 		--VF_SendMessage(_Time..":"..":"..totalPlayersResult, "NONE"); 
@@ -1090,6 +1156,31 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	elseif(string.find(_Reason, "Wipe")) then
 		VF_RD_PrecisionLoggingInterval = 10;
 	end
+end
+
+VF_RD_LastBuffData = {};
+VF_RD_BuffIDCounter = 0;
+function VF_RD_GetBuffID(_BuffName)
+	local buffID = VF_RD_BuffID[_BuffName];
+	if(buffID == nil) then
+		buffID = VF_RD_BuffIDCounter;
+		VF_RD_BuffIDCounter = VF_RD_BuffIDCounter + 1;
+		VF_RD_BuffID[_BuffName] = buffID;
+		return buffID, true;
+	end
+	return buffID, false;
+end
+
+function VF_RD_GetAllBuffs(_UnitID)
+	local buffData = {};
+	for u = 1, 16 do
+		local currBuff = UnitBuff(_UnitID, u);
+		if(currBuff) then
+			currBuff = string.gsub(currBuff, "Interface\\Icons\\", "");
+			table.insert(buffData, currBuff);
+		end
+	end
+	return buffData;
 end
 
 function VF_RD_GetTime_S()
