@@ -498,6 +498,10 @@ function VF_RD_CleanupSessions()
 	VF_RD_DebugMessage("Started session cleanup");
 	local currentDateStr = date("!%Y-%m-%d %X");
 	local currentDate = VF_ParseDate(currentDateStr);
+	local lastUploadDate = {Year = 2015, Month = 2, Day = 8, Hour = 23, Minute = 59, Second = 59};
+	if(VF_RD_LastUploadedData ~= nil) then
+		lastUploadDate = VF_ParseDate(VF_RD_LastUploadedData);
+	end
 	local currentDateComparerInt = currentDate.Year * 365 + currentDate.Month * 30 + currentDate.Day;
 	for i, session in VF_RaidDamageData do
 		local sessionTableSize = table.getn(session);
@@ -1093,7 +1097,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 				local buffPlayerEqResult = ".";
 				local buffPlayerSubResult = ".";
 				local allBuffs = VF_RD_GetAllBuffs(currUnitID);
-				for buffName in allBuffs do
+				for _, buffName in allBuffs do
 					local buffID, buffIDCreated = VF_RD_GetBuffID(buffName);
 					if(buffIDCreated == true) then
 						totalBuffsResult = totalBuffsResult.."B."..buffName.."="..buffID..",";
@@ -1401,3 +1405,5 @@ else--if not string.find(GetBuildInfo(), "^1%.") then
 
 	end
 end--if string.find(GetBuildInfo(), "^1%.") then
+
+VF_RD_LastUploadedData = "2015-02-08 23:59:59";
