@@ -1083,7 +1083,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 		local currName = UnitName(currUnitID);
 		if(currName ~= nil) then
 			local currPlayerID = SW_StrTable:hasID(currName);
-			if(currPlayerID ~= nil) then
+			if(currPlayerID ~= nil and VF_RD_LastRecorded[currPlayerID] ~= nil) then
 				local playerLastBuffData = VF_RD_LastBuffData[currPlayerID];
 				if(playerLastBuffData == nil) then
 					VF_RD_LastBuffData[currPlayerID] = {};
