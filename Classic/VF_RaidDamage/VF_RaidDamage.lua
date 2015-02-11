@@ -1182,7 +1182,7 @@ end
 VF_RD_BuffID = {};
 VF_RD_LastBuffData = {};
 VF_RD_LastDebuffData = {};
-VF_RD_BuffIDCounter = 0;
+VF_RD_BuffIDCounter = 1;
 function VF_RD_GetBuffID(_BuffName)
 	local buffID = VF_RD_BuffID[_BuffName];
 	if(buffID == nil) then
