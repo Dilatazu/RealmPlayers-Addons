@@ -39,6 +39,12 @@ and not Recount.db.profile.Filters.Show[Recount.db2.combatants[v.Owner].type])  
 
 BGStats ideer: Recorda folks positioner på kartan!
 
+/script DEFAULT_CHAT_FRAME:AddMessage(UnitBuff("player", 1));
+/script DEFAULT_CHAT_FRAME:AddMessage(UnitBuff("player", 2));
+/script local buffInfo = UnitBuff("player", 2); DEFAULT_CHAT_FRAME:AddMessage(buffInfo); --BuffName
+/script local _, buffInfo = UnitBuff("player", 2); DEFAULT_CHAT_FRAME:AddMessage(buffInfo); --BuffCount
+/script local _, _, buffInfo = UnitBuff("player", 2); DEFAULT_CHAT_FRAME:AddMessage(buffInfo); --nil
+
 
 GetNumBattlefieldPositions
 GetBattlefieldPosition

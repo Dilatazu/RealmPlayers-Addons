@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft Classic\WTF\Account\DILATAZU\SavedVariables\VF_BGStats.lua" />
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft Classic\WTF\Account\DILATAZU\SavedVariables\VF_RaidDamage.lua" />
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RaidStatsTBC.lua" />
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\BASICSTAMP\SavedVariables\VF_RealmPlayersTBC.lua" />
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft TBC\WTF\Account\NEHEROMAR\SavedVariables\VF_RaidStatsTBC.lua" />

@@ -1084,58 +1084,21 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 		if(currName ~= nil) then
 			local currPlayerID = SW_StrTable:hasID(currName);
 			if(currPlayerID ~= nil and VF_RD_LastRecorded[currPlayerID] ~= nil) then
-				local playerLastBuffData = VF_RD_LastBuffData[currPlayerID];
-				if(playerLastBuffData == nil) then
-					VF_RD_LastBuffData[currPlayerID] = {};
-					playerLastBuffData = VF_RD_LastBuffData[currPlayerID];
-				end
-				local oldPlayerLastBuffData = {};
-				for buffID, counter in pairs(playerLastBuffData) do
-					oldPlayerLastBuffData[buffID] = counter;
-				end
-				local buffPlayerAddResult = ".";
-				local buffPlayerEqResult = ".";
-				local buffPlayerSubResult = ".";
+				
 				local allBuffs = VF_RD_GetAllBuffs(currUnitID);
-				for _, buffName in allBuffs do
-					local buffID, buffIDCreated = VF_RD_GetBuffID(buffName);
-					if(buffIDCreated == true) then
-						totalBuffsResult = totalBuffsResult.."B."..buffName.."="..buffID..",";
-					end
-					if(playerLastBuffData[buffID] == nil) then
-						if(buffPlayerAddResult == ".") then
-							buffPlayerAddResult = buffPlayerAddResult..buffID;
-						else
-							buffPlayerAddResult = buffPlayerAddResult.." "..buffID;
-						end
-						playerLastBuffData[buffID] = 1;
-					elseif(playerLastBuffData[buffID] > 20) then
-						if(buffPlayerEqResult == ".") then
-							buffPlayerEqResult = buffPlayerEqResult..buffID;
-						else
-							buffPlayerEqResult = buffPlayerEqResult.." "..buffID;
-						end
-						playerLastBuffData[buffID] = 1;
-					else
-						playerLastBuffData[buffID] = playerLastBuffData[buffID] + 1;
-					end
-				end
-				for buffID, counter in pairs(oldPlayerLastBuffData) do
-					if(playerLastBuffData[buffID] == counter) then
-						playerLastBuffData[buffID] = nil;
-						if(buffPlayerSubResult == ".") then
-							buffPlayerSubResult = buffPlayerSubResult..buffID;
-						else
-							buffPlayerSubResult = buffPlayerSubResult.." "..buffID;
-						end
-					end
-				end
+				local buffDefinitionResult, buffPlayerAddResult, buffPlayerEqResult, buffPlayerSubResult = VF_RD_CalcDeltaBuff(allBuffs, VF_RD_LastBuffData, currPlayerID);
+				
+				local allDebuffs = VF_RD_GetAllDebuffs(currUnitID);
+				local debuffDefinitionResult, debuffPlayerAddResult, debuffPlayerEqResult, debuffPlayerSubResult = VF_RD_CalcDeltaBuff(allDebuffs, VF_RD_LastDebuffData, currPlayerID);
+				
+				totalBuffsResult = totalBuffsResult..buffDefinitionResult..debuffDefinitionResult;
+				
 				if(buffPlayerEqResult ~= "." or buffPlayerSubResult ~= "." or buffPlayerAddResult ~= ".") then
-					if(table.getn(allBuffs) == 16) then
-						totalBuffsResult = totalBuffsResult.."BF"..currPlayerID..buffPlayerEqResult..buffPlayerSubResult..buffPlayerAddResult..",";
-					else
-						totalBuffsResult = totalBuffsResult.."B"..currPlayerID..buffPlayerEqResult..buffPlayerSubResult..buffPlayerAddResult..",";
-					end
+					totalBuffsResult = totalBuffsResult.."B"..currPlayerID.."."..table.getn(allBuffs)..buffPlayerEqResult..buffPlayerSubResult..buffPlayerAddResult..",";
+				end
+				
+				if(debuffPlayerEqResult ~= "." or debuffPlayerSubResult ~= "." or debuffPlayerAddResult ~= ".") then
+					totalBuffsResult = totalBuffsResult.."D"..currPlayerID.."."..table.getn(allDebuffs)..debuffPlayerEqResult..debuffPlayerSubResult..debuffPlayerAddResult..",";
 				end
 			end
 		end
@@ -1164,8 +1127,61 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	end
 end
 
+function VF_RD_CalcDeltaBuff(_AllBuffs, _LastBuffDataArray, _PlayerID)
+	local buffDefinitionResult = "";
+	local buffPlayerAddResult = ".";
+	local buffPlayerEqResult = ".";
+	local buffPlayerSubResult = ".";
+
+	local playerLastBuffData = _LastBuffDataArray[_PlayerID];
+	if(playerLastBuffData == nil) then
+		_LastBuffDataArray[_PlayerID] = {};
+		playerLastBuffData = _LastBuffDataArray[_PlayerID];
+	end
+	local oldPlayerLastBuffData = {};
+	for buffID, counter in pairs(playerLastBuffData) do
+		oldPlayerLastBuffData[buffID] = counter;
+	end
+
+	for _, buffName in _AllBuffs do
+		local buffID, buffIDCreated = VF_RD_GetBuffID(buffName);
+		if(buffIDCreated == true) then
+			buffDefinitionResult = buffDefinitionResult.."B."..VF_RD_TranslateBuff(buffName).."="..buffID..",";
+		end
+		if(playerLastBuffData[buffID] == nil) then
+			if(buffPlayerAddResult == ".") then
+				buffPlayerAddResult = buffPlayerAddResult..buffID;
+			else
+				buffPlayerAddResult = buffPlayerAddResult.." "..buffID;
+			end
+			playerLastBuffData[buffID] = 1;
+		elseif(playerLastBuffData[buffID] > 20) then
+			if(buffPlayerEqResult == ".") then
+				buffPlayerEqResult = buffPlayerEqResult..buffID;
+			else
+				buffPlayerEqResult = buffPlayerEqResult.." "..buffID;
+			end
+			playerLastBuffData[buffID] = 1;
+		else
+			playerLastBuffData[buffID] = playerLastBuffData[buffID] + 1;
+		end
+	end
+	for buffID, counter in pairs(oldPlayerLastBuffData) do
+		if(playerLastBuffData[buffID] == counter) then
+			playerLastBuffData[buffID] = nil;
+			if(buffPlayerSubResult == ".") then
+				buffPlayerSubResult = buffPlayerSubResult..buffID;
+			else
+				buffPlayerSubResult = buffPlayerSubResult.." "..buffID;
+			end
+		end
+	end
+	return buffDefinitionResult, buffPlayerAddResult, buffPlayerEqResult, buffPlayerSubResult;
+end
+
 VF_RD_BuffID = {};
 VF_RD_LastBuffData = {};
+VF_RD_LastDebuffData = {};
 VF_RD_BuffIDCounter = 0;
 function VF_RD_GetBuffID(_BuffName)
 	local buffID = VF_RD_BuffID[_BuffName];
@@ -1178,14 +1194,65 @@ function VF_RD_GetBuffID(_BuffName)
 	return buffID, false;
 end
 
+VF_RD_BuffTranslations = {
+	["Spell_"] = "a",
+	["Ability_"] = "b",
+	["Racial_"] = "c",
+	["Creature_"] = "d",
+	["Warrior_"] = "e",
+	["Paladin_"] = "f",
+	["Hunter_"] = "g",
+	["Druid_"] = "h",
+	["Rogue_"] = "i",
+	["Shaman_"] = "j",
+	["Mage_"] = "k",
+	["Mount_"] = "l",
+	["Pet_"] = "m",
+	["INV_"] = "n",
+	["Potion_"] = "o",
+	["Spell_"] = "p",
+	["Fire_"] = "q",
+	["Frost_"] = "r",
+	["Holy_"] = "s",
+	["Nature_"] = "t",
+	["Shadow_"] = "u",
+	["Sword_"] = "v",
+	["Misc_"] = "w",
+	["Food_"] = "x",
+	["Jewelry_"] = "y",
+	["Drink_"] = "z",
+};
+
+function VF_RD_TranslateBuff(_BuffName)
+	local buffName = _BuffName;
+	for _1, _2 in pairs(VF_RD_BuffTranslations) do
+		buffName = string.gsub(buffName, _1, _2);
+	end
+	return buffName
+end
+
+
 function VF_RD_GetAllBuffs(_UnitID)
 	local buffData = {};
-	for u = 1, 16 do
-		local currBuff = UnitBuff(_UnitID, u);
-		if(currBuff) then
-			currBuff = string.gsub(currBuff, "Interface\\Icons\\", "");
-			table.insert(buffData, currBuff);
-		end
+	local buffIndex = 1;
+	local currBuff = UnitBuff(_UnitID, buffIndex);
+	while (currBuff ~= nil) do
+		currBuff = string.gsub(currBuff, "Interface\\Icons\\", "");
+		table.insert(buffData, currBuff);
+		buffIndex = buffIndex + 1;
+		currBuff = UnitBuff(_UnitID, buffIndex);
+	end
+	return buffData;
+end
+function VF_RD_GetAllDebuffs(_UnitID)
+	local buffData = {};
+	local buffIndex = 1;
+	local currBuff = UnitDebuff(_UnitID, buffIndex);
+	while (currBuff ~= nil) do
+		currBuff = string.gsub(currBuff, "Interface\\Icons\\", "");
+		table.insert(buffData, currBuff);
+		buffIndex = buffIndex + 1;
+		currBuff = UnitDebuff(_UnitID, buffIndex);
 	end
 	return buffData;
 end
