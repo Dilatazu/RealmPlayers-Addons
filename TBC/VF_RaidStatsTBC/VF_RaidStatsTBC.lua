@@ -102,8 +102,8 @@ VF_RS_MobsType = {
 	["Void Reaver"] = VF_RS_MobType_Boss,
 	--High Astromancer Solarian
 	["High Astromancer Solarian"] = VF_RS_MobType_Boss, 
-	--["Solarium Agent"] = VF_RS_MobType_Boss, --ADD
-	--["Solarium Priest"] = VF_RS_MobType_Boss, --ADD
+	["Solarium Agent"] = VF_RS_MobType_Boss, --ADD
+	["Solarium Priest"] = VF_RS_MobType_Boss, --ADD
 	--High Astromancer Solarian
 	--Kael'thas Sunstrider
 	["Kael'thas Sunstrider"] = VF_RS_MobType_Boss,
@@ -166,6 +166,12 @@ VF_RS_YellEvents_Start = 1;
 VF_RS_YellEvents_Phase1 = 2;
 VF_RS_YellEvents_Phase2 = 3;
 VF_RS_YellEvents_Phase3 = 4;
+VF_RS_YellEvents_Phase4 = 6;
+VF_RS_YellEvents_Phase5 = 7;
+VF_RS_YellEvents_Phase6 = 8;
+VF_RS_YellEvents_Phase7 = 9;
+VF_RS_YellEvents_Phase8 = 10;
+VF_RS_YellEvents_Phase9 = 11;
 VF_RS_YellEvents_End = 5;
 VF_RS_YellEvents_NotImportant = 99;
 
@@ -178,7 +184,139 @@ VF_RS_YellEventsStr = {
 }
 
 VF_RS_YellEvents = {
-	
+	--Tempest Keep
+	["Void Reaver"] = {
+		["are marked for extermination"] = VF_RS_YellEvents_Start,
+		["Systems... shutting..."] = VF_RS_YellEvents_End,
+	},
+	["High Astromancer Solarian"] = {
+		["Tal anu'men no"] = VF_RS_YellEvents_Start,
+		["You are hopelessly outmatched"] = VF_RS_YellEvents_Phase1,
+		["crush your delusions of grandeur"] = VF_RS_YellEvents_Phase2,
+		["fury of the cosmos itself"] = VF_RS_YellEvents_Phase3,
+		--["with the VOID"] = VF_RS_YellEvents_Phase3,
+		["warmth of the sun"] = VF_RS_YellEvents_End,
+	},
+	["Kael'thas Sunstrider"] = {
+		["dependence made manifest after the Sunwell was destroyed"] = VF_RS_YellEvents_Start,
+		["how your nerves hold up against the Darkener"] = VF_RS_YellEvents_Phase1,
+		["none can withstand the might of the Blood"] = VF_RS_YellEvents_Phase2,
+		["Capernian will see to it that your"] = VF_RS_YellEvents_Phase3,
+		["proven worthy to test your skills against my"] = VF_RS_YellEvents_Phase4,
+		["I have many weapons in my arsenal"] = VF_RS_YellEvents_Phase5,
+		["would be unfair to make you fight all"] = VF_RS_YellEvents_Phase6,
+		["must take matters into one's own hands"] = VF_RS_YellEvents_Phase7,
+		["have planned will not be jeopardized"] = VF_RS_YellEvents_Phase8,
+		["how you fare when your world is turned upside down"] = VF_RS_YellEvents_Phase9,
+		["trouble staying grounded"] = VF_RS_YellEvents_Phase9,
+		["For...Quel...thalas"] = VF_RS_YellEvents_End,
+	},
+
+	--Serpentshrine Cavern
+	["Leotheras the Blind"] = {
+		["my banishment ends"] = VF_RS_YellEvents_Start,
+		["trifling elf"] = VF_RS_YellEvents_Phase2,
+		["am the master"] = VF_RS_YellEvents_Phase3,
+		["cannot kill me"] = VF_RS_YellEvents_End,
+	},
+	["Fathom-Lord Karathress"] = {
+		["attention"] = VF_RS_YellEvents_Start,
+		["excellency"] = VF_RS_YellEvents_End,
+	},
+	["Morogrim Tidewalker"] = {
+		[", take you"] = VF_RS_YellEvents_Start,
+		["currents of... Ageon"] = VF_RS_YellEvents_End,
+	},
+	["Hydross the Unstable"] = {
+		["allow you to interfere"] = VF_RS_YellEvents_Start,
+		["the poison..."] = VF_RS_YellEvents_Phase1,
+		["much better"] = VF_RS_YellEvents_Phase2,
+		["released..."] = VF_RS_YellEvents_End,--death in water form
+		["are the disease"] = VF_RS_YellEvents_End,--death in poison form
+	},
+	["Lady Vashj"] = {
+		["to the outsiders"] = VF_RS_YellEvents_Start,
+		["split you from stem"] = VF_RS_YellEvents_Start,
+		["Victory to Lord Illidan"] = VF_RS_YellEvents_Start,
+		["spit on you"] = VF_RS_YellEvents_Start,
+		["none standing"] = VF_RS_YellEvents_Phase2,
+		["may want to take cover"] = VF_RS_YellEvents_Phase3,
+		["Lord Illidan, I..."] = VF_RS_YellEvents_End,
+	},
+
+	--Black Temple
+	["High Warlord Naj'entus"] = {
+		["in the name of"] = VF_RS_YellEvents_Start,
+		["Lord Illidan will..."] = VF_RS_YellEvents_End,
+	},
+	["Teron Gorefiend"] = {
+		["the wheel of death has spun many times"] = VF_RS_YellEvents_Start,
+		["The wheel..."] = VF_RS_YellEvents_End,
+	},
+	["Essence of Anger"] = {--Reliquary of Souls
+		["I live"] = VF_RS_YellEvents_Start,
+		["ignored"] = VF_RS_YellEvents_End,
+	},
+	["Essence of Desire"] = {--Reliquary of Souls
+		["can have anything you desire"] = VF_RS_YellEvents_Start,
+		["won't be far"] = VF_RS_YellEvents_End,
+	},
+	["Essence of Suffering"] = {--Reliquary of Souls
+		["leave me alone"] = VF_RS_YellEvents_Start,
+		["are all that await you"] = VF_RS_YellEvents_Start,--wrong, but needed for compatibility
+		["what do I do"] = VF_RS_YellEvents_End,
+	},
+	["Gurtogg Bloodboil"] = {
+		["crush you"] = VF_RS_YellEvents_Start,
+		["Aaaahrg..."] = VF_RS_YellEvents_End,
+	},
+	["Mother Shahraz"] = {
+		["pleasure?"] = VF_RS_YellEvents_Start,
+		["toying with my emotions"] = VF_RS_YellEvents_Phase2,
+		["I wasn't"] = VF_RS_YellEvents_End,
+	},
+	["Gathios the Shatterer"] = { --Illidari Council
+		["have better things to do"] = VF_RS_YellEvents_Start,
+		["You wish to test me?"] = VF_RS_YellEvents_Start,--wrong, but needed for compatibility,
+		["Lord Illidan... I..."] = VF_RS_YellEvents_End,
+	},
+	["Veras Darkshadow"] = { --Illidari Council
+		["You wish to test me?"] = VF_RS_YellEvents_Start,
+		["have better things to do"] = VF_RS_YellEvents_Start,--wrong, but needed for compatibility
+		["You got lucky"] = VF_RS_YellEvents_End,
+	},
+	["High Nethermancer Zerevor"] = { --Illidari Council
+		["Such a crude language"] = VF_RS_YellEvents_Start,
+		["oreindel'o"] = VF_RS_YellEvents_End,
+	},
+	["Lady Malande"] = { --Illidari Council
+		["Flee"] = VF_RS_YellEvents_Start,
+		["Destiny... awaits"] = VF_RS_YellEvents_End,
+	},
+	["Illidan Stormrage"] = {
+		["You are not prepared!"] = VF_RS_YellEvents_Start,
+		["will not be touched by rabble"] = VF_RS_YellEvents_Phase1,
+		["into the eyes of the Betrayer"] = VF_RS_YellEvents_Phase2,
+		["of the demon within"] = VF_RS_YellEvents_Phase3,
+		["the hatred of ten thousand years"] = VF_RS_YellEvents_Phase4,
+		["now you shall fall"] = VF_RS_YellEvents_Phase5,--Enrage
+		["without the hunt"] = VF_RS_YellEvents_Phase6,--"Death"?
+	},
+
+	--Mount Hyjal
+	["Rage Winterchill"] = {
+		["final conquest has begun"] = VF_RS_YellEvents_Start,
+		["have won this battle"] = VF_RS_YellEvents_End,
+	},
+	["Anetheron"] = {
+		["defenders of a doomed world"] = VF_RS_YellEvents_Start,
+		["ticking"] = VF_RS_YellEvents_End,
+	},
+	["Archimonde"] = {
+		["resistance is insignificant"] = VF_RS_YellEvents_Start,
+		["Mourn and lament the passing"] = VF_RS_YellEvents_Phase5,--Enrage
+		["it cannot be"] = VF_RS_YellEvents_End,
+	},
 }
 VF_RS_RaidZones = {
 	["Karazhan"] = true,
@@ -228,6 +366,9 @@ VF_RS_BossMap = {
 
 	--Tempest Keep
 	["Ember of Al'ar"] = "Al'ar";
+	
+	["Solarium Agent"] = "High Astromancer Solarian", --ADD
+	["Solarium Priest"] = "High Astromancer Solarian", --ADD
 
 	["Thaladred the Darkener"] = "Kael'thas Sunstrider", --ADD
 	["Lord Sanguinar"] = "Kael'thas Sunstrider", --ADD
@@ -524,7 +665,54 @@ function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg
 	elseif(event == "CHAT_MSG_MONSTER_YELL") then
 		local monsterName = arg2;
 		if(VF_RS_MobsType[monsterName] == VF_RS_MobType_Boss) then
-			table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=Yell-"..eventText..":"..VF_RS_GetTime_S());
+			local specialBoss = VF_RS_GetBossName(monsterName);
+			local yellEvents = VF_RS_YellEvents[monsterName];
+			if(yellEvents ~= nil) then
+				local foundBossYell = false;
+				for triggerText, yellEvent in yellEvents do
+					if(string.find(eventText, triggerText)) then
+						if(yellEvent == VF_RS_YellEvents_Start and VF_RS_LastKilledBoss == specialBoss) then
+							VF_RS_LastKilledBoss = "";
+						end
+						if(yellEvent ~= VF_RS_YellEvents_NotImportant) then
+							local yellEventStr = VF_RS_YellEventsStr[yellEvent];
+							local yellReason = yellEventStr.."="..monsterName;
+							if(specialBoss ~= monsterName) then
+								if(yellEvent == VF_RS_YellEvents_Start) then
+									yellReason = yellReason..";"..yellEventStr.."="..specialBoss;
+								elseif(yellEvent == VF_RS_YellEvents_End) then
+									if(VF_RS_CurrentBossData[monsterName] ~= nil) then
+										VF_RS_CurrentBossData[monsterName] = {};
+										VF_RS_CurrentBossData[monsterName].Dead = true;
+									end
+									if(VF_RS_IsCurrentBossKilled() == true) then
+										yellReason = yellReason..";"..yellEventStr.."="..specialBoss;
+									end
+								end
+							end
+							VF_RS_DebugMessage(yellReason.."(YellEvent)");
+							VF_RS_LogRaidStats(yellReason, VF_RS_GetTime_S());
+							VF_RS_NextUpdateTime = VF_RS_GetTime_S() + 1;
+						else
+							table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=KnownYell-"..eventText);
+						end
+						foundBossYell = true;
+					end
+				end
+				if(foundBossYell == false) then
+					table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=Yell-"..eventText..":"..VF_RS_GetTime_S());
+				end
+			else
+				if(VF_RS_CurrentBoss == "") then
+					local startReason = "Start_U="..monsterName;
+					if(specialBoss ~= monsterName) then
+						startReason = startReason..";Start_U="..specialBoss;
+					end
+					VF_RS_DebugMessage(startReason.."(UnknownYellEvent)");
+					VF_RS_LogRaidStats(startReason, VF_RS_GetTime_S());
+				end
+				table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=Yell-"..eventText..":"..VF_RS_GetTime_S());
+			end
 		end
 	elseif(event == "CHAT_MSG_MONSTER_EMOTE") then
 		local monsterName = arg2;
