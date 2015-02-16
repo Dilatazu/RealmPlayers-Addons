@@ -540,7 +540,7 @@ function VF_RS_PrintRecorded()
 		end
 	end
 	local bossKills = "Total bosses killed("..table.getn(killCount).."): ";
-	for i, bossName in killCount do
+	for i, bossName in pairs(killCount) do
 		bossKills = bossKills..bossName..", "
 	end
 	VF_RS_Message(bossKills);
@@ -669,7 +669,7 @@ function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg
 			local yellEvents = VF_RS_YellEvents[monsterName];
 			if(yellEvents ~= nil) then
 				local foundBossYell = false;
-				for triggerText, yellEvent in yellEvents do
+				for triggerText, yellEvent in pairs(yellEvents) do
 					if(string.find(eventText, triggerText)) then
 						if(yellEvent == VF_RS_YellEvents_Start and VF_RS_LastKilledBoss == specialBoss) then
 							VF_RS_LastKilledBoss = "";
