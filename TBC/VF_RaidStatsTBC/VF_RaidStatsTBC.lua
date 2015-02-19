@@ -102,8 +102,8 @@ VF_RS_MobsType = {
 	["Void Reaver"] = VF_RS_MobType_Boss,
 	--High Astromancer Solarian
 	["High Astromancer Solarian"] = VF_RS_MobType_Boss, 
-	["Solarium Agent"] = VF_RS_MobType_Boss, --ADD
-	["Solarium Priest"] = VF_RS_MobType_Boss, --ADD
+	--["Solarium Agent"] = VF_RS_MobType_Boss, --ADD
+	--["Solarium Priest"] = VF_RS_MobType_Boss, --ADD
 	--High Astromancer Solarian
 	--Kael'thas Sunstrider
 	["Kael'thas Sunstrider"] = VF_RS_MobType_Boss,
@@ -367,8 +367,8 @@ VF_RS_BossMap = {
 	--Tempest Keep
 	["Ember of Al'ar"] = "Al'ar";
 	
-	["Solarium Agent"] = "High Astromancer Solarian", --ADD
-	["Solarium Priest"] = "High Astromancer Solarian", --ADD
+	--["Solarium Agent"] = "High Astromancer Solarian", --ADD
+	--["Solarium Priest"] = "High Astromancer Solarian", --ADD
 
 	["Thaladred the Darkener"] = "Kael'thas Sunstrider", --ADD
 	["Lord Sanguinar"] = "Kael'thas Sunstrider", --ADD
