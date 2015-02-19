@@ -65,7 +65,7 @@ VF_RS_MobsType = {
 	["Kiggler the Crazed"] = VF_RS_MobType_Boss, --High King Maulgar ADD
 	["Blindeye the Seer"] = VF_RS_MobType_Boss, --High King Maulgar ADD
 	--High King Maulgar
-	["Gruul"] = VF_RS_MobType_Boss,
+	["Gruul the Dragonkiller"] = VF_RS_MobType_Boss,
 	
 	--Magtheridon's Lair
 	["Magtheridon"] = VF_RS_MobType_Boss,
