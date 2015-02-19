@@ -184,6 +184,13 @@ VF_RS_YellEventsStr = {
 }
 
 VF_RS_YellEvents = {
+	--Gruul's Lair
+	["High King Maulgar"] = {
+		["are the real power in"] = VF_RS_YellEvents_Start,
+		["will not defeat the"] = VF_RS_YellEvents_Phase2,
+		["crush you"] = VF_RS_YellEvents_End,
+	}
+
 	--Tempest Keep
 	["Void Reaver"] = {
 		["are marked for extermination"] = VF_RS_YellEvents_Start,
@@ -311,6 +318,14 @@ VF_RS_YellEvents = {
 	["Anetheron"] = {
 		["defenders of a doomed world"] = VF_RS_YellEvents_Start,
 		["ticking"] = VF_RS_YellEvents_End,
+	},
+	["Kaz'rogal"] = {
+		["meaningless lives will soon"] = VF_RS_YellEvents_Start,
+		["Eah..."] = VF_RS_YellEvents_End,
+	},
+	["Azgalor"] = {
+		["returned to finish"] = VF_RS_YellEvents_Start,
+		["time is almost"] = VF_RS_YellEvents_End,
 	},
 	["Archimonde"] = {
 		["resistance is insignificant"] = VF_RS_YellEvents_Start,
