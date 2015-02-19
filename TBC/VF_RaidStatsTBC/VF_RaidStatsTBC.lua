@@ -345,6 +345,14 @@ VF_RS_RaidZones = {
 	["Sunwell Plateau"] = true,
 }
 
+VF_RS_DisappearingBoss = 1;
+
+VF_RS_SpecialBoss = {
+	["Al'ar"] = VF_RS_DisappearingBoss,
+	["High Astromancer Solarian"] = VF_RS_DisappearingBoss,
+	["Reliquary of Souls"] = VF_RS_DisappearingBoss,
+}
+
 VF_RS_BossMap = {
 	--Karazhan
 	["Midnight"] = "Attumen the Huntsman",
