@@ -461,7 +461,15 @@ function VF_RS_OmenThreat_GetHighestThreat(player_guid)
 	end
 	return maxVal, maxGUID
 end
+
+VF_RS_ImpossibleWipeTimeout = nil;
+
 function VF_RS_OmenThreat_IsWipe()
+	if(VF_RS_ImpossibleWipeTimeout ~= nil) then
+		if(VF_RS_GetTime_S() < VF_RS_ImpossibleWipeTimeout) then
+			return false;
+		end
+	end
 	for player_guid, data in pairs(OmenThreatLib.threatTargets) do
 		for target_guid, threatValue in pairs(data) do
 			if(threatValue ~= 0) then
@@ -479,6 +487,7 @@ function VF_RS_OmenThreat_IsWipe()
 			return false;
 		end
 	end
+	VF_RS_ImpossibleWipeTimeout = nil;
 	return true;--Wipe
 end
 --ResetData
@@ -705,6 +714,7 @@ function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg
 									end
 								end
 							end
+							VF_RS_ImpossibleWipeTimeout = VF_RS_GetTime_S() + 20;--Ensure that wipe calculation can not be triggered for atleast 20 seconds
 							VF_RS_DebugMessage(yellReason.."(YellEvent)");
 							VF_RS_LogRaidStats(yellReason, VF_RS_GetTime_S());
 							VF_RS_NextUpdateTime = VF_RS_GetTime_S() + 1;
