@@ -241,6 +241,9 @@ function VF_BGStats_Parse_BGYELL(_Message, _Yeller)
 			elseif(string.find(_Message, "taken by") or string.find(_Message, "has taken the")) then
 				eventAction = VF_BGS_Event_Taken;
 				eventActionStr = "takes";
+			elseif(string.find(_Message, "defended by")) then
+				eventAction = VF_BGS_Event_Defended;
+				eventActionStr = "defended";
 			end
 		end
 	end
