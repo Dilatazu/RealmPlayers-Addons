@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: VF_CharacterStats
+## Author: Dilatazu, www.realmplayers.com, Dilatazu@gmail.com
+## Version: 1.0
+## Notes: 
+## Dependencies: 
+## OptionalDeps:
+## SavedVariablesPerCharacter: 
+## SavedVariables: VF_CharacterStatsData
+VF_CharacterStats.xml

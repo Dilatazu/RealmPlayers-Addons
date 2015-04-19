@@ -46,6 +46,9 @@
     <Filter Include="Source Files\Classic\SavedVariables">
       <UniqueIdentifier>{9518b0d6-c494-4d2e-b2e7-9bee38081c4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classic\VF_CharacterStats">
+      <UniqueIdentifier>{4caec9ef-1030-4a6b-84c4-cf8335436119}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Classic\VF_RaidDamage\VF_RaidDamage.lua">
@@ -120,6 +123,12 @@
     <None Include="..\..\..\Program Files (x86)\World Of Warcraft Classic\WTF\Account\DILATAZU\SavedVariables\VF_RaidDamage.lua">
       <Filter>Source Files\Classic\SavedVariables</Filter>
     </None>
+    <None Include="..\Classic\VF_CharacterStats\VF_CharacterStats.lua">
+      <Filter>Source Files\Classic\VF_CharacterStats</Filter>
+    </None>
+    <None Include="..\Classic\VF_CharacterStats\VF_CharacterStats.toc">
+      <Filter>Source Files\Classic\VF_CharacterStats</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml">
@@ -136,6 +145,9 @@
     </Xml>
     <Xml Include="..\Classic\VF_BGStats\VF_BGStats.xml">
       <Filter>Source Files\Classic\VF_BGStats</Filter>
+    </Xml>
+    <Xml Include="..\Classic\VF_CharacterStats\VF_CharacterStats.xml">
+      <Filter>Source Files\Classic\VF_CharacterStats</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>
