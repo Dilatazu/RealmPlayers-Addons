@@ -19,9 +19,66 @@ function VF_CharacterStats_OnLoad()
 	this:RegisterEvent("PLAYERBANKSLOTS_CHANGED");
 	this:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED");
 	this:RegisterEvent("PLAYER_MONEY");
+	this:RegisterEvent("MAIL_SEND_SUCCESS");
+	this:RegisterEvent("MAIL_INBOX_UPDATE");
 	SlashCmdList["CHARACTERSTATS"] = VF_CharacterStats_Command;
 	SLASH_CHARACTERSTATS1 = "/VFCS";
 	SLASH_CHARACTERSTATS2 = "/CharacterStats";
+end
+
+VF_MailStatus = {};
+VF_OldSendMail = nil;
+
+function VF_NewSendMail(_Character, _Subject, _Body)
+	VF_MailStatus.Character = _Character;
+	VF_MailStatus.Subject = _Subject;
+	VF_MailStatus.Body = _Body;
+	local _, _, quantity = GetSendMailItem();
+	local itemLink = GetSendMailItemLink();
+	if(itemLink ~= nil) then
+		local _, _, rubbish1, item, rubbish2 = string.find(itemLink, "(.*)|Hitem:(.*)|h%[(.*)");
+		VF_MailStatus.Item = quantity.."x"..item;
+	else
+		VF_MailStatus.item = nil;
+	end
+	local money = GetSendMailMoney();
+	if(money ~= nil) then
+		VF_MailStatus.Money = money;
+	else
+		VF_MailStatus.Money = nil;
+	end
+	VF_MailStatus.COD = GetSendMailCOD();
+
+	VF_OldSendMail(_Character, _Subject, _Body)
+end
+
+function VF_CharacterStats_SaveMailInbox()
+	VF_ThisData["Mails"] = {};
+	local mailCount = GetInboxNumItems();
+	for i = 1, mailCount do
+		local packageIcon, stationeryIcon, sender, subject, money, CODAmount, daysLeft, hasItem, wasRead, wasReturned, textCreated, canReply = GetInboxHeaderInfo(i);
+		if(sender) then
+			daysLeft = VF_GetPrecision_2(daysLeft);
+			if(wasReturned) then
+				table.insert(VF_ThisData["Mails"], sender..";"..daysLeft..";R");
+			else
+				table.insert(VF_ThisData["Mails"], sender..";"..daysLeft..";N");
+			end
+		else
+			table.insert(VF_ThisData["Mails"], ";"..daysLeft..";N");
+		end
+	end
+end
+
+function VF_CharacterStats_SaveSentMail()
+	if(VF_MailStatus.Character ~= nil) then
+		if(VF_ThisData["SentMails"] == nil) then
+			VF_ThisData["SentMails"] = {};
+		end
+		VF_MailStatus.Time = date("!%Y-%m-%d %X");
+		table.insert(VF_ThisData["SentMails"], VF_MailStatus);
+		VF_MailStatus = {};
+	end
 end
 
 function VF_CharacterStats_OnEvent()
@@ -40,6 +97,9 @@ function VF_CharacterStats_OnEvent()
 		end
 		VF_ThisData = VF_CharacterStatsData[VF_ThisRealm][VF_ThisPlayer];
 		VF_ThisData.V = VF_CharacterStatsData.Version;
+		
+		VF_OldSendMail = SendMail;
+		SendMail = VF_NewSendMail;
 		
 		DEFAULT_CHAT_FRAME:AddMessage("VF_CharacterStats(/CharacterStats) version "..VF_CharacterStatsVersion.." loaded!");
 	elseif (event == "BAG_UPDATE" or event == "BANKFRAME_OPENED" or event == "PLAYERBANKSLOTS_CHANGED" or event == "PLAYERBANKBAGSLOTS_CHANGED") then
