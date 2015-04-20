@@ -129,6 +129,12 @@
     <None Include="..\Classic\VF_CharacterStats\VF_CharacterStats.toc">
       <Filter>Source Files\Classic\VF_CharacterStats</Filter>
     </None>
+    <None Include="LuaCheckCharacterStats.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\Program Files (x86)\World Of Warcraft Classic Nostalrius\WTF\Account\BASICSTAMP\SavedVariables\VF_CharacterStats.lua">
+      <Filter>Source Files\Classic\SavedVariables</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Classic\VF_RaidDamage\VF_RaidDamage.xml">
