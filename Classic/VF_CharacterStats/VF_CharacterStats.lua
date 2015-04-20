@@ -47,10 +47,6 @@ function VF_CharacterStats_OnEvent()
 		VF_CharacterStats_SaveMoney();
 	elseif (event == "PLAYER_MONEY") then
 		VF_CharacterStats_SaveMoney();
-	elseif (event == "MAIL_SEND_SUCCESS") then
-		VF_CharacterStats_SaveSentMail();
-	elseif(event == "MAIL_INBOX_UPDATE") then
-		VF_CharacterStats_SaveMailInbox();
 	end
 end
 
