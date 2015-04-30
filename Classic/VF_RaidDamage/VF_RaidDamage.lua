@@ -655,11 +655,14 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 			local deadReason = "Dead_C="..mobName;
 			VF_RD_DebugMessage("Dead_C="..mobName.."(CombatMsgDeath)");
 			local specialBoss = VF_RD_GetBossName(mobName);
+			if(VF_RD_CurrentBossData == nil) then
+				VF_RD_CurrentBossData = {};
+			end
+			if(VF_RD_CurrentBossData[mobName] == nil) then
+				VF_RD_CurrentBossData[mobName] = {};
+			end
+			VF_RD_CurrentBossData[mobName].Dead = true;
 			if(specialBoss ~= mobName) then
-				if(VF_RD_CurrentBossData[mobName] ~= nil) then
-					VF_RD_CurrentBossData[mobName] = {};
-					VF_RD_CurrentBossData[mobName].Dead = true;
-				end
 				if(VF_RD_IsCurrentBossKilled() == true) then
 					deadReason = deadReason..";Dead_C="..specialBoss;
 					VF_RD_DebugMessage("Dead_C="..specialBoss.."(CombatMsgDeath)");
@@ -984,11 +987,11 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 							_Reason = "Dead_S="..unitName;
 						end
 						VF_RD_DebugMessage("Dead_S="..unitName.."(SW_Dead)");
+						if(VF_RD_CurrentBossData[unitName] == nil) then
+							VF_RD_CurrentBossData[unitName] = {};
+						end
+						VF_RD_CurrentBossData[unitName].Dead = true;
 						if(specialBoss ~= unitName) then
-							if(VF_RD_CurrentBossData[unitName] == nil) then
-								VF_RD_CurrentBossData[unitName] = {};
-							end
-							VF_RD_CurrentBossData[unitName].Dead = true;
 							local bossParts = VF_RD_GetBossParts(specialBoss);
 							local bossKilled = true;
 							for i, v in bossParts do
