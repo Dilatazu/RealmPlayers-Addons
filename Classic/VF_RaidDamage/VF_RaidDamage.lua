@@ -130,13 +130,32 @@ VF_RD_MobsType = {
 }
 
 VF_RD_RaidZones = {
-	["Molten Core"] = true,
-	["Onyxia's Lair"] = true,
-	["Blackwing Lair"] = true,
-	["Zul'Gurub"] = true,
-	["Ruins of Ahn'Qiraj"] = true,
-	["Temple of Ahn'Qiraj"] = true,
-	["Naxxramas"] = true,
+	--English
+	["Molten Core"] = "Molten Core",
+	["Onyxia's Lair"] = "Onyxia's Lair",
+	["Blackwing Lair"] = "Blackwing Lair",
+	["Zul'Gurub"] = "Zul'Gurub",
+	["Ruins of Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
+	["Temple of Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
+	["Naxxramas"] = "Naxxramas",
+	
+	--Deutch
+	["Geschmolzener Kern"] = "Molten Core",
+	["Onyxias Hort"] = "Onyxia's Lair",
+	["Pechschwingenhort"] = "Blackwing Lair",
+	--same ["Zul'Gurub"] = "Zul'Gurub",
+	["Ruinen von Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
+	["Tempel von Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
+	--same ["Naxxramas"] = "Naxxramas",
+
+	--French
+	["C\197\147ur du Magma"] = "Molten Core",
+	["Repaire d'Onyxia"] = "Onyxia's Lair",
+	["Repaire de l'Aile noire"] = "Blackwing Lair",
+	--same ["Zul'Gurub"] = "Zul'Gurub",
+	["Ruines d'Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
+	["Le temple d'Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
+	--same ["Naxxramas"] = "Naxxramas",
 }
 
 VF_RaidDamage_Settings = {["DebugMode"] = false};
@@ -252,11 +271,15 @@ VF_RD_YellEvents = {
 	["Lord Victor Nefarius"] = {--Nefarian
 		["Let the games begin"] = VF_RD_YellEvents_Start,
 	},
+	["Seigneur Victor Nefarius"] = {--French Nefarian
+		["Let the games begin"] = VF_RD_YellEvents_Start,
+	},
 	["Nefarian"] = {
 		["Let the games begin"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
 		["Well done, my minions."] = VF_RD_YellEvents_Phase2,
 		["Rise my minions"] = VF_RD_YellEvents_Phase3,
 		["This cannot be!"] = VF_RD_YellEvents_End,
+		["C'est impossible"] = VF_RD_YellEvents_End, --French
 	},
 	
 	--AQ40
@@ -639,13 +662,19 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 		if(VF_RD_SaveInstanceInfoBool == true) then
 			for i = 1, GetNumSavedInstances() do
 				local raidName, raidID, raidRemaining = GetSavedInstanceInfo(i);
+				local translatedRaidName = VF_RD_RaidZones[raidName];
+				if(translatedRaidName ~= nil) then
+					raidName = translatedRaidName;
+				end
 				if(string.find(VF_RaidDamageData[1][1], "Session:Info:")) then
 					VF_RaidDamageData[1][1] = VF_RaidDamageData[1][1].."RaidID"..i.."="..raidName.."-"..raidID.."-"..raidRemaining..",";
 				else
 					table.insert(VF_RaidDamageData[1], 1, "Session:Info:RaidID"..i.."="..raidName.."-"..raidID.."-"..raidRemaining..",");
 				end
+				if(VF_RD_SaveInstanceInfoUpdateCount < 1) then
+					VF_RD_SaveInstanceInfoBool = false;
+				end
 			end
-			VF_RD_SaveInstanceInfoBool = false;
 		end
 	elseif(event == "CHAT_MSG_COMBAT_HOSTILE_DEATH") then
 		local mobName;
