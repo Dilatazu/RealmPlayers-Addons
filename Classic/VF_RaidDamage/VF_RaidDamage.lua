@@ -484,7 +484,7 @@ function VF_RD_CreateNewSession()
 		sessionInfo = sessionInfo.."Zone="..currentZone..",";
 	end
 	table.insert(VF_RaidDamageData[1], 1, sessionInfo);
-	VF_RD_SaveInstanceInfo();
+	VF_RD_SaveInstanceInfo(2);
 	VF_RD_RaidMembersChanged = nil;
 	VF_RD_DebugMessage("Created new Session");
 end
@@ -712,11 +712,21 @@ function VF_RaidDamage_OnEvent()
 end
 
 VF_RD_SaveInstanceInfoBool = false;
-function VF_RD_SaveInstanceInfo()
+VF_RD_SaveInstanceInfoUpdateCount = 0;
+VF_RD_SaveInstanceInfoTimer = 0;
+function VF_RD_SaveInstanceInfo(_UpdateCount)
 	VF_RD_SaveInstanceInfoBool = true;
+	VF_RD_SaveInstanceInfoUpdateCount = _UpdateCount - 1;
+	VF_RD_SaveInstanceInfoTimer = VF_RD_GetTime_S() + 10;
 	RequestRaidInfo();
 end
-
+function VF_RD_UpdateSaveInstanceInfo()
+	if(VF_RD_SaveInstanceInfoUpdateCount > 0) then
+		if(VF_RD_GetTime_S() > VF_RD_SaveInstanceInfoTimer) then
+			VF_RD_SaveInstanceInfo(VF_RD_SaveInstanceInfoUpdateCount);
+		end
+	end
+end
 
 VF_RaidDamageData = {};
 VF_RD_ErrorLog = {};
@@ -1052,7 +1062,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 			VF_RD_DebugMessage("Wipe_K="..VF_RD_CurrentBoss.."(ThreatWipe)");
 			VF_RD_CurrentBoss = "";
 			VF_RD_CurrentBossData = {};
-			VF_RD_SaveInstanceInfo();
+			VF_RD_SaveInstanceInfo(3);
 		end
 	end
 	if(VF_RD_RaidMembersChanged ~= nil and totalPlayersResult ~= "") then
@@ -1122,7 +1132,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 				VF_RD_CurrentBoss = "";
 				VF_RD_CurrentBossData = {};
 			end
-			VF_RD_SaveInstanceInfo();
+			VF_RD_SaveInstanceInfo(3);
 			VF_RD_PrecisionLoggingInterval = 10;
 		end
 	elseif(string.find(_Reason, "Wipe")) then
@@ -1315,6 +1325,7 @@ VF_RD_NextUpdateTime = nil;
 VF_RD_NextBossCheckTime = nil;
 function VF_RaidDamage_SafeOnUpdate()
 	VF_RD_SaveServerTime_Update();
+	VF_RD_UpdateSaveInstanceInfo();
 	if(GetNumRaidMembers() ~= 0) then
 		local currTime = GetTime();
 		local currTime_S = VF_RD_GetTime_S();
