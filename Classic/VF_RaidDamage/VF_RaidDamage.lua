@@ -493,10 +493,21 @@ function VF_RD_PrintRecorded()
 	VF_RD_Message(bossKills);
 end
 
+function VF_RD_GetTranslatedZoneText()
+	local zoneText = GetZoneText();
+	if(zoneText ~= nil) then
+		local translatedZoneText = VF_RD_RaidZones[zoneText];
+		if(translatedZoneText ~= nil) then
+			return translatedZoneText;
+		end
+	end
+	return zoneText;
+end
+
 function VF_RD_CreateNewSession()
 	table.insert(VF_RaidDamageData, 1, {});
 	local currentDate = date("!%Y-%m-%d %X");
-	local currentZone = GetZoneText();
+	local currentZone = VF_RD_GetTranslatedZoneText();
 	local currentPlayer = UnitName("player");
 	local realmName = GetRealmName();
 	local startTime = VF_RD_GetTime_S();
@@ -568,7 +579,7 @@ function VF_RD_CleanupSessions()
 end
 
 function VF_RD_DetermineLogging()
-	local currZone = GetZoneText();
+	local currZone = VF_RD_GetTranslatedZoneText();
 	if(currZone ~= nil) then
 		if(VF_RD_RaidZones[currZone] ~= nil) then
 			return true;
@@ -602,7 +613,7 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 		VF_RD_CreateNewSession();
 		DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
 	elseif(event == "ZONE_CHANGED_NEW_AREA") then
-		local currentZone = GetZoneText();
+		local currentZone = VF_RD_GetTranslatedZoneText();
 		if(string.find(VF_RaidDamageData[1][1], "Session:Info:")) then
 			VF_RaidDamageData[1][1] = VF_RaidDamageData[1][1].."Zone="..currentZone..",";
 		else
@@ -1455,9 +1466,9 @@ end
 function VF_RD_SafeSaveLoot()
 	local mobName = UnitName("target");
 	if(not(mobName)) then
-		if(VF_RD_LastKilledBoss == "Majordomo Executus" and GetZoneText() == "Molten Core") then
+		if(VF_RD_LastKilledBoss == "Majordomo Executus" and VF_RD_GetTranslatedZoneText() == "Molten Core") then
 			mobName = "Majordomo Executus";
-		elseif(VF_RD_LastKilledBoss == "The Four Horsemen" and GetZoneText() == "Naxxramas") then
+		elseif(VF_RD_LastKilledBoss == "The Four Horsemen" and VF_RD_GetTranslatedZoneText() == "Naxxramas") then
 			mobName = "The Four Horsemen";
 		end
 	end
