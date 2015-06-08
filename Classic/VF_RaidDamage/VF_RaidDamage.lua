@@ -925,7 +925,7 @@ function VF_RD_DetectBossEnd()
 		local deadReason = nil;
 		for addName, addData in VF_RD_CurrentBossData do
 			if(addData.Dead ~= true) then
-				if(addData.Health ~= nil and addData.MaxHealth ~= nil and addData.Health <= 0 and addData.MaxHealth > 1000) then
+				if(addData.Health ~= nil and addData.MaxHealth ~= nil and addData.Health <= 0 and addData.MaxHealth >= 100) then
 					addData.Dead = true;
 					if(deadReason == nil) then
 						deadReason = "Dead_T="..addName;
