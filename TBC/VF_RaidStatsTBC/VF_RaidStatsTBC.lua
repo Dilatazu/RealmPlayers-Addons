@@ -189,7 +189,7 @@ VF_RS_YellEvents = {
 		["are the real power in"] = VF_RS_YellEvents_Start,
 		["will not defeat the"] = VF_RS_YellEvents_Phase2,
 		["crush you"] = VF_RS_YellEvents_End,
-	}
+	},
 
 	--Tempest Keep
 	["Void Reaver"] = {
