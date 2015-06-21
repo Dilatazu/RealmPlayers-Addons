@@ -129,6 +129,58 @@ VF_RD_MobsType = {
 	--]]
 }
 
+VF_RD_BossNameTranslations = {
+	--MC
+	["Sulfuronherold"] = "Sulfuron Harbinger",
+    ["Golemagg der Verbrenner"] = "Golemagg the Incinerator",
+	["Majordomo Exekutus"] = "Majordomo Executus",
+
+	--BWL
+	["Grethok der Aufseher"] = "Grethok the Controller",
+    ["Feuerkralle der Ungez\195\164hmte"] = "Razorgore the Untamed",
+    ["Vaelastrasz der Verdorbene"] = "Vaelastrasz the Corrupt",
+    ["Brutw\195\164chter Dreschbringer"] = "Broodlord Lashlayer",
+    ["Feuerschwinge"] = "Firemaw",
+    ["Schattenschwinge"] = "Ebonroc",
+    ["Flammenmaul"] = "Flamegor",
+
+	--ZG
+	["Hohepriesterin Jeklik"] = "High Priestess Jeklik",
+    ["Hohepriester Venoxis"] = "High Priest Venoxis",
+    ["Hohepriesterin Mar'li"] = "High Priestess Mar'li",
+    ["Hohepriester Thekal"] = "High Priest Thekal",
+    ["Hohepriesterin Arlokk"] = "High Priestess Arlokk",
+    ["Blutf\195\188rst Mandokir"] = "Bloodlord Mandokir",
+    ["Jin'do der Verhexer"] = "Jin'do the Hexxer",
+
+	--AQ20
+	["Buru der Verschlinger"] = "Buru the Gorger",
+    ["Ayamiss der J\195\164ger"] = "Ayamiss the Hunter",
+    ["Ossirian der Narbenlose"] = "Ossirian the Unscarred",
+
+	--AQ40
+    ["Auge von C'Thun"] = "Eye of C'Thun",
+    ["Prinzessin Huhuran"] = "Princess Huhuran",
+    ["Fankriss der Unnachgiebige"] = "Fankriss the Unyielding",
+    ["Schlachtwache Sartura"] = "Battleguard Sartura",
+    ["Der Prophet Skeram"] = "The Prophet Skeram",
+    ["Prinzessin Yauj"] = "Princess Yauj",
+	
+	--NAXX
+}
+
+function VF_RD_GetNameTranslated(_Name)
+	local translatedName = VF_RD_BossNameTranslations[_Name];
+	if(translatedName ~= nil) then
+		return translatedName;
+	end
+	return _Name;
+end
+
+function VF_RD_InitializeTranslations()
+
+end
+
 VF_RD_RaidZones = {
 	--English
 	["Molten Core"] = "Molten Core",
@@ -209,10 +261,19 @@ VF_RD_YellEvents = {
 	["Majordomo Executus"] = {
 		["Reckless mortals"] = VF_RD_YellEvents_Start,
 		["Impossible! Stay your attack"] = VF_RD_YellEvents_End,
+
+		--DE
+		["Schw\195\164chliche Sterbliche"] = VF_RD_YellEvents_Start,
+		["Unm\195\182glich! Haltet ein Sterbliche"] = VF_RD_YellEvents_End,
 	},
 	["Ragnaros"] = {
 		["NOW FOR YOU, INSECTS"] = VF_RD_YellEvents_Start, 
 		["COME FORTH"] = VF_RD_YellEvents_Phase2,
+		
+		--DE
+		["NUN ZU EUCH, INSEKTEN"] = VF_RD_YellEvents_Start, 
+		["Kommt herbei"] = VF_RD_YellEvents_Phase2,
+		["KOMMT HERBEI"] = VF_RD_YellEvents_Phase2,
 	},
 	
 	--Onyxia
@@ -220,6 +281,11 @@ VF_RD_YellEvents = {
 		["must leave my lair to feed"] = VF_RD_YellEvents_Start,
 		["from above"] = VF_RD_YellEvents_Phase2,
 		["It seems you'll need another lesson"] = VF_RD_YellEvents_Phase3,
+
+		--DE
+		["muss ich meinen Unterschlupf"] = VF_RD_YellEvents_Start,
+		["von oben verbrennen"] = VF_RD_YellEvents_Phase2,
+		["Es scheint, als wenn"] = VF_RD_YellEvents_Phase3,
 	},
 	
 	--ZG
@@ -227,69 +293,133 @@ VF_RD_YellEvents = {
 		["grant me wings of vengance!"] = VF_RD_YellEvents_Start,
 		["rain fire down upon these invaders"] = VF_RD_YellEvents_Phase2,
 		["Curse you Hakkar!"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["verleiht mir die Fl\195\188gel der Rache!"] = VF_RD_YellEvents_Start,
+		["Feuer auf diese Eindringlinge herabregnen zu lassen"] = VF_RD_YellEvents_Phase2,
+		["Ich verfluche euch, Hakkar"] = VF_RD_YellEvents_End,
+
+		--FR
+		["Qu'une pluie de feu s'abatte"] = VF_RD_YellEvents_Phase2,
 	},
 	["High Priest Venoxis"] = {
 		["coils of hate unfurl"] = VF_RD_YellEvents_Phase2,
 		["Ssserenity"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["das Schlachten beginnen"] = VF_RD_YellEvents_Phase2,
+		["Klarheit"] = VF_RD_YellEvents_End,
+		
+		--FR
+		["Que se d\195\169roulent les anneaux de la haine"] = VF_RD_YellEvents_Phase2,
 	},
 	["High Priestess Mar'li"] = {
 		["Draw me to your web mistress Shadra."] = VF_RD_YellEvents_Start,
 		["Hakkar controls me no longer"] = VF_RD_YellEvents_End,
+
+		--DE
+		["H\195\188llt mich in euer Netz, Herrin Shadra."] = VF_RD_YellEvents_Start,
+		["Hakkar beherrscht mich nicht l\195\164nger"] = VF_RD_YellEvents_End,
 	},
 	["Bloodlord Mandokir"] = {
 		["I'll feed your souls to Hakkar himself!"] = VF_RD_YellEvents_Start,
+
+		--DE
+		["Ich werde Hakkar eure Seelen zum Fra\195\159 vorwerfen!"] = VF_RD_YellEvents_Start,
 	},
 	["High Priest Thekal"] = {
 		["Shirvallah, fill me with your RAGE!"] = VF_RD_YellEvents_Start,
 		["Hakkar binds me no more!"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Shirvallah, erf\195\188lle mich mit deinem Zorn!"] = VF_RD_YellEvents_Start,
+		["Hakkar kontrolliert mich nicht l\195\164nger"] = VF_RD_YellEvents_End,
 	},
 	["High Priestess Arlokk"] = {
 		["Bethekk, your priestess calls upon your might"] = VF_RD_YellEvents_Start,
 		["I am free of the Soulflayer!"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Bethekk, eure Priesterin erfleht eure Macht"] = VF_RD_YellEvents_Start,
+		["Die Macht des Seelenschinders f\195\164llt von mir!"] = VF_RD_YellEvents_End,
 	},
 	["Jin'do the Hexxer"] = {
 		["Welcome to da great show friends!"] = VF_RD_YellEvents_Start,
+		
+		--DE
+		["Willkommen auf eurem Begr\195\164bnis!"] = VF_RD_YellEvents_Start,
 	},
 	["Hakkar"] = {
 		["PRIDE HERALDS THE END OF YOUR WORLD. COME"] = VF_RD_YellEvents_Start,
+		
+		--DE
+		["Eure \195\188berheblichkeit k\195\188ndet bereits vom Ende dieser Welt"] = VF_RD_YellEvents_Start,
 	},
 	
 	--BWL
 	["Grethok the Controller"] = {--Razorgore the Untamed
 		["Intruders have breached the hatchery"] = VF_RD_YellEvents_Start,
+		
+		--DE
+		["die Eier um jeden Preis!"] = VF_RD_YellEvents_Start,
 	},
 	["Razorgore the Untamed"] = {
 		["Intruders have breached the hatchery"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
 		["That device shall never torment me again!"] = VF_RD_YellEvents_Phase2,--Phase2
+		
+		--DE
+		["die Eier um jeden Preis!"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
+		["Das Ger\195\164t niemals qu\195\164len mich wieder!"] = VF_RD_YellEvents_Phase2,--Phase2
 	},
 	["Vaelastrasz the Corrupt"] = {
 		["mortals before the wrath of Lord"] = VF_RD_YellEvents_Start,
+		
+		--DE
+		["KNIET NIEDER STERBLICHE ODER DER ZORN VON LORD"] = VF_RD_YellEvents_Start,
 	},
 	["Broodlord Lashlayer"] = {
 		["None of your kind should be here"] = VF_RD_YellEvents_Start,
+		
+		--DE
+		["Euresgleichen sollte nicht hier sein"] = VF_RD_YellEvents_Start,
 	},
 	["Lord Victor Nefarius"] = {--Nefarian
 		["Let the games begin"] = VF_RD_YellEvents_Start,
-	},
-	["Seigneur Victor Nefarius"] = {--French Nefarian
-		["Let the games begin"] = VF_RD_YellEvents_Start,
+		
+		--DE
+		["Lasst die Spiele beginnen"] = VF_RD_YellEvents_Start,
 	},
 	["Nefarian"] = {
 		["Let the games begin"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
 		["Well done, my minions."] = VF_RD_YellEvents_Phase2,
 		["Rise my minions"] = VF_RD_YellEvents_Phase3,
 		["This cannot be!"] = VF_RD_YellEvents_End,
-		["C'est impossible"] = VF_RD_YellEvents_End, --French
+		
+		--DE
+		["Lasst die Spiele beginnen"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
+		["Sehr gut, meine Diener"] = VF_RD_YellEvents_Phase2,
+		["Erhebt euch meine Diener"] = VF_RD_YellEvents_Phase3,
+		["Das kann nicht sein!"] = VF_RD_YellEvents_End,
+
+		--FR
+		["C'est impossible"] = VF_RD_YellEvents_End,
 	},
 	
 	--AQ40
 	["The Prophet Skeram"] = {
 		["Are you so eager to die?"] = VF_RD_YellEvents_Start,
 		["You only delay... the inevitable..."] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Seid ihr so begierig darauf zu sterben?"] = VF_RD_YellEvents_Start,
 	},
 	["Battleguard Sartura"] = {
 		["You will be judged for defiling these sacred grounds!"] = VF_RD_YellEvents_Start,
 		["I serve to the last!"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Seid gewiss, dass ihr daf\195\188r gerichtet werdet!"] = VF_RD_YellEvents_Start,
+		["bis zum letzten Atemzug!"] = VF_RD_YellEvents_End,
 	},
 	
 	
@@ -298,6 +428,11 @@ VF_RD_YellEvents = {
 		["Foolishly you have sought your own demise."] = VF_RD_YellEvents_Start,
 		["you face the harvester of souls"] = VF_RD_YellEvents_Phase2,
 		["I... am... undone"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Ihr Narren habt euren eigenen Untergang heraufbeschworen"] = VF_RD_YellEvents_Start,
+		["Stellt euch dem Seelenj\195\164ger"] = VF_RD_YellEvents_Phase2,
+		["Das... ist... mein... Ende"] = VF_RD_YellEvents_End,
 	},
 	--EMOTE: ["Gluth"] = {["Gluth goes into a frenzy!"] = VF_RD_YellEvents_Phase2},
 	["Noth the Plaguebringer"] = {
@@ -306,55 +441,107 @@ VF_RD_YellEvents = {
 		["to the master"] = VF_RD_YellEvents_Start, --Glory to the master!
 		["and fight once more"] = VF_RD_YellEvents_Phase2, --Rise my soldiers! Rise, and fight once more!
 		["will serve the master"] = VF_RD_YellEvents_End, --I will serve the master... In... Death.
+		
+		--DE
+		["Euer Leben ist verwirkt"] = VF_RD_YellEvents_Start,
+		["Ehre unserem Meister"] = VF_RD_YellEvents_Start,
+		["Erhebt euch und k\195\164mpft erneut"] = VF_RD_YellEvents_Phase2,
+		["Ich werde dem Meister \195\188ber den Tod hinaus dienen"] = VF_RD_YellEvents_End,
 	},
 	["Heigan the Unclean"] = {
 		["are mine now"] = VF_RD_YellEvents_Start, -- You are mine now.
 		["see you"] = VF_RD_YellEvents_Start, -- I see you.../I see you!
 		["Noo... o..."] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Ihr geh\195\182rt mir"] = VF_RD_YellEvents_Start,
+		["see you"] = VF_RD_YellEvents_Start,
+		["Arghh... h..."] = VF_RD_YellEvents_End,
 	},
 	["Anub'Rekhan"] = {
 		["There is no way out"] = VF_RD_YellEvents_Start,
+		
+		--DE
+		["Es gibt kein Entkommen"] = VF_RD_YellEvents_Start,
 	},
 	["Grand Widow Faerlina"] = {
 		["them in the master"] = VF_RD_YellEvents_Start, --Slay them in the master's name!
 		["You cannot hide from me!"] = VF_RD_YellEvents_Start,
 		["before me, worm"] = VF_RD_YellEvents_Start, --Kneel before me, worm!
 		["The master... will avenge me!"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["T\195\182tet sie im Namen des Meisters"] = VF_RD_YellEvents_Start,
+		["Ihr k\195\182nnt euch nicht vor mir verstecken"] = VF_RD_YellEvents_Start,
+		["Kniet nieder, Wurm"] = VF_RD_YellEvents_Start,
+		["Mein Meister wird mich r\195\164chen"] = VF_RD_YellEvents_End,
 	},
 	["Instructor Razuvious"] = {
 		["Stand and fight!"] = VF_RD_YellEvents_Start, --Stand and fight!
 		["me what you"] = VF_RD_YellEvents_Start, --Show me what you've got!
 		["honorable"] = VF_RD_YellEvents_End, --An honorable... death...
+		
+		--DE
+		["Stellt euch und k\195\164mpft"] = VF_RD_YellEvents_Start,
+		["Zeigt mir, was ihr k\195\182nnt"] = VF_RD_YellEvents_Start, 
+		["Ein ehrenhafter"] = VF_RD_YellEvents_End,
 	},
 	["Highlord Mograine"] = {
 		["You seek death?"] = VF_RD_YellEvents_Start,
 		["I... am... released!"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Sucht Ihr den Tod?"] = VF_RD_YellEvents_Start,
 	},
 	["Thane Korth'azz"] = {
 		["Come out and fight"] = VF_RD_YellEvents_Start,
 		["What a bloody waste this is!"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Kommt und k\195\164mpft"] = VF_RD_YellEvents_Start,
+		["Was f\195\188r eine verdammte Verschwendung!"] = VF_RD_YellEvents_End,
 	},
 	["Lady Blaumeux"] = {
 		["Defend youself"] = VF_RD_YellEvents_Start,
 		["Tou... che!"] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Verteidigt euch"] = VF_RD_YellEvents_Start,
 	},
 	["Sir Zeliek"] = {
 		["Flee, before it's too late"] = VF_RD_YellEvents_Start,
 		["It is... as it should be."] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Flieht, bevor es zu sp\195\164t ist"] = VF_RD_YellEvents_Start,
+		["Es verl\195\164uft... ganz nach Plan"] = VF_RD_YellEvents_End,
 	},
 	["Patchwerk"] = {
 		["Kel'Thuzad make Patchwerk his Avatar of War!"] = VF_RD_YellEvents_Start,
 		["want to play"] = VF_RD_YellEvents_Start,
 		--EMOTE: ["becomes enraged!"] = VF_RD_YellEvents_Phase3,
 		["What happened to... Patch..."] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Kel'Thuzad macht Flickwerk zu seinem Abgesandten des Kriegs"] = VF_RD_YellEvents_Start,
+		["Flickwerk spielen m\195\182chte"] = VF_RD_YellEvents_Start,
+		["Was... sein geschehen..."] = VF_RD_YellEvents_End,
 	},
 	["Feugen"] = { --Thaddius pre fight ADD
 		["Feed you to master!"] = VF_RD_YellEvents_Start,
 		["No... more... Feugen..."] = VF_RD_YellEvents_End,
+
+		--DE
+		["Verf\195\188ttere euch an Meister!"] = VF_RD_YellEvents_Start,
+		["Kein... Feugen... mehr..."] = VF_RD_YellEvents_End,
 	},
 	["Stalagg"] = { --Thaddius pre fight ADD
 		["Stalagg crush you!"] = VF_RD_YellEvents_Start,
 		["Master save me..."] = VF_RD_YellEvents_End,
+
+		--DE
+		["Stalagg zerquetschen!"] = VF_RD_YellEvents_Start,
+		["Meister mich retten..."] = VF_RD_YellEvents_End,
 	},
 	["Thaddius"] = {
 		--pre fight yell: does not mean fight have started! 
@@ -362,6 +549,10 @@ VF_RD_YellEvents = {
 		--pre fight yell: does not mean fight have started! 
 		["Now YOU feel pain!"] = VF_RD_YellEvents_Phase2,
 		["Thank... you..."] = VF_RD_YellEvents_End,
+		
+		--DE
+		["Jetzt sp\195\188rt ihr den Schmerz..."] = VF_RD_YellEvents_Phase2,
+		["Euch... dankbar sein!"] = VF_RD_YellEvents_End,
 	},
 	["Kel'Thuzad"] = {
 		["obey the call of Kel'Thuzad!"] = VF_RD_YellEvents_Start,
@@ -370,6 +561,14 @@ VF_RD_YellEvents = {
 		["The end is upon you!"] = VF_RD_YellEvents_Phase2,
 		["Master! I require aid!"] = VF_RD_YellEvents_Phase3,
 		["Your victory is a hollow one"] = VF_RD_YellEvents_End,
+
+		--DE
+		["Folg dem Ruf von Kel'Thuzad!"] = VF_RD_YellEvents_Start,
+		["Schreiend werdet Ihr diese Welt verlassen!"] = VF_RD_YellEvents_Phase2,
+		["Betet um Gnade!"] = VF_RD_YellEvents_Phase2,
+		["Euer Ende ist gekommen!"] = VF_RD_YellEvents_Phase2,
+		["Meister, ich ben\195\182tige Beistand."] = VF_RD_YellEvents_Phase3,
+		["Euer Sieg ist bedeutungslos"] = VF_RD_YellEvents_End,
 	},
 }
 VF_RD_BossMap = {
