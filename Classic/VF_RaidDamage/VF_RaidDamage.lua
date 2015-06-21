@@ -130,6 +130,7 @@ VF_RD_MobsType = {
 }
 
 VF_RD_BossNameTranslations = {
+--DE
 	--MC
 	["Sulfuronherold"] = "Sulfuron Harbinger",
     ["Golemagg der Verbrenner"] = "Golemagg the Incinerator",
@@ -167,18 +168,80 @@ VF_RD_BossNameTranslations = {
     ["Prinzessin Yauj"] = "Princess Yauj",
 	
 	--NAXX
+--FR
+	--MC
+	["Messager de Sulfuron"] = "Sulfuron Harbinger",
+	["Golemagg l\'Incin\195\169rateur"] = "Golemagg the Incinerator",
+	["Chambellan Executus"] = "Majordomo Executus",
+      
+	--BWL
+	["Grethok le Contr\195\180leur"] = "Grethok the Controller",
+	["Tranchetripe l'Indompt\195\169"] = "Razorgore the Untamed",
+	["Vaelastrasz le Corrompu"] = "Vaelastrasz the Corrupt",
+	["Seigneur des couv\195\169es Lanistaire"] = "Broodlord Lashlayer",
+	["Gueule-de-feu"] = "Firemaw",
+	["Roch\195\169b\195\168ne"] = "Ebonroc",
+	["Seigneur Victor Nefarius"] = "Lord Victor Nefarius",
+      
+	--ZG
+	["Grande pr\195\170tresse Jeklik"] = "High Priestess Jeklik",
+	["Grand pr\195\170tre Venoxis"] = "High Priest Venoxis",
+	["Grande pr\195\170tresse Mar'li"] = "High Priestess Mar'li",
+	["Grand pr\195\170tre Thekal"] = "High Priest Thekal",
+	["Grande pr\195\170tresse Arlokk"] = "High Priestess Arlokk",
+	["Seigneur sanglant Mandokir"] = "Bloodlord Mandokir",
+	["Jin'do le maléficieur"] = "Jin'do the Hexxer",
+
+	--AQ20
+	["G\195\169n\195\169ral Rajaxx"] = "General Rajaxx",
+	["Buru Grandgosier"] = "Buru the Gorger",
+	["Ayamiss le Chasseur"] = "Ayamiss the Hunter",
+	["Ossirian l'Intouch\195\169"] = "Ossirian the Unscarred",
+      
+	--AQ40
+	["Oeil de C'Thun"] = "Eye of C'Thun",
+	["Empereur Vek'lor"] = "Emperor Vek'lor",
+	["Empereur Vek'nilash"] = "Emperor Vek'nilash",
+	["Princesse Huhuran"] = "Princess Huhuran",
+	["Fankriss l'Inflexible"] = "Fankriss the Unyielding",
+	["Garde de guerre Sartura"] = "Battleguard Sartura",
+	["Le Proph\195\168te Skeram"] = "The Prophet Skeram",
+	["Seigneur Kri"] = "Lord Kri",
+	["Princesse Yauj"] = "Princess Yauj",
+      
+	--Naxx
+	["Grande veuve Faerlina"] = "Grand Widow Faerlina",
+	["Le Recousu"] = "Patchwerk",
+	["Noth le Porte-peste"] = "Noth the Plaguebringer",
+	["Heigan l'Impur"] = "Heigan the Unclean",
+	["Horreb"] = "Loatheb",
+	["Instructeur Razuvious"] = "Instructor Razuvious",
+	["Gothik le Moissonneur"] = "Gothik the Harvester",
+	--The Four Horsemen
+	["G\195\169n\195\169ralissime Mograine"] = "Highlord Mograine",
+	["Dame Blaumeux"] = "Lady Blaumeux",
 }
 
+VF_RD_SpecialLanguageSupportMode = false;
+
+function VF_RD_InitializeLanguages()
+	if(GetRealmName() == "NostalGeek 1.12" or GetRealName() == "Nefarian" or GetLocale() == "deDE" or GetLocale() == "frFR") then
+		VF_RD_SpecialLanguageSupportMode = true;
+	end
+end
+
 function VF_RD_GetNameTranslated(_Name)
+	if(VF_RD_SpecialLanguageSupportMode == false) then
+		return _Name;
+	end
+	if(_Name == nil) then
+		return _Name;
+	end
 	local translatedName = VF_RD_BossNameTranslations[_Name];
 	if(translatedName ~= nil) then
 		return translatedName;
 	end
 	return _Name;
-end
-
-function VF_RD_InitializeTranslations()
-
 end
 
 VF_RD_RaidZones = {
@@ -256,6 +319,277 @@ VF_RD_YellEventsStr = {
 	[VF_RD_YellEvents_End] = "Dead_Y",
 }
 
+VF_RD_YellEventsDE = {
+	--MC
+	["Majordomo Executus"] = {
+		["Schw\195\164chliche Sterbliche"] = VF_RD_YellEvents_Start,
+		["Unm\195\182glich! Haltet ein Sterbliche"] = VF_RD_YellEvents_End,
+	},
+	["Ragnaros"] = {
+		["NUN ZU EUCH, INSEKTEN"] = VF_RD_YellEvents_Start, 
+		["Kommt herbei"] = VF_RD_YellEvents_Phase2,
+		["KOMMT HERBEI"] = VF_RD_YellEvents_Phase2,
+	},
+	
+	--Onyxia
+	["Onyxia"] = {
+		["muss ich meinen Unterschlupf"] = VF_RD_YellEvents_Start,
+		["von oben verbrennen"] = VF_RD_YellEvents_Phase2,
+		["Es scheint, als wenn"] = VF_RD_YellEvents_Phase3,
+	},
+	
+	--ZG
+	["High Priestess Jeklik"] = {
+		["verleiht mir die Fl\195\188gel der Rache!"] = VF_RD_YellEvents_Start,
+		["Feuer auf diese Eindringlinge herabregnen zu lassen"] = VF_RD_YellEvents_Phase2,
+		["Ich verfluche euch, Hakkar"] = VF_RD_YellEvents_End,
+	},
+	["High Priest Venoxis"] = {
+		["das Schlachten beginnen"] = VF_RD_YellEvents_Phase2,
+		["Klarheit"] = VF_RD_YellEvents_End,
+	},
+	["High Priestess Mar'li"] = {
+		["H\195\188llt mich in euer Netz, Herrin Shadra."] = VF_RD_YellEvents_Start,
+		["Hakkar beherrscht mich nicht l\195\164nger"] = VF_RD_YellEvents_End,
+	},
+	["Bloodlord Mandokir"] = {
+		["Ich werde Hakkar eure Seelen zum Fra\195\159 vorwerfen!"] = VF_RD_YellEvents_Start,
+	},
+	["High Priest Thekal"] = {
+		["Shirvallah, erf\195\188lle mich mit deinem Zorn!"] = VF_RD_YellEvents_Start,
+		["Hakkar kontrolliert mich nicht l\195\164nger"] = VF_RD_YellEvents_End,
+	},
+	["High Priestess Arlokk"] = {
+		["Bethekk, eure Priesterin erfleht eure Macht"] = VF_RD_YellEvents_Start,
+		["Die Macht des Seelenschinders f\195\164llt von mir!"] = VF_RD_YellEvents_End,
+	},
+	["Jin'do the Hexxer"] = {
+		["Willkommen auf eurem Begr\195\164bnis!"] = VF_RD_YellEvents_Start,
+	},
+	["Hakkar"] = {
+		["Eure \195\188berheblichkeit k\195\188ndet bereits vom Ende dieser Welt"] = VF_RD_YellEvents_Start,
+	},
+	
+	--BWL
+	["Grethok the Controller"] = {--Razorgore the Untamed
+		["die Eier um jeden Preis!"] = VF_RD_YellEvents_Start,
+	},
+	["Razorgore the Untamed"] = {
+		["die Eier um jeden Preis!"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
+		["Das Ger\195\164t niemals qu\195\164len mich wieder!"] = VF_RD_YellEvents_Phase2,--Phase2
+	},
+	["Vaelastrasz the Corrupt"] = {
+		["KNIET NIEDER STERBLICHE ODER DER ZORN VON LORD"] = VF_RD_YellEvents_Start,
+	},
+	["Broodlord Lashlayer"] = {
+		["Euresgleichen sollte nicht hier sein"] = VF_RD_YellEvents_Start,
+	},
+	["Lord Victor Nefarius"] = {--Nefarian
+		["Lasst die Spiele beginnen"] = VF_RD_YellEvents_Start,
+	},
+	["Nefarian"] = {
+		["Lasst die Spiele beginnen"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
+		["Sehr gut, meine Diener"] = VF_RD_YellEvents_Phase2,
+		["Erhebt euch meine Diener"] = VF_RD_YellEvents_Phase3,
+		["Das kann nicht sein!"] = VF_RD_YellEvents_End,
+	},
+	
+	--AQ40
+	["The Prophet Skeram"] = {
+		["Seid ihr so begierig darauf zu sterben?"] = VF_RD_YellEvents_Start,
+	},
+	["Battleguard Sartura"] = {
+		["Seid gewiss, dass ihr daf\195\188r gerichtet werdet!"] = VF_RD_YellEvents_Start,
+		["bis zum letzten Atemzug!"] = VF_RD_YellEvents_End,
+	},
+	
+	--Naxx
+	["Gothik the Harvester"] = {
+		["Ihr Narren habt euren eigenen Untergang heraufbeschworen"] = VF_RD_YellEvents_Start,
+		["Stellt euch dem Seelenj\195\164ger"] = VF_RD_YellEvents_Phase2,
+		["Das... ist... mein... Ende"] = VF_RD_YellEvents_End,
+	},
+	["Noth the Plaguebringer"] = {
+		["Euer Leben ist verwirkt"] = VF_RD_YellEvents_Start,
+		["Ehre unserem Meister"] = VF_RD_YellEvents_Start,
+		["Erhebt euch und k\195\164mpft erneut"] = VF_RD_YellEvents_Phase2,
+		["Ich werde dem Meister \195\188ber den Tod hinaus dienen"] = VF_RD_YellEvents_End,
+	},
+	["Heigan the Unclean"] = {
+		["Ihr geh\195\182rt mir"] = VF_RD_YellEvents_Start,
+		["see you"] = VF_RD_YellEvents_Start,
+		["Arghh... h..."] = VF_RD_YellEvents_End,
+	},
+	["Anub'Rekhan"] = {
+		["Es gibt kein Entkommen"] = VF_RD_YellEvents_Start,
+	},
+	["Grand Widow Faerlina"] = {
+		["T\195\182tet sie im Namen des Meisters"] = VF_RD_YellEvents_Start,
+		["Ihr k\195\182nnt euch nicht vor mir verstecken"] = VF_RD_YellEvents_Start,
+		["Kniet nieder, Wurm"] = VF_RD_YellEvents_Start,
+		["Mein Meister wird mich r\195\164chen"] = VF_RD_YellEvents_End,
+	},
+	["Instructor Razuvious"] = {
+		["Stellt euch und k\195\164mpft"] = VF_RD_YellEvents_Start,
+		["Zeigt mir, was ihr k\195\182nnt"] = VF_RD_YellEvents_Start, 
+		["Ein ehrenhafter"] = VF_RD_YellEvents_End,
+	},
+	["Highlord Mograine"] = {
+		["Sucht Ihr den Tod?"] = VF_RD_YellEvents_Start,
+	},
+	["Thane Korth'azz"] = {
+		["Kommt und k\195\164mpft"] = VF_RD_YellEvents_Start,
+		["Was f\195\188r eine verdammte Verschwendung!"] = VF_RD_YellEvents_End,
+	},
+	["Lady Blaumeux"] = {
+		["Verteidigt euch"] = VF_RD_YellEvents_Start,
+	},
+	["Sir Zeliek"] = {
+		["Flieht, bevor es zu sp\195\164t ist"] = VF_RD_YellEvents_Start,
+		["Es verl\195\164uft... ganz nach Plan"] = VF_RD_YellEvents_End,
+	},
+	["Patchwerk"] = {
+		["Kel'Thuzad macht Flickwerk zu seinem Abgesandten des Kriegs"] = VF_RD_YellEvents_Start,
+		["Flickwerk spielen m\195\182chte"] = VF_RD_YellEvents_Start,
+		["Was... sein geschehen..."] = VF_RD_YellEvents_End,
+	},
+	["Feugen"] = { --Thaddius pre fight ADD
+		["Verf\195\188ttere euch an Meister!"] = VF_RD_YellEvents_Start,
+		["Kein... Feugen... mehr..."] = VF_RD_YellEvents_End,
+	},
+	["Stalagg"] = { --Thaddius pre fight ADD
+		["Stalagg zerquetschen!"] = VF_RD_YellEvents_Start,
+		["Meister mich retten..."] = VF_RD_YellEvents_End,
+	},
+	["Thaddius"] = {
+		["Jetzt sp\195\188rt ihr den Schmerz..."] = VF_RD_YellEvents_Phase2,
+		["Euch... dankbar sein!"] = VF_RD_YellEvents_End,
+	},
+	["Kel'Thuzad"] = {
+		["Folg dem Ruf von Kel'Thuzad!"] = VF_RD_YellEvents_Start,
+		["Schreiend werdet Ihr diese Welt verlassen!"] = VF_RD_YellEvents_Phase2,
+		["Betet um Gnade!"] = VF_RD_YellEvents_Phase2,
+		["Euer Ende ist gekommen!"] = VF_RD_YellEvents_Phase2,
+		["Meister, ich ben\195\182tige Beistand."] = VF_RD_YellEvents_Phase3,
+		["Euer Sieg ist bedeutungslos"] = VF_RD_YellEvents_End,
+	},
+}
+VF_RD_YellEventsFR = {
+	--MC
+	["Majordomo Executus"] = {
+		
+	},
+	["Ragnaros"] = {
+		
+	},
+	
+	--Onyxia
+	["Onyxia"] = {
+		
+	},
+	
+	--ZG
+	["High Priestess Jeklik"] = {
+		["Qu'une pluie de feu s'abatte"] = VF_RD_YellEvents_Phase2,
+	},
+	["High Priest Venoxis"] = {
+		["Que se d\195\169roulent les anneaux de la haine"] = VF_RD_YellEvents_Phase2,
+	},
+	["High Priestess Mar'li"] = {
+		
+	},
+	["Bloodlord Mandokir"] = {
+		
+	},
+	["High Priest Thekal"] = {
+		
+	},
+	["High Priestess Arlokk"] = {
+		
+	},
+	["Jin'do the Hexxer"] = {
+		
+	},
+	["Hakkar"] = {
+		
+	},
+	
+	--BWL
+	["Grethok the Controller"] = {--Razorgore the Untamed
+		
+	},
+	["Razorgore the Untamed"] = {
+		
+	},
+	["Vaelastrasz the Corrupt"] = {
+		
+	},
+	["Broodlord Lashlayer"] = {
+		
+	},
+	["Lord Victor Nefarius"] = {--Nefarian
+		
+	},
+	["Nefarian"] = {
+		["C'est impossible"] = VF_RD_YellEvents_End,
+	},
+	
+	--AQ40
+	["The Prophet Skeram"] = {
+		
+	},
+	["Battleguard Sartura"] = {
+		
+	},
+	
+	
+	--Naxx
+	["Gothik the Harvester"] = {
+		
+	},
+	["Noth the Plaguebringer"] = {
+		
+	},
+	["Heigan the Unclean"] = {
+		
+	},
+	["Anub'Rekhan"] = {
+		
+	},
+	["Grand Widow Faerlina"] = {
+		
+	},
+	["Instructor Razuvious"] = {
+		
+	},
+	["Highlord Mograine"] = {
+		
+	},
+	["Thane Korth'azz"] = {
+		
+	},
+	["Lady Blaumeux"] = {
+		
+	},
+	["Sir Zeliek"] = {
+		
+	},
+	["Patchwerk"] = {
+		
+	},
+	["Feugen"] = { --Thaddius pre fight ADD
+		
+	},
+	["Stalagg"] = { --Thaddius pre fight ADD
+		
+	},
+	["Thaddius"] = {
+		
+	},
+	["Kel'Thuzad"] = {
+		
+	},
+}
 VF_RD_YellEvents = {
 	--MC
 	["Majordomo Executus"] = {
@@ -625,12 +959,7 @@ function VF_RD_HaveStartYell(bossName)
 	end
 	return false;
 end
---[[VF_RD_Onyxia_Phase2_YELL = "from above";
-VF_RD_Onyxia_Phase3_YELL = "It seems you'll need another lesson";
-VF_RD_Majordomo_Start_YELL = "Reckless mortals, none may challenge the sons of the living flame!";
-VF_RD_Majordomo_Death_YELL = "Impossible! Stay your attack mortals!";
-VF_RD_Ragnaros_Start_YELL = "NOW FOR YOU, INSECTS.";
-VF_RD_Ragnaros_Submerge_YELL = "COME FORTH";--]]
+
 
 VF_RD_OldSW_SyncReset = SW_SyncReset;
 function VF_RD_NewSW_SyncReset(newSessID, newName)
@@ -819,8 +1148,8 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 			table.insert(VF_RaidDamageData[1], 1, "Session:Info:Zone="..currentZone..",");
 		end
 	elseif(event == "CHAT_MSG_MONSTER_YELL") then
-		local monsterName = arg2;
-	
+		local monsterName = VF_RD_GetNameTranslated(arg2);
+		
 		--[[if(monsterName == "Kel'Thuzad" and eventText ~= nil and VF_RaidDamageData ~= nil) then
 			--Only debug log Kel'Thuzad yells, we allready have enough data for all other bosses
 			table.insert(VF_RaidDamageData[1], 1, "Session:Debug:"..monsterName.."=Yell-"..eventText);
@@ -889,7 +1218,8 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 	elseif(event == "CHAT_MSG_COMBAT_HOSTILE_DEATH") then
 		local mobName;
 		_, _, mobName = string.find(eventText, string.gsub(UNITDIESOTHER, "%%s", "(.+)"));
-		
+		mobName = VF_RD_GetNameTranslated(mobName);
+
 		if(VF_RD_MobsType[mobName] == VF_RD_MobType_Boss) then
 			local deadReason = "Dead_C="..mobName;
 			VF_RD_DebugMessage("Dead_C="..mobName.."(CombatMsgDeath)");
@@ -1055,7 +1385,7 @@ function VF_RD_DetectBossStart()
 	if(VF_RD_CurrentBoss == "") then
 		for unitID, unitData in SW_DataCollection.activeSegment do
 			if(type(unitID)=="number")then
-				local unitName = SW_StrTable:getStr(unitID);
+				local unitName = VF_RD_GetNameTranslated(SW_StrTable:getStr(unitID));
 				if(VF_RD_MobsType[unitName] == VF_RD_MobType_Boss) then
 					local bossName = VF_RD_GetBossName(unitName);
 					if(VF_RD_LastKilledBoss ~= bossName) then
@@ -1077,7 +1407,7 @@ function VF_RD_DetectBossStart()
 		
 		for i = 1, 40 do
 			local currUnitID = "raid"..i.."target";
-			local unitTarget = UnitName(currUnitID);
+			local unitTarget = VF_RD_GetNameTranslated(UnitName(currUnitID));
 			if(unitTarget ~= nil) then
 				if(VF_RD_MobsType[unitTarget] == VF_RD_MobType_Boss) then
 					local bossName = VF_RD_GetBossName(unitTarget);
@@ -1106,7 +1436,7 @@ end
 	local inCombatCount = 0;
 	for i = 1, 40 do
 		local currUnitID = "raid"..i;
-		local unitName = UnitName(currUnitID);
+		local unitName = VF_RD_GetNameTranslated(UnitName(currUnitID));
 		if(unitName ~= nil) then
 			if(UnitAffectingCombat(currUnitID) == 1 or UnitIsDead(currUnitID) == 1) then
 				inCombatCount = inCombatCount + 1;
@@ -1167,7 +1497,8 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	local totalPlayersResult = "";
 	for unitID, unitData in SW_DataCollection.activeSegment do 
 		if(type(unitID)=="number")then 
-			local unitName = SW_StrTable:getStr(unitID);
+			local rawUnitName = SW_StrTable:getStr(unitID);
+			local unitName = VF_RD_GetNameTranslated(rawUnitName);
 			if(VF_RD_LastRecorded[unitID] == nil) then
 				VF_RD_LastRecorded[unitID] = {};
 				totalPlayersResult = totalPlayersResult..unitName.."="..unitID..",";
@@ -1193,7 +1524,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 			local decurse, dmgCrit, healCrit = unitData:getDecurseDone(), unitData:getDmgCrit(), unitData:getHealCrit();
 			local effHealRecv, overHealRecv, rawHeal, rawHealRecv = unitData:getEffectiveHealRecieved(), unitData:getOHRecieved(), unitData:getRawHealDone(), unitData:getRawHealRecieved();
 			
-			local threatValue = klhtm.table.raiddata[unitName];
+			local threatValue = klhtm.table.raiddata[rawUnitName];
 			if(threatValue == nil) then
 				threatValue = 0;
 			end
@@ -1528,7 +1859,7 @@ function VF_RD_UpdateBossHealth()
 	else
 		for i = 1, 40 do
 			local currUnitID = "raid"..i.."target";
-			local currName = UnitName(currUnitID);
+			local currName = VF_RD_GetNameTranslated(UnitName(currUnitID));
 			if(currName ~= nil) then
 				if(VF_RD_CurrentBossData[currName] ~= nil) then
 					VF_RD_CurrentBossData[currName].Health = UnitHealth(currUnitID);
@@ -1631,15 +1962,28 @@ function VF_RD_SaveServerTime_Update()
 	end
 end
 
+if(GetLocale() == "deDE") then
+	VF_RD_SplitReceivesLootStr = "([^%s]+) bekommt Beute: (.+)%.";
+	--VF_RD_SplitReceivesLootStr2 = "([^%s]+) erh\195\164lt Beute: (.+)%."; --Not sure if needed yet... can be fixed later using "([^%s]+) (.+) Beute: (.+)%."
+	VF_RD_SplitIReceivesLootStr = "Ihr erhaltet Beute: (.+)%."
+elseif(GetLocale() == "frFR") then
+	VF_RD_SplitReceivesLootStr = "([^%s]+) receives loot: (.+)%.";
+	VF_RD_SplitIReceivesLootStr = "You receive loot: (.+)%."
+else
+	VF_RD_SplitReceivesLootStr = "([^%s]+) receives loot: (.+)%.";
+	VF_RD_SplitIReceivesLootStr = "You receive loot: (.+)%."
+end
+
+
 function VF_RD_LootReceived()
-	local _, _, playerName, itemLink = string.find(arg1, "([^%s]+) receives loot: (.+)%.");
+	local _, _, playerName, itemLink = string.find(arg1, VF_RD_SplitReceivesLootStr);
 	
 	local itemID = "0";
 	if not ( playerName == nil) then
 		local _, _, rubbish1, tempItemID, rubbish2 = string.find(itemLink, "(.*)|Hitem:(.*)|h%[(.*)");
 		itemID = tempItemID;
 	else
-		_, _, itemLink = string.find(arg1, "You receive loot: (.+)%.");
+		_, _, itemLink = string.find(arg1, VF_RD_SplitIReceivesLootStr);
 		if not ( itemLink == nil) then
 			playerName = UnitName("player");
 			local _, _, rubbish1, tempItemID, rubbish2 = string.find(itemLink, "(.*)|Hitem:(.*)|h%[(.*)");
@@ -1663,7 +2007,7 @@ function VF_RD_LootReceived()
 end
 
 function VF_RD_SafeSaveLoot()
-	local mobName = UnitName("target");
+	local mobName = VF_RD_GetNameTranslated(UnitName("target"));
 	if(not(mobName)) then
 		if(VF_RD_LastKilledBoss == "Majordomo Executus" and VF_RD_GetTranslatedZoneText() == "Molten Core") then
 			mobName = "Majordomo Executus";
