@@ -120,13 +120,112 @@ VF_RD_MobsType = {
 	["Sapphiron"] = VF_RD_MobType_Boss,
 	["Kel'Thuzad"] = VF_RD_MobType_Boss,
 	
+	--Blackrock Depths
+	["Lord Incendius"] = VF_RD_MobType_Boss,
+	["Fineous Darkvire"] = VF_RD_MobType_Boss,
+	["Pyromancer Loregrain"] = VF_RD_MobType_Boss,
+	["General Angerforge"] = VF_RD_MobType_Boss,
+	["Golem Lord Argelmach"] = VF_RD_MobType_Boss,
+	["Phalanx"] = VF_RD_MobType_Boss,
+	["Ambassador Flamelash"] = VF_RD_MobType_Boss,
+	--The Seven Event
+	["Anger'rel"] = VF_RD_MobType_Boss,
+	["Seeth'rel"] = VF_RD_MobType_Boss,
+	["Dope'rel"] = VF_RD_MobType_Boss,
+	["Gloom'rel"] = VF_RD_MobType_Boss,
+	["Vile'rel"] = VF_RD_MobType_Boss,
+	["Hate'rel"] = VF_RD_MobType_Boss,
+	["Doom'rel"] = VF_RD_MobType_Boss,
+	--The Seven Event
+	["Magmus"] = VF_RD_MobType_Boss,
+	["Emperor Dagran Thaurissan"] = VF_RD_MobType_Boss, --Come to aid the Throne!
+	["Princess Moira Bronzebeard"] = VF_RD_MobType_Boss,
+
+	--Optional/Rare
+	["Anub'Shiah"] = VF_RD_MobType_Boss,
+	["Ribbly Screwspigot"] = VF_RD_MobType_Boss,
+	["Hurley Blackbreath"] = VF_RD_MobType_Boss,
+	["Plugger Spazzring"] = VF_RD_MobType_Boss,
+	["Dark Keeper Bethek"] = VF_RD_MobType_Boss,
+	["Panzor the Invincible"] = VF_RD_MobType_Boss,
+
+	--Blackrock Spire
 	--UBRS
-	--[[
 	["Pyroguard Emberseer"] = VF_RD_MobType_Boss,
+	["Gyth"] = VF_RD_MobType_Boss, --Only here for BossMap for Warchief Rend Blackhand
 	["Warchief Rend Blackhand"] = VF_RD_MobType_Boss,
 	["The Beast"] = VF_RD_MobType_Boss,
 	["General Drakkisath"] = VF_RD_MobType_Boss,
-	--]]
+	--Optional/Rare
+	["Jed Runewatcher"] = VF_RD_MobType_Boss,
+	--LBRS
+	["Highlord Omokk"] = VF_RD_MobType_Boss,
+	["Shadow Hunter Vosh'gajin"] = VF_RD_MobType_Boss,
+	["War Master Voone"] = VF_RD_MobType_Boss,
+	["Mother Smolderweb"] = VF_RD_MobType_Boss,
+	["Quartermaster Zigris"] = VF_RD_MobType_Boss,
+	["Halycon"] = VF_RD_MobType_Boss,
+	["Overlord Wyrmthalak"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Gizrul the Slavener"] = VF_RD_MobType_Boss,
+
+	--Stratholme
+	--Living
+	["Malor the Zealous"] = VF_RD_MobType_Boss,
+	["Cannon Master Willey"] = VF_RD_MobType_Boss,
+	["Archivist Galford"] = VF_RD_MobType_Boss,
+	["Grand Crusader Dathrohan"] = VF_RD_MobType_Boss, --Only here for BossMap for Balnazzar
+	["Balnazzar"] = VF_RD_MobType_Boss,
+	--Undead
+	["Magistrate Barthilas"] = VF_RD_MobType_Boss,
+	["Nerub'enkan"] = VF_RD_MobType_Boss,
+	["Baroness Anastari"] = VF_RD_MobType_Boss,
+	["Maleki the Pallid"] = VF_RD_MobType_Boss,
+	["Ramstein the Gorger"] = VF_RD_MobType_Boss,
+	["Baron Rivendare"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["The Unforgiven"] = VF_RD_MobType_Boss,
+	["Skul"] = VF_RD_MobType_Boss,
+
+	--Scholomance
+	["Marduk Blackpool"] = VF_RD_MobType_Boss, --Same boss as Vectus
+	["Vectus"] = VF_RD_MobType_Boss, --Same boss as Marduk Blackpool
+	["Ras Frostwhisper"] = VF_RD_MobType_Boss,
+	["Lorekeeper Polkelt"] = VF_RD_MobType_Boss,
+	["Doctor Theolen Krastinov"] = VF_RD_MobType_Boss,
+	["Instructor Malicia"] = VF_RD_MobType_Boss,
+	["Lady Illucia Barov"] = VF_RD_MobType_Boss,
+	["The Ravenian"] = VF_RD_MobType_Boss,
+	["Lord Alexei Barov"] = VF_RD_MobType_Boss,
+	["Darkmaster Gandling"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Rattlegore"] = VF_RD_MobType_Boss,
+	["Jandice Barov"] = VF_RD_MobType_Boss,
+	["Kirtonos the Herald"] = VF_RD_MobType_Boss,
+
+	--Dire Maul
+	--East
+	["Hydrospawn"] = VF_RD_MobType_Boss,
+	["Zevrim Thornhoof"] = VF_RD_MobType_Boss,
+	["Pimgib"] = VF_RD_MobType_Boss, --Same boss as Lethtendris
+	["Lethtendris"] = VF_RD_MobType_Boss, --Same boss as Pimgib
+	["Alzzin the Wildshaper"] = VF_RD_MobType_Boss,
+	--West
+	["Tendris Warpwood"] = VF_RD_MobType_Boss,
+	["Magister Kalendris"] = VF_RD_MobType_Boss,
+	["Illyanna Ravenoak"] = VF_RD_MobType_Boss, --Same boss as Ferra
+	["Ferra"] = VF_RD_MobType_Boss, --Same boss as Illyanna Ravenoak
+	["Immol'thar"] = VF_RD_MobType_Boss,
+	["Prince Tortheldrin"] = VF_RD_MobType_Boss,
+	--North
+	["Guard Mol'dar"] = VF_RD_MobType_Boss,
+	["Guard Fengus"] = VF_RD_MobType_Boss,
+	["Guard Slip'kik"] = VF_RD_MobType_Boss,
+	["Captain Kromcrush"] = VF_RD_MobType_Boss,
+	["King Gordok"] = VF_RD_MobType_Boss,
+	["Cho'Rush the Observer"] = VF_RD_MobType_Boss, --Same boss as King Gordok
+	--Optional/Rare
+	["Stomper Kreeg"] = VF_RD_MobType_Boss,
 }
 
 VF_RD_BossNameTranslations = {
@@ -258,7 +357,7 @@ function VF_RD_GetNameTranslated(_Name)
 end
 
 VF_RD_RaidZones = {
-	--English
+--English
 	["Molten Core"] = "Molten Core",
 	["Onyxia's Lair"] = "Onyxia's Lair",
 	["Blackwing Lair"] = "Blackwing Lair",
@@ -266,24 +365,27 @@ VF_RD_RaidZones = {
 	["Ruins of Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Temple of Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
 	["Naxxramas"] = "Naxxramas",
-	
-	--Deutch
+
+	--Instances
+	["Blackrock Depths"] = "Blackrock Depths",
+	["Blackrock Spire"] = "Blackrock Spire",
+	["Stratholme"] = "Stratholme",
+	["Scholomance"] = "Scholomance",
+	["Dire Maul"] = "Dire Maul",
+
+--Deutch
 	["Geschmolzener Kern"] = "Molten Core",
 	["Onyxias Hort"] = "Onyxia's Lair",
 	["Pechschwingenhort"] = "Blackwing Lair",
-	--same ["Zul'Gurub"] = "Zul'Gurub",
 	["Ruinen von Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Tempel von Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
-	--same ["Naxxramas"] = "Naxxramas",
 
-	--French
+--French
 	["C\197\147ur du Magma"] = "Molten Core",
 	["Repaire d'Onyxia"] = "Onyxia's Lair",
 	["Repaire de l'Aile noire"] = "Blackwing Lair",
-	--same ["Zul'Gurub"] = "Zul'Gurub",
 	["Ruines d'Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Le temple d'Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
-	--same ["Naxxramas"] = "Naxxramas",
 }
 
 VF_RaidDamage_Settings = {["DebugMode"] = false};
@@ -735,6 +837,34 @@ VF_RD_YellEvents = {
 		["Master! I require aid!"] = VF_RD_YellEvents_Phase3,
 		["Your victory is a hollow one"] = VF_RD_YellEvents_End,
 	},
+
+	--Blackrock Depths
+	["Doom'rel"] = {
+		["You have challenged the Seven"] = VF_RD_YellEvents_Start,--Say event(?)
+	}
+
+	--Stratholme
+	["Grand Crusader Dathrohan"] = {
+		["Today you have unmade"] = VF_RD_YellEvents_Start,
+	},
+	["Balnazzar"] = {
+		["Today you have unmade"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
+		["You fools think you can defeat"] = VF_RD_YellEvents_Phase2,
+		["Damn you mortals"] = VF_RD_YellEvents_End,--Say event(?)
+	},
+
+	--Scholomance
+	["Darkmaster Gandling"] = {
+		["School is in session"] = VF_RD_YellEvents_Start,
+	},
+
+	--Dire Maul
+	["Cho'Rush the Observer"] = {
+		["The king is dead"] = VF_RD_YellEvents_End,
+	},
+	["King Gordok"] = {
+		["The king is dead"] = VF_RD_YellEvents_End, --This should not be needed?
+	},
 }
 VF_RD_BossMap = {
 	--BWL
@@ -757,12 +887,49 @@ VF_RD_BossMap = {
 	["Highlord Mograine"] = "The Four Horsemen",
 	["Thane Korth'azz"] = "The Four Horsemen",
 	["Lady Blaumeux"] = "The Four Horsemen",
+
+	--Blackrock Depths
+	["Anger'rel"] = "The Seven Event",
+	["Seeth'rel"] = "The Seven Event",
+	["Dope'rel"] = "The Seven Event",
+	["Gloom'rel"] = "The Seven Event",
+	["Vile'rel"] = "The Seven Event",
+	["Hate'rel"] = "The Seven Event",
+	["Doom'rel"] = "The Seven Event",
+	["Princess Moira Bronzebeard"] = "Emperor Dagran Thaurissan",
+
+	--Blackrock Spire
+	["Gyth"] = "Warchief Rend Blackhand",
+
+	--Stratholme
+	["Grand Crusader Dathrohan"] = "Balnazzar",
+
+	--Scholomance
+	["Marduk Blackpool"] = "Vectus And Marduk",
+	["Vectus"] = "Vectus And Marduk",
+
+	--Dire Maul
+	--West
+	["Lethtendris"] = "Lethtendris And Pimgib";
+	["Pimgib"] = "Lethtendris And Pimgib";
+	--East
+	["Illyanna Ravenoak"] = "Illyanna And Ferra",
+	["Ferra"] = "Illyanna And Ferra",
+	--North
+	["Cho'Rush the Observer"] = "King Gordok",
 }
 VF_RD_BossParts = {
 	["Three Bugs"] = {[1] = "Vem", [2] = "Lord Kri", [3] = "Princess Yauj"},
 	["Twin Emperors"] = {[1] = "Emperor Vek'nilash", [2] = "Emperor Vek'lor"},
 	["C'Thun"] = {[1] = "Eye of C'Thun", [2] = "C'Thun"},
 	["The Four Horsemen"] = {[1] = "Sir Zeliek", [2] = "Highlord Mograine", [3] = "Thane Korth'azz", [4] = "Lady Blaumeux"},
+	
+	["The Seven Event"] = {[1] = "Anger'rel", [2] = "Seeth'rel", [3] = "Dope'rel"
+	, [4] = "Gloom'rel", [5] = "Vile'rel", [6] = "Hate'rel", [7] = "Doom'rel"},
+
+	["Vectus And Marduk"] = {[1] = "Vectus", [2] = "Marduk Blackpool"},
+	["Lethtendris And Pimgib"] = {[1] = "Lethtendris", [2] = "Pimgib"},
+	["Illyanna And Ferra"] = {[1] = "Illyanna Ravenoak", [2] = "Ferra"},
 }
 
 function VF_RD_GetBossName(unitName)
