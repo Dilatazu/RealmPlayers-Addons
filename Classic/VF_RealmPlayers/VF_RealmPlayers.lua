@@ -257,7 +257,7 @@ function VF_RP_GetMount(_UnitID)
 		if(currBuff) then
 			leftText, rightText = VF_RP_GetBuffText(_UnitID, i);
 			if(table.getn(leftText) >= 2) then
-				if(leftText[2] == "Increases speed by 100%." or leftText[2] == "Increases speed by 60%.") then
+				if(leftText[2] == "Increases speed by 100%." or leftText[2] == "Increases speed by 60%." or leftText[2] == "Slow and steady...") then
 					return leftText[1];
 				end
 			end
