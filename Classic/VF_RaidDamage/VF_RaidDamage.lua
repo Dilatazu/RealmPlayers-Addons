@@ -24,6 +24,459 @@ VF_RD_MobType_Boss = 1;
 VF_RD_MobType_Trash = 2;
 VF_RD_MobType_Unknown = 3;
 
+VF_RD_YellEvents_Start = 1;
+VF_RD_YellEvents_Phase1 = 2;
+VF_RD_YellEvents_Phase2 = 3;
+VF_RD_YellEvents_Phase3 = 4;
+VF_RD_YellEvents_End = 5;
+VF_RD_YellEvents_NotImportant = 99;
+
+VF_RD_YellEventsStr = {
+	[VF_RD_YellEvents_Start] = "Start_Y",
+	[VF_RD_YellEvents_Phase1] = "Phase1_Y",
+	[VF_RD_YellEvents_Phase2] = "Phase2_Y",
+	[VF_RD_YellEvents_Phase3] = "Phase3_Y",
+	[VF_RD_YellEvents_End] = "Dead_Y",
+}
+
+VF_RD_DungeonMobsType = {
+	--Deadmines
+	["Rhahk'Zor"] = VF_RD_MobType_Boss,
+	["Sneed's Shredder"] = VF_RD_MobType_Boss, --Sneed "phase1"
+	["Sneed"] = VF_RD_MobType_Boss,
+	["Gilnid"] = VF_RD_MobType_Boss,
+	["Mr. Smite"] = VF_RD_MobType_Boss,
+	["Captain Greenskin"] = VF_RD_MobType_Boss,
+	["Edwin VanCleef"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Miner Johnson"] = VF_RD_MobType_Boss,
+	["Cookie"] = VF_RD_MobType_Boss,
+
+	--Wailing Caverns
+	["Lady Anacondra"] = VF_RD_MobType_Boss,
+	["Lord Cobrahn"] = VF_RD_MobType_Boss,
+	["Lord Pythas"] = VF_RD_MobType_Boss,
+	["Lord Serpentis"] = VF_RD_MobType_Boss,
+	["Verdan the Everliving"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Skum"] = VF_RD_MobType_Boss,
+	["Kresh"] = VF_RD_MobType_Boss,
+	["Mutanus the Devourer"] = VF_RD_MobType_Boss,
+
+	--Stockades
+	--To be filled in...
+
+	--Shadowfang Keep
+	["Baron Silverlaine"] = VF_RD_MobType_Boss,
+	["Commander Springvale"] = VF_RD_MobType_Boss,
+	["Odo the Blindwatcher"] = VF_RD_MobType_Boss,
+	["Wolf Master Nandos"] = VF_RD_MobType_Boss,
+	["Archmage Arugal"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Razorclaw the Butcher"] = VF_RD_MobType_Boss,
+
+	--Blackfathom Deeps
+	["Ghamoo-ra"] = VF_RD_MobType_Boss,
+	["Lady Sarevess"] = VF_RD_MobType_Boss,
+	["Gelihast"] = VF_RD_MobType_Boss,
+	["Twilight Lord Kelris"] = VF_RD_MobType_Boss,
+	["Aku'mai"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Lorgus Jett"] = VF_RD_MobType_Boss,
+
+	--Razorfen Kraul
+	["Death Speaker Jargba"] = VF_RD_MobType_Boss,
+	["Aggem Thorncurse"] = VF_RD_MobType_Boss,
+	["Overlord Ramtusk"] = VF_RD_MobType_Boss,
+	["Earthcaller Halmgar"] = VF_RD_MobType_Boss,
+	["Agathelos the Raging"] = VF_RD_MobType_Boss,
+	["Charlga Razorflank"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Blind Hunter"] = VF_RD_MobType_Boss,
+
+	--Gnomeregan
+	["Viscous Fallout"] = VF_RD_MobType_Boss,
+	["Electrocutioner 6000"] = VF_RD_MobType_Boss,
+	["Crowd Pummeler 9-60"] = VF_RD_MobType_Boss,
+	["Mekgineer Thermaplugg"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Chomper"] = VF_RD_MobType_Boss, --Grubbis "pet"
+	["Grubbis"] = VF_RD_MobType_Boss,
+	["Dark Iron Ambassador"] = VF_RD_MobType_Boss,
+
+	--Scarlet Monastery
+	--Graveyard
+	["Bloodmage Thalnos"] = VF_RD_MobType_Boss,
+	--Library
+	["Houndmaster Loksey"] = VF_RD_MobType_Boss,
+	["Arcanist Doan"] = VF_RD_MobType_Boss,
+	--Armory
+	["Herod"] = VF_RD_MobType_Boss,
+	--Cathedral
+	["High Inquisitor Fairbanks"] = VF_RD_MobType_Boss,
+	["Scarlet Commander Mograine"] = VF_RD_MobType_Boss, --"Infidels! They must be purified!"(startyell)
+	["High Inquisitor Whitemane"] = VF_RD_MobType_Boss, --"What, Mograine has fallen? You shall pay for this treachery!"(startyell) "Arise, my champion!"(phase2)
+
+	--Razorfen Downs
+	["Mordresh Fire Eye"] = VF_RD_MobType_Boss,
+	["Glutton"] = VF_RD_MobType_Boss,
+	["Amnennar the Coldbringer"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Ragglesnout"] = VF_RD_MobType_Boss,
+
+	--Uldaman
+	["Ironaya"] = VF_RD_MobType_Boss,
+	["Galgann Firehammer"] = VF_RD_MobType_Boss,
+	["Ancient Stone Keeper"] = VF_RD_MobType_Boss,
+	["Grimlok"] = VF_RD_MobType_Boss,
+	["Archaedas"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Revelosh"] = VF_RD_MobType_Boss,
+	["Olaf"] = VF_RD_MobType_Boss, --The Three Dwarfs
+	["Eric \"The Swift\""] = VF_RD_MobType_Boss, --The Three Dwarfs
+	["Baelog"] = VF_RD_MobType_Boss, --The Three Dwarfs
+	["Obsidian Sentinel"] = VF_RD_MobType_Boss,
+
+	--Zul'Farrak
+	["Theka the Martyr"] = VF_RD_MobType_Boss,
+	["Antu'sul"] = VF_RD_MobType_Boss,
+	["Chief Ukorz Sandscalp"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Zerillis"] = VF_RD_MobType_Boss,
+	["Shadowpriest Sezz'ziz"] = VF_RD_MobType_Boss,
+	["Gahz'rilla"] = VF_RD_MobType_Boss,
+
+	--Maraudon
+	["Noxxion"] = VF_RD_MobType_Boss, --["Noxxion's Spawn"] = VF_RD_MobType_Boss, --Adds
+	["Razorlash"] = VF_RD_MobType_Boss,
+	["Lord Vyletongue"] = VF_RD_MobType_Boss,
+	["Celebras the Cursed"] = VF_RD_MobType_Boss,
+	["Landslide"] = VF_RD_MobType_Boss,
+	["Tinkerer Gizlock"] = VF_RD_MobType_Boss,
+	["Rotgrip"] = VF_RD_MobType_Boss,
+	["Princess Theradras"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Meshlok the Harvester"] = VF_RD_MobType_Boss,
+
+	--Sunken Temple
+	["Zul'Lor"] = VF_RD_MobType_Boss,
+	["Mijan"] = VF_RD_MobType_Boss,
+	["Hukku"] = VF_RD_MobType_Boss,
+	["Loro"] = VF_RD_MobType_Boss,
+	["Gasher"] = VF_RD_MobType_Boss,
+	["Weaver"] = VF_RD_MobType_Boss,
+	["Dreamscythe"] = VF_RD_MobType_Boss,
+	["Jammal'an the Prophet"] = VF_RD_MobType_Boss, --Jammal'an
+	["Ogom the Wretched"] = VF_RD_MobType_Boss, --Jammal'an
+	["Morphaz"] = VF_RD_MobType_Boss,
+	["Hazzas"] = VF_RD_MobType_Boss,
+	["Shade of Eranikus"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Avatar of Hakkar"] = VF_RD_MobType_Boss,
+
+	--Blackrock Depths
+	["Lord Incendius"] = VF_RD_MobType_Boss,
+	["Fineous Darkvire"] = VF_RD_MobType_Boss,
+	["Pyromancer Loregrain"] = VF_RD_MobType_Boss,
+	["General Angerforge"] = VF_RD_MobType_Boss,
+	["Golem Lord Argelmach"] = VF_RD_MobType_Boss,
+	["Phalanx"] = VF_RD_MobType_Boss,
+	["Ambassador Flamelash"] = VF_RD_MobType_Boss,
+	["Anger'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Seeth'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Dope'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Gloom'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Vile'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Hate'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Doom'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Magmus"] = VF_RD_MobType_Boss,
+	["Emperor Dagran Thaurissan"] = VF_RD_MobType_Boss, --Come to aid the Throne!
+	["Princess Moira Bronzebeard"] = VF_RD_MobType_Boss,
+
+	--Optional/Rare
+	["Anub'Shiah"] = VF_RD_MobType_Boss,
+	["Ribbly Screwspigot"] = VF_RD_MobType_Boss,
+	["Hurley Blackbreath"] = VF_RD_MobType_Boss,
+	["Plugger Spazzring"] = VF_RD_MobType_Boss,
+	["Dark Keeper Bethek"] = VF_RD_MobType_Boss,
+	["Panzor the Invincible"] = VF_RD_MobType_Boss,
+
+	--Blackrock Spire
+	--UBRS
+	["Pyroguard Emberseer"] = VF_RD_MobType_Boss,
+	["Gyth"] = VF_RD_MobType_Boss, --Only here for BossMap for Warchief Rend Blackhand
+	["Warchief Rend Blackhand"] = VF_RD_MobType_Boss,
+	["The Beast"] = VF_RD_MobType_Boss,
+	["General Drakkisath"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Jed Runewatcher"] = VF_RD_MobType_Boss,
+	--LBRS
+	["Highlord Omokk"] = VF_RD_MobType_Boss,
+	["Shadow Hunter Vosh'gajin"] = VF_RD_MobType_Boss,
+	["War Master Voone"] = VF_RD_MobType_Boss,
+	["Mother Smolderweb"] = VF_RD_MobType_Boss,
+	["Quartermaster Zigris"] = VF_RD_MobType_Boss,
+	["Halycon"] = VF_RD_MobType_Boss,
+	["Overlord Wyrmthalak"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Gizrul the Slavener"] = VF_RD_MobType_Boss,
+
+	--Stratholme
+	--Living
+	["Malor the Zealous"] = VF_RD_MobType_Boss,
+	["Cannon Master Willey"] = VF_RD_MobType_Boss,
+	["Archivist Galford"] = VF_RD_MobType_Boss,
+	["Grand Crusader Dathrohan"] = VF_RD_MobType_Boss, --Only here for BossMap for Balnazzar
+	["Balnazzar"] = VF_RD_MobType_Boss,
+	--Undead
+	["Magistrate Barthilas"] = VF_RD_MobType_Boss,
+	["Nerub'enkan"] = VF_RD_MobType_Boss,
+	["Baroness Anastari"] = VF_RD_MobType_Boss,
+	["Maleki the Pallid"] = VF_RD_MobType_Boss,
+	["Ramstein the Gorger"] = VF_RD_MobType_Boss,
+	["Baron Rivendare"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["The Unforgiven"] = VF_RD_MobType_Boss,
+	["Skul"] = VF_RD_MobType_Boss,
+
+	--Scholomance
+	["Marduk Blackpool"] = VF_RD_MobType_Boss, --Same boss as Vectus
+	["Vectus"] = VF_RD_MobType_Boss, --Same boss as Marduk Blackpool
+	["Ras Frostwhisper"] = VF_RD_MobType_Boss,
+	["Lorekeeper Polkelt"] = VF_RD_MobType_Boss,
+	["Doctor Theolen Krastinov"] = VF_RD_MobType_Boss,
+	["Instructor Malicia"] = VF_RD_MobType_Boss,
+	["Lady Illucia Barov"] = VF_RD_MobType_Boss,
+	["The Ravenian"] = VF_RD_MobType_Boss,
+	["Lord Alexei Barov"] = VF_RD_MobType_Boss,
+	["Darkmaster Gandling"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Rattlegore"] = VF_RD_MobType_Boss,
+	["Jandice Barov"] = VF_RD_MobType_Boss,
+	["Kirtonos the Herald"] = VF_RD_MobType_Boss,
+
+	--Dire Maul
+	--East
+	["Hydrospawn"] = VF_RD_MobType_Boss,
+	["Zevrim Thornhoof"] = VF_RD_MobType_Boss,
+	["Pimgib"] = VF_RD_MobType_Boss, --Same boss as Lethtendris
+	["Lethtendris"] = VF_RD_MobType_Boss, --Same boss as Pimgib
+	["Alzzin the Wildshaper"] = VF_RD_MobType_Boss,
+	--West
+	["Tendris Warpwood"] = VF_RD_MobType_Boss,
+	["Magister Kalendris"] = VF_RD_MobType_Boss,
+	["Illyanna Ravenoak"] = VF_RD_MobType_Boss, --Same boss as Ferra
+	["Ferra"] = VF_RD_MobType_Boss, --Same boss as Illyanna Ravenoak
+	["Immol'thar"] = VF_RD_MobType_Boss,
+	["Prince Tortheldrin"] = VF_RD_MobType_Boss,
+	--North
+	["Guard Mol'dar"] = VF_RD_MobType_Boss,
+	["Guard Fengus"] = VF_RD_MobType_Boss,
+	["Guard Slip'kik"] = VF_RD_MobType_Boss,
+	["Captain Kromcrush"] = VF_RD_MobType_Boss,
+	["King Gordok"] = VF_RD_MobType_Boss,
+	["Cho'Rush the Observer"] = VF_RD_MobType_Boss, --Same boss as King Gordok
+	--Optional/Rare
+	["Stomper Kreeg"] = VF_RD_MobType_Boss,
+}
+
+VF_RD_DungeonZones = {
+	["Deadmines"] = "Deadmines",
+	["Wailing Caverns"] = "Wailing Caverns",
+	["Stockades"] = "Stockades",
+	["Shadowfang Keep"] = "Shadowfang Keep",
+	["Blackfathom Deeps"] = "Blackfathom Deeps",
+	["Razorfen Kraul"] = "Razorfen Kraul",
+	["Gnomeregan"] = "Gnomeregan",
+	["Scarlet Monastery"] = "Scarlet Monastery",
+	["Razorfen Downs"] = "Razorfen Downs",
+	["Uldaman"] = "Uldaman",
+	["Zul'Farrak"] = "Zul'Farrak",
+	["Maraudon"] = "Maraudon",
+	["Sunken Temple"] = "Sunken Temple",
+	["Blackrock Depths"] = "Blackrock Depths",
+	["Blackrock Spire"] = "Blackrock Spire",
+	["Stratholme"] = "Stratholme",
+	["Scholomance"] = "Scholomance",
+	["Dire Maul"] = "Dire Maul",
+}
+VF_RD_DungeonYellEvents = {
+	--Deadmines
+	["Rhahk'Zor"] = {
+		["pay big for your heads"] = VF_RD_YellEvents_Start,
+	},
+	["Edwin VanCleef"] = {
+		["None may challenge"] = VF_RD_YellEvents_Start,
+		["dogs"] = VF_RD_YellEvents_Phase2,
+		["righteous"] = VF_RD_YellEvents_Phase3,
+		["prevail"] = VF_RD_YellEvents_Phase4,
+	},
+	["Mr. Smite"] = {
+		["land lubbers are tougher"] = VF_RD_YellEvents_Phase2, --phase2(say?)
+		["making me angry"] = VF_RD_YellEvents_Phase3, --phase3(say?)
+	},
+
+	--Wailing Caverns
+	["Lady Anacondra"] = {
+		["can stand against"] = VF_RD_YellEvents_Start,
+	},
+	["Lord Cobrahn"] = {
+		["will never wake the dreamer"] = VF_RD_YellEvents_Start,
+	},
+	["Lord Pythas"] = {
+		["coils of death"] = VF_RD_YellEvents_Start,
+	},
+	["Lord Serpentis"] = {
+		["can do anything"] = VF_RD_YellEvents_Start,
+	},
+
+	--Shadowfang Keep
+	["Baron Silverlaine"] = {
+		["this accursed place"] = VF_RD_YellEvents_Start,
+		["death is only a temporary"] = VF_RD_YellEvents_End,
+	},
+	["Wolf Master Nandos"] = {
+		["destroyed my pack"] = VF_RD_YellEvents_Start,
+	},
+	["Archmage Arugal"] = {
+		["shall serve"] = VF_RD_YellEvents_Start,
+		["Release your rage"] = VF_RD_YellEvents_Phase2,
+	},
+
+	--Blackfathom Deeps
+	["Lady Sarevess"] = {
+		["not be here"] = VF_RD_YellEvents_Start,
+		--Possibly not correct: ["Hearty Kill!"] = VF_RD_YellEvents_End,
+	},
+	["Twilight Lord Kelris"] = {
+		["dares disturb my meditation"] = VF_RD_YellEvents_Start,
+	},
+
+	--Gnomeregan
+	["Mekgineer Thermaplugg"] = {
+		["Gnomeregan is mine!"] = VF_RD_YellEvents_Start,
+	},
+
+	--Scarlet Monastery
+	["Arcanist Doan"] = {
+		["will not defile these mysteries"] = VF_RD_YellEvents_Start,
+		["in righteous fire"] = VF_RD_YellEvents_Phase2,
+	},
+	["Herod"] = {
+		["been waiting for a real challenge"] = VF_RD_YellEvents_Start,
+		["Blades of Light"] = VF_RD_YellEvents_Phase2,
+	},
+	["Herod"] = {
+		["been waiting for a real challenge"] = VF_RD_YellEvents_Start,
+		["Blades of Light"] = VF_RD_YellEvents_Phase2,
+		--Not needed. Enrage: ["give me strength"] = VF_RD_YellEvents_Phase3,
+	},
+
+	--Razorfen Downs
+	["Mordresh Fire Eye"] = {
+		["my brethren"] = VF_RD_YellEvents_Start,
+	},
+	["Amnennar the Coldbringer"] = {
+		["never leave this place"] = VF_RD_YellEvents_Start,
+	},
+
+	--Uldaman
+	["Galgann Firehammer"] = {
+		["Slay Them!"] = VF_RD_YellEvents_Start,
+	},
+
+	--Maraudon
+	["Tinkerer Gizlock"] = {
+		["never reveal my presence"] = VF_RD_YellEvents_Start,
+	},
+
+	--Blackrock Depths
+	["Doom'rel"] = {
+		["You have challenged the Seven"] = VF_RD_YellEvents_Start,--Say event(?)
+	},
+
+	--Stratholme
+	["Grand Crusader Dathrohan"] = {
+		["Today you have unmade"] = VF_RD_YellEvents_Start,
+	},
+	["Balnazzar"] = {
+		["Today you have unmade"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
+		["You fools think you can defeat"] = VF_RD_YellEvents_Phase2,
+		["Damn you mortals"] = VF_RD_YellEvents_End,--Say event(?)
+	},
+
+	--Scholomance
+	["Darkmaster Gandling"] = {
+		["School is in session"] = VF_RD_YellEvents_Start,
+	},
+
+	--Dire Maul
+	["Cho'Rush the Observer"] = {
+		["The king is dead"] = VF_RD_YellEvents_End,
+	},
+	["King Gordok"] = {
+		["The king is dead"] = VF_RD_YellEvents_End, --This should not be needed?
+	},
+}
+VF_RD_DungeonBossMap = {
+	--Deadmines
+	["Sneed's Shredder"] = "Sneed",
+
+	--Gnomeregan
+	["Chomper"] = "Grubbis",
+
+	--Uldaman
+	["Olaf"] = "The Three Dwarfs",
+	["Eric \"The Swift\""] = "The Three Dwarfs",
+	["Baelog"] = "The Three Dwarfs",
+	
+	--Sunken Temple
+	["Jammal'an the Prophet"] = "Jammal'an",
+	["Ogom the Wretched"] = "Jammal'an",
+
+	--Blackrock Depths
+	["Anger'rel"] = "The Seven Event",
+	["Seeth'rel"] = "The Seven Event",
+	["Dope'rel"] = "The Seven Event",
+	["Gloom'rel"] = "The Seven Event",
+	["Vile'rel"] = "The Seven Event",
+	["Hate'rel"] = "The Seven Event",
+	["Doom'rel"] = "The Seven Event",
+	["Princess Moira Bronzebeard"] = "Emperor Dagran Thaurissan",
+
+	--Blackrock Spire
+	["Gyth"] = "Warchief Rend Blackhand",
+
+	--Stratholme
+	["Grand Crusader Dathrohan"] = "Balnazzar",
+
+	--Scholomance
+	["Marduk Blackpool"] = "Vectus And Marduk",
+	["Vectus"] = "Vectus And Marduk",
+
+	--Dire Maul
+	--West
+	["Lethtendris"] = "Lethtendris And Pimgib";
+	["Pimgib"] = "Lethtendris And Pimgib";
+	--East
+	["Illyanna Ravenoak"] = "Illyanna And Ferra",
+	["Ferra"] = "Illyanna And Ferra",
+	--North
+	["Cho'Rush the Observer"] = "King Gordok",
+}
+VF_RD_DungeonBossParts = {
+	["The Three Dwarfs"] = {[1] = "Olaf", [2] = "Eric \"The Swift\"", [3] = "Baelog"},
+
+	["Jammal'an"] = {[1] = "Jammal'an the Prophet", [2] = "Ogom the Wretched"},
+
+	["The Seven Event"] = {[1] = "Anger'rel", [2] = "Seeth'rel", [3] = "Dope'rel"
+	, [4] = "Gloom'rel", [5] = "Vile'rel", [6] = "Hate'rel", [7] = "Doom'rel"},
+
+	["Vectus And Marduk"] = {[1] = "Vectus", [2] = "Marduk Blackpool"},
+	["Lethtendris And Pimgib"] = {[1] = "Lethtendris", [2] = "Pimgib"},
+	["Illyanna And Ferra"] = {[1] = "Illyanna Ravenoak", [2] = "Ferra"},
+}
+
 VF_RD_MobsType = {
 	--MC
 	["Lucifron"] = VF_RD_MobType_Boss,
@@ -119,113 +572,6 @@ VF_RD_MobsType = {
 	--The Four Horsemen
 	["Sapphiron"] = VF_RD_MobType_Boss,
 	["Kel'Thuzad"] = VF_RD_MobType_Boss,
-	
-	--Blackrock Depths
-	["Lord Incendius"] = VF_RD_MobType_Boss,
-	["Fineous Darkvire"] = VF_RD_MobType_Boss,
-	["Pyromancer Loregrain"] = VF_RD_MobType_Boss,
-	["General Angerforge"] = VF_RD_MobType_Boss,
-	["Golem Lord Argelmach"] = VF_RD_MobType_Boss,
-	["Phalanx"] = VF_RD_MobType_Boss,
-	["Ambassador Flamelash"] = VF_RD_MobType_Boss,
-	--The Seven Event
-	["Anger'rel"] = VF_RD_MobType_Boss,
-	["Seeth'rel"] = VF_RD_MobType_Boss,
-	["Dope'rel"] = VF_RD_MobType_Boss,
-	["Gloom'rel"] = VF_RD_MobType_Boss,
-	["Vile'rel"] = VF_RD_MobType_Boss,
-	["Hate'rel"] = VF_RD_MobType_Boss,
-	["Doom'rel"] = VF_RD_MobType_Boss,
-	--The Seven Event
-	["Magmus"] = VF_RD_MobType_Boss,
-	["Emperor Dagran Thaurissan"] = VF_RD_MobType_Boss, --Come to aid the Throne!
-	["Princess Moira Bronzebeard"] = VF_RD_MobType_Boss,
-
-	--Optional/Rare
-	["Anub'Shiah"] = VF_RD_MobType_Boss,
-	["Ribbly Screwspigot"] = VF_RD_MobType_Boss,
-	["Hurley Blackbreath"] = VF_RD_MobType_Boss,
-	["Plugger Spazzring"] = VF_RD_MobType_Boss,
-	["Dark Keeper Bethek"] = VF_RD_MobType_Boss,
-	["Panzor the Invincible"] = VF_RD_MobType_Boss,
-
-	--Blackrock Spire
-	--UBRS
-	["Pyroguard Emberseer"] = VF_RD_MobType_Boss,
-	["Gyth"] = VF_RD_MobType_Boss, --Only here for BossMap for Warchief Rend Blackhand
-	["Warchief Rend Blackhand"] = VF_RD_MobType_Boss,
-	["The Beast"] = VF_RD_MobType_Boss,
-	["General Drakkisath"] = VF_RD_MobType_Boss,
-	--Optional/Rare
-	["Jed Runewatcher"] = VF_RD_MobType_Boss,
-	--LBRS
-	["Highlord Omokk"] = VF_RD_MobType_Boss,
-	["Shadow Hunter Vosh'gajin"] = VF_RD_MobType_Boss,
-	["War Master Voone"] = VF_RD_MobType_Boss,
-	["Mother Smolderweb"] = VF_RD_MobType_Boss,
-	["Quartermaster Zigris"] = VF_RD_MobType_Boss,
-	["Halycon"] = VF_RD_MobType_Boss,
-	["Overlord Wyrmthalak"] = VF_RD_MobType_Boss,
-	--Optional/Rare
-	["Gizrul the Slavener"] = VF_RD_MobType_Boss,
-
-	--Stratholme
-	--Living
-	["Malor the Zealous"] = VF_RD_MobType_Boss,
-	["Cannon Master Willey"] = VF_RD_MobType_Boss,
-	["Archivist Galford"] = VF_RD_MobType_Boss,
-	["Grand Crusader Dathrohan"] = VF_RD_MobType_Boss, --Only here for BossMap for Balnazzar
-	["Balnazzar"] = VF_RD_MobType_Boss,
-	--Undead
-	["Magistrate Barthilas"] = VF_RD_MobType_Boss,
-	["Nerub'enkan"] = VF_RD_MobType_Boss,
-	["Baroness Anastari"] = VF_RD_MobType_Boss,
-	["Maleki the Pallid"] = VF_RD_MobType_Boss,
-	["Ramstein the Gorger"] = VF_RD_MobType_Boss,
-	["Baron Rivendare"] = VF_RD_MobType_Boss,
-	--Optional/Rare
-	["The Unforgiven"] = VF_RD_MobType_Boss,
-	["Skul"] = VF_RD_MobType_Boss,
-
-	--Scholomance
-	["Marduk Blackpool"] = VF_RD_MobType_Boss, --Same boss as Vectus
-	["Vectus"] = VF_RD_MobType_Boss, --Same boss as Marduk Blackpool
-	["Ras Frostwhisper"] = VF_RD_MobType_Boss,
-	["Lorekeeper Polkelt"] = VF_RD_MobType_Boss,
-	["Doctor Theolen Krastinov"] = VF_RD_MobType_Boss,
-	["Instructor Malicia"] = VF_RD_MobType_Boss,
-	["Lady Illucia Barov"] = VF_RD_MobType_Boss,
-	["The Ravenian"] = VF_RD_MobType_Boss,
-	["Lord Alexei Barov"] = VF_RD_MobType_Boss,
-	["Darkmaster Gandling"] = VF_RD_MobType_Boss,
-	--Optional/Rare
-	["Rattlegore"] = VF_RD_MobType_Boss,
-	["Jandice Barov"] = VF_RD_MobType_Boss,
-	["Kirtonos the Herald"] = VF_RD_MobType_Boss,
-
-	--Dire Maul
-	--East
-	["Hydrospawn"] = VF_RD_MobType_Boss,
-	["Zevrim Thornhoof"] = VF_RD_MobType_Boss,
-	["Pimgib"] = VF_RD_MobType_Boss, --Same boss as Lethtendris
-	["Lethtendris"] = VF_RD_MobType_Boss, --Same boss as Pimgib
-	["Alzzin the Wildshaper"] = VF_RD_MobType_Boss,
-	--West
-	["Tendris Warpwood"] = VF_RD_MobType_Boss,
-	["Magister Kalendris"] = VF_RD_MobType_Boss,
-	["Illyanna Ravenoak"] = VF_RD_MobType_Boss, --Same boss as Ferra
-	["Ferra"] = VF_RD_MobType_Boss, --Same boss as Illyanna Ravenoak
-	["Immol'thar"] = VF_RD_MobType_Boss,
-	["Prince Tortheldrin"] = VF_RD_MobType_Boss,
-	--North
-	["Guard Mol'dar"] = VF_RD_MobType_Boss,
-	["Guard Fengus"] = VF_RD_MobType_Boss,
-	["Guard Slip'kik"] = VF_RD_MobType_Boss,
-	["Captain Kromcrush"] = VF_RD_MobType_Boss,
-	["King Gordok"] = VF_RD_MobType_Boss,
-	["Cho'Rush the Observer"] = VF_RD_MobType_Boss, --Same boss as King Gordok
-	--Optional/Rare
-	["Stomper Kreeg"] = VF_RD_MobType_Boss,
 }
 
 VF_RD_BossNameTranslations = {
@@ -321,41 +667,6 @@ VF_RD_BossNameTranslations = {
 	["Dame Blaumeux"] = "Lady Blaumeux",
 }
 
-VF_RD_SpecialLanguageSupportMode = false;
-
-function VF_RD_InitializeSpecialLanguageSupport()
-	if(GetRealmName() == "NostalGeek 1.12" or GetLocale() == "frFR") then
-		VF_RD_SpecialLanguageSupportMode = true;
-		for bossName, yellEvents in pairs(VF_RD_YellEventsFR) do
-			for yellStr, yellEvent in yellEvents do
-				VF_RD_YellEvents[bossName][yellStr] = yellEvent;
-			end
-		end
-	end
-	if(GetRealmName() == "Nefarian" or GetLocale() == "deDE") then
-		VF_RD_SpecialLanguageSupportMode = true;
-		for bossName, yellEvents in pairs(VF_RD_YellEventsDE) do
-			for yellStr, yellEvent in yellEvents do
-				VF_RD_YellEvents[bossName][yellStr] = yellEvent;
-			end
-		end
-	end
-end
-
-function VF_RD_GetNameTranslated(_Name)
-	if(VF_RD_SpecialLanguageSupportMode == false) then
-		return _Name;
-	end
-	if(_Name == nil) then
-		return _Name;
-	end
-	local translatedName = VF_RD_BossNameTranslations[_Name];
-	if(translatedName ~= nil) then
-		return translatedName;
-	end
-	return _Name;
-end
-
 VF_RD_RaidZones = {
 --English
 	["Molten Core"] = "Molten Core",
@@ -365,13 +676,6 @@ VF_RD_RaidZones = {
 	["Ruins of Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Temple of Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
 	["Naxxramas"] = "Naxxramas",
-
-	--Instances
-	["Blackrock Depths"] = "Blackrock Depths",
-	["Blackrock Spire"] = "Blackrock Spire",
-	["Stratholme"] = "Stratholme",
-	["Scholomance"] = "Scholomance",
-	["Dire Maul"] = "Dire Maul",
 
 --Deutch
 	["Geschmolzener Kern"] = "Molten Core",
@@ -386,52 +690,6 @@ VF_RD_RaidZones = {
 	["Repaire de l'Aile noire"] = "Blackwing Lair",
 	["Ruines d'Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Le temple d'Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
-}
-
-VF_RaidDamage_Settings = {["DebugMode"] = false};
-function VF_RD_DebugMessage(_Message)
-	if(VF_RaidDamage_Settings["DebugMode"] == true) then
-		DEFAULT_CHAT_FRAME:AddMessage("VF_RD_Debug: ".._Message, 1, 1, 0);
-	end
-end
-function VF_RD_Message(_Message)
-	DEFAULT_CHAT_FRAME:AddMessage("VF_RD: ".._Message, 1, 1, 0);
-end
-
-function VF_RaidDamage_OnLoad()
-	SlashCmdList["RAIDDAMAGE_CLEAR"] = VF_RD_ClearData;
-	SlashCmdList["RAIDDAMAGE_HELP"] = VF_RD_Help;
-	SlashCmdList["RAIDDAMAGE_PRINTRECORDED"] = VF_RD_PrintRecorded;
-	this:RegisterEvent("VARIABLES_LOADED");
-	this:RegisterEvent("CHAT_MSG_MONSTER_YELL");
-	this:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH");
-	this:RegisterEvent("ZONE_CHANGED_NEW_AREA");
-	this:RegisterEvent("UPDATE_INSTANCE_INFO");
-	this:RegisterEvent("RAID_ROSTER_UPDATE");
-	this:RegisterEvent("CHAT_MSG_LOOT");
-	
-	SLASH_RAIDDAMAGE_CLEAR1 = "/VFRD_Clear";
-	SLASH_RAIDDAMAGE_CLEAR2 = "/RaidDamage_Clear";
-	SLASH_RAIDDAMAGE_CLEAR3 = "/VFRDClear";
-	SLASH_RAIDDAMAGE_HELP1 = "/VFRD";
-	SLASH_RAIDDAMAGE_HELP2 = "/VFRD_Help";
-	SLASH_RAIDDAMAGE_PRINTRECORDED1 = "/VFRD_PrintRecorded";
-	--this:RegisterEvent("");
-end
-
-VF_RD_YellEvents_Start = 1;
-VF_RD_YellEvents_Phase1 = 2;
-VF_RD_YellEvents_Phase2 = 3;
-VF_RD_YellEvents_Phase3 = 4;
-VF_RD_YellEvents_End = 5;
-VF_RD_YellEvents_NotImportant = 99;
-
-VF_RD_YellEventsStr = {
-	[VF_RD_YellEvents_Start] = "Start_Y",
-	[VF_RD_YellEvents_Phase1] = "Phase1_Y",
-	[VF_RD_YellEvents_Phase2] = "Phase2_Y",
-	[VF_RD_YellEvents_Phase3] = "Phase3_Y",
-	[VF_RD_YellEvents_End] = "Dead_Y",
 }
 
 VF_RD_YellEventsDE = {
@@ -837,34 +1095,6 @@ VF_RD_YellEvents = {
 		["Master! I require aid!"] = VF_RD_YellEvents_Phase3,
 		["Your victory is a hollow one"] = VF_RD_YellEvents_End,
 	},
-
-	--Blackrock Depths
-	["Doom'rel"] = {
-		["You have challenged the Seven"] = VF_RD_YellEvents_Start,--Say event(?)
-	}
-
-	--Stratholme
-	["Grand Crusader Dathrohan"] = {
-		["Today you have unmade"] = VF_RD_YellEvents_Start,
-	},
-	["Balnazzar"] = {
-		["Today you have unmade"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
-		["You fools think you can defeat"] = VF_RD_YellEvents_Phase2,
-		["Damn you mortals"] = VF_RD_YellEvents_End,--Say event(?)
-	},
-
-	--Scholomance
-	["Darkmaster Gandling"] = {
-		["School is in session"] = VF_RD_YellEvents_Start,
-	},
-
-	--Dire Maul
-	["Cho'Rush the Observer"] = {
-		["The king is dead"] = VF_RD_YellEvents_End,
-	},
-	["King Gordok"] = {
-		["The king is dead"] = VF_RD_YellEvents_End, --This should not be needed?
-	},
 }
 VF_RD_BossMap = {
 	--BWL
@@ -887,50 +1117,79 @@ VF_RD_BossMap = {
 	["Highlord Mograine"] = "The Four Horsemen",
 	["Thane Korth'azz"] = "The Four Horsemen",
 	["Lady Blaumeux"] = "The Four Horsemen",
-
-	--Blackrock Depths
-	["Anger'rel"] = "The Seven Event",
-	["Seeth'rel"] = "The Seven Event",
-	["Dope'rel"] = "The Seven Event",
-	["Gloom'rel"] = "The Seven Event",
-	["Vile'rel"] = "The Seven Event",
-	["Hate'rel"] = "The Seven Event",
-	["Doom'rel"] = "The Seven Event",
-	["Princess Moira Bronzebeard"] = "Emperor Dagran Thaurissan",
-
-	--Blackrock Spire
-	["Gyth"] = "Warchief Rend Blackhand",
-
-	--Stratholme
-	["Grand Crusader Dathrohan"] = "Balnazzar",
-
-	--Scholomance
-	["Marduk Blackpool"] = "Vectus And Marduk",
-	["Vectus"] = "Vectus And Marduk",
-
-	--Dire Maul
-	--West
-	["Lethtendris"] = "Lethtendris And Pimgib";
-	["Pimgib"] = "Lethtendris And Pimgib";
-	--East
-	["Illyanna Ravenoak"] = "Illyanna And Ferra",
-	["Ferra"] = "Illyanna And Ferra",
-	--North
-	["Cho'Rush the Observer"] = "King Gordok",
 }
 VF_RD_BossParts = {
 	["Three Bugs"] = {[1] = "Vem", [2] = "Lord Kri", [3] = "Princess Yauj"},
 	["Twin Emperors"] = {[1] = "Emperor Vek'nilash", [2] = "Emperor Vek'lor"},
 	["C'Thun"] = {[1] = "Eye of C'Thun", [2] = "C'Thun"},
 	["The Four Horsemen"] = {[1] = "Sir Zeliek", [2] = "Highlord Mograine", [3] = "Thane Korth'azz", [4] = "Lady Blaumeux"},
-	
-	["The Seven Event"] = {[1] = "Anger'rel", [2] = "Seeth'rel", [3] = "Dope'rel"
-	, [4] = "Gloom'rel", [5] = "Vile'rel", [6] = "Hate'rel", [7] = "Doom'rel"},
-
-	["Vectus And Marduk"] = {[1] = "Vectus", [2] = "Marduk Blackpool"},
-	["Lethtendris And Pimgib"] = {[1] = "Lethtendris", [2] = "Pimgib"},
-	["Illyanna And Ferra"] = {[1] = "Illyanna Ravenoak", [2] = "Ferra"},
 }
+
+VF_RD_SpecialLanguageSupportMode = false;
+
+function VF_RD_InitializeSpecialLanguageSupport()
+	if(GetRealmName() == "NostalGeek 1.12" or GetLocale() == "frFR") then
+		VF_RD_SpecialLanguageSupportMode = true;
+		for bossName, yellEvents in pairs(VF_RD_YellEventsFR) do
+			for yellStr, yellEvent in yellEvents do
+				VF_RD_YellEvents[bossName][yellStr] = yellEvent;
+			end
+		end
+	end
+	if(GetRealmName() == "Nefarian" or GetLocale() == "deDE") then
+		VF_RD_SpecialLanguageSupportMode = true;
+		for bossName, yellEvents in pairs(VF_RD_YellEventsDE) do
+			for yellStr, yellEvent in yellEvents do
+				VF_RD_YellEvents[bossName][yellStr] = yellEvent;
+			end
+		end
+	end
+end
+
+function VF_RD_GetNameTranslated(_Name)
+	if(VF_RD_SpecialLanguageSupportMode == false) then
+		return _Name;
+	end
+	if(_Name == nil) then
+		return _Name;
+	end
+	local translatedName = VF_RD_BossNameTranslations[_Name];
+	if(translatedName ~= nil) then
+		return translatedName;
+	end
+	return _Name;
+end
+
+VF_RaidDamage_Settings = {["DebugMode"] = false};
+function VF_RD_DebugMessage(_Message)
+	if(VF_RaidDamage_Settings["DebugMode"] == true) then
+		DEFAULT_CHAT_FRAME:AddMessage("VF_RD_Debug: ".._Message, 1, 1, 0);
+	end
+end
+function VF_RD_Message(_Message)
+	DEFAULT_CHAT_FRAME:AddMessage("VF_RD: ".._Message, 1, 1, 0);
+end
+
+function VF_RaidDamage_OnLoad()
+	SlashCmdList["RAIDDAMAGE_CLEAR"] = VF_RD_ClearData;
+	SlashCmdList["RAIDDAMAGE_HELP"] = VF_RD_Help;
+	SlashCmdList["RAIDDAMAGE_PRINTRECORDED"] = VF_RD_PrintRecorded;
+	this:RegisterEvent("VARIABLES_LOADED");
+	this:RegisterEvent("CHAT_MSG_MONSTER_YELL");
+	this:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH");
+	this:RegisterEvent("ZONE_CHANGED_NEW_AREA");
+	this:RegisterEvent("UPDATE_INSTANCE_INFO");
+	this:RegisterEvent("RAID_ROSTER_UPDATE");
+	this:RegisterEvent("CHAT_MSG_LOOT");
+	
+	SLASH_RAIDDAMAGE_CLEAR1 = "/VFRD_Clear";
+	SLASH_RAIDDAMAGE_CLEAR2 = "/RaidDamage_Clear";
+	SLASH_RAIDDAMAGE_CLEAR3 = "/VFRDClear";
+	SLASH_RAIDDAMAGE_HELP1 = "/VFRD";
+	SLASH_RAIDDAMAGE_HELP2 = "/VFRD_Help";
+	SLASH_RAIDDAMAGE_PRINTRECORDED1 = "/VFRD_PrintRecorded";
+	--this:RegisterEvent("");
+end
 
 function VF_RD_GetBossName(unitName)
 	if(VF_RD_BossMap[unitName] ~= nil) then
