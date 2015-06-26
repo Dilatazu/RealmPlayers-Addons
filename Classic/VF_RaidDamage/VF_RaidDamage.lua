@@ -40,6 +40,11 @@ VF_RD_YellEventsStr = {
 }
 
 VF_RD_DungeonMobsType = {
+	--Ragefire Chasm
+	["Oggleflint"] = VF_RD_MobType_Boss,
+	["Taragaman the Hungerer"] = VF_RD_MobType_Boss,
+	["Bazzalan"] = VF_RD_MobType_Boss,
+
 	--Deadmines
 	["Rhahk'Zor"] = VF_RD_MobType_Boss,
 	["Sneed's Shredder"] = VF_RD_MobType_Boss, --Sneed "phase1"
@@ -1126,6 +1131,7 @@ VF_RD_BossParts = {
 }
 
 VF_RD_SpecialLanguageSupportMode = false;
+VF_RD_DungeonSupportMode = false;
 
 function VF_RD_InitializeSpecialLanguageSupport()
 	if(GetRealmName() == "NostalGeek 1.12" or GetLocale() == "frFR") then
@@ -1144,6 +1150,25 @@ function VF_RD_InitializeSpecialLanguageSupport()
 			end
 		end
 	end
+end
+
+function VF_RD_InitializeDungeonSupport()
+	for dungeonName, dungeonNameEN in pairs(VF_RD_DungeonZones) do
+		VF_RD_RaidZones[dungeonName] = dungeonNameEN;
+	end
+	for bossName, mobType in pairs(VF_RD_DungeonMobsType) do
+		VF_RD_MobsType[bossName] = mobType;
+	end
+	for bossName, bossNameEN in pairs(VF_RD_DungeonBossMap) do
+		VF_RD_BossMap[bossName] = bossNameEN;
+	end
+	for bossName, bossParts in pairs(VF_RD_DungeonBossParts) do
+		VF_RD_BossParts[bossName] = bossParts;
+	end
+	for bossName, yellEvents in pairs(VF_RD_DungeonYellEvents) do
+		VF_RD_YellEvents[bossName] = yellEvents;
+	end
+	VF_RD_DungeonSupportMode = true;
 end
 
 function VF_RD_GetNameTranslated(_Name)
@@ -1363,7 +1388,7 @@ function VF_RD_CleanupSessions()
 	VF_RD_DebugMessage("Done with cleanup of sessions");
 end
 
-function VF_RD_DetermineLogging()
+--[[function VF_RD_DetermineLogging()
 	local currZone = VF_RD_GetTranslatedZoneText();
 	if(currZone ~= nil) then
 		if(VF_RD_RaidZones[currZone] ~= nil) then
@@ -1379,7 +1404,7 @@ function VF_RD_DetermineLogging()
 		end
 	end
 	return false;
-end
+end--]]
 
 function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 	local eventText = arg1;
@@ -1394,8 +1419,9 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 		if(VF_RD_ErrorLog == nil) then
 			VF_RD_ErrorLog = {};
 		end
+		VF_RD_InitializeDungeonSupport();
 		VF_RD_InitializeSpecialLanguageSupport();
-
+		
 		VF_RD_CleanupSessions();
 		VF_RD_CreateNewSession();
 		DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
@@ -1664,8 +1690,9 @@ function VF_RD_DetectBossStart()
 			end
 		end
 		
-		for i = 1, 40 do
-			local currUnitID = "raid"..i.."target";
+		local groupMembers = VF_RD_GetGroupMembers();
+		for i, groupMemberID in pairs(groupMembers) do
+			local currUnitID = groupMemberID.."target";
 			local unitTarget = VF_RD_GetNameTranslated(UnitName(currUnitID));
 			if(unitTarget ~= nil) then
 				if(VF_RD_MobsType[unitTarget] == VF_RD_MobType_Boss) then
@@ -1920,8 +1947,8 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	
 	---
 	local totalBuffsResult = "";
-	for i = 1, 40 do
-		local currUnitID = "raid"..i;
+	local groupMembers = VF_RD_GetGroupMembers();
+	for i, currUnitID in pairs(groupMembers) do
 		local currName = UnitName(currUnitID);
 		if(currName ~= nil) then
 			local currPlayerID = SW_StrTable:hasID(currName);
@@ -2116,8 +2143,9 @@ function VF_RD_UpdateBossHealth()
 		VF_RD_CurrentBoss_Health = UnitHealth("targettarget");
 		VF_RD_CurrentBoss_MaxHealth = UnitHealthMax("targettarget");--]]
 	else
-		for i = 1, 40 do
-			local currUnitID = "raid"..i.."target";
+		local groupMembers = VF_RD_GetGroupMembers();
+		for i, groupMemberID in pairs(groupMembers) do
+			local currUnitID = groupMemberID.."target";
 			local currName = VF_RD_GetNameTranslated(UnitName(currUnitID));
 			if(currName ~= nil) then
 				if(VF_RD_CurrentBossData[currName] ~= nil) then
@@ -2133,10 +2161,43 @@ function VF_RD_UpdateBossHealth()
 	end
 end
 
+VF_RD_GroupMembers_Party = {};
+VF_RD_GroupMembers_Raid = {};
+for i = 1, 4 do
+	table.insert(VF_RD_GroupMembers_Party, "party"..i);
+end
+table.insert(VF_RD_GroupMembers_Party, "player");
+
+for i = 1, 40 do
+	table.insert(VF_RD_GroupMembers_Raid, "raid"..i);
+end
+
+function VF_RD_GetGroupMembers()
+	if(GetNumRaidMembers() == 0) then
+		return VF_RD_GroupMembers_Party;
+	else
+		return VF_RD_GroupMembers_Raid;
+	end
+end
+
+VF_RD_ShouldLogData = false;
+VF_RD_LastTimeSeenInsideInstanceZone = 0;
+function VF_RD_UpdateShouldLogData()
+	if(VF_RD_RaidZones[VF_RD_GetTranslatedZoneText()] ~= nil) then
+		VF_RD_LastTimeSeenInsideInstanceZone = GetTime();
+	end
+	if(GetNumRaidMembers() ~= 0 or (VF_RD_DungeonSupportMode == true and (GetTime() - VF_RD_LastTimeSeenInsideInstanceZone) < 300)) then --5 min should be enough for corpserun...
+		VF_RD_ShouldLogData = true;
+	else
+		VF_RD_ShouldLogData = false;
+	end
+end
+
 function VF_RD_GetRaidMembers()
 	local raidMembers = "";
-	for i = 1, 40 do
-		local currName = UnitName("raid"..i);
+	local groupMembers = VF_RD_GetGroupMembers();
+	for i, groupMemberID in pairs(groupMembers) do
+		local currName = UnitName(groupMemberID);
 		if(currName ~= nil) then
 			local currID = SW_StrTable:hasID(currName);
 			if(currID ~= nil) then
@@ -2155,7 +2216,8 @@ VF_RD_NextBossCheckTime = nil;
 function VF_RaidDamage_SafeOnUpdate()
 	VF_RD_SaveServerTime_Update();
 	VF_RD_UpdateSaveInstanceInfo();
-	if(GetNumRaidMembers() ~= 0) then
+	VF_RD_UpdateShouldLogData();
+	if(VF_RD_ShouldLogData == true) then
 		local currTime = GetTime();
 		local currTime_S = VF_RD_GetTime_S();
 		if(VF_RD_NextUpdateTime == nil or VF_RD_NextBossCheckTime == nil) then
@@ -2254,7 +2316,7 @@ function VF_RD_LootReceived()
 	local _, _, actualItemID = string.find(itemID, "(.*):(.*):(.*):(.*)");
 	
 	local _name, _string, itemQuality = GetItemInfo(actualItemID);
-	if(GetNumRaidMembers() ~= 0 and itemQuality ~= nil and itemQuality >= 4) then
+	if(VF_RD_ShouldLogData == true and itemQuality ~= nil and itemQuality >= 4) then
 		local lootString = "PL-"..playerName.."="..itemID..";";
 		if(string.find(VF_RaidDamageData[1][1], "Session:Loot:")) then
 			VF_RaidDamageData[1][1] = VF_RaidDamageData[1][1]..lootString;
@@ -2290,7 +2352,7 @@ function VF_RD_SafeSaveLoot()
 			end
 		end
 		if(lootDropped ~= "") then
-			if(GetNumRaidMembers() ~= 0) then
+			if(VF_RD_ShouldLogData == true) then
 				if(VF_RD_MobsType[mobName] == VF_RD_MobType_Boss) then
 					local lootString = "BL-"..mobName.."="..lootItemIDs..";";
 					if(string.find(VF_RaidDamageData[1][1], "Session:Loot:")) then
