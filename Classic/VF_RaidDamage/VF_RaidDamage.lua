@@ -1690,7 +1690,7 @@ function VF_RD_DetectBossStart()
 			end
 		end
 		
-		local groupMembers = VF_RD_GetGroupMembers();
+		local groupMembers = VF_RD_GetGroupMemberIDs();
 		for i, groupMemberID in pairs(groupMembers) do
 			local currUnitID = groupMemberID.."target";
 			local unitTarget = VF_RD_GetNameTranslated(UnitName(currUnitID));
@@ -1947,7 +1947,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	
 	---
 	local totalBuffsResult = "";
-	local groupMembers = VF_RD_GetGroupMembers();
+	local groupMembers = VF_RD_GetGroupMemberIDs();
 	for i, currUnitID in pairs(groupMembers) do
 		local currName = UnitName(currUnitID);
 		if(currName ~= nil) then
@@ -2143,7 +2143,7 @@ function VF_RD_UpdateBossHealth()
 		VF_RD_CurrentBoss_Health = UnitHealth("targettarget");
 		VF_RD_CurrentBoss_MaxHealth = UnitHealthMax("targettarget");--]]
 	else
-		local groupMembers = VF_RD_GetGroupMembers();
+		local groupMembers = VF_RD_GetGroupMemberIDs();
 		for i, groupMemberID in pairs(groupMembers) do
 			local currUnitID = groupMemberID.."target";
 			local currName = VF_RD_GetNameTranslated(UnitName(currUnitID));
@@ -2161,27 +2161,28 @@ function VF_RD_UpdateBossHealth()
 	end
 end
 
-VF_RD_GroupMembers_Party = {};
-VF_RD_GroupMembers_Raid = {};
+VF_RD_GroupMemberIDs_Party = {};
+VF_RD_GroupMemberIDs_Raid = {};
 for i = 1, 4 do
-	table.insert(VF_RD_GroupMembers_Party, "party"..i);
+	table.insert(VF_RD_GroupMemberIDs_Party, "party"..i);
 end
-table.insert(VF_RD_GroupMembers_Party, "player");
+table.insert(VF_RD_GroupMemberIDs_Party, "player");
 
 for i = 1, 40 do
-	table.insert(VF_RD_GroupMembers_Raid, "raid"..i);
+	table.insert(VF_RD_GroupMemberIDs_Raid, "raid"..i);
 end
 
-function VF_RD_GetGroupMembers()
+function VF_RD_GetGroupMemberIDs()
 	if(GetNumRaidMembers() == 0) then
-		return VF_RD_GroupMembers_Party;
+		return VF_RD_GroupMemberIDs_Party;
 	else
-		return VF_RD_GroupMembers_Raid;
+		return VF_RD_GroupMemberIDs_Raid;
 	end
 end
 
 VF_RD_ShouldLogData = false;
 VF_RD_LastTimeSeenInsideInstanceZone = 0;
+
 function VF_RD_UpdateShouldLogData()
 	if(VF_RD_RaidZones[VF_RD_GetTranslatedZoneText()] ~= nil) then
 		VF_RD_LastTimeSeenInsideInstanceZone = GetTime();
@@ -2195,7 +2196,7 @@ end
 
 function VF_RD_GetRaidMembers()
 	local raidMembers = "";
-	local groupMembers = VF_RD_GetGroupMembers();
+	local groupMembers = VF_RD_GetGroupMemberIDs();
 	for i, groupMemberID in pairs(groupMembers) do
 		local currName = UnitName(groupMemberID);
 		if(currName ~= nil) then
