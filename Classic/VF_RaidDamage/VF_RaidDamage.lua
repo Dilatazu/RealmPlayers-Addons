@@ -1187,7 +1187,7 @@ function VF_RD_GetNameTranslated(_Name)
 	return _Name;
 end
 
-VF_RaidDamage_Settings = {["DebugMode"] = false};
+VF_RaidDamage_Settings = {["DebugMode"] = false, ["DungeonRecording"] = false};
 function VF_RD_DebugMessage(_Message)
 	if(VF_RaidDamage_Settings["DebugMode"] == true) then
 		DEFAULT_CHAT_FRAME:AddMessage("VF_RD_Debug: ".._Message, 1, 1, 0);
@@ -1201,6 +1201,7 @@ function VF_RaidDamage_OnLoad()
 	SlashCmdList["RAIDDAMAGE_CLEAR"] = VF_RD_ClearData;
 	SlashCmdList["RAIDDAMAGE_HELP"] = VF_RD_Help;
 	SlashCmdList["RAIDDAMAGE_PRINTRECORDED"] = VF_RD_PrintRecorded;
+	SlashCmdList["RAIDDAMAGE_TOGGLEDUNGEONRECORDING"] = VF_RD_ToggleDungeonRecording;
 	this:RegisterEvent("VARIABLES_LOADED");
 	this:RegisterEvent("CHAT_MSG_MONSTER_YELL");
 	this:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH");
@@ -1215,6 +1216,7 @@ function VF_RaidDamage_OnLoad()
 	SLASH_RAIDDAMAGE_HELP1 = "/VFRD";
 	SLASH_RAIDDAMAGE_HELP2 = "/VFRD_Help";
 	SLASH_RAIDDAMAGE_PRINTRECORDED1 = "/VFRD_PrintRecorded";
+	SLASH_RAIDDAMAGE_TOGGLEDUNGEONRECORDING1 = "/VFRD_ToggleDungeonRecording";
 	--this:RegisterEvent("");
 end
 
@@ -1270,10 +1272,21 @@ end
 klhtm.table.clearraidtable = VF_RD_NewKTM_Clear;
 --]]
 
+function VF_RD_ToggleDungeonRecording()
+	if(VF_RaidDamage_Settings["DungeonRecording"] == true) then
+		VF_RaidDamage_Settings["DungeonRecording"] = false;
+		VF_RD_Message("Dungeon Recording is now turned OFF! Please relog or use /reloadui");
+	else
+		VF_RaidDamage_Settings["DungeonRecording"] = true;
+		VF_RD_Message("Dungeon Recording is now turned ON! Please relog or use /reloadui");
+	end
+end
+
 function VF_RD_Help()
 	VF_RD_Message("VF RaidDamage Version = "..VF_RaidDamageVersion);
 	VF_RD_Message("/VFRD_PrintRecorded - Prints all the boss fights that has been recorded so far(only counts actual boss kills)");
 	VF_RD_Message("/VFRD_Clear - clears all data from all sessions, this removes all data saved in SavedVariables/VF_RaidDamage.lua");
+	VF_RD_Message("/VFRD_ToggleDungeonRecording - Toggles Dungeon Recording(requires a relog or /reloadui)");
 	VF_RD_Message("/VFRD - shows all commands");
 end
 
@@ -1426,7 +1439,9 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 		if(VF_RD_ErrorLog == nil) then
 			VF_RD_ErrorLog = {};
 		end
-		VF_RD_InitializeDungeonSupport();
+		if(VF_RaidDamage_Settings["DungeonRecording"] == true) then
+			VF_RD_InitializeDungeonSupport();
+		end
 		VF_RD_InitializeSpecialLanguageSupport();
 		
 		VF_RD_CleanupSessions();
