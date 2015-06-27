@@ -1330,6 +1330,8 @@ function VF_RD_CreateNewSession()
 	table.insert(VF_RaidDamageData[1], 1, sessionInfo);
 	VF_RD_SaveInstanceInfo(2);
 	VF_RD_RaidMembersChanged = nil;
+	VF_RD_LastBuffData = {};
+	VF_RD_LastDebuffData = {};
 	VF_RD_DebugMessage("Created new Session");
 end
 
