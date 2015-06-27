@@ -44,8 +44,9 @@ VF_RD_DungeonMobsType = {
 	["Oggleflint"] = VF_RD_MobType_Boss,
 	["Taragaman the Hungerer"] = VF_RD_MobType_Boss,
 	["Bazzalan"] = VF_RD_MobType_Boss,
+	["Jergosh the Invoker"] = VF_RD_MobType_Boss,
 
-	--Deadmines
+	--The Deadmines
 	["Rhahk'Zor"] = VF_RD_MobType_Boss,
 	["Sneed's Shredder"] = VF_RD_MobType_Boss, --Sneed "phase1"
 	["Sneed"] = VF_RD_MobType_Boss,
@@ -286,7 +287,8 @@ VF_RD_DungeonMobsType = {
 }
 
 VF_RD_DungeonZones = {
-	["Deadmines"] = "Deadmines",
+	["Ragefire Chasm"] = "Ragefire Chasm", --OK
+	["The Deadmines"] = "The Deadmines", --OK
 	["Wailing Caverns"] = "Wailing Caverns",
 	["Stockades"] = "Stockades",
 	["Shadowfang Keep"] = "Shadowfang Keep",
@@ -302,7 +304,7 @@ VF_RD_DungeonZones = {
 	["Blackrock Depths"] = "Blackrock Depths",
 	["Blackrock Spire"] = "Blackrock Spire",
 	["Stratholme"] = "Stratholme",
-	["Scholomance"] = "Scholomance",
+	["Scholomance"] = "Scholomance", --OK
 	["Dire Maul"] = "Dire Maul",
 }
 VF_RD_DungeonYellEvents = {
@@ -2190,8 +2192,14 @@ function VF_RD_UpdateShouldLogData()
 		VF_RD_LastTimeSeenInsideInstanceZone = GetTime();
 	end
 	if(GetNumRaidMembers() ~= 0 or (VF_RD_DungeonSupportMode == true and (GetTime() - VF_RD_LastTimeSeenInsideInstanceZone) < 300)) then --5 min should be enough for corpserun...
+		if(VF_RD_ShouldLogData == false) then
+			VF_RD_DebugMessage("Started Logging Data because inside Instance");
+		end
 		VF_RD_ShouldLogData = true;
 	else
+		if(VF_RD_ShouldLogData == true) then
+			VF_RD_DebugMessage("Stopped Logging Data because outside Instance");
+		end
 		VF_RD_ShouldLogData = false;
 	end
 end
