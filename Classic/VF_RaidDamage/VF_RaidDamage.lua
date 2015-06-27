@@ -1340,6 +1340,9 @@ end
 function VF_ParseDate(dateStr)
 	local _, _, currYear, currMonth, currDay, _ = string.find(dateStr, "(.*)-(.*)-(.*) (.*)");
 	return {Year = tonumber(currYear), Month = tonumber(currMonth), Day = tonumber(currDay)};
+	 --future fix below should be applied when confirmed no issues with other changes!
+	--[[local _, _, currYear, currMonth, currDay, currHour, currMinute, currSecond = string.find(dateStr, "(.*)-(.*)-(.*) (.*):(.*):(.*)");
+	return {Year = tonumber(currYear), Month = tonumber(currMonth), Day = tonumber(currDay), Hour = tonumber(currHour), Minute = tonumber(currMinute), Second = tonumber(currSecond)};--]]
 end
 
 function VF_RD_CleanupSessions()
