@@ -251,13 +251,50 @@ function VF_RP_DeleteGameToolTip()
 	end
 end
 
+if(GetLocale() == "deDE") then
+	VF_RP_RunSpeed100 = "Erh\195\182ht Tempo um 100%.";
+	VF_RP_RunSpeed60 = "Erh\195\182ht Tempo um 60%.";
+	VF_RP_SlowSpeed = "Langsam und stetig...";
+	VF_RP_PetIdentifierStr = "Haustier von ";
+	VF_RP_MinionIdentifierStr = "Diener von ";
+	VF_RP_CompanionIdentifierStr = "Begleiter von ";
+	VF_RP_LevelStrOffset = 7; --Stufe
+	VF_RP_GetPetOwnerFromStr = function(_Str, _PetIdentifierIndex)
+		local _, _, _, owner = string.find(_Str, "(.*)[' ](.*)");
+		return owner;
+	end
+elseif(GetLocale() == "frFR") then
+	VF_RP_RunSpeed100 = "Augmente la vitesse de 100%.";
+	VF_RP_RunSpeed60 = "Augmente la vitesse de 60%.";
+	VF_RP_SlowSpeed = "Lente et r\195\169guli\195\168re...";
+	VF_RP_PetIdentifierStr = "Animaux d";
+	VF_RP_MinionIdentifierStr = "Serviteur d"; --"Serviteur d'" or "Serviteur de "
+	VF_RP_CompanionIdentifierStr = "Familier d"; --"Familier d'" or "Familier de "
+	VF_RP_LevelStrOffset = 8; --Niveau
+	VF_RP_GetPetOwnerFromStr = function(_Str, _PetIdentifierIndex)
+		local _, _, _, owner = string.find(_Str, "(.*)[' ](.*)");
+		return owner;
+	end
+else
+	VF_RP_RunSpeed100 = "Increases speed by 100%.";
+	VF_RP_RunSpeed60 = "Increases speed by 60%.";
+	VF_RP_SlowSpeed = "Slow and steady...";
+	VF_RP_PetIdentifierStr = "'s Pet";
+	VF_RP_MinionIdentifierStr = "'s Minion";
+	VF_RP_CompanionIdentifierStr = "'s Companion";
+	VF_RP_LevelStrOffset = 7; --Level
+	VF_RP_GetPetOwnerFromStr = function(_Str, _PetIdentifierIndex)
+		return string.sub(_Str, 1, _PetIdentifierIndex - 1);
+	end
+end
+
 function VF_RP_GetMount(_UnitID)
 	for i = 1, 16 do
 		local currBuff = UnitBuff(_UnitID, i);
 		if(currBuff) then
 			leftText, rightText = VF_RP_GetBuffText(_UnitID, i);
 			if(table.getn(leftText) >= 2) then
-				if(leftText[2] == "Increases speed by 100%." or leftText[2] == "Increases speed by 60%." or leftText[2] == "Slow and steady...") then
+				if(leftText[2] == VF_RP_RunSpeed100 or leftText[2] == VF_RP_RunSpeed60 or leftText[2] == VF_RP_SlowSpeed) then
 					return leftText[1];
 				end
 			end
@@ -274,24 +311,24 @@ function VF_RP_GetPetInfo(_UnitID)
 	local data = VF_RP_GetToolTipText();
 	
 	if(table.getn(data) >= 3) then
-		local petIdentifierIndex = string.find(data[2], "'s Pet");
+		local petIdentifierIndex = string.find(data[2], VF_RP_PetIdentifierStr);
 		if(petIdentifierIndex == nil) then
-			petIdentifierIndex = string.find(data[2], "'s Minion");
+			petIdentifierIndex = string.find(data[2], VF_RP_MinionIdentifierStr);
 		end
 		if(petIdentifierIndex == nil) then
-			petIdentifierIndex = string.find(data[2], "'s Companion");
+			petIdentifierIndex = string.find(data[2], VF_RP_CompanionIdentifierStr);
 		end
 		if(petIdentifierIndex) then
-			local petLevel = tonumber(string.sub(data[3], 7));
+			local petLevel = tonumber(string.sub(data[3], VF_RP_LevelStrOffset));
 			if(petLevel == nil) then
 				return nil;
 			end
 			if(UnitCreatureFamily(_UnitID) == nil and UnitStat(_UnitID, 3) == 0) then
 				--Companion
-				return {Name = data[1], Owner = string.sub(data[2], 1, petIdentifierIndex - 1), Level = petLevel, Type = "Companion"};
+				return {Name = data[1], Owner = VF_RP_GetPetOwnerFromStr(data[2], petIdentifierIndex), Level = petLevel, Type = "Companion"};
 			else
 				--Pet
-				return {Name = data[1], Owner = string.sub(data[2], 1, petIdentifierIndex - 1), Level = petLevel, Type = "Pet"};
+				return {Name = data[1], Owner = VF_RP_GetPetOwnerFromStr(data[2], petIdentifierIndex), Level = petLevel, Type = "Pet"};
 			end
 		end
 	end
