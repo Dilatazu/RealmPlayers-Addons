@@ -1449,12 +1449,7 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 		VF_RD_CreateNewSession();
 		DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
 	elseif(event == "ZONE_CHANGED_NEW_AREA") then
-		local currentZone = VF_RD_GetTranslatedZoneText();
-		if(string.find(VF_RaidDamageData[1][1], "Session:Info:")) then
-			VF_RaidDamageData[1][1] = VF_RaidDamageData[1][1].."Zone="..currentZone..",";
-		else
-			table.insert(VF_RaidDamageData[1], 1, "Session:Info:Zone="..currentZone..",");
-		end
+		VF_RD_UpdateCurrentZone();
 	elseif(event == "CHAT_MSG_MONSTER_YELL") then
 		local monsterName = VF_RD_GetNameTranslated(arg2);
 		
@@ -1951,6 +1946,14 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 			VF_RD_RaidMembersChanged = nil;
 		end
 	end
+	if(VF_RD_CurentZoneChanged ~= nil and totalPlayersResult ~= "") then
+		if(_Time - VF_RD_CurentZoneChanged > 30 or (string.find(_Reason, "Start") or string.find(_Reason, "Dead") or string.find(_Reason, "Wipe"))) then
+			if(VF_RD_CurentZoneChanged ~= "") then
+				totalPlayersResult = totalPlayersResult..VF_RD_CurentZoneChanged..",";
+			end
+			VF_RD_CurentZoneChanged = nil;
+		end
+	end
 	VF_RD_UpdateBossHealth();
 	if(totalPlayersResult ~= "" and VF_RD_CurrentBoss_MaxHealth > 0) then
 		local healthStr = "BossHealth="..VF_RD_CurrentBoss_Health.."-"..VF_RD_CurrentBoss_MaxHealth;
@@ -2219,6 +2222,22 @@ function VF_RD_UpdateShouldLogData()
 			VF_RD_DebugMessage("Stopped Logging Data because outside Instance");
 		end
 		VF_RD_ShouldLogData = false;
+	end
+end
+
+VF_RD_CurentZone = "";
+VF_RD_CurentZoneChanged = nil;
+function VF_RD_UpdateCurrentZone()
+	local currentZone = VF_RD_GetTranslatedZoneText();
+	local currentZoneStr = "Z "..currentZone;
+	if(currentZoneStr ~= VF_RD_CurentZone and currentZone ~= "") then
+		VF_RD_CurentZone = currentZoneStr;
+		VF_RD_CurentZoneChanged = VF_RD_GetTime_S();
+	end
+	if(string.find(VF_RaidDamageData[1][1], "Session:Info:")) then
+		VF_RaidDamageData[1][1] = VF_RaidDamageData[1][1].."Zone="..currentZone..",";
+	else
+		table.insert(VF_RaidDamageData[1], 1, "Session:Info:Zone="..currentZone..",");
 	end
 end
 
