@@ -1208,6 +1208,7 @@ function VF_RaidDamage_OnLoad()
 	this:RegisterEvent("ZONE_CHANGED_NEW_AREA");
 	this:RegisterEvent("UPDATE_INSTANCE_INFO");
 	this:RegisterEvent("RAID_ROSTER_UPDATE");
+	this:RegisterEvent("PARTY_MEMBERS_CHANGED");
 	this:RegisterEvent("CHAT_MSG_LOOT");
 	
 	SLASH_RAIDDAMAGE_CLEAR1 = "/VFRD_Clear";
@@ -1546,7 +1547,7 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 			end
 			VF_RD_LogRaidDamage(deadReason, VF_RD_GetTime_S());
 		end
-	elseif(event == "RAID_ROSTER_UPDATE") then
+	elseif(event == "RAID_ROSTER_UPDATE" or event == "PARTY_MEMBERS_CHANGED") then
 		local oldRaidMembers = VF_RD_RaidMembers;
 		VF_RD_RaidMembers = VF_RD_GetRaidMembers();
 		if(VF_RD_RaidMembers ~= oldRaidMembers and VF_RD_RaidMembers ~= "") then
