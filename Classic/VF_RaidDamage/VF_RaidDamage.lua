@@ -1548,11 +1548,7 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 			VF_RD_LogRaidDamage(deadReason, VF_RD_GetTime_S());
 		end
 	elseif(event == "RAID_ROSTER_UPDATE" or event == "PARTY_MEMBERS_CHANGED") then
-		local oldRaidMembers = VF_RD_RaidMembers;
-		VF_RD_RaidMembers = VF_RD_GetRaidMembers();
-		if(VF_RD_RaidMembers ~= oldRaidMembers and VF_RD_RaidMembers ~= "") then
-			VF_RD_RaidMembersChanged = VF_RD_GetTime_S();
-		end
+		VF_RD_UpdateRaidMembers();
 	end
 end
 
@@ -1807,6 +1803,9 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	for unitID, unitData in SW_DataCollection.activeSegment do 
 		if(type(unitID)=="number")then 
 			local rawUnitName = SW_StrTable:getStr(unitID);
+			if(VF_RD_RaidMembersMissingID[rawUnitName] ~= nil) then
+				VF_RD_UpdateRaidMembers();
+			end
 			local unitName = VF_RD_GetNameTranslated(rawUnitName);
 			if(VF_RD_LastRecorded[unitID] == nil) then
 				VF_RD_LastRecorded[unitID] = {};
@@ -2223,7 +2222,17 @@ function VF_RD_UpdateShouldLogData()
 	end
 end
 
-function VF_RD_GetRaidMembers()
+function VF_RD_UpdateRaidMembers()
+	local oldRaidMembers = VF_RD_RaidMembers;
+	VF_RD_RaidMembers = VF_RD_GenerateRaidMembersStr();
+	if(VF_RD_RaidMembers ~= oldRaidMembers and VF_RD_RaidMembers ~= "") then
+		VF_RD_RaidMembersChanged = VF_RD_GetTime_S();
+	end
+end
+
+VF_RD_RaidMembersMissingID = {};
+function VF_RD_GenerateRaidMembersStr()
+	VF_RD_RaidMembersMissingID = {};
 	local raidMembers = "";
 	local groupMembers = VF_RD_GetGroupMemberIDs();
 	for i, groupMemberID in pairs(groupMembers) do
@@ -2232,6 +2241,8 @@ function VF_RD_GetRaidMembers()
 			local currID = SW_StrTable:hasID(currName);
 			if(currID ~= nil) then
 				raidMembers = raidMembers.." "..currID;
+			else
+				VF_RD_RaidMembersMissingID[currName] = true;
 			end
 		end
 	end
