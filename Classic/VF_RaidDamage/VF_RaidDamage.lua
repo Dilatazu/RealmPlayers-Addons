@@ -1949,7 +1949,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	if(VF_RD_CurentZoneChanged ~= nil and totalPlayersResult ~= "") then
 		if(_Time - VF_RD_CurentZoneChanged > 30 or (string.find(_Reason, "Start") or string.find(_Reason, "Dead") or string.find(_Reason, "Wipe"))) then
 			if(VF_RD_CurentZoneChanged ~= "") then
-				totalPlayersResult = totalPlayersResult..VF_RD_CurentZoneChanged..",";
+				totalPlayersResult = totalPlayersResult..VF_RD_CurentZoneStr..",";
 			end
 			VF_RD_CurentZoneChanged = nil;
 		end
@@ -2225,13 +2225,13 @@ function VF_RD_UpdateShouldLogData()
 	end
 end
 
-VF_RD_CurentZone = "";
+VF_RD_CurentZoneStr = "";
 VF_RD_CurentZoneChanged = nil;
 function VF_RD_UpdateCurrentZone()
 	local currentZone = VF_RD_GetTranslatedZoneText();
 	local currentZoneStr = "Z "..currentZone;
-	if(currentZoneStr ~= VF_RD_CurentZone and currentZone ~= "") then
-		VF_RD_CurentZone = currentZoneStr;
+	if(currentZoneStr ~= VF_RD_CurentZoneStr and currentZone ~= "") then
+		VF_RD_CurentZoneStr = currentZoneStr;
 		VF_RD_CurentZoneChanged = VF_RD_GetTime_S();
 	end
 	if(string.find(VF_RaidDamageData[1][1], "Session:Info:")) then
