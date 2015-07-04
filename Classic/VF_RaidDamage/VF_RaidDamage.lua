@@ -24,6 +24,466 @@ VF_RD_MobType_Boss = 1;
 VF_RD_MobType_Trash = 2;
 VF_RD_MobType_Unknown = 3;
 
+VF_RD_YellEvents_Start = 1;
+VF_RD_YellEvents_Phase1 = 2;
+VF_RD_YellEvents_Phase2 = 3;
+VF_RD_YellEvents_Phase3 = 4;
+VF_RD_YellEvents_End = 5;
+VF_RD_YellEvents_NotImportant = 99;
+
+VF_RD_YellEventsStr = {
+	[VF_RD_YellEvents_Start] = "Start_Y",
+	[VF_RD_YellEvents_Phase1] = "Phase1_Y",
+	[VF_RD_YellEvents_Phase2] = "Phase2_Y",
+	[VF_RD_YellEvents_Phase3] = "Phase3_Y",
+	[VF_RD_YellEvents_End] = "Dead_Y",
+}
+
+VF_RD_DungeonMobsType = {
+	--Ragefire Chasm
+	["Oggleflint"] = VF_RD_MobType_Boss,
+	["Taragaman the Hungerer"] = VF_RD_MobType_Boss,
+	["Bazzalan"] = VF_RD_MobType_Boss,
+	["Jergosh the Invoker"] = VF_RD_MobType_Boss,
+
+	--The Deadmines
+	["Rhahk'Zor"] = VF_RD_MobType_Boss,
+	["Sneed's Shredder"] = VF_RD_MobType_Boss, --Sneed "phase1"
+	["Sneed"] = VF_RD_MobType_Boss,
+	["Gilnid"] = VF_RD_MobType_Boss,
+	["Mr. Smite"] = VF_RD_MobType_Boss,
+	["Captain Greenskin"] = VF_RD_MobType_Boss,
+	["Edwin VanCleef"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Miner Johnson"] = VF_RD_MobType_Boss,
+	["Cookie"] = VF_RD_MobType_Boss,
+
+	--Wailing Caverns
+	["Lady Anacondra"] = VF_RD_MobType_Boss,
+	["Lord Cobrahn"] = VF_RD_MobType_Boss,
+	["Lord Pythas"] = VF_RD_MobType_Boss,
+	["Lord Serpentis"] = VF_RD_MobType_Boss,
+	["Verdan the Everliving"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Skum"] = VF_RD_MobType_Boss,
+	["Kresh"] = VF_RD_MobType_Boss,
+	["Mutanus the Devourer"] = VF_RD_MobType_Boss,
+
+	--Stockades
+	--To be filled in...
+
+	--Shadowfang Keep
+	["Baron Silverlaine"] = VF_RD_MobType_Boss,
+	["Commander Springvale"] = VF_RD_MobType_Boss,
+	["Odo the Blindwatcher"] = VF_RD_MobType_Boss,
+	["Wolf Master Nandos"] = VF_RD_MobType_Boss,
+	["Archmage Arugal"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Razorclaw the Butcher"] = VF_RD_MobType_Boss,
+
+	--Blackfathom Deeps
+	["Ghamoo-ra"] = VF_RD_MobType_Boss,
+	["Lady Sarevess"] = VF_RD_MobType_Boss,
+	["Gelihast"] = VF_RD_MobType_Boss,
+	["Twilight Lord Kelris"] = VF_RD_MobType_Boss,
+	["Aku'mai"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Lorgus Jett"] = VF_RD_MobType_Boss,
+
+	--Razorfen Kraul
+	["Death Speaker Jargba"] = VF_RD_MobType_Boss,
+	["Aggem Thorncurse"] = VF_RD_MobType_Boss,
+	["Overlord Ramtusk"] = VF_RD_MobType_Boss,
+	["Earthcaller Halmgar"] = VF_RD_MobType_Boss,
+	["Agathelos the Raging"] = VF_RD_MobType_Boss,
+	["Charlga Razorflank"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Blind Hunter"] = VF_RD_MobType_Boss,
+
+	--Gnomeregan
+	["Viscous Fallout"] = VF_RD_MobType_Boss,
+	["Electrocutioner 6000"] = VF_RD_MobType_Boss,
+	["Crowd Pummeler 9-60"] = VF_RD_MobType_Boss,
+	["Mekgineer Thermaplugg"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Chomper"] = VF_RD_MobType_Boss, --Grubbis "pet"
+	["Grubbis"] = VF_RD_MobType_Boss,
+	["Dark Iron Ambassador"] = VF_RD_MobType_Boss,
+
+	--Scarlet Monastery
+	--Graveyard
+	["Bloodmage Thalnos"] = VF_RD_MobType_Boss,
+	--Library
+	["Houndmaster Loksey"] = VF_RD_MobType_Boss,
+	["Arcanist Doan"] = VF_RD_MobType_Boss,
+	--Armory
+	["Herod"] = VF_RD_MobType_Boss,
+	--Cathedral
+	["High Inquisitor Fairbanks"] = VF_RD_MobType_Boss,
+	["Scarlet Commander Mograine"] = VF_RD_MobType_Boss, --"Infidels! They must be purified!"(startyell)
+	["High Inquisitor Whitemane"] = VF_RD_MobType_Boss, --"What, Mograine has fallen? You shall pay for this treachery!"(startyell) "Arise, my champion!"(phase2)
+
+	--Razorfen Downs
+	["Mordresh Fire Eye"] = VF_RD_MobType_Boss,
+	["Glutton"] = VF_RD_MobType_Boss,
+	["Amnennar the Coldbringer"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Ragglesnout"] = VF_RD_MobType_Boss,
+
+	--Uldaman
+	["Ironaya"] = VF_RD_MobType_Boss,
+	["Galgann Firehammer"] = VF_RD_MobType_Boss,
+	["Ancient Stone Keeper"] = VF_RD_MobType_Boss,
+	["Grimlok"] = VF_RD_MobType_Boss,
+	["Archaedas"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Revelosh"] = VF_RD_MobType_Boss,
+	["Olaf"] = VF_RD_MobType_Boss, --The Three Dwarfs
+	["Eric \"The Swift\""] = VF_RD_MobType_Boss, --The Three Dwarfs
+	["Baelog"] = VF_RD_MobType_Boss, --The Three Dwarfs
+	["Obsidian Sentinel"] = VF_RD_MobType_Boss,
+
+	--Zul'Farrak
+	["Theka the Martyr"] = VF_RD_MobType_Boss,
+	["Antu'sul"] = VF_RD_MobType_Boss,
+	["Chief Ukorz Sandscalp"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Zerillis"] = VF_RD_MobType_Boss,
+	["Shadowpriest Sezz'ziz"] = VF_RD_MobType_Boss,
+	["Gahz'rilla"] = VF_RD_MobType_Boss,
+
+	--Maraudon
+	["Noxxion"] = VF_RD_MobType_Boss, --["Noxxion's Spawn"] = VF_RD_MobType_Boss, --Adds
+	["Razorlash"] = VF_RD_MobType_Boss,
+	["Lord Vyletongue"] = VF_RD_MobType_Boss,
+	["Celebras the Cursed"] = VF_RD_MobType_Boss,
+	["Landslide"] = VF_RD_MobType_Boss,
+	["Tinkerer Gizlock"] = VF_RD_MobType_Boss,
+	["Rotgrip"] = VF_RD_MobType_Boss,
+	["Princess Theradras"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Meshlok the Harvester"] = VF_RD_MobType_Boss,
+
+	--Sunken Temple
+	["Zul'Lor"] = VF_RD_MobType_Boss,
+	["Mijan"] = VF_RD_MobType_Boss,
+	["Hukku"] = VF_RD_MobType_Boss,
+	["Loro"] = VF_RD_MobType_Boss,
+	["Gasher"] = VF_RD_MobType_Boss,
+	["Weaver"] = VF_RD_MobType_Boss,
+	["Dreamscythe"] = VF_RD_MobType_Boss,
+	["Jammal'an the Prophet"] = VF_RD_MobType_Boss, --Jammal'an
+	["Ogom the Wretched"] = VF_RD_MobType_Boss, --Jammal'an
+	["Morphaz"] = VF_RD_MobType_Boss,
+	["Hazzas"] = VF_RD_MobType_Boss,
+	["Shade of Eranikus"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Avatar of Hakkar"] = VF_RD_MobType_Boss,
+
+	--Blackrock Depths
+	["Lord Incendius"] = VF_RD_MobType_Boss,
+	["Fineous Darkvire"] = VF_RD_MobType_Boss,
+	["Pyromancer Loregrain"] = VF_RD_MobType_Boss,
+	["General Angerforge"] = VF_RD_MobType_Boss,
+	["Golem Lord Argelmach"] = VF_RD_MobType_Boss,
+	["Phalanx"] = VF_RD_MobType_Boss,
+	["Ambassador Flamelash"] = VF_RD_MobType_Boss,
+	["Anger'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Seeth'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Dope'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Gloom'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Vile'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Hate'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Doom'rel"] = VF_RD_MobType_Boss, --The Seven Event
+	["Magmus"] = VF_RD_MobType_Boss,
+	["Emperor Dagran Thaurissan"] = VF_RD_MobType_Boss, --Come to aid the Throne!
+	["Princess Moira Bronzebeard"] = VF_RD_MobType_Boss,
+
+	--Optional/Rare
+	["Anub'Shiah"] = VF_RD_MobType_Boss,
+	["Ribbly Screwspigot"] = VF_RD_MobType_Boss,
+	["Hurley Blackbreath"] = VF_RD_MobType_Boss,
+	["Plugger Spazzring"] = VF_RD_MobType_Boss,
+	["Dark Keeper Bethek"] = VF_RD_MobType_Boss,
+	["Panzor the Invincible"] = VF_RD_MobType_Boss,
+
+	--Blackrock Spire
+	--UBRS
+	["Pyroguard Emberseer"] = VF_RD_MobType_Boss,
+	["Gyth"] = VF_RD_MobType_Boss, --Only here for BossMap for Warchief Rend Blackhand
+	["Warchief Rend Blackhand"] = VF_RD_MobType_Boss,
+	["The Beast"] = VF_RD_MobType_Boss,
+	["General Drakkisath"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Jed Runewatcher"] = VF_RD_MobType_Boss,
+	--LBRS
+	["Highlord Omokk"] = VF_RD_MobType_Boss,
+	["Shadow Hunter Vosh'gajin"] = VF_RD_MobType_Boss,
+	["War Master Voone"] = VF_RD_MobType_Boss,
+	["Mother Smolderweb"] = VF_RD_MobType_Boss,
+	["Quartermaster Zigris"] = VF_RD_MobType_Boss,
+	["Halycon"] = VF_RD_MobType_Boss,
+	["Overlord Wyrmthalak"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Gizrul the Slavener"] = VF_RD_MobType_Boss,
+
+	--Stratholme
+	--Living
+	["Malor the Zealous"] = VF_RD_MobType_Boss,
+	["Cannon Master Willey"] = VF_RD_MobType_Boss,
+	["Archivist Galford"] = VF_RD_MobType_Boss,
+	["Grand Crusader Dathrohan"] = VF_RD_MobType_Boss, --Only here for BossMap for Balnazzar
+	["Balnazzar"] = VF_RD_MobType_Boss,
+	--Undead
+	["Magistrate Barthilas"] = VF_RD_MobType_Boss,
+	["Nerub'enkan"] = VF_RD_MobType_Boss,
+	["Baroness Anastari"] = VF_RD_MobType_Boss,
+	["Maleki the Pallid"] = VF_RD_MobType_Boss,
+	["Ramstein the Gorger"] = VF_RD_MobType_Boss,
+	["Baron Rivendare"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["The Unforgiven"] = VF_RD_MobType_Boss,
+	["Skul"] = VF_RD_MobType_Boss,
+
+	--Scholomance
+	["Marduk Blackpool"] = VF_RD_MobType_Boss, --Same boss as Vectus
+	["Vectus"] = VF_RD_MobType_Boss, --Same boss as Marduk Blackpool
+	["Ras Frostwhisper"] = VF_RD_MobType_Boss,
+	["Lorekeeper Polkelt"] = VF_RD_MobType_Boss,
+	["Doctor Theolen Krastinov"] = VF_RD_MobType_Boss,
+	["Instructor Malicia"] = VF_RD_MobType_Boss,
+	["Lady Illucia Barov"] = VF_RD_MobType_Boss,
+	["The Ravenian"] = VF_RD_MobType_Boss,
+	["Lord Alexei Barov"] = VF_RD_MobType_Boss,
+	["Darkmaster Gandling"] = VF_RD_MobType_Boss,
+	--Optional/Rare
+	["Rattlegore"] = VF_RD_MobType_Boss,
+	["Jandice Barov"] = VF_RD_MobType_Boss,
+	["Kirtonos the Herald"] = VF_RD_MobType_Boss,
+
+	--Dire Maul
+	--East
+	["Hydrospawn"] = VF_RD_MobType_Boss,
+	["Zevrim Thornhoof"] = VF_RD_MobType_Boss,
+	["Pimgib"] = VF_RD_MobType_Boss, --Same boss as Lethtendris
+	["Lethtendris"] = VF_RD_MobType_Boss, --Same boss as Pimgib
+	["Alzzin the Wildshaper"] = VF_RD_MobType_Boss,
+	--West
+	["Tendris Warpwood"] = VF_RD_MobType_Boss,
+	["Magister Kalendris"] = VF_RD_MobType_Boss,
+	["Illyanna Ravenoak"] = VF_RD_MobType_Boss, --Same boss as Ferra
+	["Ferra"] = VF_RD_MobType_Boss, --Same boss as Illyanna Ravenoak
+	["Immol'thar"] = VF_RD_MobType_Boss,
+	["Prince Tortheldrin"] = VF_RD_MobType_Boss,
+	--North
+	["Guard Mol'dar"] = VF_RD_MobType_Boss,
+	["Guard Fengus"] = VF_RD_MobType_Boss,
+	["Guard Slip'kik"] = VF_RD_MobType_Boss,
+	["Captain Kromcrush"] = VF_RD_MobType_Boss,
+	["King Gordok"] = VF_RD_MobType_Boss,
+	["Cho'Rush the Observer"] = VF_RD_MobType_Boss, --Same boss as King Gordok
+	--Optional/Rare
+	["Stomper Kreeg"] = VF_RD_MobType_Boss,
+}
+
+VF_RD_DungeonZones = {
+	["Ragefire Chasm"] = "Ragefire Chasm", --OK
+	["The Deadmines"] = "The Deadmines", --OK
+	["Wailing Caverns"] = "Wailing Caverns",
+	["Stockades"] = "Stockades",
+	["Shadowfang Keep"] = "Shadowfang Keep",
+	["Blackfathom Deeps"] = "Blackfathom Deeps",
+	["Razorfen Kraul"] = "Razorfen Kraul",
+	["Gnomeregan"] = "Gnomeregan",
+	["Scarlet Monastery"] = "Scarlet Monastery",
+	["Razorfen Downs"] = "Razorfen Downs",
+	["Uldaman"] = "Uldaman",
+	["Zul'Farrak"] = "Zul'Farrak",
+	["Maraudon"] = "Maraudon",
+	["Sunken Temple"] = "Sunken Temple",
+	["Blackrock Depths"] = "Blackrock Depths",
+	["Blackrock Spire"] = "Blackrock Spire",
+	["Stratholme"] = "Stratholme",
+	["Scholomance"] = "Scholomance", --OK
+	["Dire Maul"] = "Dire Maul",
+}
+VF_RD_DungeonYellEvents = {
+	--Deadmines
+	["Rhahk'Zor"] = {
+		["pay big for your heads"] = VF_RD_YellEvents_Start,
+	},
+	["Edwin VanCleef"] = {
+		["None may challenge"] = VF_RD_YellEvents_Start,
+		["dogs"] = VF_RD_YellEvents_Phase2,
+		["righteous"] = VF_RD_YellEvents_Phase3,
+		["prevail"] = VF_RD_YellEvents_Phase4,
+	},
+	["Mr. Smite"] = {
+		["land lubbers are tougher"] = VF_RD_YellEvents_Phase2, --phase2(say?)
+		["making me angry"] = VF_RD_YellEvents_Phase3, --phase3(say?)
+	},
+
+	--Wailing Caverns
+	["Lady Anacondra"] = {
+		["can stand against"] = VF_RD_YellEvents_Start,
+	},
+	["Lord Cobrahn"] = {
+		["will never wake the dreamer"] = VF_RD_YellEvents_Start,
+	},
+	["Lord Pythas"] = {
+		["coils of death"] = VF_RD_YellEvents_Start,
+	},
+	["Lord Serpentis"] = {
+		["can do anything"] = VF_RD_YellEvents_Start,
+	},
+
+	--Shadowfang Keep
+	["Baron Silverlaine"] = {
+		["this accursed place"] = VF_RD_YellEvents_Start,
+		["death is only a temporary"] = VF_RD_YellEvents_End,
+	},
+	["Wolf Master Nandos"] = {
+		["destroyed my pack"] = VF_RD_YellEvents_Start,
+	},
+	["Archmage Arugal"] = {
+		["shall serve"] = VF_RD_YellEvents_Start,
+		["Release your rage"] = VF_RD_YellEvents_Phase2,
+	},
+
+	--Blackfathom Deeps
+	["Lady Sarevess"] = {
+		["not be here"] = VF_RD_YellEvents_Start,
+		--Possibly not correct: ["Hearty Kill!"] = VF_RD_YellEvents_End,
+	},
+	["Twilight Lord Kelris"] = {
+		["dares disturb my meditation"] = VF_RD_YellEvents_Start,
+	},
+
+	--Gnomeregan
+	["Mekgineer Thermaplugg"] = {
+		["Gnomeregan is mine!"] = VF_RD_YellEvents_Start,
+	},
+
+	--Scarlet Monastery
+	["Arcanist Doan"] = {
+		["will not defile these mysteries"] = VF_RD_YellEvents_Start,
+		["in righteous fire"] = VF_RD_YellEvents_Phase2,
+	},
+	["Herod"] = {
+		["been waiting for a real challenge"] = VF_RD_YellEvents_Start,
+		["Blades of Light"] = VF_RD_YellEvents_Phase2,
+	},
+	["Herod"] = {
+		["been waiting for a real challenge"] = VF_RD_YellEvents_Start,
+		["Blades of Light"] = VF_RD_YellEvents_Phase2,
+		--Not needed. Enrage: ["give me strength"] = VF_RD_YellEvents_Phase3,
+	},
+
+	--Razorfen Downs
+	["Mordresh Fire Eye"] = {
+		["my brethren"] = VF_RD_YellEvents_Start,
+	},
+	["Amnennar the Coldbringer"] = {
+		["never leave this place"] = VF_RD_YellEvents_Start,
+	},
+
+	--Uldaman
+	["Galgann Firehammer"] = {
+		["Slay Them!"] = VF_RD_YellEvents_Start,
+	},
+
+	--Maraudon
+	["Tinkerer Gizlock"] = {
+		["never reveal my presence"] = VF_RD_YellEvents_Start,
+	},
+
+	--Blackrock Depths
+	["Doom'rel"] = {
+		["You have challenged the Seven"] = VF_RD_YellEvents_Start,--Say event(?)
+	},
+
+	--Stratholme
+	["Grand Crusader Dathrohan"] = {
+		["Today you have unmade"] = VF_RD_YellEvents_Start,
+	},
+	["Balnazzar"] = {
+		["Today you have unmade"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
+		["You fools think you can defeat"] = VF_RD_YellEvents_Phase2,
+		["Damn you mortals"] = VF_RD_YellEvents_End,--Say event(?)
+	},
+
+	--Scholomance
+	["Darkmaster Gandling"] = {
+		["School is in session"] = VF_RD_YellEvents_Start,
+	},
+
+	--Dire Maul
+	["Cho'Rush the Observer"] = {
+		["The king is dead"] = VF_RD_YellEvents_End,
+	},
+	["King Gordok"] = {
+		["The king is dead"] = VF_RD_YellEvents_End, --This should not be needed?
+	},
+}
+VF_RD_DungeonBossMap = {
+	--Deadmines
+	["Sneed's Shredder"] = "Sneed",
+
+	--Gnomeregan
+	["Chomper"] = "Grubbis",
+
+	--Uldaman
+	["Olaf"] = "The Three Dwarfs",
+	["Eric \"The Swift\""] = "The Three Dwarfs",
+	["Baelog"] = "The Three Dwarfs",
+	
+	--Sunken Temple
+	["Jammal'an the Prophet"] = "Jammal'an",
+	["Ogom the Wretched"] = "Jammal'an",
+
+	--Blackrock Depths
+	["Anger'rel"] = "The Seven Event",
+	["Seeth'rel"] = "The Seven Event",
+	["Dope'rel"] = "The Seven Event",
+	["Gloom'rel"] = "The Seven Event",
+	["Vile'rel"] = "The Seven Event",
+	["Hate'rel"] = "The Seven Event",
+	["Doom'rel"] = "The Seven Event",
+	["Princess Moira Bronzebeard"] = "Emperor Dagran Thaurissan",
+
+	--Blackrock Spire
+	["Gyth"] = "Warchief Rend Blackhand",
+
+	--Stratholme
+	["Grand Crusader Dathrohan"] = "Balnazzar",
+
+	--Scholomance
+	["Marduk Blackpool"] = "Vectus And Marduk",
+	["Vectus"] = "Vectus And Marduk",
+
+	--Dire Maul
+	--West
+	["Lethtendris"] = "Lethtendris And Pimgib";
+	["Pimgib"] = "Lethtendris And Pimgib";
+	--East
+	["Illyanna Ravenoak"] = "Illyanna And Ferra",
+	["Ferra"] = "Illyanna And Ferra",
+	--North
+	["Cho'Rush the Observer"] = "King Gordok",
+}
+VF_RD_DungeonBossParts = {
+	["The Three Dwarfs"] = {[1] = "Olaf", [2] = "Eric \"The Swift\"", [3] = "Baelog"},
+
+	["Jammal'an"] = {[1] = "Jammal'an the Prophet", [2] = "Ogom the Wretched"},
+
+	["The Seven Event"] = {[1] = "Anger'rel", [2] = "Seeth'rel", [3] = "Dope'rel"
+	, [4] = "Gloom'rel", [5] = "Vile'rel", [6] = "Hate'rel", [7] = "Doom'rel"},
+
+	["Vectus And Marduk"] = {[1] = "Vectus", [2] = "Marduk Blackpool"},
+	["Lethtendris And Pimgib"] = {[1] = "Lethtendris", [2] = "Pimgib"},
+	["Illyanna And Ferra"] = {[1] = "Illyanna Ravenoak", [2] = "Ferra"},
+}
+
 VF_RD_MobsType = {
 	--MC
 	["Lucifron"] = VF_RD_MobType_Boss,
@@ -119,14 +579,6 @@ VF_RD_MobsType = {
 	--The Four Horsemen
 	["Sapphiron"] = VF_RD_MobType_Boss,
 	["Kel'Thuzad"] = VF_RD_MobType_Boss,
-	
-	--UBRS
-	--[[
-	["Pyroguard Emberseer"] = VF_RD_MobType_Boss,
-	["Warchief Rend Blackhand"] = VF_RD_MobType_Boss,
-	["The Beast"] = VF_RD_MobType_Boss,
-	["General Drakkisath"] = VF_RD_MobType_Boss,
-	--]]
 }
 
 VF_RD_BossNameTranslations = {
@@ -222,43 +674,8 @@ VF_RD_BossNameTranslations = {
 	["Dame Blaumeux"] = "Lady Blaumeux",
 }
 
-VF_RD_SpecialLanguageSupportMode = false;
-
-function VF_RD_InitializeSpecialLanguageSupport()
-	if(GetRealmName() == "NostalGeek 1.12" or GetLocale() == "frFR") then
-		VF_RD_SpecialLanguageSupportMode = true;
-		for bossName, yellEvents in pairs(VF_RD_YellEventsFR) do
-			for yellStr, yellEvent in yellEvents do
-				VF_RD_YellEvents[bossName][yellStr] = yellEvent;
-			end
-		end
-	end
-	if(GetRealmName() == "Nefarian" or GetLocale() == "deDE") then
-		VF_RD_SpecialLanguageSupportMode = true;
-		for bossName, yellEvents in pairs(VF_RD_YellEventsDE) do
-			for yellStr, yellEvent in yellEvents do
-				VF_RD_YellEvents[bossName][yellStr] = yellEvent;
-			end
-		end
-	end
-end
-
-function VF_RD_GetNameTranslated(_Name)
-	if(VF_RD_SpecialLanguageSupportMode == false) then
-		return _Name;
-	end
-	if(_Name == nil) then
-		return _Name;
-	end
-	local translatedName = VF_RD_BossNameTranslations[_Name];
-	if(translatedName ~= nil) then
-		return translatedName;
-	end
-	return _Name;
-end
-
 VF_RD_RaidZones = {
-	--English
+--English
 	["Molten Core"] = "Molten Core",
 	["Onyxia's Lair"] = "Onyxia's Lair",
 	["Blackwing Lair"] = "Blackwing Lair",
@@ -266,70 +683,20 @@ VF_RD_RaidZones = {
 	["Ruins of Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Temple of Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
 	["Naxxramas"] = "Naxxramas",
-	
-	--Deutch
+
+--Deutch
 	["Geschmolzener Kern"] = "Molten Core",
 	["Onyxias Hort"] = "Onyxia's Lair",
 	["Pechschwingenhort"] = "Blackwing Lair",
-	--same ["Zul'Gurub"] = "Zul'Gurub",
 	["Ruinen von Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Tempel von Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
-	--same ["Naxxramas"] = "Naxxramas",
 
-	--French
+--French
 	["C\197\147ur du Magma"] = "Molten Core",
 	["Repaire d'Onyxia"] = "Onyxia's Lair",
 	["Repaire de l'Aile noire"] = "Blackwing Lair",
-	--same ["Zul'Gurub"] = "Zul'Gurub",
 	["Ruines d'Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Le temple d'Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
-	--same ["Naxxramas"] = "Naxxramas",
-}
-
-VF_RaidDamage_Settings = {["DebugMode"] = false};
-function VF_RD_DebugMessage(_Message)
-	if(VF_RaidDamage_Settings["DebugMode"] == true) then
-		DEFAULT_CHAT_FRAME:AddMessage("VF_RD_Debug: ".._Message, 1, 1, 0);
-	end
-end
-function VF_RD_Message(_Message)
-	DEFAULT_CHAT_FRAME:AddMessage("VF_RD: ".._Message, 1, 1, 0);
-end
-
-function VF_RaidDamage_OnLoad()
-	SlashCmdList["RAIDDAMAGE_CLEAR"] = VF_RD_ClearData;
-	SlashCmdList["RAIDDAMAGE_HELP"] = VF_RD_Help;
-	SlashCmdList["RAIDDAMAGE_PRINTRECORDED"] = VF_RD_PrintRecorded;
-	this:RegisterEvent("VARIABLES_LOADED");
-	this:RegisterEvent("CHAT_MSG_MONSTER_YELL");
-	this:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH");
-	this:RegisterEvent("ZONE_CHANGED_NEW_AREA");
-	this:RegisterEvent("UPDATE_INSTANCE_INFO");
-	this:RegisterEvent("RAID_ROSTER_UPDATE");
-	this:RegisterEvent("CHAT_MSG_LOOT");
-	
-	SLASH_RAIDDAMAGE_CLEAR1 = "/VFRD_Clear";
-	SLASH_RAIDDAMAGE_CLEAR2 = "/RaidDamage_Clear";
-	SLASH_RAIDDAMAGE_CLEAR3 = "/VFRDClear";
-	SLASH_RAIDDAMAGE_HELP1 = "/VFRD";
-	SLASH_RAIDDAMAGE_HELP2 = "/VFRD_Help";
-	SLASH_RAIDDAMAGE_PRINTRECORDED1 = "/VFRD_PrintRecorded";
-	--this:RegisterEvent("");
-end
-
-VF_RD_YellEvents_Start = 1;
-VF_RD_YellEvents_Phase1 = 2;
-VF_RD_YellEvents_Phase2 = 3;
-VF_RD_YellEvents_Phase3 = 4;
-VF_RD_YellEvents_End = 5;
-VF_RD_YellEvents_NotImportant = 99;
-
-VF_RD_YellEventsStr = {
-	[VF_RD_YellEvents_Start] = "Start_Y",
-	[VF_RD_YellEvents_Phase1] = "Phase1_Y",
-	[VF_RD_YellEvents_Phase2] = "Phase2_Y",
-	[VF_RD_YellEvents_Phase3] = "Phase3_Y",
-	[VF_RD_YellEvents_End] = "Dead_Y",
 }
 
 VF_RD_YellEventsDE = {
@@ -765,6 +1132,95 @@ VF_RD_BossParts = {
 	["The Four Horsemen"] = {[1] = "Sir Zeliek", [2] = "Highlord Mograine", [3] = "Thane Korth'azz", [4] = "Lady Blaumeux"},
 }
 
+VF_RD_SpecialLanguageSupportMode = false;
+VF_RD_DungeonSupportMode = false;
+
+function VF_RD_InitializeSpecialLanguageSupport()
+	if(GetRealmName() == "NostalGeek 1.12" or GetLocale() == "frFR") then
+		VF_RD_SpecialLanguageSupportMode = true;
+		for bossName, yellEvents in pairs(VF_RD_YellEventsFR) do
+			for yellStr, yellEvent in yellEvents do
+				VF_RD_YellEvents[bossName][yellStr] = yellEvent;
+			end
+		end
+	end
+	if(GetRealmName() == "Nefarian" or GetLocale() == "deDE") then
+		VF_RD_SpecialLanguageSupportMode = true;
+		for bossName, yellEvents in pairs(VF_RD_YellEventsDE) do
+			for yellStr, yellEvent in yellEvents do
+				VF_RD_YellEvents[bossName][yellStr] = yellEvent;
+			end
+		end
+	end
+end
+
+function VF_RD_InitializeDungeonSupport()
+	for dungeonName, dungeonNameEN in pairs(VF_RD_DungeonZones) do
+		VF_RD_RaidZones[dungeonName] = dungeonNameEN;
+	end
+	for bossName, mobType in pairs(VF_RD_DungeonMobsType) do
+		VF_RD_MobsType[bossName] = mobType;
+	end
+	for bossName, bossNameEN in pairs(VF_RD_DungeonBossMap) do
+		VF_RD_BossMap[bossName] = bossNameEN;
+	end
+	for bossName, bossParts in pairs(VF_RD_DungeonBossParts) do
+		VF_RD_BossParts[bossName] = bossParts;
+	end
+	for bossName, yellEvents in pairs(VF_RD_DungeonYellEvents) do
+		VF_RD_YellEvents[bossName] = yellEvents;
+	end
+	VF_RD_DungeonSupportMode = true;
+end
+
+function VF_RD_GetNameTranslated(_Name)
+	if(VF_RD_SpecialLanguageSupportMode == false) then
+		return _Name;
+	end
+	if(_Name == nil) then
+		return _Name;
+	end
+	local translatedName = VF_RD_BossNameTranslations[_Name];
+	if(translatedName ~= nil) then
+		return translatedName;
+	end
+	return _Name;
+end
+
+VF_RaidDamage_Settings = {["DebugMode"] = false, ["DungeonRecording"] = false};
+function VF_RD_DebugMessage(_Message)
+	if(VF_RaidDamage_Settings["DebugMode"] == true) then
+		DEFAULT_CHAT_FRAME:AddMessage("VF_RD_Debug: ".._Message, 1, 1, 0);
+	end
+end
+function VF_RD_Message(_Message)
+	DEFAULT_CHAT_FRAME:AddMessage("VF_RD: ".._Message, 1, 1, 0);
+end
+
+function VF_RaidDamage_OnLoad()
+	SlashCmdList["RAIDDAMAGE_CLEAR"] = VF_RD_ClearData;
+	SlashCmdList["RAIDDAMAGE_HELP"] = VF_RD_Help;
+	SlashCmdList["RAIDDAMAGE_PRINTRECORDED"] = VF_RD_PrintRecorded;
+	SlashCmdList["RAIDDAMAGE_TOGGLEDUNGEONRECORDING"] = VF_RD_ToggleDungeonRecording;
+	this:RegisterEvent("VARIABLES_LOADED");
+	this:RegisterEvent("CHAT_MSG_MONSTER_YELL");
+	this:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH");
+	this:RegisterEvent("ZONE_CHANGED_NEW_AREA");
+	this:RegisterEvent("UPDATE_INSTANCE_INFO");
+	this:RegisterEvent("RAID_ROSTER_UPDATE");
+	this:RegisterEvent("PARTY_MEMBERS_CHANGED");
+	this:RegisterEvent("CHAT_MSG_LOOT");
+	
+	SLASH_RAIDDAMAGE_CLEAR1 = "/VFRD_Clear";
+	SLASH_RAIDDAMAGE_CLEAR2 = "/RaidDamage_Clear";
+	SLASH_RAIDDAMAGE_CLEAR3 = "/VFRDClear";
+	SLASH_RAIDDAMAGE_HELP1 = "/VFRD";
+	SLASH_RAIDDAMAGE_HELP2 = "/VFRD_Help";
+	SLASH_RAIDDAMAGE_PRINTRECORDED1 = "/VFRD_PrintRecorded";
+	SLASH_RAIDDAMAGE_TOGGLEDUNGEONRECORDING1 = "/VFRD_ToggleDungeonRecording";
+	--this:RegisterEvent("");
+end
+
 function VF_RD_GetBossName(unitName)
 	if(VF_RD_BossMap[unitName] ~= nil) then
 		return VF_RD_BossMap[unitName];
@@ -817,10 +1273,21 @@ end
 klhtm.table.clearraidtable = VF_RD_NewKTM_Clear;
 --]]
 
+function VF_RD_ToggleDungeonRecording()
+	if(VF_RaidDamage_Settings["DungeonRecording"] == true) then
+		VF_RaidDamage_Settings["DungeonRecording"] = false;
+		VF_RD_Message("Dungeon Recording is now turned OFF! Please relog or use /reloadui");
+	else
+		VF_RaidDamage_Settings["DungeonRecording"] = true;
+		VF_RD_Message("Dungeon Recording is now turned ON! Please relog or use /reloadui");
+	end
+end
+
 function VF_RD_Help()
 	VF_RD_Message("VF RaidDamage Version = "..VF_RaidDamageVersion);
 	VF_RD_Message("/VFRD_PrintRecorded - Prints all the boss fights that has been recorded so far(only counts actual boss kills)");
 	VF_RD_Message("/VFRD_Clear - clears all data from all sessions, this removes all data saved in SavedVariables/VF_RaidDamage.lua");
+	VF_RD_Message("/VFRD_ToggleDungeonRecording - Toggles Dungeon Recording(requires a relog or /reloadui)");
 	VF_RD_Message("/VFRD - shows all commands");
 end
 
@@ -879,12 +1346,17 @@ function VF_RD_CreateNewSession()
 	table.insert(VF_RaidDamageData[1], 1, sessionInfo);
 	VF_RD_SaveInstanceInfo(2);
 	VF_RD_RaidMembersChanged = nil;
+	VF_RD_LastBuffData = {};
+	VF_RD_LastDebuffData = {};
 	VF_RD_DebugMessage("Created new Session");
 end
 
 function VF_ParseDate(dateStr)
 	local _, _, currYear, currMonth, currDay, _ = string.find(dateStr, "(.*)-(.*)-(.*) (.*)");
 	return {Year = tonumber(currYear), Month = tonumber(currMonth), Day = tonumber(currDay)};
+	 --future fix below should be applied when confirmed no issues with other changes!
+	--[[local _, _, currYear, currMonth, currDay, currHour, currMinute, currSecond = string.find(dateStr, "(.*)-(.*)-(.*) (.*):(.*):(.*)");
+	return {Year = tonumber(currYear), Month = tonumber(currMonth), Day = tonumber(currDay), Hour = tonumber(currHour), Minute = tonumber(currMinute), Second = tonumber(currSecond)};--]]
 end
 
 function VF_RD_CleanupSessions()
@@ -937,7 +1409,7 @@ function VF_RD_CleanupSessions()
 	VF_RD_DebugMessage("Done with cleanup of sessions");
 end
 
-function VF_RD_DetermineLogging()
+--[[function VF_RD_DetermineLogging()
 	local currZone = VF_RD_GetTranslatedZoneText();
 	if(currZone ~= nil) then
 		if(VF_RD_RaidZones[currZone] ~= nil) then
@@ -953,7 +1425,7 @@ function VF_RD_DetermineLogging()
 		end
 	end
 	return false;
-end
+end--]]
 
 function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 	local eventText = arg1;
@@ -968,18 +1440,16 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 		if(VF_RD_ErrorLog == nil) then
 			VF_RD_ErrorLog = {};
 		end
+		if(VF_RaidDamage_Settings["DungeonRecording"] == true) then
+			VF_RD_InitializeDungeonSupport();
+		end
 		VF_RD_InitializeSpecialLanguageSupport();
-
+		
 		VF_RD_CleanupSessions();
 		VF_RD_CreateNewSession();
 		DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
 	elseif(event == "ZONE_CHANGED_NEW_AREA") then
-		local currentZone = VF_RD_GetTranslatedZoneText();
-		if(string.find(VF_RaidDamageData[1][1], "Session:Info:")) then
-			VF_RaidDamageData[1][1] = VF_RaidDamageData[1][1].."Zone="..currentZone..",";
-		else
-			table.insert(VF_RaidDamageData[1], 1, "Session:Info:Zone="..currentZone..",");
-		end
+		VF_RD_UpdateCurrentZone();
 	elseif(event == "CHAT_MSG_MONSTER_YELL") then
 		local monsterName = VF_RD_GetNameTranslated(arg2);
 		
@@ -1072,12 +1542,8 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 			end
 			VF_RD_LogRaidDamage(deadReason, VF_RD_GetTime_S());
 		end
-	elseif(event == "RAID_ROSTER_UPDATE") then
-		local oldRaidMembers = VF_RD_RaidMembers;
-		VF_RD_RaidMembers = VF_RD_GetRaidMembers();
-		if(VF_RD_RaidMembers ~= oldRaidMembers and VF_RD_RaidMembers ~= "") then
-			VF_RD_RaidMembersChanged = VF_RD_GetTime_S();
-		end
+	elseif(event == "RAID_ROSTER_UPDATE" or event == "PARTY_MEMBERS_CHANGED") then
+		VF_RD_UpdateRaidMembers();
 	end
 end
 
@@ -1238,8 +1704,9 @@ function VF_RD_DetectBossStart()
 			end
 		end
 		
-		for i = 1, 40 do
-			local currUnitID = "raid"..i.."target";
+		local groupMembers = VF_RD_GetGroupMemberIDs();
+		for i, groupMemberID in pairs(groupMembers) do
+			local currUnitID = groupMemberID.."target";
 			local unitTarget = VF_RD_GetNameTranslated(UnitName(currUnitID));
 			if(unitTarget ~= nil) then
 				if(VF_RD_MobsType[unitTarget] == VF_RD_MobType_Boss) then
@@ -1331,6 +1798,9 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	for unitID, unitData in SW_DataCollection.activeSegment do 
 		if(type(unitID)=="number")then 
 			local rawUnitName = SW_StrTable:getStr(unitID);
+			if(VF_RD_RaidMembersMissingID[rawUnitName] ~= nil) then
+				VF_RD_UpdateRaidMembers();
+			end
 			local unitName = VF_RD_GetNameTranslated(rawUnitName);
 			if(VF_RD_LastRecorded[unitID] == nil) then
 				VF_RD_LastRecorded[unitID] = {};
@@ -1476,6 +1946,14 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 			VF_RD_RaidMembersChanged = nil;
 		end
 	end
+	if(VF_RD_CurentZoneChanged ~= nil and totalPlayersResult ~= "") then
+		if(_Time - VF_RD_CurentZoneChanged > 30 or (string.find(_Reason, "Start") or string.find(_Reason, "Dead") or string.find(_Reason, "Wipe"))) then
+			if(VF_RD_CurentZoneChanged ~= "") then
+				totalPlayersResult = totalPlayersResult..VF_RD_CurentZoneStr..",";
+			end
+			VF_RD_CurentZoneChanged = nil;
+		end
+	end
 	VF_RD_UpdateBossHealth();
 	if(totalPlayersResult ~= "" and VF_RD_CurrentBoss_MaxHealth > 0) then
 		local healthStr = "BossHealth="..VF_RD_CurrentBoss_Health.."-"..VF_RD_CurrentBoss_MaxHealth;
@@ -1494,8 +1972,8 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	
 	---
 	local totalBuffsResult = "";
-	for i = 1, 40 do
-		local currUnitID = "raid"..i;
+	local groupMembers = VF_RD_GetGroupMemberIDs();
+	for i, currUnitID in pairs(groupMembers) do
 		local currName = UnitName(currUnitID);
 		if(currName ~= nil) then
 			local currPlayerID = SW_StrTable:hasID(currName);
@@ -1690,8 +2168,9 @@ function VF_RD_UpdateBossHealth()
 		VF_RD_CurrentBoss_Health = UnitHealth("targettarget");
 		VF_RD_CurrentBoss_MaxHealth = UnitHealthMax("targettarget");--]]
 	else
-		for i = 1, 40 do
-			local currUnitID = "raid"..i.."target";
+		local groupMembers = VF_RD_GetGroupMemberIDs();
+		for i, groupMemberID in pairs(groupMembers) do
+			local currUnitID = groupMemberID.."target";
 			local currName = VF_RD_GetNameTranslated(UnitName(currUnitID));
 			if(currName ~= nil) then
 				if(VF_RD_CurrentBossData[currName] ~= nil) then
@@ -1707,14 +2186,82 @@ function VF_RD_UpdateBossHealth()
 	end
 end
 
-function VF_RD_GetRaidMembers()
+VF_RD_GroupMemberIDs_Party = {};
+VF_RD_GroupMemberIDs_Raid = {};
+for i = 1, 4 do
+	table.insert(VF_RD_GroupMemberIDs_Party, "party"..i);
+end
+table.insert(VF_RD_GroupMemberIDs_Party, "player");
+
+for i = 1, 40 do
+	table.insert(VF_RD_GroupMemberIDs_Raid, "raid"..i);
+end
+
+function VF_RD_GetGroupMemberIDs()
+	if(GetNumRaidMembers() == 0) then
+		return VF_RD_GroupMemberIDs_Party;
+	else
+		return VF_RD_GroupMemberIDs_Raid;
+	end
+end
+
+VF_RD_ShouldLogData = false;
+VF_RD_LastTimeSeenInsideInstanceZone = 0;
+
+function VF_RD_UpdateShouldLogData()
+	if(VF_RD_RaidZones[VF_RD_GetTranslatedZoneText()] ~= nil) then
+		VF_RD_LastTimeSeenInsideInstanceZone = GetTime();
+	end
+	if(GetNumRaidMembers() ~= 0 or (VF_RD_DungeonSupportMode == true and (GetTime() - VF_RD_LastTimeSeenInsideInstanceZone) < 300)) then --5 min should be enough for corpserun...
+		if(VF_RD_ShouldLogData == false) then
+			VF_RD_DebugMessage("Started Logging Data because inside Instance");
+		end
+		VF_RD_ShouldLogData = true;
+	else
+		if(VF_RD_ShouldLogData == true) then
+			VF_RD_DebugMessage("Stopped Logging Data because outside Instance");
+		end
+		VF_RD_ShouldLogData = false;
+	end
+end
+
+VF_RD_CurentZoneStr = "";
+VF_RD_CurentZoneChanged = nil;
+function VF_RD_UpdateCurrentZone()
+	local currentZone = VF_RD_GetTranslatedZoneText();
+	local currentZoneStr = "Z "..currentZone;
+	if(currentZoneStr ~= VF_RD_CurentZoneStr and currentZone ~= "") then
+		VF_RD_CurentZoneStr = currentZoneStr;
+		VF_RD_CurentZoneChanged = VF_RD_GetTime_S();
+	end
+	if(string.find(VF_RaidDamageData[1][1], "Session:Info:")) then
+		VF_RaidDamageData[1][1] = VF_RaidDamageData[1][1].."Zone="..currentZone..",";
+	else
+		table.insert(VF_RaidDamageData[1], 1, "Session:Info:Zone="..currentZone..",");
+	end
+end
+
+function VF_RD_UpdateRaidMembers()
+	local oldRaidMembers = VF_RD_RaidMembers;
+	VF_RD_RaidMembers = VF_RD_GenerateRaidMembersStr();
+	if(VF_RD_RaidMembers ~= oldRaidMembers and VF_RD_RaidMembers ~= "") then
+		VF_RD_RaidMembersChanged = VF_RD_GetTime_S();
+	end
+end
+
+VF_RD_RaidMembersMissingID = {};
+function VF_RD_GenerateRaidMembersStr()
+	VF_RD_RaidMembersMissingID = {};
 	local raidMembers = "";
-	for i = 1, 40 do
-		local currName = UnitName("raid"..i);
+	local groupMembers = VF_RD_GetGroupMemberIDs();
+	for i, groupMemberID in pairs(groupMembers) do
+		local currName = UnitName(groupMemberID);
 		if(currName ~= nil) then
 			local currID = SW_StrTable:hasID(currName);
 			if(currID ~= nil) then
 				raidMembers = raidMembers.." "..currID;
+			else
+				VF_RD_RaidMembersMissingID[currName] = true;
 			end
 		end
 	end
@@ -1729,7 +2276,8 @@ VF_RD_NextBossCheckTime = nil;
 function VF_RaidDamage_SafeOnUpdate()
 	VF_RD_SaveServerTime_Update();
 	VF_RD_UpdateSaveInstanceInfo();
-	if(GetNumRaidMembers() ~= 0) then
+	VF_RD_UpdateShouldLogData();
+	if(VF_RD_ShouldLogData == true) then
 		local currTime = GetTime();
 		local currTime_S = VF_RD_GetTime_S();
 		if(VF_RD_NextUpdateTime == nil or VF_RD_NextBossCheckTime == nil) then
@@ -1828,7 +2376,7 @@ function VF_RD_LootReceived()
 	local _, _, actualItemID = string.find(itemID, "(.*):(.*):(.*):(.*)");
 	
 	local _name, _string, itemQuality = GetItemInfo(actualItemID);
-	if(GetNumRaidMembers() ~= 0 and itemQuality ~= nil and itemQuality >= 4) then
+	if(VF_RD_ShouldLogData == true and itemQuality ~= nil and itemQuality >= 4) then
 		local lootString = "PL-"..playerName.."="..itemID..";";
 		if(string.find(VF_RaidDamageData[1][1], "Session:Loot:")) then
 			VF_RaidDamageData[1][1] = VF_RaidDamageData[1][1]..lootString;
@@ -1864,7 +2412,7 @@ function VF_RD_SafeSaveLoot()
 			end
 		end
 		if(lootDropped ~= "") then
-			if(GetNumRaidMembers() ~= 0) then
+			if(VF_RD_ShouldLogData == true) then
 				if(VF_RD_MobsType[mobName] == VF_RD_MobType_Boss) then
 					local lootString = "BL-"..mobName.."="..lootItemIDs..";";
 					if(string.find(VF_RaidDamageData[1][1], "Session:Loot:")) then
