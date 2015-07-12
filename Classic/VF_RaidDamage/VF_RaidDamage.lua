@@ -246,6 +246,7 @@ VF_RD_DungeonMobsType = {
 	["Skul"] = VF_RD_MobType_Boss,
 
 	--Scholomance
+	["Rattlegore"] = VF_RD_MobType_Boss,
 	["Marduk Blackpool"] = VF_RD_MobType_Boss, --Same boss as Vectus
 	["Vectus"] = VF_RD_MobType_Boss, --Same boss as Marduk Blackpool
 	["Ras Frostwhisper"] = VF_RD_MobType_Boss,
@@ -257,7 +258,6 @@ VF_RD_DungeonMobsType = {
 	["Lord Alexei Barov"] = VF_RD_MobType_Boss,
 	["Darkmaster Gandling"] = VF_RD_MobType_Boss,
 	--Optional/Rare
-	["Rattlegore"] = VF_RD_MobType_Boss,
 	["Jandice Barov"] = VF_RD_MobType_Boss,
 	["Kirtonos the Herald"] = VF_RD_MobType_Boss,
 
@@ -303,7 +303,7 @@ VF_RD_DungeonZones = {
 	["Sunken Temple"] = "Sunken Temple",
 	["Blackrock Depths"] = "Blackrock Depths",
 	["Blackrock Spire"] = "Blackrock Spire",
-	["Stratholme"] = "Stratholme",
+	["Stratholme"] = "Stratholme", --OK
 	["Scholomance"] = "Scholomance", --OK
 	["Dire Maul"] = "Dire Maul",
 }
