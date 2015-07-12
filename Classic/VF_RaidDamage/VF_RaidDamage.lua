@@ -1250,25 +1250,33 @@ end
 
 VF_RD_OldSW_SyncReset = SW_SyncReset;
 function VF_RD_NewSW_SyncReset(newSessID, newName)
-	VF_RD_ExecuteSub(VF_RD_LogRaidDamage, "SWReset", VF_RD_GetTime_S());
+	if(VF_RaidDamage_IsSupported()) then
+		VF_RD_ExecuteSub(VF_RD_LogRaidDamage, "SWReset", VF_RD_GetTime_S());
+	end
 	VF_RD_OldSW_SyncReset(newSessID, newName);
-	VF_RD_ExecuteSub(VF_RD_ResetLastRecordedCacheForAccumulaters);
+	if(VF_RaidDamage_IsSupported()) then
+		VF_RD_ExecuteSub(VF_RD_ResetLastRecordedCacheForAccumulaters);
+	end
 end
 SW_SyncReset = VF_RD_NewSW_SyncReset
 
 VF_RD_OldSW_NukeDataCollection = SW_NukeDataCollection;
 function VF_RD_NewSW_NukeDataCollection()
 	VF_RD_OldSW_NukeDataCollection();
-	VF_RD_LastRecorded = {};
-	VF_RD_ExecuteSub(VF_RD_CreateNewSession);
-	VF_RD_DebugMessage("Started a new session because of SWStats nuke");
+	if(VF_RaidDamage_IsSupported()) then
+		VF_RD_LastRecorded = {};
+		VF_RD_ExecuteSub(VF_RD_CreateNewSession);
+		VF_RD_DebugMessage("Started a new session because of SWStats nuke");
+	end
 end
 SW_NukeDataCollection = VF_RD_NewSW_NukeDataCollection;
 
 --[[VF_RD_OldKTM_Clear = klhtm.table.clearraidtable;
 function VF_RD_NewKTM_Clear()
 	VF_RD_OldKTM_Clear();
-	VF_RD_ResetLastRecordedCacheForDataIndex(VF_RD_DataIndex_Threat);
+	if(VF_RaidDamage_IsSupported()) then
+		VF_RD_ResetLastRecordedCacheForDataIndex(VF_RD_DataIndex_Threat);
+	end
 end
 klhtm.table.clearraidtable = VF_RD_NewKTM_Clear;
 --]]
@@ -1427,6 +1435,10 @@ end
 	return false;
 end--]]
 
+function VF_RaidDamage_IsSupported()
+	return SW_StrTable ~= nil and SW_DataCollection ~= nil;
+end
+
 function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 	local eventText = arg1;
 	if(event=="VARIABLES_LOADED") then
@@ -1440,14 +1452,22 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 		if(VF_RD_ErrorLog == nil) then
 			VF_RD_ErrorLog = {};
 		end
-		if(VF_RaidDamage_Settings["DungeonRecording"] == true) then
-			VF_RD_InitializeDungeonSupport();
-		end
-		VF_RD_InitializeSpecialLanguageSupport();
+		if(VF_RaidDamage_IsSupported()) then
+			if(VF_RaidDamage_Settings["DungeonRecording"] == true) then
+				VF_RD_InitializeDungeonSupport();
+			end
+			VF_RD_InitializeSpecialLanguageSupport();
 		
-		VF_RD_CleanupSessions();
-		VF_RD_CreateNewSession();
-		DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
+			VF_RD_CleanupSessions();
+			VF_RD_CreateNewSession();
+			DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
+		else
+			local errorMessage = "VF_RaidDamage(/VFRD) is not compatible with this SW_Stats version. Please make sure you never use VF_RaidDamage together with an unsupported SW_Stats version!(Supported versions can be found on the RealmPlayers forum). VF_RaidDamage will be automatically disabled because of this!";
+			DEFAULT_CHAT_FRAME:AddMessage(errorMessage, 1, 0, 0);
+			VF_RaidDamage_OnLoad = function() end;
+			VF_RaidDamage_OnEvent = function() end;
+			VF_RaidDamage_OnUpdate = function() end;
+		end
 	elseif(event == "ZONE_CHANGED_NEW_AREA") then
 		VF_RD_UpdateCurrentZone();
 	elseif(event == "CHAT_MSG_MONSTER_YELL") then
@@ -2433,7 +2453,9 @@ end
 VF_RD_OldLootFrame_OnShow = LootFrame_OnShow;
 function VF_RD_NewLootFrame_OnShow()
 	VF_RD_OldLootFrame_OnShow();
-	VF_RD_ExecuteSub(VF_RD_SafeSaveLoot);
+	if(VF_RaidDamage_IsSupported()) then
+		VF_RD_ExecuteSub(VF_RD_SafeSaveLoot);
+	end
 end
 LootFrame_OnShow = VF_RD_NewLootFrame_OnShow
 
