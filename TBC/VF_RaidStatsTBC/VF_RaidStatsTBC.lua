@@ -180,10 +180,23 @@ VF_RS_YellEventsStr = {
 	[VF_RS_YellEvents_Phase1] = "Phase1_Y",
 	[VF_RS_YellEvents_Phase2] = "Phase2_Y",
 	[VF_RS_YellEvents_Phase3] = "Phase3_Y",
+	[VF_RS_YellEvents_Phase4] = "Phase4_Y",
+	[VF_RS_YellEvents_Phase5] = "Phase5_Y",
+	[VF_RS_YellEvents_Phase6] = "Phase6_Y",
+	[VF_RS_YellEvents_Phase7] = "Phase7_Y",
+	[VF_RS_YellEvents_Phase8] = "Phase8_Y",
+	[VF_RS_YellEvents_Phase9] = "Phase9_Y",
 	[VF_RS_YellEvents_End] = "Dead_Y",
 }
 
 VF_RS_YellEvents = {
+	--Karazhan
+	["Prince Malchezaar"] = {
+		["Madness has brought you here to me"] = VF_RS_YellEvents_Start,
+		["Time is the fire in which"] = VF_RS_YellEvents_Phase2,
+		["I refuse to concede defeat"] = VF_RS_YellEvents_End,
+	},
+
 	--Gruul's Lair
 	["High King Maulgar"] = {
 		["are the real power in"] = VF_RS_YellEvents_Start,
