@@ -704,6 +704,7 @@ VF_RD_YellEventsDE = {
 	["Majordomo Executus"] = {
 		["Schw\195\164chliche Sterbliche"] = VF_RD_YellEvents_Start,
 		["Unm\195\182glich! Haltet ein Sterbliche"] = VF_RD_YellEvents_End,
+		["Ich werde euch nun verlassen. Es ist an der Zeit den Herrn dieses Hauses herbeizurufen"] = VF_RD_YellEvents_End,
 	},
 	["Ragnaros"] = {
 		["NUN ZU EUCH, INSEKTEN"] = VF_RD_YellEvents_Start, 
@@ -944,6 +945,7 @@ VF_RD_YellEvents = {
 	["Majordomo Executus"] = {
 		["Reckless mortals"] = VF_RD_YellEvents_Start,
 		["Impossible! Stay your attack"] = VF_RD_YellEvents_End,
+		["My flame! Please don't take away my flame..."] = VF_RD_YellEvents_End, --Special one used on Nefarian realm
 	},
 	["Ragnaros"] = {
 		["NOW FOR YOU, INSECTS"] = VF_RD_YellEvents_Start, 
@@ -1005,6 +1007,9 @@ VF_RD_YellEvents = {
 	},
 	["Lord Victor Nefarius"] = {--Nefarian
 		["Let the games begin"] = VF_RD_YellEvents_Start,
+		["Would it not be glorious if you somehow managed to defeat me"] = VF_RD_YellEvents_NotImportant, --Possibly fixes some minor issues
+		["Ah...the heroes. You are persistent, aren't you?"] = VF_RD_YellEvents_NotImportant,			  --for Nefarian realm
+		["Get up, little red wyrm...and destroy them!"] = VF_RD_YellEvents_NotImportant,
 	},
 	["Nefarian"] = {
 		["Let the games begin"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
