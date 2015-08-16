@@ -858,42 +858,64 @@ VF_RD_YellEventsDE = {
 VF_RD_YellEventsFR = {
 	--MC
 	["Majordomo Executus"] = {
+		["Imprudents mortels, nul ne défie les fils de la Flamme Vivante !"] = VF_RD_YellEvents_Start, --TODO fix utf8
+		["Impossible ! Retenez vos coups, mortels ! Je me rends !"] = VF_RD_YellEvents_End,
 	},
 	["Ragnaros"] = {
+		["À VOTRE TOUR INSECTES ! VOUS VOULIEZ CONNAÎTRE LE POUVOIR DE RAGNAROS. VOUS ALLEZ LE DÉCOUVRIR !"] = VF_RD_YellEvents_Start, --TODO fix utf8
+		["VENEZ ! Ô MES SERVITEURS ! VENEZ DÉFENDRE VOTRE MAÎTRE !"] = VF_RD_YellEvents_Phase2, --TODO fix utf8
 	},
 	
 	--Onyxia
 	["Onyxia"] = {
+		["Quelle chance. D'habitude je dois quitter mon antre pour me nourrir."] = VF_RD_YellEvents_Start,
+		["Ces efforts inutiles m'ennuient. Je vais vous incinérer depuis les airs."] = VF_RD_YellEvents_Phase2, --TODO fix utf8
+		["On dirait que vous avez besoin d'une nouvelle leçon, mortels !"] = VF_RD_YellEvents_Phase3, --TODO fix utf8
 	},
 	
 	--ZG
 	["High Priestess Jeklik"] = {
+		["Seigneur Hir'eek, accorde moi les ailes de la vengeance."] = VF_RD_YellEvents_Start,
 		["Qu'une pluie de feu s'abatte"] = VF_RD_YellEvents_Phase2,
+		["Enfin la mort ! Soit maudit Hakkar ! Soit maudit !"] = VF_RD_YellEvents_End,
 	},
 	["High Priest Venoxis"] = {
 		["Que se d\195\169roulent les anneaux de la haine"] = VF_RD_YellEvents_Phase2,
+		["La sérénité... enfin !"] = VF_RD_YellEvents_End, --TODO fix utf8
 	},
 	["High Priestess Mar'li"] = {
+		["Entraine moi dans ta toile dame Shadra ! Déchaine ton venin !"] = VF_RD_YellEvents_Start, --TODO fix utf8
+		["Soyez béni mortel pour m'avoir libérée. Hakkar ne me contrôle plus."] = VF_RD_YellEvents_End, --TODO fix utf8
 	},
 	["Bloodlord Mandokir"] = {
+		["Je jetterai vos âmes en patûre à Hakkar lui-même !"] = VF_RD_YellEvents_Start, --TODO fix utf8
 	},
 	["High Priest Thekal"] = {
+		["Shirvallah ! Que ta rage m'envahisse !"] = VF_RD_YellEvents_Start,
+		["Hakkar ne me domine plus. Je connais enfin la paix !"] = VF_RD_YellEvents_End,
 	},
 	["High Priestess Arlokk"] = {
+		["Bethekk, ta prêtresse en appelle à ta puissance !"] = VF_RD_YellEvents_Start, --TODO fix utf8
+		["Enfin ! Je suis enfin libérée de l'Ecorcheur d'âme !"] = VF_RD_YellEvents_End, --TODO fix utf8
 	},
 	["Jin'do the Hexxer"] = {
 	},
 	["Hakkar"] = {
+		["L'ORGUEIL ANNONCE LA FIN DE VOTRE MONDE. AVANCEZ MORTELS ! AFFRONTEZ LA COLÈRE DE L'ECORCHEUR D'ÂME !"] = VF_RD_YellEvents_Start, --TODO fix utf8
 	},
 	
 	--BWL
 	["Grethok the Controller"] = {--Razorgore the Untamed
+		["La chambre des oeufs est envahie !"] = VF_RD_YellEvents_Start,
 	},
 	["Razorgore the Untamed"] = {
+		["La chambre des oeufs est envahie !"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
 	},
 	["Vaelastrasz the Corrupt"] = {
+		["DESTRUCTION ! Tremblez mortels, devant la colère du seigneur... Non ! Je dois lutter !"] = VF_RD_YellEvents_Start,--TODO fix utf8
 	},
 	["Broodlord Lashlayer"] = {
+		["Aucun membre de votre espèce ne devrait être ici. Vous vous êtes condamnés vous mêmes !"] = VF_RD_YellEvents_Start,--TODO fix utf8
 	},
 	["Lord Victor Nefarius"] = {--Nefarian
 	},
@@ -924,6 +946,8 @@ VF_RD_YellEventsFR = {
 	["Highlord Mograine"] = {
 	},
 	["Thane Korth'azz"] = {
+		["Allez viens te battre, mauviette !"] = VF_RD_YellEvents_Start,
+		["Quel gâchis de sang !"] = VF_RD_YellEvents_End, --TODO fix utf8
 	},
 	["Lady Blaumeux"] = {
 	},
