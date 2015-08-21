@@ -1489,6 +1489,7 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 		
 			VF_RD_CleanupSessions();
 			VF_RD_CreateNewSession();
+			VF_RD_HookLootFrame();
 			DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
 		else
 			local errorMessage = "VF_RaidDamage(/VFRD) is not compatible with this SW_Stats version. Please make sure you never use VF_RaidDamage together with an unsupported SW_Stats version!(Supported versions can be found on the RealmPlayers forum). VF_RaidDamage will be automatically disabled because of this!";
@@ -2479,14 +2480,27 @@ function VF_RD_SafeSaveLoot()
 	end
 end
 
-VF_RD_OldLootFrame_OnShow = LootFrame_OnShow;
-function VF_RD_NewLootFrame_OnShow()
-	VF_RD_OldLootFrame_OnShow();
-	if(VF_RaidDamage_IsSupported()) then
-		VF_RD_ExecuteSub(VF_RD_SafeSaveLoot);
+function VF_RD_HookLootFrame()
+	if(XLoot ~= nil) then
+		VF_RD_OldXLoot_LootFrame_OnShow = XLoot.LootFrame_OnShow;
+		function VF_RD_NewXLoot_LootFrame_OnShow(self)
+			VF_RD_OldXLoot_LootFrame_OnShow(self);
+			if(VF_RaidDamage_IsSupported()) then
+				VF_RD_ExecuteSub(VF_RD_SafeSaveLoot);
+			end
+		end
+		XLoot.LootFrame_OnShow = VF_RD_NewXLoot_LootFrame_OnShow;
+	else
+		VF_RD_OldLootFrame_OnShow = LootFrame_OnShow;
+		function VF_RD_NewLootFrame_OnShow()
+			VF_RD_OldLootFrame_OnShow();
+			if(VF_RaidDamage_IsSupported()) then
+				VF_RD_ExecuteSub(VF_RD_SafeSaveLoot);
+			end
+		end
+		LootFrame_OnShow = VF_RD_NewLootFrame_OnShow
 	end
 end
-LootFrame_OnShow = VF_RD_NewLootFrame_OnShow
 
 else--if not string.find(GetBuildInfo(), "^1%.") then
 	DEFAULT_CHAT_FRAME:AddMessage("ERROR! VF_RaidStats does not work on this WoW version! Only works on World of Warcraft Classic!");

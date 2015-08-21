@@ -1,10 +1,10 @@
 ## Interface: 11200
 ## Title: VF_RaidDamage
 ## Author: Dilatazu, www.realmplayers.com, Dilatazu@gmail.com
-## Version: 1.9.8
+## Version: 1.9.9
 ## Notes: 
 ## Dependencies: SW_Stats, KLHThreatMeter
-## OptionalDeps: 
+## OptionalDeps: XLoot
 ## SavedVariablesPerCharacter: 
 ## SavedVariables: VF_RaidDamageData, VF_RaidDamageVersion, VF_RaidDamage_Settings, VF_RD_ErrorLog
 VF_RaidDamage.xml
