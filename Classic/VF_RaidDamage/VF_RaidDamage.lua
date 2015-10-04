@@ -586,7 +586,7 @@ VF_RD_BossNameTranslations = {
 	--MC
 	["Sulfuronherold"] = "Sulfuron Harbinger",
     ["Golemagg der Verbrenner"] = "Golemagg the Incinerator",
-	["Majordomo Exekutus"] = "Majordomo Executus",
+	["Majordomus Exekutus"] = "Majordomo Executus",
 
 	--BWL
 	["Grethok der Aufseher"] = "Grethok the Controller",
