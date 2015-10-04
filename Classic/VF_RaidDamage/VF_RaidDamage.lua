@@ -246,6 +246,7 @@ VF_RD_DungeonMobsType = {
 	["Skul"] = VF_RD_MobType_Boss,
 
 	--Scholomance
+	["Rattlegore"] = VF_RD_MobType_Boss,
 	["Marduk Blackpool"] = VF_RD_MobType_Boss, --Same boss as Vectus
 	["Vectus"] = VF_RD_MobType_Boss, --Same boss as Marduk Blackpool
 	["Ras Frostwhisper"] = VF_RD_MobType_Boss,
@@ -257,7 +258,6 @@ VF_RD_DungeonMobsType = {
 	["Lord Alexei Barov"] = VF_RD_MobType_Boss,
 	["Darkmaster Gandling"] = VF_RD_MobType_Boss,
 	--Optional/Rare
-	["Rattlegore"] = VF_RD_MobType_Boss,
 	["Jandice Barov"] = VF_RD_MobType_Boss,
 	["Kirtonos the Herald"] = VF_RD_MobType_Boss,
 
@@ -289,23 +289,23 @@ VF_RD_DungeonMobsType = {
 VF_RD_DungeonZones = {
 	["Ragefire Chasm"] = "Ragefire Chasm", --OK
 	["The Deadmines"] = "The Deadmines", --OK
-	["Wailing Caverns"] = "Wailing Caverns",
+	["Wailing Caverns"] = "Wailing Caverns", --OK(?)
 	["Stockades"] = "Stockades",
-	["Shadowfang Keep"] = "Shadowfang Keep",
+	["Shadowfang Keep"] = "Shadowfang Keep", --OK
 	["Blackfathom Deeps"] = "Blackfathom Deeps",
-	["Razorfen Kraul"] = "Razorfen Kraul",
+	["Razorfen Kraul"] = "Razorfen Kraul", --OK
 	["Gnomeregan"] = "Gnomeregan",
 	["Scarlet Monastery"] = "Scarlet Monastery",
 	["Razorfen Downs"] = "Razorfen Downs",
-	["Uldaman"] = "Uldaman",
-	["Zul'Farrak"] = "Zul'Farrak",
+	["Uldaman"] = "Uldaman", --OK
+	["Zul'Farrak"] = "Zul'Farrak", --OK
 	["Maraudon"] = "Maraudon",
-	["Sunken Temple"] = "Sunken Temple",
+	["The Temple of Atal'Hakkar"] = "The Temple of Atal'Hakkar", --OK Sunken Temple
 	["Blackrock Depths"] = "Blackrock Depths",
-	["Blackrock Spire"] = "Blackrock Spire",
-	["Stratholme"] = "Stratholme",
+	["Hall of Blackhand"] = "Hall of Blackhand", --OK Blackrock Spire
+	["Stratholme"] = "Stratholme", --OK
 	["Scholomance"] = "Scholomance", --OK
-	["Dire Maul"] = "Dire Maul",
+	["Dire Maul"] = "Dire Maul", --OK
 }
 VF_RD_DungeonYellEvents = {
 	--Deadmines
@@ -704,6 +704,7 @@ VF_RD_YellEventsDE = {
 	["Majordomo Executus"] = {
 		["Schw\195\164chliche Sterbliche"] = VF_RD_YellEvents_Start,
 		["Unm\195\182glich! Haltet ein Sterbliche"] = VF_RD_YellEvents_End,
+		["Ich werde euch nun verlassen. Es ist an der Zeit den Herrn dieses Hauses herbeizurufen"] = VF_RD_YellEvents_End,
 	},
 	["Ragnaros"] = {
 		["NUN ZU EUCH, INSEKTEN"] = VF_RD_YellEvents_Start, 
@@ -857,42 +858,64 @@ VF_RD_YellEventsDE = {
 VF_RD_YellEventsFR = {
 	--MC
 	["Majordomo Executus"] = {
+		["Imprudents mortels, nul ne défie les fils de la Flamme Vivante !"] = VF_RD_YellEvents_Start, --TODO fix utf8
+		["Impossible ! Retenez vos coups, mortels ! Je me rends !"] = VF_RD_YellEvents_End,
 	},
 	["Ragnaros"] = {
+		["À VOTRE TOUR INSECTES ! VOUS VOULIEZ CONNAÎTRE LE POUVOIR DE RAGNAROS. VOUS ALLEZ LE DÉCOUVRIR !"] = VF_RD_YellEvents_Start, --TODO fix utf8
+		["VENEZ ! Ô MES SERVITEURS ! VENEZ DÉFENDRE VOTRE MAÎTRE !"] = VF_RD_YellEvents_Phase2, --TODO fix utf8
 	},
 	
 	--Onyxia
 	["Onyxia"] = {
+		["Quelle chance. D'habitude je dois quitter mon antre pour me nourrir."] = VF_RD_YellEvents_Start,
+		["Ces efforts inutiles m'ennuient. Je vais vous incinérer depuis les airs."] = VF_RD_YellEvents_Phase2, --TODO fix utf8
+		["On dirait que vous avez besoin d'une nouvelle leçon, mortels !"] = VF_RD_YellEvents_Phase3, --TODO fix utf8
 	},
 	
 	--ZG
 	["High Priestess Jeklik"] = {
+		["Seigneur Hir'eek, accorde moi les ailes de la vengeance."] = VF_RD_YellEvents_Start,
 		["Qu'une pluie de feu s'abatte"] = VF_RD_YellEvents_Phase2,
+		["Enfin la mort ! Soit maudit Hakkar ! Soit maudit !"] = VF_RD_YellEvents_End,
 	},
 	["High Priest Venoxis"] = {
 		["Que se d\195\169roulent les anneaux de la haine"] = VF_RD_YellEvents_Phase2,
+		["La sérénité... enfin !"] = VF_RD_YellEvents_End, --TODO fix utf8
 	},
 	["High Priestess Mar'li"] = {
+		["Entraine moi dans ta toile dame Shadra ! Déchaine ton venin !"] = VF_RD_YellEvents_Start, --TODO fix utf8
+		["Soyez béni mortel pour m'avoir libérée. Hakkar ne me contrôle plus."] = VF_RD_YellEvents_End, --TODO fix utf8
 	},
 	["Bloodlord Mandokir"] = {
+		["Je jetterai vos âmes en patûre à Hakkar lui-même !"] = VF_RD_YellEvents_Start, --TODO fix utf8
 	},
 	["High Priest Thekal"] = {
+		["Shirvallah ! Que ta rage m'envahisse !"] = VF_RD_YellEvents_Start,
+		["Hakkar ne me domine plus. Je connais enfin la paix !"] = VF_RD_YellEvents_End,
 	},
 	["High Priestess Arlokk"] = {
+		["Bethekk, ta prêtresse en appelle à ta puissance !"] = VF_RD_YellEvents_Start, --TODO fix utf8
+		["Enfin ! Je suis enfin libérée de l'Ecorcheur d'âme !"] = VF_RD_YellEvents_End, --TODO fix utf8
 	},
 	["Jin'do the Hexxer"] = {
 	},
 	["Hakkar"] = {
+		["L'ORGUEIL ANNONCE LA FIN DE VOTRE MONDE. AVANCEZ MORTELS ! AFFRONTEZ LA COLÈRE DE L'ECORCHEUR D'ÂME !"] = VF_RD_YellEvents_Start, --TODO fix utf8
 	},
 	
 	--BWL
 	["Grethok the Controller"] = {--Razorgore the Untamed
+		["La chambre des oeufs est envahie !"] = VF_RD_YellEvents_Start,
 	},
 	["Razorgore the Untamed"] = {
+		["La chambre des oeufs est envahie !"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
 	},
 	["Vaelastrasz the Corrupt"] = {
+		["DESTRUCTION ! Tremblez mortels, devant la colère du seigneur... Non ! Je dois lutter !"] = VF_RD_YellEvents_Start,--TODO fix utf8
 	},
 	["Broodlord Lashlayer"] = {
+		["Aucun membre de votre espèce ne devrait être ici. Vous vous êtes condamnés vous mêmes !"] = VF_RD_YellEvents_Start,--TODO fix utf8
 	},
 	["Lord Victor Nefarius"] = {--Nefarian
 	},
@@ -923,6 +946,8 @@ VF_RD_YellEventsFR = {
 	["Highlord Mograine"] = {
 	},
 	["Thane Korth'azz"] = {
+		["Allez viens te battre, mauviette !"] = VF_RD_YellEvents_Start,
+		["Quel gâchis de sang !"] = VF_RD_YellEvents_End, --TODO fix utf8
 	},
 	["Lady Blaumeux"] = {
 	},
@@ -944,6 +969,7 @@ VF_RD_YellEvents = {
 	["Majordomo Executus"] = {
 		["Reckless mortals"] = VF_RD_YellEvents_Start,
 		["Impossible! Stay your attack"] = VF_RD_YellEvents_End,
+		["My flame! Please don't take away my flame..."] = VF_RD_YellEvents_End, --Special one used on Nefarian realm
 	},
 	["Ragnaros"] = {
 		["NOW FOR YOU, INSECTS"] = VF_RD_YellEvents_Start, 
@@ -1005,6 +1031,9 @@ VF_RD_YellEvents = {
 	},
 	["Lord Victor Nefarius"] = {--Nefarian
 		["Let the games begin"] = VF_RD_YellEvents_Start,
+		["Would it not be glorious if you somehow managed to defeat me"] = VF_RD_YellEvents_NotImportant, --Possibly fixes some minor issues
+		["Ah...the heroes. You are persistent, aren't you?"] = VF_RD_YellEvents_NotImportant,			  --for Nefarian realm
+		["Get up, little red wyrm...and destroy them!"] = VF_RD_YellEvents_NotImportant,
 	},
 	["Nefarian"] = {
 		["Let the games begin"] = VF_RD_YellEvents_Start, --only here for HaveStartYell compatibility
@@ -1250,25 +1279,33 @@ end
 
 VF_RD_OldSW_SyncReset = SW_SyncReset;
 function VF_RD_NewSW_SyncReset(newSessID, newName)
-	VF_RD_ExecuteSub(VF_RD_LogRaidDamage, "SWReset", VF_RD_GetTime_S());
+	if(VF_RaidDamage_IsSupported()) then
+		VF_RD_ExecuteSub(VF_RD_LogRaidDamage, "SWReset", VF_RD_GetTime_S());
+	end
 	VF_RD_OldSW_SyncReset(newSessID, newName);
-	VF_RD_ExecuteSub(VF_RD_ResetLastRecordedCacheForAccumulaters);
+	if(VF_RaidDamage_IsSupported()) then
+		VF_RD_ExecuteSub(VF_RD_ResetLastRecordedCacheForAccumulaters);
+	end
 end
 SW_SyncReset = VF_RD_NewSW_SyncReset
 
 VF_RD_OldSW_NukeDataCollection = SW_NukeDataCollection;
 function VF_RD_NewSW_NukeDataCollection()
 	VF_RD_OldSW_NukeDataCollection();
-	VF_RD_LastRecorded = {};
-	VF_RD_ExecuteSub(VF_RD_CreateNewSession);
-	VF_RD_DebugMessage("Started a new session because of SWStats nuke");
+	if(VF_RaidDamage_IsSupported()) then
+		VF_RD_LastRecorded = {};
+		VF_RD_ExecuteSub(VF_RD_CreateNewSession);
+		VF_RD_DebugMessage("Started a new session because of SWStats nuke");
+	end
 end
 SW_NukeDataCollection = VF_RD_NewSW_NukeDataCollection;
 
 --[[VF_RD_OldKTM_Clear = klhtm.table.clearraidtable;
 function VF_RD_NewKTM_Clear()
 	VF_RD_OldKTM_Clear();
-	VF_RD_ResetLastRecordedCacheForDataIndex(VF_RD_DataIndex_Threat);
+	if(VF_RaidDamage_IsSupported()) then
+		VF_RD_ResetLastRecordedCacheForDataIndex(VF_RD_DataIndex_Threat);
+	end
 end
 klhtm.table.clearraidtable = VF_RD_NewKTM_Clear;
 --]]
@@ -1427,6 +1464,10 @@ end
 	return false;
 end--]]
 
+function VF_RaidDamage_IsSupported()
+	return SW_StrTable ~= nil and SW_DataCollection ~= nil;
+end
+
 function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 	local eventText = arg1;
 	if(event=="VARIABLES_LOADED") then
@@ -1440,14 +1481,23 @@ function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
 		if(VF_RD_ErrorLog == nil) then
 			VF_RD_ErrorLog = {};
 		end
-		if(VF_RaidDamage_Settings["DungeonRecording"] == true) then
-			VF_RD_InitializeDungeonSupport();
-		end
-		VF_RD_InitializeSpecialLanguageSupport();
+		if(VF_RaidDamage_IsSupported()) then
+			if(VF_RaidDamage_Settings["DungeonRecording"] == true) then
+				VF_RD_InitializeDungeonSupport();
+			end
+			VF_RD_InitializeSpecialLanguageSupport();
 		
-		VF_RD_CleanupSessions();
-		VF_RD_CreateNewSession();
-		DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
+			VF_RD_CleanupSessions();
+			VF_RD_CreateNewSession();
+			VF_RD_HookLootFrame();
+			DEFAULT_CHAT_FRAME:AddMessage("VF_RaidDamage(/VFRD) version "..VF_RaidDamageVersion.." loaded!", 1, 1, 0);
+		else
+			local errorMessage = "VF_RaidDamage(/VFRD) is not compatible with this SW_Stats version. Please make sure you never use VF_RaidDamage together with an unsupported SW_Stats version!(Supported versions can be found on the RealmPlayers forum). VF_RaidDamage will be automatically disabled because of this!";
+			DEFAULT_CHAT_FRAME:AddMessage(errorMessage, 1, 0, 0);
+			VF_RaidDamage_OnLoad = function() end;
+			VF_RaidDamage_OnEvent = function() end;
+			VF_RaidDamage_OnUpdate = function() end;
+		end
 	elseif(event == "ZONE_CHANGED_NEW_AREA") then
 		VF_RD_UpdateCurrentZone();
 	elseif(event == "CHAT_MSG_MONSTER_YELL") then
@@ -2430,12 +2480,27 @@ function VF_RD_SafeSaveLoot()
 	end
 end
 
-VF_RD_OldLootFrame_OnShow = LootFrame_OnShow;
-function VF_RD_NewLootFrame_OnShow()
-	VF_RD_OldLootFrame_OnShow();
-	VF_RD_ExecuteSub(VF_RD_SafeSaveLoot);
+function VF_RD_HookLootFrame()
+	if(XLoot ~= nil) then
+		VF_RD_OldXLoot_LootFrame_OnShow = XLoot.LootFrame_OnShow;
+		function VF_RD_NewXLoot_LootFrame_OnShow(self)
+			VF_RD_OldXLoot_LootFrame_OnShow(self);
+			if(VF_RaidDamage_IsSupported()) then
+				VF_RD_ExecuteSub(VF_RD_SafeSaveLoot);
+			end
+		end
+		XLoot.LootFrame_OnShow = VF_RD_NewXLoot_LootFrame_OnShow;
+	else
+		VF_RD_OldLootFrame_OnShow = LootFrame_OnShow;
+		function VF_RD_NewLootFrame_OnShow()
+			VF_RD_OldLootFrame_OnShow();
+			if(VF_RaidDamage_IsSupported()) then
+				VF_RD_ExecuteSub(VF_RD_SafeSaveLoot);
+			end
+		end
+		LootFrame_OnShow = VF_RD_NewLootFrame_OnShow
+	end
 end
-LootFrame_OnShow = VF_RD_NewLootFrame_OnShow
 
 else--if not string.find(GetBuildInfo(), "^1%.") then
 	DEFAULT_CHAT_FRAME:AddMessage("ERROR! VF_RaidStats does not work on this WoW version! Only works on World of Warcraft Classic!");

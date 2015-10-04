@@ -180,10 +180,23 @@ VF_RS_YellEventsStr = {
 	[VF_RS_YellEvents_Phase1] = "Phase1_Y",
 	[VF_RS_YellEvents_Phase2] = "Phase2_Y",
 	[VF_RS_YellEvents_Phase3] = "Phase3_Y",
+	[VF_RS_YellEvents_Phase4] = "Phase4_Y",
+	[VF_RS_YellEvents_Phase5] = "Phase5_Y",
+	[VF_RS_YellEvents_Phase6] = "Phase6_Y",
+	[VF_RS_YellEvents_Phase7] = "Phase7_Y",
+	[VF_RS_YellEvents_Phase8] = "Phase8_Y",
+	[VF_RS_YellEvents_Phase9] = "Phase9_Y",
 	[VF_RS_YellEvents_End] = "Dead_Y",
 }
 
 VF_RS_YellEvents = {
+	--Karazhan
+	["Prince Malchezaar"] = {
+		["Madness has brought you here to me"] = VF_RS_YellEvents_Start,
+		["Time is the fire in which"] = VF_RS_YellEvents_Phase2,
+		["I refuse to concede defeat"] = VF_RS_YellEvents_End,
+	},
+
 	--Gruul's Lair
 	["High King Maulgar"] = {
 		["are the real power in"] = VF_RS_YellEvents_Start,
@@ -685,6 +698,7 @@ function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg
 		end
 		VF_RS_CleanupSessions();
 		VF_RS_CreateNewSession();
+		VF_RS_HookLootFrame();
 		DEFAULT_CHAT_FRAME:AddMessage("VF_RaidStats(/VFRS) version "..VF_RaidStatsVersion.." loaded!", 1, 1, 0);
 		VF_RS_AssertSpecialSettings();
 	elseif(event == "ZONE_CHANGED_NEW_AREA") then
@@ -767,6 +781,8 @@ function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg
 		if(VF_RS_MobsType[monsterName] == VF_RS_MobType_Boss) then
 			table.insert(VF_RaidStatsData[1], 1, "Session:Debug:"..monsterName.."=Party-"..eventText..":"..VF_RS_GetTime_S());
 		end
+	elseif(event == "CHAT_MSG_LOOT") then
+		VF_RS_LootReceived();
 	elseif(event == "UPDATE_INSTANCE_INFO") then
 		if(VF_RS_SaveInstanceInfoBool == true) then
 			for i = 1, GetNumSavedInstances() do
@@ -1280,6 +1296,7 @@ VF_RS_NextUpdateTime = nil;
 VF_RS_NextBossCheckTime = nil;
 function VF_RaidStats_SafeOnUpdate()
 	if(GetNumRaidMembers() ~= 0) then
+		VF_RS_ShouldLogData = true;
 		local currTime = GetTime();
 		local currTime_S = VF_RS_GetTime_S();
 		if(VF_RS_NextUpdateTime == nil or VF_RS_NextBossCheckTime == nil) then
@@ -1302,12 +1319,105 @@ function VF_RaidStats_SafeOnUpdate()
 			VF_RS_UpdateBossHealth();
 		end
 		VF_RS_DetectBossEnd();
+	else
+		VF_RS_ShouldLogData = false;
 	end
 end
 
 function VF_RaidStats_OnUpdate()
 	VF_RS_ExecuteSub(VF_RaidStats_SafeOnUpdate);
 end
+
+
+if(GetLocale() == "deDE") then
+	VF_RS_SplitReceivesLootStr = "([^%s]+) bekommt Beute: (.+)%.";
+	--VF_RS_SplitReceivesLootStr2 = "([^%s]+) erh\195\164lt Beute: (.+)%."; --Not sure if needed yet... can be fixed later using "([^%s]+) (.+) Beute: (.+)%."
+	VF_RS_SplitIReceivesLootStr = "Ihr erhaltet Beute: (.+)%."
+elseif(GetLocale() == "frFR") then
+	VF_RS_SplitReceivesLootStr = "([^%s]+) receives loot: (.+)%.";
+	VF_RS_SplitIReceivesLootStr = "You receive loot: (.+)%."
+else
+	VF_RS_SplitReceivesLootStr = "([^%s]+) receives loot: (.+)%.";
+	VF_RS_SplitIReceivesLootStr = "You receive loot: (.+)%."
+end
+
+
+function VF_RS_LootReceived()
+	local _, _, playerName, itemLink = string.find(arg1, VF_RS_SplitReceivesLootStr);
+	
+	local itemID = "0";
+	if not ( playerName == nil) then
+		local _, _, rubbish1, tempItemID, rubbish2 = string.find(itemLink, "(.*)|Hitem:(.*)|h%[(.*)");
+		itemID = tempItemID;
+	else
+		_, _, itemLink = string.find(arg1, VF_RS_SplitIReceivesLootStr);
+		if not ( itemLink == nil) then
+			playerName = UnitName("player");
+			local _, _, rubbish1, tempItemID, rubbish2 = string.find(itemLink, "(.*)|Hitem:(.*)|h%[(.*)");
+			itemID = tempItemID;
+		else
+			return;
+		end
+	end
+	local _, _, actualItemID = string.find(itemID, "(.*):(.*):(.*):(.*)");
+	
+	local _name, _string, itemQuality = GetItemInfo(actualItemID);
+	if(VF_RS_ShouldLogData == true and itemQuality ~= nil and itemQuality >= 4) then
+		local lootString = "PL-"..playerName.."="..itemID..";";
+		if(string.find(VF_RaidStatsData[1][1], "Session:Loot:")) then
+			VF_RaidStatsData[1][1] = VF_RaidStatsData[1][1]..lootString;
+		else
+			table.insert(VF_RaidStatsData[1], 1, "Session:Loot:"..lootString);
+		end
+	end
+	VF_RS_DebugMessage(playerName.." looted: "..itemLink);
+end
+
+function VF_RS_SafeSaveLoot()
+	local mobName = UnitName("target");
+	if(mobName) then
+		local numLoot = GetNumLootItems()
+		local lootDropped = "";
+		local lootItemIDs = "";
+		for slot = 1, numLoot do
+			if (LootSlotIsItem(slot)) then
+				local texture, item, quantity, quality = GetLootSlotInfo(slot)
+				if(quality >= 4) then
+					local itemLink = GetLootSlotLink(slot);
+					lootDropped = lootDropped..itemLink.." ";
+					local _, _, rubbish1, itemID, rubbish2 = string.find(itemLink, "(.*)|Hitem:(.*)|h%[(.*)");
+					lootItemIDs = lootItemIDs..itemID..",";
+				end
+			end
+		end
+		if(lootDropped ~= "") then
+			if(VF_RS_ShouldLogData == true) then
+				if(VF_RS_MobsType[mobName] == VF_RS_MobType_Boss) then
+					local lootString = "BL-"..mobName.."="..lootItemIDs..";";
+					if(string.find(VF_RaidStatsData[1][1], "Session:Loot:")) then
+						local escapedLootString = "BL%-"..mobName.."="..lootItemIDs..";";
+						if(not(string.find(VF_RaidStatsData[1][1], escapedLootString))) then
+							VF_RaidStatsData[1][1] = VF_RaidStatsData[1][1]..lootString;
+						end
+					else
+						table.insert(VF_RaidStatsData[1], 1, "Session:Loot:"..lootString);
+					end
+				end
+			end
+			VF_RS_DebugMessage(mobName.." dropped: "..lootDropped);--.." (ItemIDs: "..lootItemIDs..")");
+		end
+	end
+end
+
+function VF_RS_HookLootFrame()
+	VF_RS_OldLootFrame_OnShow = LootFrame_OnShow;
+	function VF_RS_NewLootFrame_OnShow()
+		VF_RS_OldLootFrame_OnShow();
+		VF_RS_ExecuteSub(VF_RS_SafeSaveLoot);
+	end
+	LootFrame_OnShow = VF_RS_NewLootFrame_OnShow
+end
+
 
 else--if not string.find(GetBuildInfo(), "^2%.") then
 	DEFAULT_CHAT_FRAME:AddMessage("ERROR! VF_RaidStatsTBC does not work on this WoW version! Only works on World of Warcraft TBC!");

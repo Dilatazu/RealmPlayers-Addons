@@ -442,6 +442,34 @@ function VF_RP_UpdateCharacterItemsData(_Target)
 	end
 end
 
+function VF_RP_UpdateCharacterTalentsData(_Target)
+	local characterName = UnitName(_Target);
+	local talentData = "";
+	
+	function _GetTalentPageData(_PageIndex, _IsPlayer)
+		local talentData = "";
+		local numTalents = GetNumTalents(_PageIndex, _IsPlayer ~= true);
+		for i=1, numTalents do
+			local name, iconTexture, tier, column, rank, maxRank, isExceptional, meetsPrereq = GetTalentInfo(_PageIndex, i, _IsPlayer ~= true);
+			talentData = talentData..rank;
+		end
+		return talentData;
+	end
+
+	if(_Target == "player") then
+		--local tabName, tabTexture, tabPoints, tabFileName = GetTalentTabInfo(currInspectTab, false);
+		talentData = talentData.._GetTalentPageData(1, true);
+		talentData = talentData.._GetTalentPageData(2, true);
+		talentData = talentData.._GetTalentPageData(3, true);
+	else
+		talentData = talentData.._GetTalentPageData(1, false);
+		talentData = talentData.._GetTalentPageData(2, false);
+		talentData = talentData.._GetTalentPageData(3, false);
+	end
+
+	VF_RealmPlayersData[characterName].TalentsData = talentData;
+end
+
 function VF_RP_UpdateCharacterMetaData(_Target)
 	local characterName = UnitName(_Target);
 	local _, characterClass = UnitClass(_Target);
@@ -532,6 +560,7 @@ function VF_RealmPlayersTBC_OnUpdate()
 					VF_RP_UpdateCharacterInfoData("player");
 					VF_RP_UpdateCharacterExtraData("player");
 					VF_RP_UpdateCharacterItemsData("player");
+					VF_RP_UpdateCharacterTalentsData("player");
 					VF_RP_UpdateCharacterMetaData("player");
 				else
 					VF_RP_UpdateCharacterHonorData("target");
@@ -539,6 +568,7 @@ function VF_RealmPlayersTBC_OnUpdate()
 					VF_RP_UpdateCharacterInfoData("target");
 					VF_RP_UpdateCharacterExtraData("target");
 					VF_RP_UpdateCharacterItemsData("target");
+					VF_RP_UpdateCharacterTalentsData("target");
 					VF_RP_UpdateCharacterMetaData("target");
 				end
 				VF_InspectDone(true);

@@ -1,7 +1,7 @@
 ## Interface: 20400
 ## Title: VF_RealmPlayers
 ## Author: Dilatazu, www.realmplayers.com, Dilatazu@gmail.com
-## Version: 1.1.1
+## Version: 1.1.2
 ## Notes: 
 ## Dependencies: 
 ## OptionalDeps: SuperInspect, SuperInspect_UI
