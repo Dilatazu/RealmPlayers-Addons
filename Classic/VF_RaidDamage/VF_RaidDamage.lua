@@ -681,7 +681,8 @@ VF_RD_RaidZones = {
 	["Blackwing Lair"] = "Blackwing Lair",
 	["Zul'Gurub"] = "Zul'Gurub",
 	["Ruins of Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
-	["Temple of Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
+	["Temple of Ahn'Qiraj"] = "Temple of Ahn'Qiraj",--RaidID name
+	["Ahn'Qiraj Temple"] = "Ahn'Qiraj Temple",--Zone name
 	["Naxxramas"] = "Naxxramas",
 
 --Deutch
@@ -689,8 +690,8 @@ VF_RD_RaidZones = {
 	["Onyxias Hort"] = "Onyxia's Lair",
 	["Pechschwingenhort"] = "Blackwing Lair",
 	["Ruinen von Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
-	["Tempel von Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
-	["Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
+	["Tempel von Ahn'Qiraj"] = "Temple of Ahn'Qiraj",--RaidID name
+	["Ahn'Qiraj"] = "Ahn'Qiraj Temple",--Zone name
 
 --French
 	["C\197\147ur du Magma"] = "Molten Core",
