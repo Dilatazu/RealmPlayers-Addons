@@ -690,6 +690,7 @@ VF_RD_RaidZones = {
 	["Pechschwingenhort"] = "Blackwing Lair",
 	["Ruinen von Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Tempel von Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
+	["Tore von Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
 
 --French
 	["C\197\147ur du Magma"] = "Molten Core",
