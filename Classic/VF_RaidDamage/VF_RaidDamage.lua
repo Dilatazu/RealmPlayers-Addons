@@ -1279,14 +1279,25 @@ function VF_RD_HaveStartYell(bossName)
 	return false;
 end
 
+VF_RD_OldDPSMate_SyncReset = DPSMate.Options.Reset;
+function VF_RD_NewDPSMate_SyncReset()
+	if(VF_RaidDamage_IsSupported_DPSMate()) then
+		VF_RD_ExecuteSub(VF_RD_LogRaidDamage, "SWReset", VF_RD_GetTime_S());
+	end
+	VF_RD_OldDPSMate_SyncReset();
+	if(VF_RaidDamage_IsSupported_DPSMate()) then
+		VF_RD_ExecuteSub(VF_RD_ResetLastRecordedCacheForAccumulaters);
+	end
+end
+DPSMate.Options.Reset = VF_RD_NewDPSMate_SyncReset
 
 VF_RD_OldSW_SyncReset = SW_SyncReset;
 function VF_RD_NewSW_SyncReset(newSessID, newName)
-	if(VF_RaidDamage_IsSupported()) then
+	if(VF_RaidDamage_IsSupported_SWStats()) then
 		VF_RD_ExecuteSub(VF_RD_LogRaidDamage, "SWReset", VF_RD_GetTime_S());
 	end
 	VF_RD_OldSW_SyncReset(newSessID, newName);
-	if(VF_RaidDamage_IsSupported()) then
+	if(VF_RaidDamage_IsSupported_SWStats()) then
 		VF_RD_ExecuteSub(VF_RD_ResetLastRecordedCacheForAccumulaters);
 	end
 end
@@ -1295,7 +1306,7 @@ SW_SyncReset = VF_RD_NewSW_SyncReset
 VF_RD_OldSW_NukeDataCollection = SW_NukeDataCollection;
 function VF_RD_NewSW_NukeDataCollection()
 	VF_RD_OldSW_NukeDataCollection();
-	if(VF_RaidDamage_IsSupported()) then
+	if(VF_RaidDamage_IsSupported_SWStats()) then
 		VF_RD_LastRecorded = {};
 		VF_RD_ExecuteSub(VF_RD_CreateNewSession);
 		VF_RD_DebugMessage("Started a new session because of SWStats nuke");
@@ -1306,7 +1317,7 @@ SW_NukeDataCollection = VF_RD_NewSW_NukeDataCollection;
 --[[VF_RD_OldKTM_Clear = klhtm.table.clearraidtable;
 function VF_RD_NewKTM_Clear()
 	VF_RD_OldKTM_Clear();
-	if(VF_RaidDamage_IsSupported()) then
+	if(VF_RaidDamage_IsSupported_SWStats()) then
 		VF_RD_ResetLastRecordedCacheForDataIndex(VF_RD_DataIndex_Threat);
 	end
 end
@@ -1467,8 +1478,16 @@ end
 	return false;
 end--]]
 
-function VF_RaidDamage_IsSupported()
+function VF_RaidDamage_IsSupported_DPSMate()
+	return DPSMate ~= nil;
+end
+
+function VF_RaidDamage_IsSupported_SWStats()
 	return SW_StrTable ~= nil and SW_DataCollection ~= nil;
+end
+
+function VF_RaidDamage_IsSupported()
+	return VF_RaidDamage_IsSupported_DPSMate() or VF_RaidDamage_IsSupported_SWStats();
 end
 
 function VF_RaidDamage_SafeOnEvent(event, arg1, arg2)
@@ -1735,23 +1754,21 @@ end
 
 function VF_RD_DetectBossStart()
 	if(VF_RD_CurrentBoss == "") then
-		for unitID, unitData in SW_DataCollection.activeSegment do
-			if(type(unitID)=="number")then
-				local unitName = VF_RD_GetNameTranslated(SW_StrTable:getStr(unitID));
-				if(VF_RD_MobsType[unitName] == VF_RD_MobType_Boss) then
-					local bossName = VF_RD_GetBossName(unitName);
-					if(VF_RD_LastKilledBoss ~= bossName) then
-						if(VF_RD_PeekDeltaChange(unitData:getDmgDone(), unitID, VF_RD_DataIndex_Damage) > 0 or VF_RD_PeekDeltaChange(unitData:getDmgRecieved(), unitID, VF_RD_DataIndex_DamageTaken) > 0 or VF_RD_PeekDeltaChange(unitData:getRawHealDone(), unitID, VF_RD_DataIndex_RawHeal) > 0) then
-							--Boss Fight start
-							local startReason = "Start_C="..unitName;
-							if(bossName ~= unitName) then
-								startReason = startReason..";Start_C="..bossName;
-							end
-							VF_RD_DebugMessage(startReason.."(CombatMsgScan)");
-							VF_RD_LogRaidDamage(startReason, VF_RD_GetTime_S());
-							VF_RD_NextUpdateTime = VF_RD_GetTime_S() + 1;
-							return;
+		for unitID, unitData in DPSMate.DB.UserData do
+			local unitName = VF_RD_GetNameTranslated(DPSMate.GetNameForUnitID(unitID));
+			if(VF_RD_MobsType[unitName] == VF_RD_MobType_Boss) then
+				local bossName = VF_RD_GetBossName(unitName);
+				if(VF_RD_LastKilledBoss ~= bossName) then
+					if(VF_RD_PeekDeltaChange(unitData["Dmg"], unitID, VF_RD_DataIndex_Damage) > 0 or VF_RD_PeekDeltaChange(unitData["DmgTaken"], unitID, VF_RD_DataIndex_DamageTaken) > 0 or VF_RD_PeekDeltaChange(unitData["Heal"], unitID, VF_RD_DataIndex_RawHeal) > 0) then
+						--Boss Fight start
+						local startReason = "Start_C="..unitName;
+						if(bossName ~= unitName) then
+							startReason = startReason..";Start_C="..bossName;
 						end
+						VF_RD_DebugMessage(startReason.."(CombatMsgScan)");
+						VF_RD_LogRaidDamage(startReason, VF_RD_GetTime_S());
+						VF_RD_NextUpdateTime = VF_RD_GetTime_S() + 1;
+						return;
 					end
 				end
 			end
@@ -1846,131 +1863,129 @@ function VF_RD_DetectBossEnd()
 	end
 end
 
+--function GetPetOwnerUnitID(petname) --return pet owner unitID or nil if unitID is not a pet
+--function GetNameForUnitID(unitID) -- returns Name for UnitID
+
 function VF_RD_LogRaidDamage(_Reason, _Time)
 	local totalPlayersResult = "";
-	for unitID, unitData in SW_DataCollection.activeSegment do 
-		if(type(unitID)=="number")then 
-			local rawUnitName = SW_StrTable:getStr(unitID);
-			if(VF_RD_RaidMembersMissingID[rawUnitName] ~= nil) then
-				VF_RD_UpdateRaidMembers();
+	for unitID, unitData in DPSMate.DB.UserData do
+		local rawUnitName = DPSMate.GetNameForUnitID(unitID);
+		if(VF_RD_RaidMembersMissingID[rawUnitName] ~= nil) then
+			VF_RD_UpdateRaidMembers();
+		end
+		local unitName = VF_RD_GetNameTranslated(rawUnitName);
+		if(VF_RD_LastRecorded[unitID] == nil) then
+			VF_RD_LastRecorded[unitID] = {};
+			totalPlayersResult = totalPlayersResult..unitName.."="..unitID..",";
+		end
+		local petOwnerID = DPSMate.GetPetOwnerUnitID(rawUnitName);
+		if(petOwnerID ~= nil) then
+			if(VF_RD_LastRecorded[petOwnerID]["pets"] == nil) then
+				VF_RD_LastRecorded[petOwnerID]["pets"] = {};
 			end
-			local unitName = VF_RD_GetNameTranslated(rawUnitName);
-			if(VF_RD_LastRecorded[unitID] == nil) then
-				VF_RD_LastRecorded[unitID] = {};
-				totalPlayersResult = totalPlayersResult..unitName.."="..unitID..",";
+			if(VF_RD_LastRecorded[petOwnerID]["pets"][unitID] == nil) then
+				local petOwnerName = DPSMate.GetNameForUnitID(petOwnerID);
+				local petName = rawUnitName;
+				if(petName == nil or string.len(petName) < 2 or string.find(petName,"%W")) then petName = "VFUnknown"; end
+				VF_RD_LastRecorded[petOwnerID]["pets"][unitID] = 1;
+				totalPlayersResult = totalPlayersResult.."VF_PET_"..unitID.."_"..petName.."_"..petOwnerName.."="..unitID..",";
 			end
-			if(SW_DataCollection.meta[unitID]) then
-				if(SW_DataCollection.meta[unitID].allPets) then
-					for i, v in SW_DataCollection.meta[unitID].allPets do
-						if(VF_RD_LastRecorded[unitID]["pets"] == nil) then
-							VF_RD_LastRecorded[unitID]["pets"] = {};
-						end
-						if(VF_RD_LastRecorded[unitID]["pets"][i] == nil) then
-							--local petName = SW_StrTable:getStr(i);
-							local petName = SW_DataCollection.meta[i].origName;--testing
-							if(petName == nil or string.len(petName) < 2 or string.find(petName,"%W")) then petName = "VFUnknown"; end
-							VF_RD_LastRecorded[unitID]["pets"][i] = 1;
-							totalPlayersResult = totalPlayersResult.."VF_PET_"..i.."_"..petName.."_"..unitName.."="..i..",";
-						end
-					end
-				end
-			end
-			local dmg, effHeal, dmgTaken = unitData:getDmgDone(), unitData:getEffectiveHealDone(), unitData:getDmgRecieved();
-			local overHeal, dps, hps, death = unitData:getOHDone(), unitData:getDPS(), unitData:getHPS(), unitData:getDeaths();
-			local decurse, dmgCrit, healCrit = unitData:getDecurseDone(), unitData:getDmgCrit(), unitData:getHealCrit();
-			local effHealRecv, overHealRecv, rawHeal, rawHealRecv = unitData:getEffectiveHealRecieved(), unitData:getOHRecieved(), unitData:getRawHealDone(), unitData:getRawHealRecieved();
+		end
+
+		local dmg, effHeal, dmgTaken = unitData["Dmg"], unitData["EffHeal"], unitData["DmgTaken"];
+		local overHeal, dps, hps, death = unitData["OverHeal"], 0, 0, unitData["Deaths"];
+		local decurse, dmgCrit, healCrit = 0, 0, 0;
+		local effHealRecv, overHealRecv, rawHeal, rawHealRecv = 0, 0, unitData["Heal"], 0;
 			
-			local threatValue = klhtm.table.raiddata[rawUnitName];
-			if(threatValue == nil) then
-				threatValue = 0;
-			end
+		local threatValue = klhtm.table.raiddata[rawUnitName];
+		if(threatValue == nil) then
+			threatValue = 0;
+		end
 			
-			dmg = VF_RD_GenerateDeltaChange(dmg, unitID, VF_RD_DataIndex_Damage, _Time);
-			effHeal = VF_RD_GenerateDeltaChange(effHeal, unitID, VF_RD_DataIndex_EffectiveHeal, _Time);
-			dmgTaken = VF_RD_GenerateDeltaChange(dmgTaken, unitID, VF_RD_DataIndex_DamageTaken, _Time);
-			overHeal = VF_RD_GenerateDeltaChange(overHeal, unitID, VF_RD_DataIndex_OverHeal, _Time);
-			death = VF_RD_GenerateDeltaChange(death, unitID, VF_RD_DataIndex_Death, _Time);
-			decurse = VF_RD_GenerateDeltaChange(decurse, unitID, VF_RD_DataIndex_Decurse, _Time);
-			effHealRecv = VF_RD_GenerateDeltaChange(effHealRecv, unitID, VF_RD_DataIndex_EffectiveHealReceived, _Time);
-			overHealRecv = VF_RD_GenerateDeltaChange(overHealRecv, unitID, VF_RD_DataIndex_OverHealReceived, _Time);
-			rawHeal = VF_RD_GenerateDeltaChange(rawHeal, unitID, VF_RD_DataIndex_RawHeal, _Time);
-			rawHealRecv = VF_RD_GenerateDeltaChange(rawHealRecv, unitID, VF_RD_DataIndex_RawHealReceived, _Time);
+		dmg = VF_RD_GenerateDeltaChange(dmg, unitID, VF_RD_DataIndex_Damage, _Time);
+		effHeal = VF_RD_GenerateDeltaChange(effHeal, unitID, VF_RD_DataIndex_EffectiveHeal, _Time);
+		dmgTaken = VF_RD_GenerateDeltaChange(dmgTaken, unitID, VF_RD_DataIndex_DamageTaken, _Time);
+		overHeal = VF_RD_GenerateDeltaChange(overHeal, unitID, VF_RD_DataIndex_OverHeal, _Time);
+		death = VF_RD_GenerateDeltaChange(death, unitID, VF_RD_DataIndex_Death, _Time);
+		decurse = VF_RD_GenerateDeltaChange(decurse, unitID, VF_RD_DataIndex_Decurse, _Time);
+		effHealRecv = VF_RD_GenerateDeltaChange(effHealRecv, unitID, VF_RD_DataIndex_EffectiveHealReceived, _Time);
+		overHealRecv = VF_RD_GenerateDeltaChange(overHealRecv, unitID, VF_RD_DataIndex_OverHealReceived, _Time);
+		rawHeal = VF_RD_GenerateDeltaChange(rawHeal, unitID, VF_RD_DataIndex_RawHeal, _Time);
+		rawHealRecv = VF_RD_GenerateDeltaChange(rawHealRecv, unitID, VF_RD_DataIndex_RawHealReceived, _Time);
 			
-			if(dmg ~= "" or effHeal ~= "" or dmgTaken ~= "" or overHeal ~= "" or death ~= "" or effHealRecv ~= "" or rawHeal ~= "" or rawHealRecv ~= "") then
-				if(VF_RD_MobsType[unitName] == VF_RD_MobType_Boss) then
-					local specialBoss = VF_RD_GetBossName(unitName);
-					if(VF_RD_CurrentBoss ~= specialBoss and VF_RD_LastKilledBoss ~= specialBoss) then -- or (_Time - VF_RD_LastBossData) > 60)
-						if(_Reason ~= "") then
-							if(string.find(_Reason, "Start_C=") or string.find(_Reason, "Start_T=")) then
+		if(dmg ~= "" or effHeal ~= "" or dmgTaken ~= "" or overHeal ~= "" or death ~= "" or effHealRecv ~= "" or rawHeal ~= "" or rawHealRecv ~= "") then
+			if(VF_RD_MobsType[unitName] == VF_RD_MobType_Boss) then
+				local specialBoss = VF_RD_GetBossName(unitName);
+				if(VF_RD_CurrentBoss ~= specialBoss and VF_RD_LastKilledBoss ~= specialBoss) then -- or (_Time - VF_RD_LastBossData) > 60)
+					if(_Reason ~= "") then
+						if(string.find(_Reason, "Start_C=") or string.find(_Reason, "Start_T=")) then
 								
-							else
-								_Reason = _Reason..";Start_S="..specialBoss;
-							end
 						else
-							_Reason = "Start_S="..specialBoss;
+							_Reason = _Reason..";Start_S="..specialBoss;
 						end
-						VF_RD_DebugMessage("Start_S="..specialBoss.."(SW_Start)");
-						VF_RD_CurrentBoss = specialBoss;
+					else
+						_Reason = "Start_S="..specialBoss;
+					end
+					VF_RD_DebugMessage("Start_S="..specialBoss.."(SW_Start)");
+					VF_RD_CurrentBoss = specialBoss;
+					local bossParts = VF_RD_GetBossParts(specialBoss);
+					VF_RD_CurrentBossData = {};
+					for i, v in bossParts do
+						VF_RD_CurrentBossData[v] = {Health = 0, MaxHealth = 0};
+					end
+				elseif(death ~= "" and VF_RD_CurrentBoss == specialBoss) then
+					if(_Reason ~= "") then
+						_Reason = _Reason..";Dead_S="..unitName;
+					else
+						_Reason = "Dead_S="..unitName;
+					end
+					VF_RD_DebugMessage("Dead_S="..unitName.."(SW_Dead)");
+					if(VF_RD_CurrentBossData[unitName] == nil) then
+						VF_RD_CurrentBossData[unitName] = {};
+					end
+					VF_RD_CurrentBossData[unitName].Dead = true;
+					if(specialBoss ~= unitName) then
 						local bossParts = VF_RD_GetBossParts(specialBoss);
-						VF_RD_CurrentBossData = {};
+						local bossKilled = true;
 						for i, v in bossParts do
-							VF_RD_CurrentBossData[v] = {Health = 0, MaxHealth = 0};
-						end
-					elseif(death ~= "" and VF_RD_CurrentBoss == specialBoss) then
-						if(_Reason ~= "") then
-							_Reason = _Reason..";Dead_S="..unitName;
-						else
-							_Reason = "Dead_S="..unitName;
-						end
-						VF_RD_DebugMessage("Dead_S="..unitName.."(SW_Dead)");
-						if(VF_RD_CurrentBossData[unitName] == nil) then
-							VF_RD_CurrentBossData[unitName] = {};
-						end
-						VF_RD_CurrentBossData[unitName].Dead = true;
-						if(specialBoss ~= unitName) then
-							local bossParts = VF_RD_GetBossParts(specialBoss);
-							local bossKilled = true;
-							for i, v in bossParts do
-								if(VF_RD_CurrentBossData[v] == nil or VF_RD_CurrentBossData[v].Dead ~= true) then
-									bossKilled = false;
-									break;
-								end
+							if(VF_RD_CurrentBossData[v] == nil or VF_RD_CurrentBossData[v].Dead ~= true) then
+								bossKilled = false;
+								break;
 							end
-							if(bossKilled == true) then
-								if(_Reason ~= "") then
-									_Reason = _Reason..";Dead_S="..specialBoss;
-								else
-									_Reason = "Dead_S="..specialBoss;
-								end
-								VF_RD_DebugMessage("Dead_S="..specialBoss.."(SW_Dead)");
+						end
+						if(bossKilled == true) then
+							if(_Reason ~= "") then
+								_Reason = _Reason..";Dead_S="..specialBoss;
+							else
+								_Reason = "Dead_S="..specialBoss;
 							end
+							VF_RD_DebugMessage("Dead_S="..specialBoss.."(SW_Dead)");
 						end
 					end
-					VF_RD_LastBossData = _Time;
 				end
-				--Inside here because they do not get saved every single time they change
-				--[[
-				local threatChange = VF_RD_GenerateDeltaChange(threatValue, unitID, VF_RD_DataIndex_Threat, _Time);
-				dmgCrit = VF_RD_GenerateDeltaChange(dmgCrit, unitID, VF_RD_DataIndex_DamageCrit, _Time);
-				healCrit = VF_RD_GenerateDeltaChange(healCrit, unitID, VF_RD_DataIndex_HealCrit, _Time);
-				dps = VF_RD_GenerateDeltaChange(dps, unitID, VF_RD_DataIndex_DPS, _Time);
-				hps = VF_RD_GenerateDeltaChange(hps, unitID, VF_RD_DataIndex_HPS, _Time);
-				if(dps ~= "") then
-					dps = string.format("%.2f", dps);
-				end
-				if(hps ~= "") then
-					hps = string.format("%.2f", hps);
-				end
-				--]]
-				dmgCrit = string.format("%.2f", dmgCrit);
-				healCrit = string.format("%.2f", healCrit);
-				dps = string.format("%.2f", dps);
-				hps = string.format("%.2f", hps);
-				local unitResultStr = unitID.." "..dmg.." "..effHeal.." "..dmgTaken.." "..overHeal.." "..dps.." "..hps.." "..death.." "..decurse.." "..dmgCrit.." "..healCrit.." "..effHealRecv.." "..overHealRecv.." "..rawHeal.." "..rawHealRecv.." "..threatValue;
-				totalPlayersResult = totalPlayersResult..unitResultStr..",";
+				VF_RD_LastBossData = _Time;
 			end
-			
-		end 
+			--Inside here because they do not get saved every single time they change
+			--[[
+			local threatChange = VF_RD_GenerateDeltaChange(threatValue, unitID, VF_RD_DataIndex_Threat, _Time);
+			dmgCrit = VF_RD_GenerateDeltaChange(dmgCrit, unitID, VF_RD_DataIndex_DamageCrit, _Time);
+			healCrit = VF_RD_GenerateDeltaChange(healCrit, unitID, VF_RD_DataIndex_HealCrit, _Time);
+			dps = VF_RD_GenerateDeltaChange(dps, unitID, VF_RD_DataIndex_DPS, _Time);
+			hps = VF_RD_GenerateDeltaChange(hps, unitID, VF_RD_DataIndex_HPS, _Time);
+			if(dps ~= "") then
+				dps = string.format("%.2f", dps);
+			end
+			if(hps ~= "") then
+				hps = string.format("%.2f", hps);
+			end
+			--]]
+			dmgCrit = string.format("%.2f", dmgCrit);
+			healCrit = string.format("%.2f", healCrit);
+			dps = string.format("%.2f", dps);
+			hps = string.format("%.2f", hps);
+			local unitResultStr = unitID.." "..dmg.." "..effHeal.." "..dmgTaken.." "..overHeal.." "..dps.." "..hps.." "..death.." "..decurse.." "..dmgCrit.." "..healCrit.." "..effHealRecv.." "..overHealRecv.." "..rawHeal.." "..rawHealRecv.." "..threatValue;
+			totalPlayersResult = totalPlayersResult..unitResultStr..",";
+		end
 	end
 
 	if(_Reason == "" and VF_RD_CurrentBoss ~= "" and VF_RD_LastBossData ~= _Time) then
@@ -2029,7 +2044,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	for i, currUnitID in pairs(groupMembers) do
 		local currName = UnitName(currUnitID);
 		if(currName ~= nil) then
-			local currPlayerID = SW_StrTable:hasID(currName);
+			local currPlayerID = DPSMate.GetUnitIDForName(currName);
 			if(currPlayerID ~= nil and VF_RD_LastRecorded[currPlayerID] ~= nil) then
 				
 				local allBuffs = VF_RD_GetAllBuffs(currUnitID);
@@ -2310,7 +2325,7 @@ function VF_RD_GenerateRaidMembersStr()
 	for i, groupMemberID in pairs(groupMembers) do
 		local currName = UnitName(groupMemberID);
 		if(currName ~= nil) then
-			local currID = SW_StrTable:hasID(currName);
+			local currID = DPSMate.GetUnitIDForName(currName);
 			if(currID ~= nil) then
 				raidMembers = raidMembers.." "..currID;
 			else
