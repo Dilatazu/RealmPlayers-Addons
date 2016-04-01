@@ -1755,7 +1755,7 @@ end
 function VF_RD_DetectBossStart()
 	if(VF_RD_CurrentBoss == "") then
 		for unitID, unitData in DPSMate.DB.UserData do
-			local unitName = VF_RD_GetNameTranslated(DPSMate.GetNameForUnitID(unitID));
+			local unitName = VF_RD_GetNameTranslated(DPSMate:GetUserById(unitID));
 			if(VF_RD_MobsType[unitName] == VF_RD_MobType_Boss) then
 				local bossName = VF_RD_GetBossName(unitName);
 				if(VF_RD_LastKilledBoss ~= bossName) then
@@ -1863,13 +1863,10 @@ function VF_RD_DetectBossEnd()
 	end
 end
 
---function GetPetOwnerUnitID(petname) --return pet owner unitID or nil if unitID is not a pet
---function GetNameForUnitID(unitID) -- returns Name for UnitID
-
 function VF_RD_LogRaidDamage(_Reason, _Time)
 	local totalPlayersResult = "";
 	for unitID, unitData in DPSMate.DB.UserData do
-		local rawUnitName = DPSMate.GetNameForUnitID(unitID);
+		local rawUnitName = DPSMate:GetUserById(unitID);
 		if(VF_RD_RaidMembersMissingID[rawUnitName] ~= nil) then
 			VF_RD_UpdateRaidMembers();
 		end
@@ -1878,13 +1875,13 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 			VF_RD_LastRecorded[unitID] = {};
 			totalPlayersResult = totalPlayersResult..unitName.."="..unitID..",";
 		end
-		local petOwnerID = DPSMate.GetPetOwnerUnitID(rawUnitName);
+		local petOwnerID = DPSMate:GetPetOwnerUnitID(rawUnitName);
 		if(petOwnerID ~= nil) then
 			if(VF_RD_LastRecorded[petOwnerID]["pets"] == nil) then
 				VF_RD_LastRecorded[petOwnerID]["pets"] = {};
 			end
 			if(VF_RD_LastRecorded[petOwnerID]["pets"][unitID] == nil) then
-				local petOwnerName = DPSMate.GetNameForUnitID(petOwnerID);
+				local petOwnerName = DPSMate:GetUserById(petOwnerID);
 				local petName = rawUnitName;
 				if(petName == nil or string.len(petName) < 2 or string.find(petName,"%W")) then petName = "VFUnknown"; end
 				VF_RD_LastRecorded[petOwnerID]["pets"][unitID] = 1;
@@ -2044,7 +2041,7 @@ function VF_RD_LogRaidDamage(_Reason, _Time)
 	for i, currUnitID in pairs(groupMembers) do
 		local currName = UnitName(currUnitID);
 		if(currName ~= nil) then
-			local currPlayerID = DPSMate.GetUnitIDForName(currName);
+			local currPlayerID = DPSMate:GetUnitIDForName(currName);
 			if(currPlayerID ~= nil and VF_RD_LastRecorded[currPlayerID] ~= nil) then
 				
 				local allBuffs = VF_RD_GetAllBuffs(currUnitID);
@@ -2325,7 +2322,7 @@ function VF_RD_GenerateRaidMembersStr()
 	for i, groupMemberID in pairs(groupMembers) do
 		local currName = UnitName(groupMemberID);
 		if(currName ~= nil) then
-			local currID = DPSMate.GetUnitIDForName(currName);
+			local currID = DPSMate:GetUnitIDForName(currName);
 			if(currID ~= nil) then
 				raidMembers = raidMembers.." "..currID;
 			else
