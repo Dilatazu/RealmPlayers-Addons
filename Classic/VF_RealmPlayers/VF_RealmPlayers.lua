@@ -81,10 +81,10 @@ function VF_RealmPlayers_OnEvent()
 		local targetName = UnitName("target");
 		if(targetName == nil) then targetName = "nil"; end
 	elseif(event == "WHO_LIST_UPDATE") then
-		if(VF_RealmplayersData["OnlineData"] == nil) then
-			VF_RealmplayersData["OnlineData"] = {};
+		if(VF_RealmPlayersData["OnlineData"] == nil) then
+			VF_RealmPlayersData["OnlineData"] = {};
 		end
-		local onlineData = VF_RealmplayersData["OnlineData"];
+		local onlineData = VF_RealmPlayersData["OnlineData"];
 		
 		local currOnlineDataTime = GetTime();
 		if(VF_RealmPlayers_CurrentOnlineData == nil) then
@@ -95,7 +95,7 @@ function VF_RealmPlayers_OnEvent()
 		end
 		local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
 
-		if(currOnlineDataTime - onlineDataTime > 60000) then
+		if(currOnlineDataTime - onlineDataTime > 60) then
 			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
@@ -105,10 +105,12 @@ function VF_RealmPlayers_OnEvent()
 		local numWhoResults = GetNumWhoResults();
 		for i = 1, numWhoResults, 1 do
 			local name, guild, level, race, class, zone, group = GetWhoInfo(i);
-
+			if(guild == nil) then
+				guild = "nil";
+			end
 			if(onlineCharacters[name] == nil) then
 				onlineCharacters[name] = 1;
-				onlineDataString = onlineDataString .. name .. ":" race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
+				onlineDataString = onlineDataString .. name .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
 			end
 		end
 		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
