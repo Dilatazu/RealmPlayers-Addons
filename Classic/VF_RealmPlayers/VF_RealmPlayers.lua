@@ -48,6 +48,9 @@ end
 function VF_RealmPlayers_OnLoad()
 	this:RegisterEvent("PLAYER_TARGET_CHANGED");
 	this:RegisterEvent("VARIABLES_LOADED");
+	this:RegisterEvent("WHO_LIST_UPDATE");
+	this:RegisterEvent("GUILD_ROSTER_UPDATE");
+	this:RegisterEvent("UPDATE_MOUSEOVER_UNIT");
 	SlashCmdList["REALMPLAYERS"] = VF_RealmPlayers_Command;
 	SLASH_REALMPLAYERS1 = "/VFRP";
 	SLASH_REALMPLAYERS2 = "/RealmPlayers";
@@ -77,6 +80,53 @@ function VF_RealmPlayers_OnEvent()
 		VF_TemporarySupressTargetChange = nil;
 		local targetName = UnitName("target");
 		if(targetName == nil) then targetName = "nil"; end
+	elseif(event == "WHO_LIST_UPDATE") then
+		if(VF_RealmplayersData["OnlineData"] == nil) then
+			VF_RealmplayersData["OnlineData"] = {};
+		end
+		local onlineData = VF_RealmplayersData["OnlineData"];
+		
+		if(VF_RealmPlayers_CurrentOnlineData == nil) then
+			VF_RealmPlayers_CurrentOnlineData = {};
+			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
+		end
+		local onlineCharacters = VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"];
+		local onlineDataString = VF_RealmPlayers_CurrentOnlineData["OnlineDataString"];
+		local currOnlineDataTime = GetTime();
+		if(onlineData[currOnlineDataTime] ~= nil) then
+			--We already processed online data last couple of **** time, so we dont need to generate a totally new data
+			local numWhoResults = GetNumWhoResults();
+			for i = 1, numWhoResults, 1 do
+				local name, guild, level, race, class, zone, group = GetWhoInfo(i);
+
+				if(onlineCharacters[name] == nil) then
+					onlineCharacters[name] = 1;
+					onlineDataString = onlineDataString .. name .. ":" race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
+				end
+
+				onlineData[currOnlineDataTime] = onlineDataString;
+			end
+		else
+			onlineData[currOnlineDataTime] = {};
+		end
+
+		onlineData[currOnlineDataTime]
+		local currentDate = date("!%Y-%m-%d %X");
+
+		
+		local numWhoResults = GetNumWhoResults();
+		for i = 1, numWhoResults, 1 do
+			local name, guild, level, race, class, zone, group = GetWhoInfo(i);
+
+			onlineData[currTime]
+			VF_RealmplayersData["OnlineData"]
+		end
+		
+				if(VF_RealmPlayersData[VF_CurrentlyInspecting].DateTimeUTC == nil or string.sub(currentDate, 1, -5) ~= string.sub(VF_RealmPlayersData[VF_CurrentlyInspecting].DateTimeUTC, 1, -5)) then
+				end
+	elseif(event == "GUILD_ROSTER_UPDATE") then
+	elseif(event == "UPDATE_MOUSEOVER_UNIT") then
 	end
 end
 
