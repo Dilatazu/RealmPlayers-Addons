@@ -175,6 +175,12 @@ VF_InventorySlots = {
 	["Tabard"] = 19,
 }
 
+function VF_RP_GetTime_S()
+	local currTime = GetTime();
+	local currTime_S = math.floor(currTime);
+	return currTime_S;
+end
+
 function VF_RealmPlayers_Debug(_Text)
 	if(VF_RealmPlayers_Settings["DebugMode"] == true) then
 		DEFAULT_CHAT_FRAME:AddMessage(_Text);
@@ -222,12 +228,14 @@ function VF_RealmPlayers_OnEvent()
 		end
 		local onlineData = VF_RealmPlayersData["OnlineData"];
 		
-		local currOnlineDataTime = GetTime();
+		local currOnlineDataTime = VF_RP_GetTime_S();
+		local currentDate = date("!%Y-%m-%d %X");
 		if(VF_RealmPlayers_CurrentOnlineData == nil) then
 			VF_RealmPlayers_CurrentOnlineData = {};
 			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
 		end
 		local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
 
@@ -235,6 +243,7 @@ function VF_RealmPlayers_OnEvent()
 			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
 		end
 		local onlineCharacters = VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"];
 		local onlineDataString = VF_RealmPlayers_CurrentOnlineData["OnlineDataString"];
@@ -250,24 +259,13 @@ function VF_RealmPlayers_OnEvent()
 			end
 		end
 		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
-		onlineData[onlineDataTime] = onlineDataString;
+		table.insert(onlineData, 1, {});
+		onlineData[1].DataString = onlineDataString;
+		onlineData[1].DateTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate;
 
 		--onlineData[currOnlineDataTime]
-		--local currentDate = date("!%Y-%m-%d %X");
+		--
 
-		
-		--[[
-		local numWhoResults = GetNumWhoResults();
-		for i = 1, numWhoResults, 1 do
-			local name, guild, level, race, class, zone, group = GetWhoInfo(i);
-
-			onlineData[currTime]
-			VF_RealmplayersData["OnlineData"]
-		end
-		
-		if(VF_RealmPlayersData[VF_CurrentlyInspecting].DateTimeUTC == nil or string.sub(currentDate, 1, -5) ~= string.sub(VF_RealmPlayersData[VF_CurrentlyInspecting].DateTimeUTC, 1, -5)) then
-		end
-		--]]
 	elseif(event == "GUILD_ROSTER_UPDATE") then
 	elseif(event == "UPDATE_MOUSEOVER_UNIT") then
 	end
