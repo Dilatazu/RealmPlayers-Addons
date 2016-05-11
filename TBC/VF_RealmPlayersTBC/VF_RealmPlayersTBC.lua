@@ -17,6 +17,193 @@ VF_ClassColor = {
 	["PET"] = "|cff00ff00",
 };
 
+VF_ClassToIndex = {
+	["DRUID"] = 1,
+	["WARRIOR"] = 2,
+	["SHAMAN"] = 3,
+	["PRIEST"] = 4,
+	["MAGE"] = 5,
+	["ROGUE"] = 6,
+	["WARLOCK"] = 7,
+	["HUNTER"] = 8,
+	["PALADIN"] = 9,
+
+	["Druid"] = 1,
+	["Warrior"] = 2,
+	["Shaman"] = 3,
+	["Priest"] = 4,
+	["Mage"] = 5,
+	["Rogue"] = 6,
+	["Warlock"] = 7,
+	["Hunter"] = 8,
+	["Paladin"] = 9,
+};
+
+VF_RaceToIndex = {
+	["Orc"] = 1,
+	["Undead"] = 2,
+	["Scourge"] = 2,
+	["Tauren"] = 3,
+	["Troll"] = 4,
+	["Human"] = 5,
+	["Dwarf"] = 6,
+	["Gnome"] = 7,
+	["NightElf"] = 8,
+	["Nightelf"] = 8,
+	["Night Elf"] = 8,
+	["Night elf"] = 8,
+	["BloodElf"] = 9,
+	["Bloodelf"] = 9,
+	["Blood Elf"] = 9,
+	["Blood elf"] = 9,
+	["Draenei"] = 10,
+};
+
+VF_ZoneToIndex = {
+	["Ahn'Qiraj"] = 1,
+	["Alterac Mountains"] = 2,
+	["Alterac Valley"] = 3,
+	["Arathi Basin"] = 4,
+	["Arathi Highlands"] = 5,
+	["Ashenvale"] = 6,
+	["Auberdine"] = 7,
+	["Azshara"] = 8,
+	["Badlands"] = 9,
+	["The Barrens"] = 10,
+	["Blackfathom Deeps"] = 11,
+	["Blackrock Depths"] = 12,
+	["Blackrock Mountain"] = 13,
+	["Blackrock Spire"] = 14,
+	["Lower Blackrock Spire"] = 15,
+	["Upper Blackrock Spire"] = 16,
+	["Blackwing Lair"] = 17,
+	["Blasted Lands"] = 18,
+	["Booty Bay"] = 19,
+	["Burning Steppes"] = 20,
+	["Darkshore"] = 21,
+	["Darnassus"] = 22,
+	["The Deadmines"] = 23,
+	["Deadwind Pass"] = 24,
+	["Deeprun Tram"] = 25,
+	["Desolace"] = 26,
+	["Dire Maul"] = 27,
+	["Dire Maul (East)"] = 28,
+	["Dire Maul (West)"] = 29,
+	["Dire Maul (North)"] = 30,
+	["Dun Morogh"] = 31,
+	["Durotar"] = 32,
+	["Duskwood"] = 33,
+	["Dustwallow Marsh"] = 34,
+	["Eastern Plaguelands"] = 35,
+	["Elwynn Forest"] = 36,
+	["Everlook"] = 37,
+	["Felwood"] = 38,
+	["Feralas"] = 39,
+	["The Forbidding Sea"] = 40,
+	["Gadgetzan"] = 41,
+	["Gates of Ahn'Qiraj"] = 42,
+	["Gnomeregan"] = 43,
+	["The Great Sea"] = 44,
+	["Grom'gol Base Camp"] = 45,
+	["Hall of Legends"] = 46,
+	["Hillsbrad Foothills"] = 47,
+	["The Hinterlands"] = 48,
+	["Hyjal"] = 49,
+	["Ironforge"] = 50,
+	["Loch Modan"] = 51,
+	["Maraudon"] = 52,
+	["Menethil Harbor"] = 53,
+	["Molten Core"] = 54,
+	["Moonglade"] = 55,
+	["Mulgore"] = 56,
+	["Naxxramas"] = 57,
+	["Onyxia's Lair"] = 58,
+	["Orgrimmar"] = 59,
+	["Ratchet"] = 60,
+	["Ragefire Chasm"] = 61,
+	["Razorfen Downs"] = 62,
+	["Razorfen Kraul"] = 63,
+	["Redridge Mountains"] = 64,
+	["Ruins of Ahn'Qiraj"] = 65,
+	["Scarlet Monastery"] = 66,
+	["Scholomance"] = 67,
+	["Searing Gorge"] = 68,
+	["Shadowfang Keep"] = 69,
+	["Silithus"] = 70,
+	["Silverpine Forest"] = 71,
+	["The Stockade"] = 72,
+	["Stonetalon Mountains"] = 73,
+	["Stormwind City"] = 74,
+	["Stranglethorn Vale"] = 75,
+	["Stratholme"] = 76,
+	["Swamp of Sorrows"] = 77,
+	["Tanaris"] = 78,
+	["Teldrassil"] = 79,
+	["Temple of Ahn'Qiraj"] = 80,
+	["The Temple of Atal'Hakkar"] = 81,
+	["Theramore Isle"] = 82,
+	["Thousand Needles"] = 83,
+	["Thunder Bluff"] = 84,
+	["Tirisfal Glades"] = 85,
+	["Uldaman"] = 86,
+	["Un'Goro Crater"] = 87,
+	["Undercity"] = 88,
+	["Wailing Caverns"] = 89,
+	["Warsong Gulch"] = 90,
+	["Western Plaguelands"] = 91,
+	["Westfall"] = 92,
+	["Wetlands"] = 93,
+	["Winterspring"] = 94,
+	["Zul'Farrak"] = 95,
+	["Zul'Gurub"] = 96,
+
+	--TBC Instance Zones
+	["Plaguewood"] = 97,
+	["Hellfire Citadel"] = 98,
+	["Auchindoun"] = 99,
+	["The Bone Wastes"] = 100, -- Substitute for Auchindoun, since this is what shows on the minimap.
+	["Coilfang Reservoir"] = 101, -- Not used yet.
+	
+	--TBC Zones
+	["Azuremyst Isle"] = 102,
+	["Bloodmyst Isle"] = 103,
+	["Eversong Woods"] = 104,
+	["Ghostlands"] = 105,
+	["The Exodar"] = 106,
+	["Silvermoon City"] = 107,
+	["Shadowmoon Valley"] = 108,
+	["Black Temple"] = 109,
+	["Terokkar Forest"] = 110,
+	["Auchenai Crypts"] = 111,
+	["Mana-Tombs"] = 112,
+	["Shadow Labyrinth"] = 113,
+	["Sethekk Halls"] = 114,
+	["Hellfire Peninsula"] = 115,
+	["The Dark Portal"] = 116,
+	["Hellfire Ramparts"] = 117,
+	["The Blood Furnace"] = 118,
+	["The Shattered Halls"] = 119,
+	["Magtheridon's Lair"] = 120,
+	["Nagrand"] = 121,
+	["Zangarmarsh"] = 122,
+	["The Slave Pens"] = 123,
+	["The Underbog"] = 124,
+	["The Steamvault"] = 125,
+	["Serpentshrine Cavern"] = 126,
+	["Blade's Edge Mountains"] = 127,
+	["Gruul's Lair"] = 128,
+	["Netherstorm"] = 129,
+	["Tempest Keep"] = 130,
+	["The Mechanar"] = 131,
+	["The Botanica"] = 132,
+	["The Arcatraz"] = 133,
+	["Eye of the Storm"] = 134,
+	["Shattrath City"] = 135,
+	["Karazhan"] = 136,
+	["Caverns of Time"] = 137,
+	["Zul'Aman"] = 138,
+};
+
 VF_InventorySlots = {
 	["Head"] = 1,
 	["Neck"] = 2,
@@ -39,6 +226,12 @@ VF_InventorySlots = {
 	["Tabard"] = 19,
 }
 
+function VF_RP_GetTime_S()
+	local currTime = GetTime();
+	local currTime_S = math.floor(currTime);
+	return currTime_S;
+end
+
 function VF_RealmPlayers_Debug(_Text)
 	if(VF_RealmPlayers_Settings["DebugMode"] == true) then
 		DEFAULT_CHAT_FRAME:AddMessage(_Text);
@@ -49,6 +242,9 @@ function VF_RealmPlayersTBC_OnLoad()
 	this:RegisterEvent("PLAYER_TARGET_CHANGED");
 	this:RegisterEvent("INSPECT_HONOR_UPDATE");
 	this:RegisterEvent("VARIABLES_LOADED");
+	this:RegisterEvent("WHO_LIST_UPDATE");
+	this:RegisterEvent("GUILD_ROSTER_UPDATE");
+	this:RegisterEvent("UPDATE_MOUSEOVER_UNIT");
 	SlashCmdList["REALMPLAYERS"] = VF_RealmPlayers_Command;
 	SLASH_REALMPLAYERS1 = "/VFRP";
 	SLASH_REALMPLAYERS2 = "/RealmPlayers";
@@ -80,6 +276,60 @@ function VF_RealmPlayersTBC_OnEvent()
 		if(targetName == nil) then targetName = "nil"; end
 	elseif(event == "INSPECT_HONOR_UPDATE") then
 		VF_Inspect_Honor_Update = true;
+	elseif(event == "WHO_LIST_UPDATE") then
+		if(VF_RealmPlayersData["OnlineData"] == nil) then
+			VF_RealmPlayersData["OnlineData"] = {};
+		end
+		local onlineData = VF_RealmPlayersData["OnlineData"];
+		
+		local currOnlineDataTime = VF_RP_GetTime_S();
+		local currentDate = date("!%Y-%m-%d %X");
+		if(VF_RealmPlayers_CurrentOnlineData == nil) then
+			VF_RealmPlayers_CurrentOnlineData = {};
+			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
+			table.insert(onlineData, 1, "");
+		end
+		local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
+		local charsRecorded = table.getn(VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"]);
+		if(currOnlineDataTime - onlineDataTime > 60 or charsRecorded > 100) then
+			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
+			table.insert(onlineData, 1, "");
+		end
+		local onlineCharacters = VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"];
+		local onlineDataString = VF_RealmPlayers_CurrentOnlineData["OnlineDataString"];
+		local numWhoResults = GetNumWhoResults();
+		for i = 1, numWhoResults, 1 do
+			local name, guild, level, race, class, zone, group = GetWhoInfo(i);
+			if(guild == nil) then
+				guild = "";
+			end
+			if(onlineCharacters[name] == nil) then
+				onlineCharacters[name] = 1;
+				
+				if(VF_RaceToIndex[race] ~= nil) then
+					race = VF_RaceToIndex[race];
+				end
+				if(VF_ClassToIndex[class] ~= nil) then
+					class = VF_ClassToIndex[class];
+				end
+				if(VF_ZoneToIndex[zone] ~= nil) then
+					zone = VF_ZoneToIndex[zone];
+				end
+				onlineDataString = onlineDataString .. name .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
+			end
+		end
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
+		
+		onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
+
+	elseif(event == "GUILD_ROSTER_UPDATE") then
+	elseif(event == "UPDATE_MOUSEOVER_UNIT") then
 	end
 end
 

@@ -240,7 +240,7 @@ function VF_RealmPlayers_OnEvent()
 		end
 		local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
 		local charsRecorded = table.getn(VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"]);
-		if(currOnlineDataTime - onlineDataTime > 60 || charsRecorded > 100) then
+		if(currOnlineDataTime - onlineDataTime > 60 or charsRecorded > 100) then
 			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
@@ -273,9 +273,6 @@ function VF_RealmPlayers_OnEvent()
 		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
 		
 		onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
-
-		--onlineData[currOnlineDataTime]
-		--
 
 	elseif(event == "GUILD_ROSTER_UPDATE") then
 	elseif(event == "UPDATE_MOUSEOVER_UNIT") then
