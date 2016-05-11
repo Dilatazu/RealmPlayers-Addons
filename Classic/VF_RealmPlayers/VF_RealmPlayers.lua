@@ -236,14 +236,16 @@ function VF_RealmPlayers_OnEvent()
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
+			table.insert(onlineData, 1, "");
 		end
 		local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
-
-		if(currOnlineDataTime - onlineDataTime > 60) then
+		local charsRecorded = table.getn(VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"]);
+		if(currOnlineDataTime - onlineDataTime > 60 || charsRecorded > 100) then
 			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
+			table.insert(onlineData, 1, "");
 		end
 		local onlineCharacters = VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"];
 		local onlineDataString = VF_RealmPlayers_CurrentOnlineData["OnlineDataString"];
@@ -251,17 +253,26 @@ function VF_RealmPlayers_OnEvent()
 		for i = 1, numWhoResults, 1 do
 			local name, guild, level, race, class, zone, group = GetWhoInfo(i);
 			if(guild == nil) then
-				guild = "nil";
+				guild = "";
 			end
 			if(onlineCharacters[name] == nil) then
 				onlineCharacters[name] = 1;
+				
+				if(VF_RaceToIndex[race] ~= nil) then
+					race = VF_RaceToIndex[race];
+				end
+				if(VF_ClassToIndex[class] ~= nil) then
+					class = VF_ClassToIndex[class];
+				end
+				if(VF_ZoneToIndex[zone] ~= nil) then
+					zone = VF_ZoneToIndex[zone];
+				end
 				onlineDataString = onlineDataString .. name .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
 			end
 		end
 		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
-		table.insert(onlineData, 1, {});
-		onlineData[1].DataString = onlineDataString;
-		onlineData[1].DateTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate;
+		
+		onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
 
 		--onlineData[currOnlineDataTime]
 		--
