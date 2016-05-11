@@ -330,6 +330,20 @@ function VF_RealmPlayersTBC_OnEvent()
 
 	elseif(event == "GUILD_ROSTER_UPDATE") then
 	elseif(event == "UPDATE_MOUSEOVER_UNIT") then
+		if(UnitExists("mouseover")) and (UnitIsPlayer("mouseover")) then
+			local name = UnitName("mouseover");
+			local class = UnitClass("mouseover");
+			local race, raceEN = UnitRace("mouseover");
+			local level = UnitLevel("mouseover");
+			local guild, guildRank, guildRankIndex = GetGuildInfo("mouseover");
+			if(guild == nil) then
+				guild = "";
+			end
+			local zone = GetRealZoneText();
+			if(name ~= nil and class ~= nil and raceEN ~= nil and level ~= nil and guild ~= nil and zone ~= nil) then
+				VF_RealmPlayers_Debug("" .. VF_RP_GetTime_S() .. name .. ":" .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",");
+			end
+		end
 	end
 end
 
