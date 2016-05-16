@@ -699,6 +699,8 @@ VF_RD_RaidZones = {
 	["Repaire de l'Aile noire"] = "Blackwing Lair",
 	["Ruines d'Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
 	["Le temple d'Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
+	["Temple d'Ahn'Qiraj"] = "Temple of Ahn'Qiraj",--RaidID name
+	--["Ahn'Qiraj"] = "Ahn'Qiraj Temple",--Zone name
 }
 
 VF_RD_YellEventsDE = {
