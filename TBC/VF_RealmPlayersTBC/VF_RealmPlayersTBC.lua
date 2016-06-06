@@ -252,6 +252,32 @@ function VF_RealmPlayersTBC_OnLoad()
 	VF_RP_CreateGameToolTip();
 end
 
+function VF_RP_GetActiveOnlineData(_CurrOnlineDataTime, _CurrentDate)
+	if(VF_RealmPlayersData["OnlineData"] == nil) then
+		VF_RealmPlayersData["OnlineData"] = {};
+	end
+	local onlineData = VF_RealmPlayersData["OnlineData"];
+		
+	if(VF_RealmPlayers_CurrentOnlineData == nil) then
+		VF_RealmPlayers_CurrentOnlineData = {};
+		VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = _CurrOnlineDataTime;
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = _CurrentDate;
+		table.insert(onlineData, 1, "");
+	end
+	local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
+	local charsRecorded = table.getn(VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"]);
+	if(_CurrOnlineDataTime - onlineDataTime > 60 or charsRecorded > 100) then
+		VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = _CurrOnlineDataTime;
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = _CurrentDate;
+		table.insert(onlineData, 1, "");
+	end
+	return onlineData, VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"], VF_RealmPlayers_CurrentOnlineData["OnlineDataString"];
+end
+
 function VF_RealmPlayersTBC_OnEvent()
 	if(event == "VARIABLES_LOADED") then
 		VF_RealmPlayersVersion = VF_REALMPLAYERSVERSION;
@@ -277,32 +303,10 @@ function VF_RealmPlayersTBC_OnEvent()
 	elseif(event == "INSPECT_HONOR_UPDATE") then
 		VF_Inspect_Honor_Update = true;
 	elseif(event == "WHO_LIST_UPDATE") then
-		if(VF_RealmPlayersData["OnlineData"] == nil) then
-			VF_RealmPlayersData["OnlineData"] = {};
-		end
-		local onlineData = VF_RealmPlayersData["OnlineData"];
-		
 		local currOnlineDataTime = VF_RP_GetTime_S();
 		local currentDate = date("!%Y-%m-%d %X");
-		if(VF_RealmPlayers_CurrentOnlineData == nil) then
-			VF_RealmPlayers_CurrentOnlineData = {};
-			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
-			table.insert(onlineData, 1, "");
-		end
-		local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
-		local charsRecorded = table.getn(VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"]);
-		if(currOnlineDataTime - onlineDataTime > 60 or charsRecorded > 100) then
-			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
-			table.insert(onlineData, 1, "");
-		end
-		local onlineCharacters = VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"];
-		local onlineDataString = VF_RealmPlayers_CurrentOnlineData["OnlineDataString"];
+		local onlineData, onlineCharacters, onlineDataString = VF_RP_GetActiveOnlineData(currOnlineDataTime, currentDate);
+		
 		local numWhoResults = GetNumWhoResults();
 		for i = 1, numWhoResults, 1 do
 			local name, guild, level, race, class, zone, group = GetWhoInfo(i);
@@ -329,6 +333,44 @@ function VF_RealmPlayersTBC_OnEvent()
 		onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
 
 	elseif(event == "GUILD_ROSTER_UPDATE") then
+		local prevShowOffline = GetGuildRosterShowOffline();
+		SetGuildRosterShowOffline(1);
+		
+		local guildOnlineCount = 0;
+		local guild, guildRank, guildRankIndex = GetGuildInfo("player");
+		if(guild ~= nil) then
+			local numGuildMembers = GetNumGuildMembers();
+			
+			local currOnlineDataTime = VF_RP_GetTime_S();
+			local currentDate = date("!%Y-%m-%d %X");
+			local onlineData, onlineCharacters, onlineDataString = VF_RP_GetActiveOnlineData(currOnlineDataTime, currentDate);
+		
+			for index = 1, numGuildMembers, 1 do
+				local name, rank, rankIndex, level, class, zone, _, _, online, status = GetGuildRosterInfo(index);
+				if(online == 1) then
+					guildOnlineCount = guildOnlineCount + 1;
+					if(onlineCharacters[name] == nil) then
+						onlineCharacters[name] = 1;
+				
+						if(VF_RaceToIndex[race] ~= nil) then
+							race = VF_RaceToIndex[race];
+						end
+						if(VF_ClassToIndex[class] ~= nil) then
+							class = VF_ClassToIndex[class];
+						end
+						if(VF_ZoneToIndex[zone] ~= nil) then
+							zone = VF_ZoneToIndex[zone];
+						end
+						onlineDataString = onlineDataString .. name .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
+					end
+				end
+			end
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
+		
+			onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
+		end
+		SetGuildRosterShowOffline(prevShowOffline);
+
 	elseif(event == "UPDATE_MOUSEOVER_UNIT") then
 		if(UnitExists("mouseover")) and (UnitIsPlayer("mouseover")) then
 			local name = UnitName("mouseover");
@@ -341,7 +383,27 @@ function VF_RealmPlayersTBC_OnEvent()
 			end
 			local zone = GetRealZoneText();
 			if(name ~= nil and class ~= nil and raceEN ~= nil and level ~= nil and guild ~= nil and zone ~= nil) then
-				VF_RealmPlayers_Debug("" .. VF_RP_GetTime_S() .. name .. ":" .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",");
+				local currOnlineDataTime = VF_RP_GetTime_S();
+				local currentDate = date("!%Y-%m-%d %X");
+				local onlineData, onlineCharacters, onlineDataString = VF_RP_GetActiveOnlineData(currOnlineDataTime, currentDate);
+				if(onlineCharacters[name] == nil) then
+					onlineCharacters[name] = 1;
+				
+					if(VF_RaceToIndex[raceEN] ~= nil) then
+						raceEN = VF_RaceToIndex[raceEN];
+					end
+					if(VF_ClassToIndex[class] ~= nil) then
+						class = VF_ClassToIndex[class];
+					end
+					if(VF_ZoneToIndex[zone] ~= nil) then
+						zone = VF_ZoneToIndex[zone];
+					end
+					onlineDataString = onlineDataString .. name .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
+					VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
+					onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
+
+					--VF_RealmPlayers_Debug("" .. VF_RP_GetTime_S() .. name .. ":" .. ":" .. raceEN .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",");
+				end
 			end
 		end
 	end
