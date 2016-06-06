@@ -681,7 +681,7 @@ VF_RD_RaidZones = {
 	["Blackwing Lair"] = "Blackwing Lair",
 	["Zul'Gurub"] = "Zul'Gurub",
 	["Ruins of Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
-	["Temple of Ahn'Qiraj"] = "Temple of Ahn'Qiraj",--RaidID name
+	["Temple of Ahn'Qiraj"] = "Ahn'Qiraj Temple",--RaidID name
 	["Ahn'Qiraj Temple"] = "Ahn'Qiraj Temple",--Zone name
 	["Naxxramas"] = "Naxxramas",
 
@@ -690,7 +690,7 @@ VF_RD_RaidZones = {
 	["Onyxias Hort"] = "Onyxia's Lair",
 	["Pechschwingenhort"] = "Blackwing Lair",
 	["Ruinen von Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
-	["Tempel von Ahn'Qiraj"] = "Temple of Ahn'Qiraj",--RaidID name
+	["Tempel von Ahn'Qiraj"] = "Ahn'Qiraj Temple",--RaidID name
 	["Ahn'Qiraj"] = "Ahn'Qiraj Temple",--Zone name
 
 --French
@@ -698,8 +698,8 @@ VF_RD_RaidZones = {
 	["Repaire d'Onyxia"] = "Onyxia's Lair",
 	["Repaire de l'Aile noire"] = "Blackwing Lair",
 	["Ruines d'Ahn'Qiraj"] = "Ruins of Ahn'Qiraj",
-	["Le temple d'Ahn'Qiraj"] = "Temple of Ahn'Qiraj",
-	["Temple d'Ahn'Qiraj"] = "Temple of Ahn'Qiraj",--RaidID name
+	["Le temple d'Ahn'Qiraj"] = "Ahn'Qiraj Temple",
+	["Temple d'Ahn'Qiraj"] = "Ahn'Qiraj Temple",--RaidID name
 	--["Ahn'Qiraj"] = "Ahn'Qiraj Temple",--Zone name
 }
 
