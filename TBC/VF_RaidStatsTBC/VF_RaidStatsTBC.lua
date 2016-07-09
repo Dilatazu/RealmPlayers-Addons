@@ -1410,12 +1410,21 @@ function VF_RS_SafeSaveLoot()
 end
 
 function VF_RS_HookLootFrame()
-	VF_RS_OldLootFrame_OnShow = LootFrame_OnShow;
-	function VF_RS_NewLootFrame_OnShow()
-		VF_RS_OldLootFrame_OnShow();
-		VF_RS_ExecuteSub(VF_RS_SafeSaveLoot);
+	if(XLoot ~= nil) then
+		VF_RS_OldXLoot_LootFrame_OnShow = XLoot.LootFrame_OnShow;
+		function VF_RS_NewXLoot_LootFrame_OnShow(self)
+			VF_RS_OldXLoot_LootFrame_OnShow(self);
+			VF_RS_ExecuteSub(VF_RS_SafeSaveLoot);
+		end
+		XLoot.LootFrame_OnShow = VF_RS_NewXLoot_LootFrame_OnShow;
+	else
+		VF_RS_OldLootFrame_OnShow = LootFrame_OnShow;
+		function VF_RS_NewLootFrame_OnShow()
+			VF_RS_OldLootFrame_OnShow();
+			VF_RS_ExecuteSub(VF_RS_SafeSaveLoot);
+		end
+		LootFrame_OnShow = VF_RS_NewLootFrame_OnShow
 	end
-	LootFrame_OnShow = VF_RS_NewLootFrame_OnShow
 end
 
 

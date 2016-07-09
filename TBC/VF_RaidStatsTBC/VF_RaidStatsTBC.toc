@@ -1,10 +1,10 @@
 ## Interface: 20400
 ## Title: VF_RaidStats
 ## Author: Dilatazu, www.realmplayers.com, Dilatazu@gmail.com
-## Version: 1.2.1
+## Version: 1.2.2
 ## Notes: 
 ## Dependencies: Recount, Omen, CombatLogClearer
-## OptionalDeps: 
+## OptionalDeps: XLoot
 ## SavedVariablesPerCharacter: 
 ## SavedVariables: VF_RaidStatsData, VF_RaidStatsVersion, VF_RaidStats_Settings, VF_RS_ErrorLog
 VF_RaidStatsTBC.xml
