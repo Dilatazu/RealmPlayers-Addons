@@ -1051,6 +1051,7 @@ VF_RD_YellEvents = {
 	["The Prophet Skeram"] = {
 		["Are you so eager to die?"] = VF_RD_YellEvents_Start,
 		["You only delay... the inevitable..."] = VF_RD_YellEvents_End,
+		["You only delay... the inevetable"] = VF_RD_YellEvents_End, --kronos misspelling inevitable
 	},
 	["Battleguard Sartura"] = {
 		["You will be judged for defiling these sacred grounds!"] = VF_RD_YellEvents_Start,
