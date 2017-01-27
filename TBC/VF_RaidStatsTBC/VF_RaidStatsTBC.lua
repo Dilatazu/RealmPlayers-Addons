@@ -160,6 +160,22 @@ VF_RS_MobsType = {
 	["Kaz'rogal"] = VF_RS_MobType_Boss,
 	["Azgalor"] = VF_RS_MobType_Boss,
 	["Archimonde"] = VF_RS_MobType_Boss,
+	
+	--Sunwell Plateau
+	["Kalecgos"] = VF_RS_MobType_Boss,
+	["Brutallus"] = VF_RS_MobType_Boss,
+	["Felmyst"] = VF_RS_MobType_Boss,
+	--Eredar Twins
+	["Lady Sacrolash"] = VF_RS_MobType_Boss,
+	["Grand Warlock Alythess"] = VF_RS_MobType_Boss,
+	--Eredar Twins
+	["M'uru"] = VF_RS_MobType_Boss,
+	["Entropius"] = VF_RS_MobType_Boss,
+	--["Shadowsword Berserker"] = VF_RS_MobType_Boss, --ADD
+	--["Shadowsword Fury Mage"] = VF_RS_MobType_Boss, --ADD
+	--["Void Sentinel"] = VF_RS_MobType_Boss, --ADD
+	--["Void Spawn"] = VF_RS_MobType_Boss, --ADD
+	["Kil'jaeden"] = VF_RS_MobType_Boss
 }
 
 VF_RS_YellEvents_Start = 1;
@@ -345,6 +361,47 @@ VF_RS_YellEvents = {
 		["Mourn and lament the passing"] = VF_RS_YellEvents_Phase5,--Enrage
 		["it cannot be"] = VF_RS_YellEvents_End,
 	},
+
+	--Sunwell Plateau
+	["Kalecgos"] = {
+		["me and you will be destroyed"] = VF_RS_YellEvents_Start,
+		["shall all perish"] = VF_RS_YellEvents_Phase3,
+		["lose my mind"] = VF_RS_YellEvents_Phase4,
+		["is not much of me left"] = VF_RS_YellEvents_Phase5,
+		["am forever in your debt"] = VF_RS_YellEvents_End,
+	},
+	["Brutallus"] = {
+		["lambs to the slaughter"] = VF_RS_YellEvents_Start,
+		["interesting"] = VF_RS_YellEvents_End,
+	},
+	["Felmyst"] = {
+		["to all who oppose"] = VF_RS_YellEvents_Start,
+		["fates are written"] = VF_RS_YellEvents_Phase4,
+		["prevail"] = VF_RS_YellEvents_End,
+		["but this battle is far from over"] = VF_RS_YellEvents_End,
+	},
+	["Lady Sacrolash"] = { --Eredar Twins
+		["Misery"] = VF_RS_YellEvents_Start,
+		["Eredun"] = VF_RS_YellEvents_End,
+		["fade"] = VF_RS_YellEvents_End,
+	},
+	["Grand Warlock Alythess"] = { --Eredar Twins
+		["Depravity"] = VF_RS_YellEvents_Start,
+		["luck has run its course"] = VF_RS_YellEvents_Phase4,
+		["Eredun"] = VF_RS_YellEvents_End,
+		["fade"] = VF_RS_YellEvents_End,
+	},
+	["M'uru"] = {
+
+	},
+	["Kil'jaeden"] = {
+		["end has come"] = VF_RS_YellEvents_Start,
+		["will not be denied"] = VF_RS_YellEvents_Phase3,
+		["not harbor false hope"] = VF_RS_YellEvents_Phase4,
+		["have you done"] = VF_RS_YellEvents_Phase5,
+		["oooooooo"] = VF_RS_YellEvents_End, --Nooooooooooooo!
+		["Noo"] = VF_RS_YellEvents_End,
+	},
 }
 VF_RS_RaidZones = {
 	["Karazhan"] = true,
@@ -429,6 +486,16 @@ VF_RS_BossMap = {
 	["High Nethermancer Zerevor"] = "Illidari Council",
 	["Lady Malande"] = "Illidari Council",
 	["Veras Darkshadow"] = "Illidari Council",
+
+	--Sunwell Plateau
+	["Lady Sacrolash"] = "Eredar Twins",
+	["Grand Warlock Alythess"] = "Eredar Twins",
+
+	["Shadowsword Berserker"] = "M'uru", --ADD
+	["Shadowsword Fury Mage"] = "M'uru", --ADD
+	["Void Sentinel"] = "M'uru", --ADD
+	["Void Spawn"] = "M'uru", --ADD
+	["Entropius"] = "M'uru",
 }
 VF_RS_BossParts = {
 	["Romulo and Julianne"] = {[1] = "Romulo", [2] = "Julianne"},
@@ -436,6 +503,9 @@ VF_RS_BossParts = {
 	
 	["Reliquary of Souls"] = {[1] = "Essence of Anger", [2] = "Essence of Desire", [3] = "Essence of Suffering"},
 	["Illidari Council"] = {[1] = "Gathios the Shatterer", [2] = "High Nethermancer Zerevor", [3] = "Lady Malande", [4] = "Veras Darkshadow"},
+	
+	["Eredar Twins"] = {[1] = "Lady Sacrolash", [2] = "Grand Warlock Alythess"},
+	["M'uru"] = {[1] = "Entropius", [2] = "M'uru"},
 }
 
 function VF_RS_GetBossName(unitName)
