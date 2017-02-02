@@ -161,6 +161,14 @@ VF_RS_MobsType = {
 	["Azgalor"] = VF_RS_MobType_Boss,
 	["Archimonde"] = VF_RS_MobType_Boss,
 	
+	--Zul'Aman
+	["Akil'zon"] = VF_RS_MobType_Boss,
+	["Nalorakk"] = VF_RS_MobType_Boss,
+	["Jan'alai"] = VF_RS_MobType_Boss,
+	["Halazzi"] = VF_RS_MobType_Boss,
+	["Hex Lord Malacrass"] = VF_RS_MobType_Boss,
+	["Zul'jin"] = VF_RS_MobType_Boss,
+
 	--Sunwell Plateau
 	["Kalecgos"] = VF_RS_MobType_Boss,
 	["Brutallus"] = VF_RS_MobType_Boss,
@@ -367,6 +375,43 @@ VF_RS_YellEvents = {
 		["resistance is insignificant"] = VF_RS_YellEvents_Start,
 		["Mourn and lament the passing"] = VF_RS_YellEvents_Phase5,--Enrage
 		["it cannot be"] = VF_RS_YellEvents_End,
+	},
+	
+	--Zul'Aman
+	["Akil'zon"] = {
+		["I be da predator"] = VF_RS_YellEvents_Start,
+		["ya be doin"] = VF_RS_YellEvents_Phase3,
+		["me spirit"] = VF_RS_YellEvents_End,
+	},
+	["Nalorakk"] = {
+		["be dead soon enough"] = VF_RS_YellEvents_Start,
+		["gonna rule again"] = VF_RS_YellEvents_Start,
+		["you gonna get more"] = VF_RS_YellEvents_Phase2,
+		["way for Nalorakk"] = VF_RS_YellEvents_Phase3,
+		["on da udda side"] = VF_RS_YellEvents_End,
+	},
+	["Jan'alai"] = {
+		["wind be your doom"] = VF_RS_YellEvents_Start,
+		["show you strength"] = VF_RS_YellEvents_Phase7,
+		["run outta time"] = VF_RS_YellEvents_Phase8,
+		["got a surprise for you"] = VF_RS_YellEvents_End,
+	},
+	["Halazzi"] = {
+		["on your knees"] = VF_RS_YellEvents_Start,
+		["choka'jinn"] = VF_RS_YellEvents_End,
+	},
+	["Hex Lord Malacrass"] = {
+		["shadow gonna fall"] = VF_RS_YellEvents_Start,
+		["end of me"] = VF_RS_YellEvents_End,
+	},
+	["Zul'jin"] = {
+		["badduh dan me"] = VF_RS_YellEvents_Start,
+		["me some new tricks"] = VF_RS_YellEvents_Phase2,
+		["introduce to you my new"] = VF_RS_YellEvents_Phase3,
+		["be no hidin"] = VF_RS_YellEvents_Phase4,
+		["look to da sky"] = VF_RS_YellEvents_Phase5,
+		["too strong"] = VF_RS_YellEvents_Phase8,
+		["never gonna die"] = VF_RS_YellEvents_End,
 	},
 
 	--Sunwell Plateau
