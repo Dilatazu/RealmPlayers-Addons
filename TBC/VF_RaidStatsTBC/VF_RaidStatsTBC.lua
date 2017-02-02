@@ -219,6 +219,13 @@ VF_RS_YellEvents = {
 		["will not defeat the"] = VF_RS_YellEvents_Phase2,
 		["crush you"] = VF_RS_YellEvents_End,
 	},
+	
+	--Magtheridon's Lair
+	["Magtheridon"] = {
+		["you for releasing me"] = VF_RS_YellEvents_Start,
+		["will not be taken so easily"] = VF_RS_YellEvents_Phase3,
+		["will consume you"] = VF_RS_YellEvents_End,
+	},
 
 	--Tempest Keep
 	["Void Reaver"] = {
@@ -491,10 +498,10 @@ VF_RS_BossMap = {
 	["Lady Sacrolash"] = "Eredar Twins",
 	["Grand Warlock Alythess"] = "Eredar Twins",
 
-	["Shadowsword Berserker"] = "M'uru", --ADD
-	["Shadowsword Fury Mage"] = "M'uru", --ADD
-	["Void Sentinel"] = "M'uru", --ADD
-	["Void Spawn"] = "M'uru", --ADD
+	--["Shadowsword Berserker"] = "M'uru", --ADD
+	--["Shadowsword Fury Mage"] = "M'uru", --ADD
+	--["Void Sentinel"] = "M'uru", --ADD
+	--["Void Spawn"] = "M'uru", --ADD
 	["Entropius"] = "M'uru",
 }
 VF_RS_BossParts = {
