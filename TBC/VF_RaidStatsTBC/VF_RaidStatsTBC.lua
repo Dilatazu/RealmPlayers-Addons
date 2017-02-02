@@ -411,15 +411,17 @@ VF_RS_YellEvents = {
 	},
 }
 VF_RS_RaidZones = {
-	["Karazhan"] = true,
-	["Gruul's Lair"] = true,
-	["Magtheridon's Lair"] = true,
-	["Serpentshrine Cavern"] = true,
-	["The Eye"] = true,
-	["Hyjal Summit"] = true,
-	["Black Temple"] = true,
-	["Zul'Aman"] = true,
-	["Sunwell Plateau"] = true,
+	["Karazhan"] = "Karazhan",
+	["Gruul's Lair"] = "Gruul's Lair",
+	["Magtheridon's Lair"] = "Magtheridon's Lair",
+	["Coilfang: Serpentshrine Cavern"] = "Serpentshrine Cavern",
+	["Serpentshrine Cavern"] = "Serpentshrine Cavern",
+	["The Eye"] = "The Eye",
+	["Hyjal Summit"] = "Hyjal Summit",
+	["Black Temple"] = "Black Temple",
+	["Zul'Aman"] = "Zul'Aman",
+	["Sunwell Plateau"] = "Sunwell Plateau",
+	["The Sunwell"] = "Sunwell Plateau", --RaidID name
 }
 
 VF_RS_DisappearingBoss = 1;
@@ -864,6 +866,10 @@ function VF_RaidStats_SafeOnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg
 		if(VF_RS_SaveInstanceInfoBool == true) then
 			for i = 1, GetNumSavedInstances() do
 				local raidName, raidID, raidRemaining = GetSavedInstanceInfo(i);
+				local translatedRaidName = VF_RS_RaidZones[raidName];
+				if(translatedRaidName ~= nil) then
+					raidName = translatedRaidName;
+				end
 				if(string.find(VF_RaidStatsData[1][1], "Session:Info:")) then
 					VF_RaidStatsData[1][1] = VF_RaidStatsData[1][1].."RaidID"..i.."="..raidName.."-"..raidID.."-"..raidRemaining..",";
 				else
