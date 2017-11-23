@@ -1222,6 +1222,7 @@ function VF_RS_GetUniqueID(_Name)
 	return _Name;
 end
 
+VF_RS_LastDataRecordedTime = nil;
 VF_RS_ErroredGUIDs = {}; --To prevent this from happening too often.
 function VF_RS_LogRaidStats(_Reason, _Time)
 	local totalPlayersResult = "";
@@ -1395,7 +1396,17 @@ function VF_RS_LogRaidStats(_Reason, _Time)
 		end
 	end
 	
+	if(VF_RS_LastDataRecordedTime ~= nil and VF_RS_CurrentBoss ~= "" and totalPlayersResult == "" and _Reason == "") then
+		if(_Time - VF_RS_LastDataRecordedTime > 60) then
+			_Reason = "Wipe_T="..VF_RS_CurrentBoss;
+			VF_RS_DebugMessage("Wipe_T="..VF_RS_CurrentBoss.."(Time Wipe)");
+			VF_RS_CurrentBoss = "";
+			VF_RS_CurrentBossData = {};
+			VF_RS_SaveInstanceInfo();
+		end
+	end
 	if(totalPlayersResult ~= "" or _Reason ~= "") then
+		VF_RS_LastDataRecordedTime = _Time;
 		table.insert(VF_RaidStatsData[1], 1, _Time..":".._Reason..":"..totalPlayersResult);
 		--VF_SendMessage(_Time..":"..":"..totalPlayersResult, "NONE"); 
 	end
