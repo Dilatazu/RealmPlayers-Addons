@@ -1471,13 +1471,13 @@ end
 if(GetLocale() == "deDE") then
 	VF_RS_SplitReceivesLootStr = "([^%s]+) bekommt Beute: (.+)%.";
 	--VF_RS_SplitReceivesLootStr2 = "([^%s]+) erh\195\164lt Beute: (.+)%."; --Not sure if needed yet... can be fixed later using "([^%s]+) (.+) Beute: (.+)%."
-	VF_RS_SplitIReceivesLootStr = "Ihr erhaltet Beute: (.+)%."
+	VF_RS_SplitIReceivesLootStr = "Ihr erhaltet Beute: (.+)%.";
 elseif(GetLocale() == "frFR") then
-	VF_RS_SplitReceivesLootStr = "([^%s]+) receives loot: (.+)%.";
-	VF_RS_SplitIReceivesLootStr = "You receive loot: (.+)%."
+	VF_RD_SplitReceivesLootStr = "([^%s]+) re\195\167oit le butin: (.+)%.";
+	VF_RD_SplitIReceivesLootStr = "Vous recevez le butin: (.+)%.";
 else
 	VF_RS_SplitReceivesLootStr = "([^%s]+) receives loot: (.+)%.";
-	VF_RS_SplitIReceivesLootStr = "You receive loot: (.+)%."
+	VF_RS_SplitIReceivesLootStr = "You receive loot: (.+)%.";
 end
 
 

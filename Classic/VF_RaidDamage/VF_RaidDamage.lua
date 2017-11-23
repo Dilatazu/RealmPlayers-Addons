@@ -618,6 +618,8 @@ VF_RD_BossNameTranslations = {
     ["Schlachtwache Sartura"] = "Battleguard Sartura",
     ["Der Prophet Skeram"] = "The Prophet Skeram",
     ["Prinzessin Yauj"] = "Princess Yauj",
+	["Imperator Vek'lor"] = "Emperor Vek'lor",
+	["Imperator Vek'nilash"] = "Emperor Vek'nilash",
 	
 	--NAXX
 --FR
@@ -2402,13 +2404,13 @@ end
 if(GetLocale() == "deDE") then
 	VF_RD_SplitReceivesLootStr = "([^%s]+) bekommt Beute: (.+)%.";
 	--VF_RD_SplitReceivesLootStr2 = "([^%s]+) erh\195\164lt Beute: (.+)%."; --Not sure if needed yet... can be fixed later using "([^%s]+) (.+) Beute: (.+)%."
-	VF_RD_SplitIReceivesLootStr = "Ihr erhaltet Beute: (.+)%."
+	VF_RD_SplitIReceivesLootStr = "Ihr erhaltet Beute: (.+)%.";
 elseif(GetLocale() == "frFR") then
-	VF_RD_SplitReceivesLootStr = "([^%s]+) receives loot: (.+)%.";
-	VF_RD_SplitIReceivesLootStr = "You receive loot: (.+)%."
+	VF_RD_SplitReceivesLootStr = "([^%s]+) re\195\167oit le butin: (.+)%.";
+	VF_RD_SplitIReceivesLootStr = "Vous recevez le butin: (.+)%.";
 else
 	VF_RD_SplitReceivesLootStr = "([^%s]+) receives loot: (.+)%.";
-	VF_RD_SplitIReceivesLootStr = "You receive loot: (.+)%."
+	VF_RD_SplitIReceivesLootStr = "You receive loot: (.+)%.";
 end
 
 
@@ -2522,4 +2524,4 @@ else--if not string.find(GetBuildInfo(), "^1%.") then
 	end
 end--if string.find(GetBuildInfo(), "^1%.") then
 
-VF_RD_LastUploadedData = "2015-02-08 23:59:59";
+VF_RD_LastUploadedData = "2017-09-24 23:11:14";
