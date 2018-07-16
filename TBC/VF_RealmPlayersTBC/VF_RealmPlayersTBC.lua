@@ -367,7 +367,7 @@ function VF_RealmPlayersTBC_OnEvent()
 			end
 			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
 		
-			onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
+			onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_GetScribbledRealmName() .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
 		end
 		SetGuildRosterShowOffline(prevShowOffline);
 
@@ -400,7 +400,7 @@ function VF_RealmPlayersTBC_OnEvent()
 					end
 					onlineDataString = onlineDataString .. name .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
 					VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
-					onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
+					onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_GetScribbledRealmName() .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
 
 					--VF_RealmPlayers_Debug("" .. VF_RP_GetTime_S() .. name .. ":" .. ":" .. raceEN .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",");
 				end
@@ -448,6 +448,11 @@ function VF_RP_Help()
 	DEFAULT_CHAT_FRAME:AddMessage("/RealmPlayers PrintInspected - Prints the inspected players so far");
 	DEFAULT_CHAT_FRAME:AddMessage("/RealmPlayers PrintRecentlyInspected - Prints the recently inspected players(within last 2 minutes)");
 	DEFAULT_CHAT_FRAME:AddMessage("/RealmPlayers Help - shows all commands");
+end
+
+function VF_GetScribbledRealmName()
+	local realmName = GetRealmName();
+	return string.sub(realmName, 1, 1).."#"..string.sub(realmName, 2); --Scribble realmName to avoid search-and-replace misstakes people do when changing realm and maintaining addon settings...
 end
 
 local VF_RecentlyInspected = {};
@@ -724,7 +729,7 @@ function VF_RP_UpdateCharacterInfoData(_Target)
 	local sex = UnitSex(_Target);
 	local level = UnitLevel(_Target);
 	local guildname, guildtitle, guildrank = GetGuildInfo(_Target);
-	local realmName = GetRealmName();
+	local realmName = VF_GetScribbledRealmName();
 	if(guildname == nil) then guildname = "nil"; end
 	if(guildtitle == nil) then guildtitle = "nil"; end
 	if(guildrank == nil) then guildrank = 0; end
