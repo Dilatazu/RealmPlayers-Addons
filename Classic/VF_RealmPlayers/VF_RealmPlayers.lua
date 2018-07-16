@@ -547,6 +547,11 @@ function VF_InspectDone(success)
 	end
 end
 
+function VF_GetScribbledRealmName()
+	local realmName = GetRealmName();
+	return string.sub(realmName, 1, 1).."#"..string.sub(realmName, 2); --Scribble realmName to avoid search-and-replace misstakes people do when changing realm and maintaining addon settings...
+end
+
 VF_RealmPlayers_HasBeenWarnedOnce = false;
 VF_RealmPlayers_Playername = "Unknown";
 VF_RealmPlayers_Settings = {["DebugMode"] = true,["MaxDatabase"] = 1000};
@@ -604,7 +609,7 @@ function VF_RealmPlayers_OnUpdate()
 				local sex = UnitSex("target");
 				local level = UnitLevel("target");
 				local guildname, guildtitle, guildrank = GetGuildInfo("target");
-				local realmName = GetRealmName();
+				local realmName = VF_GetScribbledRealmName();
 				if(guildname == nil) then guildname = "nil"; end
 				if(guildtitle == nil) then guildtitle = "nil"; end
 				if(guildrank == nil) then guildrank = 0; end
