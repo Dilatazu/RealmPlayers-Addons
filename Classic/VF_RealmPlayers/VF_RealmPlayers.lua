@@ -272,7 +272,7 @@ function VF_RealmPlayers_OnEvent()
 		end
 		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
 		
-		onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
+		onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_GetScribbledRealmName() .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
 
 	elseif(event == "GUILD_ROSTER_UPDATE") then
 	elseif(event == "UPDATE_MOUSEOVER_UNIT") then
