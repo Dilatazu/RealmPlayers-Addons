@@ -222,6 +222,7 @@ function VF_RP_GetActiveOnlineData(_CurrOnlineDataTime, _CurrentDate)
 		VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = _CurrOnlineDataTime;
 		VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = _CurrentDate;
 		table.insert(onlineData, 1, "");
+		VF_RealmPlayers_Debug("VF_RealmPlayers online data archived " .. charsRecorded .. " characters!");
 	end
 	return onlineData, VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"], VF_RealmPlayers_CurrentOnlineData["OnlineDataString"];
 end
@@ -249,35 +250,36 @@ function VF_RealmPlayers_OnEvent()
 		local targetName = UnitName("target");
 		if(targetName == nil) then targetName = "nil"; end
 	elseif(event == "WHO_LIST_UPDATE") then
-		local currOnlineDataTime = VF_RP_GetTime_S();
-		local currentDate = date("!%Y-%m-%d %X");
-		local onlineData, onlineCharacters, onlineDataString = VF_RP_GetActiveOnlineData(currOnlineDataTime, currentDate);
-		
-		local numWhoResults = GetNumWhoResults();
-		for i = 1, numWhoResults, 1 do
-			local name, guild, level, race, class, zone, group = GetWhoInfo(i);
-			if(guild == nil) then
-				guild = "";
+		if(VF_RealmPlayers_Settings["OnlineCollecting"] ~= false) then
+			local currOnlineDataTime = VF_RP_GetTime_S();
+			local currentDate = date("!%Y-%m-%d %X");
+			local onlineData, onlineCharacters, onlineDataString = VF_RP_GetActiveOnlineData(currOnlineDataTime, currentDate);
+			
+			local numWhoResults = GetNumWhoResults();
+			for i = 1, numWhoResults, 1 do
+				local name, guild, level, race, class, zone, group = GetWhoInfo(i);
+				if(guild == nil) then
+					guild = "";
+				end
+				if(onlineCharacters[name] == nil) then
+					onlineCharacters[name] = 1;
+					
+					if(VF_RaceToIndex[race] ~= nil) then
+						race = VF_RaceToIndex[race];
+					end
+					if(VF_ClassToIndex[class] ~= nil) then
+						class = VF_ClassToIndex[class];
+					end
+					if(VF_ZoneToIndex[zone] ~= nil) then
+						zone = VF_ZoneToIndex[zone];
+					end
+					onlineDataString = onlineDataString .. name .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
+				end
 			end
-			if(onlineCharacters[name] == nil) then
-				onlineCharacters[name] = 1;
-				
-				if(VF_RaceToIndex[race] ~= nil) then
-					race = VF_RaceToIndex[race];
-				end
-				if(VF_ClassToIndex[class] ~= nil) then
-					class = VF_ClassToIndex[class];
-				end
-				if(VF_ZoneToIndex[zone] ~= nil) then
-					zone = VF_ZoneToIndex[zone];
-				end
-				onlineDataString = onlineDataString .. name .. ":" .. race .. ":" .. class .. ":" .. guild .. ":" .. level .. ":" .. zone .. ",";
-			end
+			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
+			
+			onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_GetScribbledRealmName() .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
 		end
-		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = onlineDataString;
-		
-		onlineData[1] = "" .. currOnlineDataTime .. ";" .. VF_GetScribbledRealmName() .. ";" .. VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] .. ";" .. currentDate .. ";" .. onlineDataString;
-
 	elseif(event == "GUILD_ROSTER_UPDATE") then
 	elseif(event == "UPDATE_MOUSEOVER_UNIT") then
 	end
@@ -287,8 +289,18 @@ function VF_RealmPlayers_Command(arg1)
 	if(string.lower(arg1) == "toggledebug") then
 		if(VF_RealmPlayers_Settings["DebugMode"] == true) then
 			VF_RealmPlayers_Settings["DebugMode"] = false;
+			DEFAULT_CHAT_FRAME:AddMessage("VF_RealmPlayers is now in quiet mode!");
 		else
 			VF_RealmPlayers_Settings["DebugMode"] = true;
+			DEFAULT_CHAT_FRAME:AddMessage("VF_RealmPlayers Event Information will be displayed in console!");
+		end
+	elseif(string.lower(arg1) == "toggleonlinecollecting") then
+		if(VF_RealmPlayers_Settings["OnlineCollecting"] == true) then
+			VF_RealmPlayers_Settings["OnlineCollecting"] = false;
+			DEFAULT_CHAT_FRAME:AddMessage("VF_RealmPlayers Online Data collecting is now disabled! Please enable this to support better accuracy for the RealmPlayers project :)");
+		else
+			VF_RealmPlayers_Settings["OnlineCollecting"] = true;
+			DEFAULT_CHAT_FRAME:AddMessage("VF_RealmPlayers Online Data is now being collected!");
 		end
 	elseif(string.lower(arg1) == "printinspected") then
 		local playerList = "";
@@ -319,6 +331,7 @@ end
 function VF_RP_Help()
 	DEFAULT_CHAT_FRAME:AddMessage("VF RealmPlayers Version = "..VF_RealmPlayersVersion);
 	DEFAULT_CHAT_FRAME:AddMessage("/RealmPlayers ToggleDebug - Toggles Debug/Inspect Output");
+	DEFAULT_CHAT_FRAME:AddMessage("/RealmPlayers ToggleOnlineCollecting - Toggles Online/Who Data Collecting");
 	DEFAULT_CHAT_FRAME:AddMessage("/RealmPlayers PrintInspected - Prints the inspected players so far");
 	DEFAULT_CHAT_FRAME:AddMessage("/RealmPlayers PrintRecentlyInspected - Prints the recently inspected players(within last 2 minutes)");
 	DEFAULT_CHAT_FRAME:AddMessage("/RealmPlayers Help - shows all commands");
@@ -558,7 +571,7 @@ end
 
 VF_RealmPlayers_HasBeenWarnedOnce = false;
 VF_RealmPlayers_Playername = "Unknown";
-VF_RealmPlayers_Settings = {["DebugMode"] = true,["MaxDatabase"] = 1000};
+VF_RealmPlayers_Settings = {["DebugMode"] = true, ["OnlineCollecting"] = true, ["MaxDatabase"] = 1000};
 VF_RealmPlayersData = {};
 local VF_NextInspectTryTime = 0;
 local VF_AutomaticInspection = nil;
