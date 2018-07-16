@@ -200,6 +200,32 @@ function VF_RealmPlayers_OnLoad()
 	VF_RP_CreateGameToolTip();
 end
 
+function VF_RP_GetActiveOnlineData(_CurrOnlineDataTime, _CurrentDate)
+	if(VF_RealmPlayersData["OnlineData"] == nil) then
+		VF_RealmPlayersData["OnlineData"] = {};
+	end
+	local onlineData = VF_RealmPlayersData["OnlineData"];
+		
+	if(VF_RealmPlayers_CurrentOnlineData == nil) then
+		VF_RealmPlayers_CurrentOnlineData = {};
+		VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = _CurrOnlineDataTime;
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = _CurrentDate;
+		table.insert(onlineData, 1, "");
+	end
+	local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
+	local charsRecorded = table.getn(VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"]);
+	if(_CurrOnlineDataTime - onlineDataTime > 60 or charsRecorded > 100) then
+		VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = _CurrOnlineDataTime;
+		VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = _CurrentDate;
+		table.insert(onlineData, 1, "");
+	end
+	return onlineData, VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"], VF_RealmPlayers_CurrentOnlineData["OnlineDataString"];
+end
+
 function VF_RealmPlayers_OnEvent()
 	if(event == "VARIABLES_LOADED") then
 		VF_RealmPlayersVersion = VF_REALMPLAYERSVERSION;
@@ -223,32 +249,10 @@ function VF_RealmPlayers_OnEvent()
 		local targetName = UnitName("target");
 		if(targetName == nil) then targetName = "nil"; end
 	elseif(event == "WHO_LIST_UPDATE") then
-		if(VF_RealmPlayersData["OnlineData"] == nil) then
-			VF_RealmPlayersData["OnlineData"] = {};
-		end
-		local onlineData = VF_RealmPlayersData["OnlineData"];
-		
 		local currOnlineDataTime = VF_RP_GetTime_S();
 		local currentDate = date("!%Y-%m-%d %X");
-		if(VF_RealmPlayers_CurrentOnlineData == nil) then
-			VF_RealmPlayers_CurrentOnlineData = {};
-			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
-			table.insert(onlineData, 1, "");
-		end
-		local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
-		local charsRecorded = table.getn(VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"]);
-		if(currOnlineDataTime - onlineDataTime > 60 or charsRecorded > 100) then
-			VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = currOnlineDataTime;
-			VF_RealmPlayers_CurrentOnlineData["OnlineDataStartDateTime"] = currentDate;
-			table.insert(onlineData, 1, "");
-		end
-		local onlineCharacters = VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"];
-		local onlineDataString = VF_RealmPlayers_CurrentOnlineData["OnlineDataString"];
+		local onlineData, onlineCharacters, onlineDataString = VF_RP_GetActiveOnlineData(currOnlineDataTime, currentDate);
+		
 		local numWhoResults = GetNumWhoResults();
 		for i = 1, numWhoResults, 1 do
 			local name, guild, level, race, class, zone, group = GetWhoInfo(i);
