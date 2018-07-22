@@ -200,6 +200,12 @@ function VF_RealmPlayers_OnLoad()
 	VF_RP_CreateGameToolTip();
 end
 
+function VF_GetTableLength(_Table)
+	local count = 0
+	for _ in pairs(_Table) do count = count + 1 end
+	return count
+  end
+
 function VF_RP_GetActiveOnlineData(_CurrOnlineDataTime, _CurrentDate)
 	if(VF_RealmPlayersData["OnlineData"] == nil) then
 		VF_RealmPlayersData["OnlineData"] = {};
@@ -215,8 +221,8 @@ function VF_RP_GetActiveOnlineData(_CurrOnlineDataTime, _CurrentDate)
 		table.insert(onlineData, 1, "");
 	end
 	local onlineDataTime = VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"];
-	local charsRecorded = table.getn(VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"]);
-	if(_CurrOnlineDataTime - onlineDataTime > 60 or charsRecorded > 100) then
+	local charsRecorded = VF_GetTableLength(VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"]);
+	if(_CurrOnlineDataTime - onlineDataTime > 120 or charsRecorded > 500) then
 		VF_RealmPlayers_CurrentOnlineData["OnlineCharacters"] = {};
 		VF_RealmPlayers_CurrentOnlineData["OnlineDataString"] = "";
 		VF_RealmPlayers_CurrentOnlineData["OnlineDataTime"] = _CurrOnlineDataTime;
